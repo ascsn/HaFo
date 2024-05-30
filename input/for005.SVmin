@@ -1,0 +1,17 @@
+1,,    IWUNIT
+'SV-min, BCS mixed pairing'
+51,0.3,              NGRID,RSTEP
+-1,1E-8,1E-9,300,6000,3,-1,,, IWR,DABR/E,ITPR/MAX,IFPL
+0.2,110.,0.2,-1,,               X0DAMP,E0DAMP,ADDNEW,WALL
+ 1, 0, 0, 1, 1, 3, 0, 0, 0,10,,, if:ex,tm,enrg,rso,zpe,dfms,rhoc,enav,mfold,optsk
+1,,,                       ifform
+0.64,0,0,0,0,   apro0,apro11,apro12,bpro11,bpro12
+0.64,0,0,0,0,   aneu0,aneu11,aneu12,bneu11,bneu12
+ -2112.248,   295.781,   142.268, 13988.567,   111.291,      t0,t1,t2,t3,t4
+  0.243886306    ,  -1.43492628    ,  -2.62589912    ,  0.258070167    ,   45.93615,       x0,x1,x2,x3,b4p
+   0.00000   0.21159,,0,,      riftm,rho0pr
+     0.000,  0.000000,  0.000000,           tyuk,xyuk,ayuk
+  0.255368,1.0,7,601.16,567.191,0,,,,,,,   POWER,ACOUL,IPAIR,PAIRFP/N,ILNRESP,...
+50,70,,,2,,  nprot,nneut,nmaxp,nmaxn,iparsh
+0         IFGSC
+-1,,    IWUNIT

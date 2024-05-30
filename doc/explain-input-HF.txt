@@ -1,0 +1,262 @@
+There are three entries for input to the 1D HF program,
+1. logical switch variables at compile time, 
+2. variables from an input file read via standard input, and
+3. special parameters for HFB calculations are entered
+   through the file 'hfbparams' residing in the working
+   working directory.
+
+The logical switches at compile time are set in 'params.inc':
+=============================================================
+  TPHPAIR   switches type of pairing cutoff,
+             .TRUE.   activates cutoff on the pairing gap and u*v
+             .FALSE.  activates cutoff on the occupation v**2
+  TREGPAIR  switches to regularized pairing
+  TLOWERCUT switches to make the cutoff symmetric about the
+            Fermi energy
+  TFORMW    activates computations of weak-charge formfactor
+There are many more basic setting in 'params.inc' for grid size
+and wavefunction space, for details see the comments in 'params.inc'.
+
+
+The variables read from standard input are:
+===========================================
+
+A sample input for computing 208Pb with SV-min is 'for005.SVmin':
+1,,                                             IWUNIT
+'SV-min, BCS mixed pairing'                     TITLE
+51,0.3,                                         NGRID,RSTEP
+-1,1D-9,1D-9,300,6000,3,-1,,,                   IWR,DABR,DABE,ITPR.ITMAX,IFPLOT
+0.2,110.,0.2,-1,,                               X0DAMP,E0DAMP,ADDNEW,WALL
+ 1, 0, 0, 1, 1, 3, 0, 0, 0,10,,,                IF:EX,TM,ENRG,RSO,ZPE,DFMS,RHOC,ENAV,MFOLD,OPTSK
+1,,,                                            IFFORM
+0.64,0,0,0,0,                                   APRO0,APR011,APRO12,BPRO11,BPRO12
+0.64,0,0,0,0,                                   ANEU0,ANEU11,ANEU12,BNEU11,BNEU12
+-2112.248,295.781,142.268,3988.567,111.291,     t0,t1,t2,t3,t4
+0.243886306,-1.43492628,-2.62589912,0.258070167,45.93615,       x0,x1,x2,x3,b4p
+0.00000   0.21159,,0,,                          riftm,rho0pr
+0.000,  0.000000,  0.000000,                    tyuk,xyuk,ayuk
+0.255368,1.0,7,601.16,567.191,0,,,,,,,          POWER,ACOUL,IPAIR,PAIRFP/N,ILNRESP,...
+50,70,,,2,,                                     nprot,nneut,nmaxp,nmaxn,iparsh
+0                                               IFGSC
+-1,,                                            IWUNIT
+
+
+The integer and floating point numbers (to the left) are read by the
+code. The right part show the corresponding variable names as
+comments. 
+We are now repeating the input line by line and provide explanations 
+for each input variable. 
+Some variables are experience-settings which should taken as
+proposed. These are marked as D (=default) in the first column of the
+explanations.
+An extensive explanation of the variables is found in the header
+of 'hafbody.for'.
+
+
+----- line 1: ---------------------------------------------------------
+ 1,                   IWUNIT
+-----------------------------------------------------------------------
+   IWUNIT        choice of output unit
+                    1 --> terminal
+                    0 --> file 'for006'
+                   -1 --> stops the program
+-----------------------------------------------------------------------
+
+
+----- line 2: ---------------------------------------------------------
+  'SV-min, BCS mixed pairing'                     TITLE
+-----------------------------------------------------------------------
+A character variable which can be chosen freely and serves as comment
+on several output file.
+-----------------------------------------------------------------------
+
+
+----- line 3: ---------------------------------------------------------
+ 0,0.3,                  NGRID,RSTEP
+-----------------------------------------------------------------------
+  NGRID           number of grid points, 
+                  a "0" switches to automatic setting, 
+                  more recently "71" is used in most cases
+D RSTEP           grid spacing in fm, the value of 0.3 kis recommended
+-----------------------------------------------------------------------
+
+
+----- line 4: ---------------------------------------------------------
+-1,1D-9,1D-9,300,6000,3,-1,,,                   IWR,DABR,DABE,ITPR.ITMAX,IFPLOT
+-----------------------------------------------------------------------
+D IWR             write level (higher value produces more output)
+D DABR            termination criterion on radii
+D DABE            termination criterion on energies
+D ITPR            number of pairing iterations
+D ITMAX           maximal number of HF iterations
+D IFPLOT          write level in compressed output file 'for011',
+                  higher values print more
+D IDISC           restart from status saved on disk (not to be activated)
+-----------------------------------------------------------------------
+
+
+----- line 5: ---------------------------------------------------------
+0.2,110.,0.2,-1,,                               X0DAMP,E0DAMP,ADDNEW,WALL
+-----------------------------------------------------------------------
+D XODAMP          stepsize for iteration
+D E0DAMP          stabilizing energy for iteration
+D ADDNEW          fraction of new density in composing density
+D WALL            optionally add a stabilizing potential at large radius
+-----------------------------------------------------------------------
+
+
+----- line 6: ---------------------------------------------------------
+ 1, 0, 0, 1, 1, 3, 0, 0, 0,10,,,                IF:EX,TM,ENRG,RSO,ZPE,DFMS,RHOC,ENAV,MFOLD,OPTSK
+-----------------------------------------------------------------------
+  IFEX            switch to Coulomb exchange in Slater approximation
+  IFTM            switch to tensor spin-orbit
+D IFENRG          compute total energy from scratch after termination
+  IFRSO           switch to include spin-orbit contribution to density
+                    -1  activates new (and correct) contribution
+                     0  no spin-orbit contribution
+                     1  activates old contribution (obsolete)
+  IFZPE           switch for sort of c.m. correction 
+                    -4 --> nothing for energy but correction for rho      
+                    -3 --> energy as -<p**2>/(2*a*m) and nothing for rho   
+                    -2 --> no correction at all                           
+                    -1 --> factor (1-1/a) on the mass is used a postiori
+                     0 --> factor (1-1/a) on the mass is used
+                     1 --> correction is computed explicitely and a       
+                           posteriori as -<p**2>/(2*a*m).                  
+                     2 --> correction is computed explicitely and before  
+                           variation as -<p**2>/(2*a*m).               
+  IFDFMS          switch for actual value of nucleon mass hbar**2/2m
+                     0 --> equal values 20.7525
+                     1 --> hbar**2/2m_p=20.750, hbar**2/2m_n=20.722
+                     2 --> equal values 20.73553
+                     3 --> hbar**2/2m_p=20.749811, hbar**2/2m_n=20.721249
+                     4 --> hbar**2/2m_p=20.7505, hbar**2/2m_n=20.7219
+  IFRHOC          switch to use charge density in Coulomb energy
+D IFENAV          switch to compute s.p. energy variances
+  MFOLD           switch to finite-range Skyrme model (not to be used)
+  OPTSK           option of functional (list below selective)
+                     0 --> old simple Skyrme
+                     1 --> rational approximant for isoscalar density dependence 
+                     2 --> rational approximant for density dependence 
+                     5 --> extended Skyrme density dep. l*s and kinetic
+                     8 --> alternative isovector density dep.
+                     9 --> one more density dep. term with own POWER
+                    10 --> l*s tensor term with feree parameter 'riftm'
+                    11 --> combines options 5, 8, 9, and 10
+                    13 --> Fayans functional
+                  attention: the choice of OPTSK can produce different
+                             input sequence after line 9
+-----------------------------------------------------------------------
+
+
+----- line 7: ---------------------------------------------------------
+ 1,,                      IFFORM
+-----------------------------------------------------------------------
+D IFFORM          switch for density-dependent nucleon formfactor (obsolete)
+-----------------------------------------------------------------------
+
+
+----- lines 8-9: ------------------------------------------------------
+ 0.64,0.0,0.0,0.0,0.0,    APRO0,APR011,APRO12,BPRO11,BPRO12
+ 0.64,0.0,0.0,0.0,0.0,    ANEU0,ANEU11,ANEU12,BNEU11,BNEU12
+-----------------------------------------------------------------------
+descrition of the density dependent nucleon fomfactor (obsolete)
+-----------------------------------------------------------------------
+
+
+----- line 10: ---------------------------------------------------------
+-2112.248,295.781,142.268,3988.567,111.291,     t0,t1,t2,t3,t4
+-----------------------------------------------------------------------
+  t0,t1,t2,t3,t4       Skyrme parameters
+-----------------------------------------------------------------------
+
+
+----- line 11: ---------------------------------------------------------
+0.243886306,-1.43492628,-2.62589912,0.258070167,45.93615,       x0,x1,x2,x3,b4p
+-----------------------------------------------------------------------
+  x0,x1,x2,x3,b4p      Skyrme parameters
+-----------------------------------------------------------------------
+
+
+----- line 12:------------------------------------------------------
+0.00000   0.21159,,0,,                          riftm,rho0pr,powerp,ecstab
+-----------------------------------------------------------------------
+  RIFTM             flexible factor in front of tensor l*s term
+  RH0PR             reference density for mixed pairing
+  POWERP            power on isovector density dependence
+                    (active for OPTSK=8)
+  ECSTAB            stabilizing energy in stabilized pairing
+                    (default 0.0)
+-----------------------------------------------------------------------
+
+
+----- line 13: ---------------------------------------------------------
+0.255368,1.0,7,601.16,567.191,0,,,,,,,          POWER,ACOUL,IPAIR,PAIRFP/N,ILNRESP,TEMPRT,CUTFAC
+-----------------------------------------------------------------------
+  POWER             power of density dependence in Skyrme functional
+D ACOUL             switch factor on Coulomb force
+  IPAIR             choice of pairing model for Skyrme functional (listed selectively)
+                      5 = BCS with full pairing matrix from delta force (VDI)
+                      6 = HFB with full pairing matrix from delta force (VDI) 
+                      7 = BCS with surface pairing force  (DDDI)
+                          of the form V_0 delta(1-2) (1-rho(r)/rho0pr0)
+                      8 = HFB with surface pairing force (DDDI)
+                      9 = Lipkin-Nogami BCS with VDI  
+                     10 = Lipkin-Nogami BCS with DDDI  
+  PAIRFP            proton pairing strength
+  PAIRFN            neutron pairing strength
+D ILNRSP            linear response contribution to surface pairing
+D TEMPRT            temperature (default 0.0)
+  CUTFAC            determines energy cutoff in pairing
+                      >0  -->  cutoff in terms of number of states
+                      <0  -->  cutoff as given energy band above Fermi energy
+                    default for Skyrme functionals is ECSTAB=1.65
+                    default for most Fayans functionals ios ECSTAB=-15
+-----------------------------------------------------------------------
+
+
+----- line 14: ---------------------------------------------------------
+ 82,126,,,2,  nprot,nneut,nmaxp,nmaxn,iparsh
+-----------------------------------------------------------------------
+  nprot             number pof protons
+  nneut             number of neutrons  
+D nmaxp             maximum number of spherical proton states
+                     0 --> uses automatic setting by IPARSH
+D nmaxn             maximum number of spherical neutron states
+                     0 --> uses automatic setting by IPARSH
+  iparsh            number of extra shells for pairing space
+                    depends on CUTFAC
+                     typically 2 for for Skyrme functionals
+                     typically 3 for for Fayans functionals
+-----------------------------------------------------------------------
+
+----- line 15: ---------------------------------------------------------
+ 0         IFGSC
+-----------------------------------------------------------------------
+D IFGSC             switch to RPA part
+-----------------------------------------------------------------------
+
+
+----- line 16: ---------------------------------------------------------
+ -1,                   IWUNIT
+-----------------------------------------------------------------------
+  IWUNIT       next round, here the IWUNIT=-1 terminates th run
+
+
+
+HFB parameters are read from 'hfbparams' which looks as:
+========================================================
+
+------ single line ------------------------------------------------------
+1000,10,1,2.0,500         iterhfb,iternat,modnat,pairenhance,iterbcs
+-------------------------------------------------------------------------
+
+ iterhfb       nr. of initial iteration in which pairuing strength is
+               gradually reduced from enhance to normal value.
+ iternat       nr. of subiterations in the HF accelerator.
+ modnat        modulus with which the occelerator is invoked.
+ pairenhance   initial pairing enhancement factor.
+ iterbcs       nr. of initial BCS iterations.
+
+Pairing enhancement and initgial BCS iterations serve to avoid
+state-wise HFB pairing collapse.

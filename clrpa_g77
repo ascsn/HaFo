@@ -1,0 +1,9 @@
+cd source_1D
+gfortran -O3 -c weak-charge.f90
+gfortran -O3 -c xx.f90
+gfortran -O3 -c NMP-entry.f90
+gfortran -Ofast  -msse4.2 -mtune=native -mavx -mfpmath=sse -ffast-math -finline-functions -fno-align-commons -fdefault-real-8 -fdefault-double-8 -c hfb-matrix.f
+gfortran -g -c givens.f
+gfortran -w -ffpe-summary=none -Ofast -msse4.2 -mtune=native -mavx -mfpmath=sse -ffast-math -finline-functions -fno-align-commons -fdefault-real-8 -fdefault-double-8 -Wno-underflow -o ../haforpa.exe haforpa.f givens.o weak-charge.o  NMP-entry.o hfb-matrix.o xx.o
+#gfortran -w -ffpe-summary=none -fbacktrace -Ofast -msse4.2 -mtune=native -mavx -mfpmath=sse -ffast-math -finline-functions -fno-align-commons -o ../haforpa.exe haforpa.f givens.o weak-charge.o  NMP-entry.o hfb-matrix.o
+cd ..

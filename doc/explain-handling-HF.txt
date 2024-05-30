@@ -1,0 +1,64 @@
+The package 'hafosend.zip' contains a package for static spherical
+mean field calculations of nuclei with the Skyrme-Hartree-Fock (SHF)
+and Fayans model. 
+
+The following steps are needed to install and run the code.
+
+
+Unpack with issuing
+                unzip hafosend.zip
+This yields the source code in the subdirectory 'source_1D',
+some documantation in the subdirectory 'doc',
+example input file in the subdirectory 'input',
+working space for tests  in the subdirectory 'test',
+and a few auxiliary files in the base directory in which 
+unpacking took place.
+Nota that the subdirectory  'source_1D' contains many files 
+which are not really neede for the presenbt project. They
+are reserve for possible later developments.
+
+
+The subdirectory 'doc' contains:
+  hf_artic.pdf   a book article which explains an early version of
+                 the 1D sphrical HF code. Some model aspects and I/O
+                 are meanwhile outdated. But the basic numerical 
+                 representation explained in the article remains 
+                 relevant.
+  
+  explain-input-HF.txt  description of a typical input file with
+                 explanation of its input parameters.
+
+  explain-input-HF.txt  description of the package, content and
+                 usage.
+
+The subdirectory 'input' contains a couple of input files for
+typical functionals. The name indicates the functional.
+
+
+Compile and link is done with
+   ./clrpa       for the Intel Fortran compiler
+or
+   ./clrpa_g77   for the GNU 'gfortran' compiler.
+You may have to adjust the files to the actual compiler of the system.
+Result is an executable 'haforpa.exe' residing in the base directory.
+Note that som code options have to be set before compilation in the
+files 'source_1D/params.inc'. For explanations, see 'explain-input-HF.txt'.
+
+The code is run with
+    ./haforpa.exe < "input-file"
+Sample input is provided under 'input/for005.<name>'.
+The above command writes extensive aoutput to the terminal.
+If you do not want to watch that, use instead
+    ./haforpa.exe < "input-file" > /dev/null
+You can also decide to save the extensice output for later 
+inspection, e.g. by
+    ./haforpa.exe < "input-file" > for006
+A compact, well readable output of the relecvant results i9s
+writen to the file 'for011'. The level of information is set
+by IFPLOT in the input file, see  'explain-input-HF.txt'.
+Attention: The file 'for011' is overwritten by the next call.
+Save it to another name if ou need it later.
+
+
+Theses explanations here are on the file 'explain-handling-HF.txt'.
+
