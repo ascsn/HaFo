@@ -5,9 +5,9 @@ c
 c
 c     Diagonalaizes a real symmetric matrix.     
 c     List parameters are:
-c      rmatrix   = input matrix in quadratic storage
+c      rmatrix   = hermitian input matrix in quadratic storage
 c      root      = linear array of eigenvalues
-c      vect      = rectangular array of eigenvectors
+c      vect      = rectangualr array of eigenvectors
 c      nmax      = actual dimension of the matrix
 c                  and numbers of roots
 c      ndim      = general dimension of the matrix

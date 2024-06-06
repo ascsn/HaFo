@@ -74,6 +74,12 @@ ALLOCATE(fold1D(1:ngrid,1:ngrid,jsmax),nmin(1:ngrid),nmax(1:ngrid))
 !  ...
 !      Define here the folding matrix for each 'js=1,jsmax'.
 !      Evaluate the bounds 'nmin' and 'nmax' according to 'folding_limit'.
+!
+!      The idea is to compute the folding matrix via Fourier-Bessel basis.
+!      The basis is generated on the grid using by diagonalizing the
+!      matrix of the -nabla**2 operator using 'diag_real_symm' in 'givens.f'.
+!      The matrix of -nabla**2 can be composed using the routine 'k2psi' in
+!      'hafbody.for' which computes the action of -nabla**2.
 !     
 !  ...
 

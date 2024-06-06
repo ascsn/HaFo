@@ -7607,6 +7607,54 @@ c      r      = (ir-1)*rstep
 c
       return
       end
+c-----k2psi  ------------ part of the hartree-fock package ---------------------
+c
+      subroutine k2psi(wfin,hwfout,d2wfin,jsa)
+c
+      include 'params.inc'
+c
+c     action of the operator -nabla**2 
+c
+c     where:
+c       wfin    = input wave function field ,
+c       hwfout  = output wave function field ,
+c       jsa     = combined angular momentum q.n. of wfin and hwfout,
+c
+c     grid properties are transferred via common /grid/
+c
+      dimension wfin(kg1),hwfout(kg1),d2wfin(kg1)
+c
+      include 'grid.inc'
+      include 'skypar.inc'
+      include 'constn.inc'
+c
+c-------------------------------------------------------------------------------
+c
+c     the quantum numbers of the wave function
+c      la      = orbital angular momentum of state  wfin>
+c      parity  = parity for the radial wave function (note that it
+c                contains an extra factor 'r' such that the 1s1/2
+c                state has parity=-1 etc)
+
+c
+      la     = jsa/2
+      xlp    = (la*la+la)
+      parity = (mod(la,2)*2-1)
+cold      isoadd = (iso-1)*ngrid
+c
+c     the derivatives of the wave function
+c
+      call derv25(wfin,d2wfin,parity,ngrid,rstep)
+c
+c     action of -nabla**2
+c
+      hwfout(1) = d2wfin(1)
+      DO ir=2,ngrid
+        hwfout(ir) = xlp*zentrf(ir)*wfin(ir) - d2wfin(ir)
+      END DO
+c
+      return
+      end
 c-----derv13------------ part of the hartree-fock package ----------------------
 c
       subroutine derv13(wfin,dwfout,parity,ngrid,delr)
