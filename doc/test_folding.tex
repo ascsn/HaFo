@@ -1,0 +1,130 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+
+\addtolength{\textheight}{0.5in}
+\addtolength{\topmargin}{-0.2in}
+\addtolength{\evensidemargin}{-0.0in}
+\addtolength{\textwidth}{0.9in}
+%\raggedbottom
+
+
+%\def\sst{\scriptscriptstyle}
+\renewcommand{\baselinestretch}{1.1}
+\renewcommand{\arraystretch}{1.2}
+\parindent=20pt
+
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.9}
+
+
+\setlength{\unitlength}{1cm}
+
+\begin{document}
+
+\title{Test of Gaussian folding routing}
+\author{Discussion file: FAU -- MSU}
+\date{Started: 11. June 2024}
+\maketitle
+
+
+The file \texttt{Gauss\_folding.f90} provides a routine for the
+Gaussian folding
+\begin{equation}
+  \varphi'(\mathbf{r})
+  =
+  \Delta r^3\pi^{3/2}\int d\mathbf{r}_2
+  \exp\left(-\frac{(\mathbf{r}-\mathbf{r}_2)^2}{\Delta r^2}\right)
+  \varphi(\mathbf{r}_2)
+\end{equation}
+acting on a s.p. wavefunction $\varphi$. It is specified for 1D
+spherical calculations on a coordinate-space grid, thus serving as a
+plugin to the Erlangen 1D SHF code.
+
+The new piece of code needs yet testing. This can be done by using
+oscillator functions as probes. For simplicity, we those whicn can be
+expressed by monomials
+\begin{equation}
+  \varphi
+  =
+  r^lY_{ll}(\Omega)\exp\left(-\frac{r^2}{\delta r^2}\right)
+  \quad.
+\label{eq:initHO}
+\end{equation}
+The task is now to find an analytical expression for the corresponding
+$\varphi'$. 
+
+First, we express $\varphi$ in terms of derivatives. To that end, we
+use the gradient formula 
+\begin{eqnarray}
+  \nabla_+r^lY_{ll}e^{-r^2/\delta r^2}
+  &=&
+  Y_{l+1,l+1}\sqrt{\frac{l+1}{2l+3}}\left(\partial_r-\frac{l}{r}\right)
+  r^le^{-r^2/\delta r^2}
+\nonumber\\
+  &=&
+  -\frac{2}{\delta r^2}\sqrt{\frac{l+1}{2l+3}}Y_{l+1,l+1}
+  r^{l+1}e^{-r^2/\delta r^2}
+\\
+  \nabla_+
+  &=&
+  \partial_x+\mathrm{i}\partial_y  
+\end{eqnarray}
+from which we can deduce
+\begin{equation}
+  r^lY_{ll}(\Omega)\exp\left(-\frac{r^2}{\delta r^2}\right)
+  =
+  \left(\frac{-\delta r^2}{2}\right)^l
+  \sqrt{\frac{(2l+1)!!}{l!}}\,Y_{00}\,
+  \nabla_+^l\exp\left(-\frac{r^2}{\delta r^2}\right)
+  \quad.
+\label{eq:rpowerlfunction}
+\end{equation}
+
+Second, we use partial integration to shovel the derivative from
+$\varphi$ to $\varphi'$. This reads
+\begin{eqnarray*}
+  \varphi'
+  &=&
+  \Delta r^3\pi^{3/2}\int d\mathbf{r}_2
+  \exp\left(-\frac{(\mathbf{r}-\mathbf{r}_2)^2}{\Delta r^2}\right)
+  r_2^lY_{ll}(\Omega_2)\exp\left(-\frac{r_2^2}{\delta r^2}\right)
+\\
+  &=&
+  \Delta r^3\pi^{3/2}
+  \left(\frac{-\delta r^2}{2}\right)^l
+  \sqrt{\frac{(2l+1)!!}{l!}}\,Y_{00}\,
+  \int d\mathbf{r}_2
+  \exp\left(-\frac{(\mathbf{r}-\mathbf{r}_2)^2}{\Delta r^2}\right)
+  \nabla_{2,+}^l\exp\left(-\frac{r^2}{\delta r^2}\right)
+\\
+  &=&
+  \Delta r^3\pi^{3/2}
+  \left(\frac{-\delta r^2}{2}\right)^l
+  \sqrt{\frac{(2l+1)!!}{l!}}\,Y_{00}\,
+  (-)^l\nabla_+^l
+  \int d\mathbf{r}_2
+  \exp\left(-\frac{(\mathbf{r}-\mathbf{r}_2)^2}{\Delta r^2}\right)
+  \exp\left(-\frac{r^2}{\delta r^2}\right)
+\\ 
+  &=&
+  \frac{(\Delta r^2+\delta r^2)^{3/2}}{\delta r^3}
+  \left(\frac{-\delta r^2}{2}\right)^l
+  \sqrt{\frac{(2l+1)!!}{l!}}\,Y_{00}\,
+  (-)^l\nabla_+^l
+  \exp\left(-\frac{r^2}{\Delta r^2+\delta r^2}\right)
+\end{eqnarray*}
+from which we conclude
+\begin{equation}
+  \varphi'
+  =
+  (-)^l\frac{(\Delta r^2+\delta r^2)^{3/2}}{\delta r^3}
+  \left(\frac{\delta r^2}{\Delta r^2+\delta r^2}\right)^l
+  r^lY_{ll}\exp\left(-\frac{r^2}{\Delta r^2+\delta r^2}\right)
+\end{equation}
+for the wavefunction $\varphi$ as given in eq. (\ref{eq:initHO}).
+
+
+\end{document}
