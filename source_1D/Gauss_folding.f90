@@ -1,14 +1,14 @@
 SUBROUTINE Gauss_folding_m(psi_in,fpsi_out,rstep,ngrid,js,foldwid,jsmax)
 
 ! Subroutine to apply Gaussian folding to the s.p. wavefunction
-! 'psi_in' having the copmbined angular momentum quantum number 'js'.
+! 'psi_in' having the combined angular momentum quantum number 'js'.
 ! The resulting wavefunction is returned on 'fpsi_out'.
 ! The combined angular momentum 'js' is resolved in to spatial
 ! angular momentum 'll' and twice total angular momentum 'j2'
 ! as exemplified below.
-! The grid parameters are eneterd as stepsize 'rstep' and 
+! The grid parameters are entered as stepsize 'rstep' and 
 ! number of grid points 'ngrid'.
-! The maximum number of 'js' values is as well as the folding width
+! The maximum number of 'js' values as well as the folding width
 ! 'foldwid' is given for the case of intializaton.
 !
 ! The folding kernel is generated at the first call of this routine
@@ -35,10 +35,12 @@ REAL(8), PARAMETER :: folding_limit=1D-6  ! threshold above which folding acts
 REAL(8), ALLOCATABLE, SAVE :: fold1D(:,:,:)  ! array containing the folding matrix
 INTEGER, ALLOCATABLE, SAVE :: nmin(:)     ! minimal grid point above threshold
 INTEGER, ALLOCATABLE, SAVE :: nmax(:)     ! maximal grid point above threshold
-LOGICAL, SAVE :: tfirst=.TRUE:            ! triggers initializaton at first call
+LOGICAL, SAVE :: tfirst=.TRUE.            ! triggers initializaton at first call
 
 INTEGER :: ll      ! spatial angular momentum of 'psi_in'
 INTEGER :: j2      ! twice total angular momentum of 'psi_in'
+
+REAL(8), DIMENSION(ngrid) :: hwfout, d2wfin
 
 IF(tfirst) THEN
   IF(jsmax<0) STOP 'folding must be intialized already in that call'
@@ -51,7 +53,7 @@ IF(2*ll == js) THEN
   j2=js-1
 ELSE
   j2=js
-END DO
+END IF
 
 
 !  ...
@@ -63,13 +65,18 @@ END DO
 !      folding and restored after.
 !  ...
 
+print*, jsmax
+! call Init_Gauss_folding
+fpsi_out = 0
+
 CONTAINS
 
 SUBROUTINE Init_Gauss_folding
-
+integer :: ndimlin, i
+real(8), dimension(SIZE(psi_in), SIZE(psi_in)) :: hwfArray
 ! initializes folding matrix and selection of active elements
-
 ALLOCATE(fold1D(1:ngrid,1:ngrid,jsmax),nmin(1:ngrid),nmax(1:ngrid))
+
 
 !  ...
 !      Define here the folding matrix for each 'js=1,jsmax'.
@@ -83,7 +90,46 @@ ALLOCATE(fold1D(1:ngrid,1:ngrid,jsmax),nmin(1:ngrid),nmax(1:ngrid))
 !     
 !  ...
 
+! Define folding matrix
+
+
+! Calculate the matrix of -nabla**2
+ndimlin = ngrid*(ngrid+1)/2
+do i = 1, jsmax  
+  call k2psi(psi_in, hwfout, d2wfin, i)
+  hwfArray(i, 1:ngrid) = hwfout
+  ! fold1D(1:ngrid, 1:ngrid, i) = hwfout
+  print*, "hwfout", hwfout
+  print*, "D2WFIN", d2wfin
+end do
+! print*, hwfArray
+! call diag_real_symm(fold1D(1:ngrid, 1:ngrid, jsmax), root, vect, ngrid, ndimlin)
+
 END SUBROUTINE Init_Gauss_folding
+
+! General Bessel basis function
+real(8) function bessel_basis(order, r, theta)
+    implicit none
+    real(8), intent(in) :: r, theta
+    integer, intent(in) :: order
+    real(8) :: jn
+
+    ! Compute the nth-order Bessel function of the first kind
+    call bessel_jn(order, r, jn)
+    bessel_basis = jn * cos(theta)
+end function bessel_basis
+
+! Subroutine to compute the nth-order Bessel function of the first kind
+subroutine bessel_jn(n, x, result)
+    implicit none
+    integer :: n
+    real(8), intent(in) :: x
+    real(8), intent(out) :: result
+
+    ! Use a built-in function or an approximation
+    result = besjn(n, x)
+end subroutine bessel_jn
+
 
 END SUBROUTINE Gauss_folding_m
 

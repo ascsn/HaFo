@@ -1337,6 +1337,8 @@ c
       data chipro,chineu/10000.02,10000.02/
       LOGICAL, PARAMETER :: tpaircur=.FALSE.  ! .TRUE. to revive old version
       REAL(8), PARAMETER :: pairoffset=1D-100  !1D-20  !xsmall
+      LOGICAL, PARAMETER :: folding=.TRUE.
+      REAL(8), DIMENSION(KX11) :: fpsi
 c
 c--------------------------------------------------------------------
 c
@@ -1403,11 +1405,22 @@ c                                    the case r=0.0 needs special treatment
         endif
 c                                    now all r>0.0
         r      = zero
-        do ir=ia,ie
-          r      = r+rstep
-          wfa    = wf(nadd+ir)/r
-          paircr(ir) = om*(wfa*wfa) + paircr(ir)
-        enddo
+        IF (folding) THEN
+        ! call folding; last two values are dummy
+            call Gauss_folding_m(wf(nadd+1:nadd+ngrid), 
+     &       fpsi(nadd+1:nadd+ngrid), rstep, ngrid, js, 1D0, -1)
+            DO ir=ia,ie
+              r      = r+rstep
+              wfa    = wf(nadd+ir)/r
+              paircr(ir) = om*(fpsi*fpsi) + paircr(ir)
+            END DO
+        ELSE
+            DO ir=ia,ie
+              r      = r+rstep
+              wfa    = wf(nadd+ir)/r
+              paircr(ir) = om*(wfa*wfa) + paircr(ir)
+            END DO
+        END IF
    30   continue
    20   continue
       END IF

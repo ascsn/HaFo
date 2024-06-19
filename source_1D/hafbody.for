@@ -1372,7 +1372,7 @@ c      call radius
           apv_weak = apv_funct(0.3978D0)*1D9
         ELSE IF(nprot==20 .AND. nneut==28) THEN
 !          apv_weak = apv_funct(0.873)*1D9
-          apv_weak = apv_funct(0.8733)*1D9
+          apv_weak = apv_funct(0.8733D0)*1D9
         ELSE
           apv_weak = 0D0
         END IF

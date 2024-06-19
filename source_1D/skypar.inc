@@ -96,6 +96,7 @@ C
      &            rspln(2),suv2r(2),
      *            PAIRFP,PAIRFN,rho0pr,pptmax(2), ! pairing strength & cut dens.
      &            xparsh,cutfac,atajima,pairgm,
+     &            hfbwidth,           ! folding width    
      &            ecstab,             ! cut-off energy for stabil. pairing
      &            alpinv,betinv,      ! parameters for pade-appr. densit.dep.
      &            alpin2,betin2,      ! parameters for pade-appr. densit.dep.
