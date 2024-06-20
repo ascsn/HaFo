@@ -29,6 +29,7 @@
 \date{Started: 11. June 2024}
 \maketitle
 
+\section{An analytical solution as benchmark}
 
 The file \texttt{Gauss\_folding.f90} provides a routine for the
 Gaussian folding
@@ -44,7 +45,7 @@ spherical calculations on a coordinate-space grid, thus serving as a
 plugin to the Erlangen 1D SHF code.
 
 The new piece of code needs yet testing. This can be done by using
-oscillator functions as probes. For simplicity, we those whicn can be
+oscillator functions as probes. For simplicity, we those which can be
 expressed by monomials
 \begin{equation}
   \varphi
@@ -126,5 +127,78 @@ from which we conclude
 \end{equation}
 for the wavefunction $\varphi$ as given in eq. (\ref{eq:initHO}).
 
+\section{Building the Bessel functions on the grid}
+
+The folding matrix is to be build from the Fourier-Bessel
+transformation. This requires the spherical Bessel functions
+$j_l(kr)$.  The idea is to create them as solution of
+\begin{equation}
+  -\Delta j_l(kr)
+  =
+  k^2j_l(kr)
+\end{equation}
+on the actual radial grid. The 1D spherical code prefers to scale the
+radial functions yielding
+\begin{subequations}
+\begin{eqnarray}
+  \widetilde{j}_l(kr)
+  &=&
+  rj_l(kr))
+  \;,
+\\
+  -\partial_r^2\;\;\widetilde{j}_l(kr)
+  &=&
+  k^2\;\;\widetilde{j}_l(kr)
+  \;.
+\end{eqnarray}
+\end{subequations}
+The 1D code employs a discretized version of the differential equation
+on an equidistant radial grid with points $r_\nu=(\nu-1)\Delta r$ with
+$n=1...N_g$.  There are two ways to compose the matrix
+$(-\partial_r^2)_{\nu\mu}$ between grid points $\nu$ and $\mu$. The
+first one is, to read of the entries from the routine \texttt{derv25}
+(in the file \texttt{hafbody.for}) which computed the action of
+$\partial_3^2$ with the 5-point formula of derivatives. The second way
+is to evaluate the matrix directly from the action of the subroutine
+\texttt{derv25}.  To that end, we use the probe functions
+\begin{subequations}
+\begin{equation}
+  \psi_\nu(r_\mu)
+  =
+  \delta_{\nu\mu}
+\end{equation}
+and apply the routine  \texttt{derv25} which yields
+$\left(-\partial_r^2\psi_\nu\right)(r_\mu)$. The wanted matrix is
+identified as
+\begin{equation}
+  (-\partial_r^2)_{\nu\mu}
+  =
+  \left(-\partial_r^2\psi_\nu\right)(r_\mu)
+  \;.
+\end{equation}
+\end{subequations}
+Running through $\nu=1...N_g$ fills the matrix row by row. One should
+check finally that the resulting matrix is symmetric.
+There remains the question whether the point $\nu=1$ is relevant. 
+We know a priori that $\widetilde{j}_l(0)=0$. One has to see what
+happens if $\nu=1$ is included. 
+
+The matrix $(-\partial_r^2)_{\nu\mu}$ is then diagonalized with a
+standard routine. The outcome are eigenvalues \texttt{eig(n)}$=(k^2)_n, n=1...N_g$ and
+corresponding (real) eigenvectors \texttt{vect(nu,n)}$=\Phi_n(r_\nu)$.
+The folding matrix for the action
+\begin{equation}
+  \hat{\mathcal{F}}\varphi
+  =
+  \int d^3r_2\exp\left(-\frac{(\mathbf{r}-\mathbf{r}_2)^2}{w^2}\right)\varphi(\mathbf{r}_2)
+\end{equation}
+is then composed as
+\begin{equation}
+  \mathcal{F}_{\nu\mu}
+  \propto
+  \sum_n\Phi_n(r_\nu)\exp\left(-\frac{w^2}{4}k^2_n\right)\Phi_n(r_\mu)
+  \quad.
+\end{equation}
+The correct normalization factor has yet to be worked out.
 
 \end{document}
