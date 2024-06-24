@@ -1338,7 +1338,7 @@ c
       LOGICAL, PARAMETER :: tpaircur=.FALSE.  ! .TRUE. to revive old version
       REAL(8), PARAMETER :: pairoffset=1D-100  !1D-20  !xsmall
       LOGICAL, PARAMETER :: folding=.TRUE.
-      REAL(8), DIMENSION(KX11) :: fpsi
+      REAL(8), DIMENSION(ngrid) :: fpsi
 c
 c--------------------------------------------------------------------
 c
@@ -1412,7 +1412,7 @@ c                                    now all r>0.0
             DO ir=ia,ie
               r      = r+rstep
               wfa    = wf(nadd+ir)/r
-              paircr(ir) = om*(fpsi*fpsi) + paircr(ir)
+c              paircr(ir) = om*(fpsi*fpsi) + paircr(ir)
             END DO
         ELSE
             DO ir=ia,ie

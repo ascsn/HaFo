@@ -32,13 +32,14 @@ REAL(8), INTENT(IN) :: foldwid            ! spatial width of the folding
 INTEGER, INTENT(IN) :: jsmax              ! maximum 'js' supported
 
 REAL(8), PARAMETER :: folding_limit=1D-6  ! threshold above which folding acts
-REAL(8), ALLOCATABLE, SAVE :: fold1D(:,:,:)  ! array containing the folding matrix
+REAL(8), ALLOCATABLE, SAVE :: fold1D(:,:,:) ! array containing the folding matrix
 INTEGER, ALLOCATABLE, SAVE :: nmin(:)     ! minimal grid point above threshold
 INTEGER, ALLOCATABLE, SAVE :: nmax(:)     ! maximal grid point above threshold
 LOGICAL, SAVE :: tfirst=.TRUE.            ! triggers initializaton at first call
 
 INTEGER :: ll      ! spatial angular momentum of 'psi_in'
 INTEGER :: j2      ! twice total angular momentum of 'psi_in'
+INTEGER :: i
 
 REAL(8), DIMENSION(ngrid) :: hwfout, d2wfin
 
@@ -65,17 +66,22 @@ END IF
 !      folding and restored after.
 !  ...
 
-print*, jsmax
-! call Init_Gauss_folding
-fpsi_out = 0
+fpsi_out = 0d0
+fpsi_out = matmul(fold1D(1:ngrid, 1:ngrid, 2), psi_in)
 
 CONTAINS
 
 SUBROUTINE Init_Gauss_folding
-integer :: ndimlin, i
+integer :: ndimlin, i, la, j, k
+integer :: xlp, parity
+real(8) :: w, jn
+real(8), dimension(ngrid) :: r
 real(8), dimension(SIZE(psi_in), SIZE(psi_in)) :: hwfArray
+real(8), ALLOCATABLE :: psi_uv(:,:), d2psi_uv(:,:), eigVals(:), eigVects(:,:)
 ! initializes folding matrix and selection of active elements
 ALLOCATE(fold1D(1:ngrid,1:ngrid,jsmax),nmin(1:ngrid),nmax(1:ngrid))
+ALLOCATE(psi_uv(1:ngrid, 1:ngrid), d2psi_uv(1:ngrid, 1:ngrid))
+ALLOCATE(eigVals(1:ngrid), eigVects(1:ngrid, 1:ngrid))
 
 
 !  ...
@@ -90,20 +96,40 @@ ALLOCATE(fold1D(1:ngrid,1:ngrid,jsmax),nmin(1:ngrid),nmax(1:ngrid))
 !     
 !  ...
 
-! Define folding matrix
+! r grid
+    r = 0d0
+    do i = 1, ngrid
+        r(i) = (i-1)*0.2
+    end do
 
+w = 1.0d0
+! Define kronecker delta matrix (probe function psi_nu (r_mu) = delta_nu_mu)
+psi_uv = 0.0d0
+forall (j=1:ngrid) psi_uv(j,j) = 1.0d0
+
+! Define bessel-fourier grid for the same matrix
+do i = 1, ngrid
+  call bessel_calc(js, r(i), jn)
+  psi_uv(1:ngrid, i) = psi_uv(1:ngrid, i) * jn
+end do
 
 ! Calculate the matrix of -nabla**2
 ndimlin = ngrid*(ngrid+1)/2
-do i = 1, jsmax  
-  call k2psi(psi_in, hwfout, d2wfin, i)
-  hwfArray(i, 1:ngrid) = hwfout
-  ! fold1D(1:ngrid, 1:ngrid, i) = hwfout
-  print*, "hwfout", hwfout
-  print*, "D2WFIN", d2wfin
-end do
-! print*, hwfArray
-! call diag_real_symm(fold1D(1:ngrid, 1:ngrid, jsmax), root, vect, ngrid, ndimlin)
+jloop: do i = 1, jsmax
+gridLoop: do j = 1, ngrid
+            call k2psi(psi_uv(j,1:ngrid), hwfout, d2wfin, i)
+            d2psi_uv(j, 1:ngrid) = hwfout
+          end do gridLoop
+          call diag_real_symm(d2psi_uv, eigVals, &
+            eigVects, ngrid, ngrid, ndimlin)
+          do j =1, ngrid
+            do k = 1, ngrid
+              fold1D(j, k, i) = eigVects(j,k) * &
+              exp(-eigVals(k)/4 * w**2) * eigVects(k, j)
+            end do
+          end do
+end do jloop
+
 
 END SUBROUTINE Init_Gauss_folding
 
@@ -115,20 +141,20 @@ real(8) function bessel_basis(order, r, theta)
     real(8) :: jn
 
     ! Compute the nth-order Bessel function of the first kind
-    call bessel_jn(order, r, jn)
+    call bessel_calc(order, r, jn)
     bessel_basis = jn * cos(theta)
 end function bessel_basis
 
 ! Subroutine to compute the nth-order Bessel function of the first kind
-subroutine bessel_jn(n, x, result)
+subroutine bessel_calc(n, x, result)
     implicit none
     integer :: n
     real(8), intent(in) :: x
     real(8), intent(out) :: result
 
     ! Use a built-in function or an approximation
-    result = besjn(n, x)
-end subroutine bessel_jn
+    result = bessel_jn(n, x)
+end subroutine bessel_calc
 
 
 END SUBROUTINE Gauss_folding_m
