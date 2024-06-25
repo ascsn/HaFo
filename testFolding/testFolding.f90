@@ -5,8 +5,7 @@ PROGRAM test_folding
     ! external hfbpot
 
     INTEGER, PARAMETER :: n_grid = 5
-    INTEGER :: i
-    REAL(8) :: js
+    INTEGER :: i, js
     ! REAL(8), parameter :: pi = 3.141592653589793d0
     ! REAL(8) :: phi
     REAL(8), DIMENSION(n_grid) :: psi_in, r, deltar, deltar2, fpsi_out
@@ -35,8 +34,9 @@ PROGRAM test_folding
         psi_in(i) = r(i)**l*REAL(Yll)*EXP(-r(i)**2/deltar2(i))
     end do
     print*, "Psi_IN", psi_in
+    ! SUBROUTINE Gauss_folding_m(psi_in,fpsi_out,rstep,ngrid,js,foldwid,jsmax)
     call Gauss_folding_m(psi_in, fpsi_out, 0.2, n_grid, js, 1d0, 4)
-    print*, fpsi_out
+    print*, "psi_out",fpsi_out
 
     ! Test the norm, widths of the new function wrt old function
 

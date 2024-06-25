@@ -67,7 +67,7 @@ END IF
 !  ...
 
 fpsi_out = 0d0
-fpsi_out = matmul(fold1D(1:ngrid, 1:ngrid, 2), psi_in)
+fpsi_out = matmul(fold1D(1:ngrid, 1:ngrid, j2), psi_in)
 
 CONTAINS
 
@@ -77,11 +77,13 @@ integer :: xlp, parity
 real(8) :: w, jn
 real(8), dimension(ngrid) :: r
 real(8), dimension(SIZE(psi_in), SIZE(psi_in)) :: hwfArray
-real(8), ALLOCATABLE :: psi_uv(:,:), d2psi_uv(:,:), eigVals(:), eigVects(:,:)
+real(8), ALLOCATABLE :: exp_uv(:), d2psi_uv(:,:), eigVals(:), eigVects(:,:)
+real(8), ALLOCATABLE :: psi_u(:)
 ! initializes folding matrix and selection of active elements
 ALLOCATE(fold1D(1:ngrid,1:ngrid,jsmax),nmin(1:ngrid),nmax(1:ngrid))
-ALLOCATE(psi_uv(1:ngrid, 1:ngrid), d2psi_uv(1:ngrid, 1:ngrid))
+ALLOCATE(exp_uv(1:ngrid), d2psi_uv(1:ngrid, 1:ngrid))
 ALLOCATE(eigVals(1:ngrid), eigVects(1:ngrid, 1:ngrid))
+ALLOCATE(psi_u(1:ngrid))
 
 
 !  ...
@@ -96,40 +98,37 @@ ALLOCATE(eigVals(1:ngrid), eigVects(1:ngrid, 1:ngrid))
 !     
 !  ...
 
-! r grid
-    r = 0d0
-    do i = 1, ngrid
-        r(i) = (i-1)*0.2
-    end do
+! Create r grid 
+  r = 0d0
+  do i = 1, ngrid
+      r(i) = (i-1)*rstep
+  end do
 
+! Weight needs to be found
 w = 1.0d0
-! Define kronecker delta matrix (probe function psi_nu (r_mu) = delta_nu_mu)
-psi_uv = 0.0d0
-forall (j=1:ngrid) psi_uv(j,j) = 1.0d0
-
 ! Define bessel-fourier grid for the same matrix
-do i = 1, ngrid
-  call bessel_calc(js, r(i), jn)
-  psi_uv(1:ngrid, i) = psi_uv(1:ngrid, i) * jn
-end do
+ndimlin = ngrid*(ngrid+1)/2
+do i = 1, jsmax
+  do j = 1, ngrid
+    call bessel_calc(i-1, r(j), jn)
+    psi_u(j) = jn
+  end do
 
 ! Calculate the matrix of -nabla**2
-ndimlin = ngrid*(ngrid+1)/2
-jloop: do i = 1, jsmax
-gridLoop: do j = 1, ngrid
-            call k2psi(psi_uv(j,1:ngrid), hwfout, d2wfin, i)
-            d2psi_uv(j, 1:ngrid) = hwfout
-          end do gridLoop
-          call diag_real_symm(d2psi_uv, eigVals, &
-            eigVects, ngrid, ngrid, ndimlin)
-          do j =1, ngrid
-            do k = 1, ngrid
-              fold1D(j, k, i) = eigVects(j,k) * &
-              exp(-eigVals(k)/4 * w**2) * eigVects(k, j)
-            end do
-          end do
-end do jloop
-
+  call k2psi(psi_u, hwfout, d2wfin, i)
+  do j = 1, ngrid
+    do k = 1, ngrid
+      d2psi_uv(i,j) = psi_u(i) * hwfout(j)
+    end do
+  end do
+  call diag_real_symm(d2psi_uv, eigVals, eigVects, ngrid, ngrid, ndimlin)
+  exp_uv = exp(-eigVals/4 * w**2)
+  do j = 1, ngrid
+    do k = 1, ngrid
+      fold1D(j, k, i) = eigVects(j,k) * exp_uv(j)  * eigVects (j, k)
+    end do
+  end do
+end do
 
 END SUBROUTINE Init_Gauss_folding
 
