@@ -78,14 +78,14 @@ CONTAINS
 SUBROUTINE Init_Gauss_folding
 
 
-integer :: ndimlin, i, la, j, k, js, lang
+integer :: ndimlin, i, la, j, k, lang, l
 integer :: xlp, parity
 real(8) :: jn
 !real(8), dimension(ngrid) :: r
 real(8), dimension(SIZE(psi_in), SIZE(psi_in)) :: hwfArray
 real(8), ALLOCATABLE :: exp_uv(:), d2psi_uv(:,:), eigVals(:), eigVects(:,:)
 real(8), ALLOCATABLE :: psi_u(:)
-logical,parameter :: ttestfols=.TRUE.
+logical,parameter :: ttestfold=.TRUE.
 
 ! initializes folding matrix and selection of active elements
 ALLOCATE(fold1D(1:ngrid,1:ngrid,jsmax),nmin(1:ngrid),nmax(1:ngrid))
@@ -115,8 +115,8 @@ ALLOCATE(psi_u(1:ngrid))
 
 ! Define bessel-fourier grid for the same matrix
 ndimlin = ngrid*(ngrid+1)/2
-do js = 1, jsmax            ! loop over total angular momenta
-  lang=js/2    ! orbital angular momentum
+do l = 1, jsmax            ! loop over total angular momenta
+  lang=l/2    ! orbital angular momentum
 
 ! compose matrix of -partial_r^2 on the grid points 
   do j = 1, ngrid     
@@ -125,7 +125,7 @@ do js = 1, jsmax            ! loop over total angular momenta
     psi_u(j) = 1D0
 
 !    Calculate the matrix of -nabla**2
-    call k2psi(psi_u, hwfout, d2wfin, js)
+    call k2psi(psi_u, hwfout, d2wfin, l)
     d2psi_uv(:,j) = hwfout(:)
 !    do j = 1, ngrid
 !      do k = 1, ngrid
@@ -135,32 +135,32 @@ do js = 1, jsmax            ! loop over total angular momenta
   IF(ttestfold) THEN
     WRITE(6,'(a,i3)') 'The matrix of -partial_r^2 for js='
     do i=1,ngrid
-      write(6,'(200(1pg13.5))') (d2psi_uv(:,i),i=1,ngrid)
+      write(6,'(200(1pg13.5))') (d2psi_uv(:,j),j=1,ngrid)
     end do
-  END DO
+  END IF
 
 ! diagonalize to have "numerical Bessel functions" on 'eigVects'
   call diag_real_symm(d2psi_uv, eigVals, eigVects, ngrid, ngrid, ndimlin)
-  exp_uv = exp(-eigVals/(4D0*foldwidth)**2)
+  exp_uv = exp(-eigVals/(4D0*foldwid)**2)
   IF(ttestfold) THEN
     WRITE(6,'(a)') 'The eigenvalues of -partial_r^2:'
     write(6,'(200(1pg13.5))') eigVals
-  END DO
+  END IF
 
-! finall compose folding matrix 
+! finally compose folding matrix 
   do i=1,ngrid; do j = 1, ngrid
 !   sum over "Bessel" eigenstates  
-    fold1D(i,j,js)=0D0
+    fold1D(i,j,l)=0D0
     do k = 1, ngrid
-      fold1D(i,j,js) = fold1D(i,j,js) + eigVects(i,k)*exp_uv(k)*eigVects (j, k)
+      fold1D(i,j,l) = fold1D(i,j,l) + eigVects(i,k)*exp_uv(k)*eigVects (j, k)
     end do
   end do; end do
   IF(ttestfold) THEN
-    WRITE(6,'(a,i3)') 'The folding matrix for js=',js
+    WRITE(6,'(a,i3)') 'The folding matrix for js=',l
     do i=1,ngrid
-      write(6,'(200(1pg13.5))') (fold1D(:,i,js),i=1,ngrid)
+      write(6,'(200(1pg13.5))') (fold1D(:,j,l),j=1,ngrid)
     end do
-  END DO
+  END IF
 
 end do                     ! end loop over total angular momenta
 
