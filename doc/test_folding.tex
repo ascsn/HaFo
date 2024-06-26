@@ -127,6 +127,33 @@ from which we conclude
 \end{equation}
 for the wavefunction $\varphi$ as given in eq. (\ref{eq:initHO}).
 
+
+Actually, the 1D code does not use the radial parts of the
+wavefunctions $\varphi$, $\varphi'$ as such, but the $r$-weighted
+radial wavefunctions $R(r)=r\varphi(r)$ instead. What we have to
+compare is thus the initial wavefunction
+\begin{subequations}
+\begin{equation}
+  R(r)
+  =
+  \frac{r\varphi}{Y_{ll}}
+  =
+  =
+  r^{l+1}(\Omega)\exp\left(-\frac{r^2}{\delta r^2}\right)
+\end{equation}
+with the folded one
+\begin{equation}
+  R'(r)
+  =
+  \frac{r\varphi'}{Y_{ll}}
+  =
+  (-)^l\frac{(\Delta r^2+\delta r^2)^{3/2}}{\delta r^3}
+  \left(\frac{\delta r^2}{\Delta r^2+\delta r^2}\right)^l
+  r^{l+1}\exp\left(-\frac{r^2}{\Delta r^2+\delta r^2}\right)
+  \;.
+\end{equation}
+\end{subequations}
+
 \section{Building the Bessel functions on the grid}
 
 The folding matrix is to be build from the Fourier-Bessel
