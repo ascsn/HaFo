@@ -41,7 +41,7 @@ PROGRAM test_folding
 
     ! Test the norm, widths of the new function wrt old function
     do i = 1, n_grid
-        t1 = (deltar2(i)/(2*deltar2(i)))**l*r(i)**l
+        t1 = (-deltar2(i)/(2*deltar2(i)))**l*r(i)**l
         t2  = Yll * exp(- r(i)**2/(2*deltar2(i)))
         phi_exact(i) = (-1)**l*t1*t2
     end do
