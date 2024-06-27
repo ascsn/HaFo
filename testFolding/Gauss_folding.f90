@@ -23,10 +23,10 @@ SUBROUTINE Gauss_folding_m(psi_in,fpsi_out,rstep,ngrid,js,foldwid,jsmax)
 
 IMPLICIT NONE
 
+INTEGER, INTENT(IN) :: ngrid              ! number of grid points
 REAL(8), INTENT(IN) :: psi_in(1:ngrid)    ! s.p. wavefunction to be folded
 REAL(8), INTENT(OUT) :: fpsi_out(1:ngrid) ! result of folding
 REAL(8), INTENT(IN) :: rstep              ! stepsize of radial grid
-INTEGER, INTENT(IN) :: ngrid              ! number of grid points
 INTEGER, INTENT(IN) :: js                 ! combinded ang.mom. quantum number
 REAL(8), INTENT(IN) :: foldwid            ! spatial width of the folding 
 INTEGER, INTENT(IN) :: jsmax              ! maximum 'js' supported
@@ -35,7 +35,7 @@ REAL(8), PARAMETER :: folding_limit=1D-6  ! threshold above which folding acts
 REAL(8), ALLOCATABLE, SAVE :: fold1D(:,:,:)  ! array containing the folding matrix
 INTEGER, ALLOCATABLE, SAVE :: nmin(:)     ! minimal grid point above threshold
 INTEGER, ALLOCATABLE, SAVE :: nmax(:)     ! maximal grid point above threshold
-LOGICAL, SAVE :: tfirst=.TRUE:            ! triggers initializaton at first call
+LOGICAL, SAVE :: tfirst=.TRUE.            ! triggers initializaton at first call
 
 INTEGER :: ll      ! spatial angular momentum of 'psi_in'
 INTEGER :: j2      ! twice total angular momentum of 'psi_in'
@@ -51,7 +51,7 @@ IF(2*ll == js) THEN
   j2=js-1
 ELSE
   j2=js
-END DO
+END IF
 
 !  ...
 !      code here the folding
@@ -62,7 +62,7 @@ END DO
 !      folding and restored after.
 !  ...
 
-psi_in = psi_in/r
+!psi_in = psi_in/r
 
 
 CONTAINS
@@ -90,7 +90,7 @@ ALLOCATE(fold1D(1:ngrid,1:ngrid,jsmax),nmin(1:ngrid),nmax(1:ngrid))
     CALL k2psi(psi_in,hwfout,d2wfin,j2)
 
 ! Diagonalize the matrix
-    CALL diag_real_symm(hwfout,root,vect,nmax,ndim,ndimlin)
+    CALL diag_real_symm(hwfout,root,vect,ngrid,ngrid,ngrid*ngrid+ngrid)/2)
 
       
 
