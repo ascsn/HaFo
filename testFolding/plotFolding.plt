@@ -7,9 +7,9 @@ set output "plotTestCase.eps"
 set mxtics 9
 set mytics 5
 
-#set yrange [-0.1:0.3]
+#set yrange [1e-80:1e1]
 #set xrange [1e8:5e11]
-#set logscale x
+#set logscale y
 set colorsequence classic
 #set ytics nomirror scale 2
 set xtics auto
@@ -41,7 +41,7 @@ set style line 15 dt 3 lc rgb "royalblue" pt 2 lw 4 ps 1.5
 set style line 16 dt 3 lc rgb "dark-grey" pt 2 lw 4 ps 1.5
 #set style line 
 
-set key bottom right font 'Helvetica, 14'
+set key top right font 'Helvetica, 14'
 
 plot "testFoldingData.dat" using 1:3 w lines ls 1 ti "Folded Wavefunction",\
     "testFoldingData.dat" using 1:4 w lines ls 15 ti "Exact Result (eqn 6)"

@@ -107,30 +107,20 @@ ALLOCATE(psi_u(1:ngrid))
 !     
 !  ...
 
-! Create r grid 
-!  r = 0d0
-!  do i = 1, ngrid
-!      r(i) = (i-1)*rstep
-!  end do
 
 ! Define bessel-fourier grid for the same matrix
 ndimlin = ngrid*(ngrid+1)/2
-do l = 1, jsmax            ! loop over total angular momenta
-  lang=l/2    ! orbital angular momentum
+do l = 1, jsmax             ! loop over total angular momenta
+  lang=l/2                  ! orbital angular momentum
 
 ! compose matrix of -partial_r^2 on the grid points 
   do j = 1, ngrid     
-!    call bessel_calc(i-1, r(j), jn)
     psi_u=0D0
     psi_u(j) = 1D0
 
 !    Calculate the matrix of -nabla**2
     call k2psi(psi_u, hwfout, d2wfin, l)
     d2psi_uv(:,j) = hwfout(:)
-!    do j = 1, ngrid
-!      do k = 1, ngrid
-!        d2psi_uv(i,j) = psi_u(i) * hwfout(j)
-!      end do
   end do
   IF(ttestfold) THEN
     WRITE(6,'(a,i3)') 'The matrix of -partial_r^2 for js='
@@ -191,9 +181,6 @@ end subroutine bessel_calc
 
 
 END SUBROUTINE Gauss_folding_m
-
-
-
 
 
 SUBROUTINE gapoperator(fpsi_in,gappsi_out,rstep,ngrid,js,pairpt)

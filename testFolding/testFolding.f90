@@ -9,6 +9,7 @@ PROGRAM test_folding
     ! REAL(8), parameter :: pi = 3.141592653589793d0
     REAL(8) :: t1, t2, rstep
     REAL(8), DIMENSION(n_grid) :: psi_in, r, deltar, deltar2, fpsi_out, phi_exact
+    REAL(8), DIMENSION(n_grid) :: redPsi_in
     COMPLEX(8) :: Yll
     theta = pi/6.0
     phi = 1.d0 ! phi contribution isn't included
@@ -34,25 +35,28 @@ PROGRAM test_folding
         deltar2(i) = deltar(i)**2
         psi_in(i) = r(i)**l*REAL(Yll)*EXP(-r(i)**2/deltar2(i))
     end do
-    ! print*, "Psi_IN", psi_in
+    
     ! SUBROUTINE Gauss_folding_m(psi_in,fpsi_out,rstep,ngrid,js,foldwid,jsmax)
-    call Gauss_folding_m(psi_in, fpsi_out, 0.2, n_grid, js, 1d0, 4)
-    ! print*, "psi_out",fpsi_out
+    call Gauss_folding_m(psi_in, fpsi_out, rstep, n_grid, js, 3d0, 4)
 
     ! Test the norm, widths of the new function wrt old function
     do i = 1, n_grid
-        t1 = (-deltar2(i)/(2*deltar2(i)))**l*r(i)**l
-        t2  = Yll * exp(- r(i)**2/(2*deltar2(i)))
-        phi_exact(i) = (-1)**l*t1*t2
+        t1 = (-deltar2(i)/(2*deltar2(i)))**l*r(i)**(l+1)
+        t2  = exp(- r(i)**2/(2*deltar2(i)))
+        phi_exact(i) = (-1)**l*(2*deltar2(i))**(3/2)/deltar(i)**3*t1*t2
     end do
 
-    ! print*, "phi_exact", phi_exact
-    ! print*, phi_exact - fpsi_out
+    print*, "phi_exact", phi_exact
+    print*, "fpsi", fpsi_out
+    print*, phi_exact - fpsi_out
+
+    redPsi_in = psi_in*r/Yll
 
     ! Write data to file
     open(unit=10, file="testFoldingData.dat", status="unknown")
     do i = 1, n_grid
-        write(10, '(4es15.6)') r(i), psi_in(i), fpsi_out(i), phi_exact(i)
+        write(10, '(5es15.6)') r(i), redPsi_in(i), fpsi_out(i),&
+        phi_exact(i)
     end do
     close(10)
 
