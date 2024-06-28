@@ -1,0 +1,4 @@
+gfortran -c -w ../source_1D/givens.f
+gfortran -c Gauss_folding.f90
+gfortran -c k2psi.f
+gfortran testFolding.f90 Gauss_folding.o k2psi.o givens.o

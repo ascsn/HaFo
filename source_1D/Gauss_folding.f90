@@ -67,7 +67,10 @@ END IF
 !  ...
 
 fpsi_out = 0d0
-fpsi_out = matmul(fold1D(1:ngrid, 1:ngrid, j2), psi_in)
+!fpsi_out = matmul(fold1D(1:ngrid, 1:ngrid, j2), psi_in)
+do i=1,ngrid
+  fpsi_out(i) = SUM(fold1D(i,:,js)*psi_in(:))
+end do
 
 CONTAINS
 
@@ -114,7 +117,8 @@ do l = 1, jsmax             ! loop over total angular momenta
   lang=l/2                  ! orbital angular momentum
 
 ! compose matrix of -partial_r^2 on the grid points 
-  do j = 1, ngrid     
+  d2psi_uv(:,1)=0D0
+  do j = 2, ngrid     
     psi_u=0D0
     psi_u(j) = 1D0
 
@@ -123,32 +127,39 @@ do l = 1, jsmax             ! loop over total angular momenta
     d2psi_uv(:,j) = hwfout(:)
   end do
   IF(ttestfold) THEN
-    WRITE(6,'(a,i3)') 'The matrix of -partial_r^2 for js='
+    WRITE(6,'(a,i3)') 'The matrix of -partial_r^2 for js=',js
     do i=1,ngrid
-      write(6,'(200(1pg13.5))') (d2psi_uv(:,j),j=1,ngrid)
+      write(6,'(200(1pg13.5))') d2psi_uv(:,i)
+      WRITE(6,'(/1x)')
     end do
   END IF
 
 ! diagonalize to have "numerical Bessel functions" on 'eigVects'
   call diag_real_symm(d2psi_uv, eigVals, eigVects, ngrid, ngrid, ndimlin)
-  exp_uv = exp(-eigVals/(4D0*foldwid)**2)
+  exp_uv = exp(-eigVals*(0.5D0*foldwid)**2)
   IF(ttestfold) THEN
-    WRITE(6,'(a)') 'The eigenvalues of -partial_r^2:'
+    WRITE(6,'(/a)') 'The eigenvalues of -partial_r^2:'
     write(6,'(200(1pg13.5))') eigVals
+    WRITE(6,'(/a,i3)') 'The eigenvectors'
+    do i=1,ngrid
+      write(6,'(200(1pg13.5))') eigVects(i,:)
+!      WRITE(6,'(/1x)')
+    end do
   END IF
 
 ! finally compose folding matrix 
   do i=1,ngrid; do j = 1, ngrid
 !   sum over "Bessel" eigenstates  
     fold1D(i,j,l)=0D0
-    do k = 1, ngrid
+    do k = 2, ngrid
       fold1D(i,j,l) = fold1D(i,j,l) + eigVects(i,k)*exp_uv(k)*eigVects (j, k)
     end do
   end do; end do
   IF(ttestfold) THEN
-    WRITE(6,'(a,i3)') 'The folding matrix for js=',l
+    WRITE(6,'(/a,i3)') 'The folding matrix for js=',l
     do i=1,ngrid
-      write(6,'(200(1pg13.5))') (fold1D(:,j,l),j=1,ngrid)
+      write(6,'(200(1pg13.5))') fold1D(:,i,l)
+      write(6,'(1x)')
     end do
   END IF
 

@@ -2,15 +2,17 @@ PROGRAM test_folding
     ! Test program for Gaussian folding subroutine.
 !    use spherical_harmonics
     IMPLICIT NONE
-    ! external hfbpot
+
+!   common 'grid' to communicate 'ngrid'
+    include 'grid.inc'
 
 !   set the model parameters here by PARAMETER statements
 !   (may be changed to be read in later)
     INTEGER, PARAMETER :: n_grid = 31      ! number of radial grid points
     INTEGER, PARAMETER :: js=1             ! angular momentum
     INTEGER, PARAMETER :: jsmax=4          ! maximum angular momentum
-    REAL(8), PARAMETER :: rstep=0.3D0      ! grid spacing
-    REAL(8), PARAMETER :: foldwidth=3D0    ! Gaussian folding width
+    REAL(8), PARAMETER :: rstep_in=0.3D0   ! grid spacing
+    REAL(8), PARAMETER :: foldwidth=2.0D0    ! Gaussian folding width
     REAL(8), PARAMETER :: wpwidth=3D0      ! with of test wavepacket
 
     INTEGER :: i, ll
@@ -21,6 +23,8 @@ PROGRAM test_folding
     COMPLEX(8) :: Yll
 !    theta = pi/6.0
 !    phi = 1.d0 ! phi contribution isn't included
+    ngrid = n_grid            ! to be available in 'k2psi'
+    rstep = rstep_in          ! to be available in 'k2psi'
     ll = js/2  ! orbital angular momentum to combined a.m. quantum number 'js'
 
     ! Define the wavefunction to be folded
@@ -48,7 +52,8 @@ PROGRAM test_folding
     do i = 1, n_grid
         t1 = 1D0/(wpwidth**2+foldwidth**2) !(-deltar2(i)/(2*deltar2(i)))**l*r(i)**(l+1)
         t2  = wpwidth**2*t1
-        phi_exact(i) = ((-1)**ll)*t2**(ll-1.5D0)*r(i)**(ll+1)*EXP(-r(i)**2*t1)
+        phi_exact(i) = ((-1)**ll)*t2**(ll+1.5D0)*r(i)**(ll+1)*EXP(-r(i)**2*t1)
+!        phi_exact(i) = ((-1)**ll)*t2**(ll)*r(i)**(ll+1)*EXP(-r(i)**2*t1)
     end do
 
     print*, "phi_exact", phi_exact
@@ -59,10 +64,12 @@ PROGRAM test_folding
 
     ! Write data to file
     open(unit=10, file="testFoldingData.dat", status="unknown")
-    WRITE(10,'(a)') ' r   init w.p.   folded w.p.    exact folding'
+    WRITE(10,'(a,2(1pg13.5))') &
+     '# test Gaussian folding for w.p.width,fold.width=',wpwidth,foldwidth
+    WRITE(10,'(a)') '# r   init w.p.   folded w.p.    exact folding'
     do i = 1, n_grid
-        write(10, '(5es15.6)') r(i), psi_in(i), fpsi_out(i),&
-        phi_exact(i)
+        write(10, '(6(1pg13.5))') r(i), psi_in(i), fpsi_out(i),&
+        phi_exact(i),fpsi_out(i)/phi_exact(i)
     end do
     close(10)
 
