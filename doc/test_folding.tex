@@ -36,7 +36,7 @@ Gaussian folding
 \begin{equation}
   \varphi'(\mathbf{r})
   =
-  \Delta r^3\pi^{3/2}\int d\mathbf{r}_2
+  \frac{1}{\Delta r^3\pi^{3/2}}\int d\mathbf{r}_2
   \exp\left(-\frac{(\mathbf{r}-\mathbf{r}_2)^2}{\Delta r^2}\right)
   \varphi(\mathbf{r}_2)
 \end{equation}
@@ -89,12 +89,13 @@ $\varphi$ to $\varphi'$. This reads
 \begin{eqnarray*}
   \varphi'
   &=&
-  \Delta r^3\pi^{3/2}\int d\mathbf{r}_2
+  \frac{1}{\Delta r^3\pi^{3/2}}\int d\mathbf{r}_2
+  \int d\mathbf{r}_2
   \exp\left(-\frac{(\mathbf{r}-\mathbf{r}_2)^2}{\Delta r^2}\right)
   r_2^lY_{ll}(\Omega_2)\exp\left(-\frac{r_2^2}{\delta r^2}\right)
 \\
   &=&
-  \Delta r^3\pi^{3/2}
+  \frac{1}{\Delta r^3\pi^{3/2}}\int d\mathbf{r}_2
   \left(\frac{-\delta r^2}{2}\right)^l
   \sqrt{\frac{(2l+1)!!}{l!}}\,Y_{00}\,
   \int d\mathbf{r}_2
@@ -102,7 +103,7 @@ $\varphi$ to $\varphi'$. This reads
   \nabla_{2,+}^l\exp\left(-\frac{r^2}{\delta r^2}\right)
 \\
   &=&
-  \Delta r^3\pi^{3/2}
+  \frac{1}{\Delta r^3\pi^{3/2}}\int d\mathbf{r}_2
   \left(\frac{-\delta r^2}{2}\right)^l
   \sqrt{\frac{(2l+1)!!}{l!}}\,Y_{00}\,
   (-)^l\nabla_+^l
@@ -111,7 +112,7 @@ $\varphi$ to $\varphi'$. This reads
   \exp\left(-\frac{r^2}{\delta r^2}\right)
 \\ 
   &=&
-  \frac{(\Delta r^2+\delta r^2)^{3/2}}{\delta r^3}
+  \frac{\delta r^3}{(\Delta r^2+\delta r^2)^{3/2}}
   \left(\frac{-\delta r^2}{2}\right)^l
   \sqrt{\frac{(2l+1)!!}{l!}}\,Y_{00}\,
   (-)^l\nabla_+^l
@@ -121,7 +122,7 @@ from which we conclude
 \begin{equation}
   \varphi'
   =
-  (-)^l\frac{(\Delta r^2+\delta r^2)^{3/2}}{\delta r^3}
+  (-)^l\frac{\delta r^3}{(\Delta r^2+\delta r^2)^{3/2}}
   \left(\frac{\delta r^2}{\Delta r^2+\delta r^2}\right)^l
   r^lY_{ll}\exp\left(-\frac{r^2}{\Delta r^2+\delta r^2}\right)
 \end{equation}
@@ -147,12 +148,21 @@ with the folded one
   =
   \frac{r\varphi'}{Y_{ll}}
   =
-  (-)^l\frac{(\Delta r^2+\delta r^2)^{3/2}}{\delta r^3}
-  \left(\frac{\delta r^2}{\Delta r^2+\delta r^2}\right)^l
+  (-)^l\left(\frac{\delta r^2}{\Delta r^2+\delta r^2}\right)^{l+3/2}
   r^{l+1}\exp\left(-\frac{r^2}{\Delta r^2+\delta r^2}\right)
   \;.
 \end{equation}
 \end{subequations}
+
+Most crucial is a proper normalization of folding. The rule is that
+folding should not change the integral from initial to folded field.
+Thus we use as a first test:
+\begin{equation}
+  \int_0^\infty dr\,r\,R
+  =
+  \int_0^\infty dr\,r\,R'
+  \quad.
+\end{equation}
 
 \section{Building the Bessel functions on the grid}
 

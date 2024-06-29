@@ -67,7 +67,6 @@ END IF
 !  ...
 
 fpsi_out = 0d0
-!fpsi_out = matmul(fold1D(1:ngrid, 1:ngrid, j2), psi_in)
 do i=1,ngrid
   fpsi_out(i) = SUM(fold1D(i,:,js)*psi_in(:))
 end do

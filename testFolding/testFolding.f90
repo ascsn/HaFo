@@ -8,26 +8,24 @@ PROGRAM test_folding
 
 !   set the model parameters here by PARAMETER statements
 !   (may be changed to be read in later)
-    INTEGER, PARAMETER :: n_grid = 31      ! number of radial grid points
+    INTEGER, PARAMETER :: n_grid = 50      ! number of radial grid points
     ! INTEGER, PARAMETER :: js=2             ! angular momentum
     INTEGER, PARAMETER :: jsmax=15          ! maximum angular momentum
     INTEGER :: js
     REAL(8), PARAMETER :: rstep_in=0.3D0   ! grid spacing
-    ! REAL(8), PARAMETER :: foldwidth=2.0D0    ! Gaussian folding width
+    ! REAL(8), PARAMETER :: foldwidth=3.0D0    ! Gaussian folding width
     ! REAL(8), PARAMETER :: wpwidth=3D0      ! with of test wavepacket
     REAL(8) :: foldwidth, wpwidth
 
     INTEGER :: i, ll, k
     INTEGER :: fw, wp
     ! REAL(8), parameter :: pi = 3.141592653589793d0
-    REAL(8) :: t1, t2           
+    REAL(8) :: t1, t2
     REAL(8), DIMENSION(n_grid) :: psi_in, r, deltar, deltar2, fpsi_out, phi_exact
     REAL(8), DIMENSION(n_grid) :: redPsi_in
     COMPLEX(8) :: Yll
     CHARACTER(len=100) :: filename
     CHARACTER(*), parameter :: filepath="./results_data/"
-!    theta = pi/6.0
-!    phi = 1.d0 ! phi contribution isn't included
     ngrid = n_grid            ! to be available in 'k2psi'
     rstep = rstep_in          ! to be available in 'k2psi'
 
@@ -62,6 +60,9 @@ PROGRAM test_folding
         ! print*, "fpsi", fpsi_out
         ! print*, phi_exact - fpsi_out
 
+        ! Calculate norms
+
+
 
         ! Write data to file
         k = js + 10
@@ -75,6 +76,9 @@ PROGRAM test_folding
             write(k, '(6(1pg13.5))') r(i), psi_in(i), fpsi_out(i),&
             phi_exact(i),fpsi_out(i)/phi_exact(i)
         end do
+    write(k,'(a,5(1pg13.5))') '# norms initial w.p.,folded,exact,ratio=', &
+      rstep*SUM(r*psi_in),rstep*SUM(r*fpsi_out),rstep*SUM(r*phi_exact), &
+      SUM(r*fpsi_out)/SUM(r*psi_in)
         close(k)
     end do wpLoop
     end do fwLoop

@@ -41,7 +41,7 @@ def plot():
     jsList = np.asarray(sorted(list(set(jsList))))
     wpList = np.asarray(sorted(list(set(wpList))), dtype=np.float64)
     fwList = np.asarray(sorted(list(set(fwList))), dtype=np.float64)
-    print("wplist", wpList)
+
     for js in jsList:
         for fw in fwList:
             fig, ax = plt.subplots(dpi=150)
