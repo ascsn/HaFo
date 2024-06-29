@@ -8,11 +8,11 @@ PROGRAM test_folding
 
 !   set the model parameters here by PARAMETER statements
 !   (may be changed to be read in later)
-    INTEGER, PARAMETER :: n_grid = 31      ! number of radial grid points
+    INTEGER, PARAMETER :: n_grid = 71      ! number of radial grid points
     INTEGER, PARAMETER :: js=1             ! angular momentum
     INTEGER, PARAMETER :: jsmax=4          ! maximum angular momentum
     REAL(8), PARAMETER :: rstep_in=0.3D0   ! grid spacing
-    REAL(8), PARAMETER :: foldwidth=2.0D0    ! Gaussian folding width
+    REAL(8), PARAMETER :: foldwidth=3.0D0    ! Gaussian folding width
     REAL(8), PARAMETER :: wpwidth=3D0      ! with of test wavepacket
 
     INTEGER :: i, ll
@@ -71,6 +71,9 @@ PROGRAM test_folding
         write(10, '(6(1pg13.5))') r(i), psi_in(i), fpsi_out(i),&
         phi_exact(i),fpsi_out(i)/phi_exact(i)
     end do
+    write(10,'(a,5(1pg13.5))') '# norms initial w.p.,folded,exact,ratio=', &
+      rstep*SUM(r*psi_in),rstep*SUM(r*fpsi_out),rstep*SUM(r*phi_exact), &
+      SUM(r*fpsi_out)/SUM(r*psi_in)
     close(10)
 
 END PROGRAM test_folding
