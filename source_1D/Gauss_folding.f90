@@ -88,7 +88,7 @@ real(8) :: jn
 real(8), dimension(SIZE(psi_in), SIZE(psi_in)) :: hwfArray
 real(8), ALLOCATABLE :: exp_uv(:), d2psi_uv(:,:), eigVals(:), eigVects(:,:)
 real(8), ALLOCATABLE :: psi_u(:)
-logical,parameter :: ttestfold=.TRUE.
+logical,parameter :: ttestfold=.FALSE.
 
 ! initializes folding matrix and selection of active elements
 ALLOCATE(fold1D(1:ngrid,1:ngrid,jsmax),nmin(1:ngrid),nmax(1:ngrid))

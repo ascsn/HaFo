@@ -2,7 +2,8 @@
 reset
 
 set terminal postscript eps color enhanced "Helvetica" 22
-set output "plotTestCase.eps"
+set output "test_js_10_fw_0.3.eps"
+set title "js = 10, fw = 0.3"
 #set format y "10^{%L}"
 set mxtics 9
 set mytics 5
@@ -43,8 +44,9 @@ set style line 16 dt 3 lc rgb "dark-grey" pt 2 lw 4 ps 1.5
 
 set key top right font 'Helvetica, 14'
 
-plot "testFoldingData.dat" using 1:3 w lines ls 1 ti "Folded Wavefunction",\
-    "testFoldingData.dat" using 1:4 w lines ls 15 ti "Exact Result (eqn 6)"
+plot "test_js_10_fw_0.3.dat" using 1:3 w lines ls 1 ti "Folded Wavefunction",\
+    "test_js_10_fw_0.3.dat" using 1:4 w lines ls 15 ti "Exact Result (eqn 6)",\
+    "test_js_10_fw_0.3.dat" using 1:2 w lines ls 2 ti "initial Wavefunction"
 
 unset label
 unset ylabel
