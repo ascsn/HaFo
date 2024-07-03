@@ -34,7 +34,6 @@ def plot():
     fwList = []
     for file in os.listdir(testResultsPath):
         fileSplit = file.strip("test.dat").split("_")
-        print(fileSplit)
         jsList.append(fileSplit[2])
         wpList.append(fileSplit[-1])
         fwList.append(fileSplit[4])
@@ -51,6 +50,7 @@ def plot():
             colors = cmap(norm(np.asarray(wpList, dtype=np.float64)))
             for i, wp in enumerate(wpList):
                 fileName = f"test_js_{js}_fw_{fw}_wp_{wp}.dat"
+                print(fileName)
                 data = np.loadtxt(f"{testResultsPath}{fileName}")
                 ax.plot(
                     data.T[0],

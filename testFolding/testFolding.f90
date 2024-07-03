@@ -8,11 +8,11 @@ PROGRAM test_folding
 
 !   set the model parameters here by PARAMETER statements
 !   (may be changed to be read in later)
-    INTEGER, PARAMETER :: n_grid = 150      ! number of radial grid points
+    INTEGER, PARAMETER :: n_grid = 71      ! number of radial grid points
     ! INTEGER, PARAMETER :: js=2             ! angular momentum
     INTEGER, PARAMETER :: jsmax=15          ! maximum angular momentum
     INTEGER :: js
-    REAL(8), PARAMETER :: rstep_in=0.1D0   ! grid spacing
+    REAL(8), PARAMETER :: rstep_in=0.3D0   ! grid spacing
     ! REAL(8), PARAMETER :: foldwidth=3.0D0    ! Gaussian folding width
     ! REAL(8), PARAMETER :: wpwidth=3D0      ! with of test wavepacket
     REAL(8) :: foldwidth, wpwidth
