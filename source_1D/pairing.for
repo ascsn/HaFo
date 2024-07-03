@@ -1397,22 +1397,21 @@ c        wl     = wls(js)
         om     = zwj(js)*uv*0.5              ! factor 1/2 because "state>0"
 c        write(*,*) ' iso,nshl,js,uv,om=',iso,nshl,js,uv,om
         nadd   = nadd+ngrid
-        if(om.lt.xsmall) goto 30
+        if(om.lt.xsmall) CYCLE
 c                                    the case r=0.0 needs special treatment
         if(ll.lt.1) then
          x      = wfs(im+nadd)
-         paircr(im) = (x*x)*om + paircr(im)
+         IF(thfbfold) paircr(im) = (x*x)*om + paircr(im)
         endif
 c                                    now all r>0.0
         r      = zero
-        IF (folding) THEN
-        ! call folding; last two values are dummy
+        IF (thfbfold) THEN
             call Gauss_folding_m(wf(nadd+1:nadd+ngrid), 
      &       fpsi(nadd+1:nadd+ngrid), rstep, ngrid, js, 1D0, -1)
             DO ir=ia,ie
               r      = r+rstep
-              wfa    = wf(nadd+ir)/r
-c              paircr(ir) = om*(fpsi*fpsi) + paircr(ir)
+              wfa    = wffold(nadd+ir)/r
+              paircr(ir) = om*(wfa*wfa) + paircr(ir)
             END DO
         ELSE
             DO ir=ia,ie
@@ -1421,7 +1420,6 @@ c              paircr(ir) = om*(fpsi*fpsi) + paircr(ir)
               paircr(ir) = om*(wfa*wfa) + paircr(ir)
             END DO
         END IF
-   30   continue
    20   continue
       END IF
 c
@@ -1503,12 +1501,21 @@ c
         nadd   = ngrid+nadd
         acc    = zero
         pptacc = zero
-        do ir=1,ngrid
-          wfa    = wf(nadd+ir)
-          pptacc = max(abs(pairpt(isoadd+ir)),pptacc)
-          acc    = (wfa*wfa)*pairpt(isoadd+ir) + acc
-        enddo
-        pptmax(iso) = pptacc              !  ???????
+        IF(thfbfold) THEN
+          do ir=1,ngrid
+            wfa    = wffold(nadd+ir)
+            pptacc = max(abs(pairpt(isoadd+ir)),pptacc)
+            acc    = (wfa*wfa)*pairpt(isoadd+ir) + acc
+          enddo
+          pptmax(iso) = pptacc            
+        ELSE
+          do ir=1,ngrid
+            wfa    = wf(nadd+ir)
+            pptacc = max(abs(pairpt(isoadd+ir)),pptacc)
+            acc    = (wfa*wfa)*pairpt(isoadd+ir) + acc
+          enddo
+          pptmax(iso) = pptacc            
+        END IF
 !        deltaf(istate) = (1D0-addnew)*deltaf(istate)-addnew*rstep*acc
         deltaf(istate) = MAX(-rstep*acc,1D-6)
       enddo
@@ -2291,13 +2298,23 @@ c
        accel  = v2**(-atajima)
        v2a    = v2*accel
        uva    = uv*accel
-       do ir=1,ngrid
+       IF(thfbfold) THEN
+         IF(ifkincut==1) "STOP kinetic cutoff incompatible with folding"
+         CALL gapoperator(wffold(nplm+1:nplm+ngrid),aux2(1:ngrid),
+     &                    rstep,ngrid,js,pairpt)
+         do ir=1,ngrid
+           aux3(ir) = v2a*aux3(ir)+uva*aux2(ir)
+           savlr(nplm+ir,1) = aux3(ir)                    ! save action of HFB
+         enddo
+       ELSE
+         do ir=1,ngrid
 cold         aux3(ir) = v2*aux3(ir)+uv*pairpt(ir+isoadd)*wf(nplm+ir)
 !         IF(nplshl.NE.nblock) 
-         aux3(ir) = v2a*aux3(ir)+uva*pairpt(ir+isoadd)*wf(nplm+ir)
-         IF(ifkincut==1) aux3(ir) = aux3(ir) +uva*fackincut*aux2(ir)
-         savlr(nplm+ir,1) = aux3(ir)                    ! save action of HFB
-       enddo
+           aux3(ir) = v2a*aux3(ir)+uva*pairpt(ir+isoadd)*wf(nplm+ir)
+           IF(ifkincut==1) aux3(ir) = aux3(ir) +uva*fackincut*aux2(ir)
+           savlr(nplm+ir,1) = aux3(ir)                    ! save action of HFB
+         enddo
+       END IF
        if(iwr.ge.0) then
          testsp = zero
          do ir=1,ngrid

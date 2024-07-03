@@ -23,7 +23,7 @@ C     ALL POTENTIALS AND DENSITIES STORE INFORMATION FOR PROTONS
 C     IN THE PLACES [1..'NGRID'] AND FOR NEUTRONS IN THE PLACES
 C     ['NGRID'+1...2*'NGRID'].
 C
-      COMMON /WAVFUN/ WF(KX11),WFS(KX11),
+      COMMON /WAVFUN/ WF(KX11),WFS(KX11),wffold(KX11),
      *                BMASS(KGR2),POT(KGR2),POTLS(KGR2),D1B(KGR2),
      *                paircr(kgr2),       ! pair current for HFB
      &                pairpt(kgr2),       ! pair potential for HFB

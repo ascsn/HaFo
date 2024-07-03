@@ -473,6 +473,11 @@ c
         h1xip=h1xip*(1D0+pairaddfacp)
         hgradxip=hgradxip*(1D0+pairaddfacp)
       END IF 
+      IF(hfbwidth.NE.0D0) THEN
+        thbfold = .TRUE.
+      ELSE
+        thbfold = .FALSE.
+      END IF
 c
 c     check consistency of pairing options
 c
@@ -755,11 +760,11 @@ c      write(12,'(a)') '  iter  energy       ewid       detot'
      &     ' powerp=',powerp,' ecstab=',ecstab
        END IF
        write(11,'(10x,a,i3,a,2f8.3,a,f8.3,a,i3,/
-     &            10x,a,l1,2(a,f7.3)/5(a,i5)/10x,5(a,i5)/9x,5(a,i5))')
+     &            10x,a,l1,3(a,f7.3)/5(a,i5)/10x,5(a,i5)/9x,5(a,i5))')
      &             ' ipair=',ipair,' pairfp/n=',pairfp,pairfn,
      &             ' temprt=',temprt,
      &             ' ilnrsp=',ilnrsp,' oldcut=',tphpair,
-     &             ' cutfac=',cutfac,' acoul=',acoul,
+     &             ' cutfac=',cutfac,' hfbwid=',hfbwidth,' acoul=',acoul,
      &   ' cases:     ifex=',ifex,'  iftm=',iftm,'  ifzpe=',ifzpe,
      &            ' ifdfms=',ifdfms,' ifrhoc=',ifrhoc,
      &             ' ifrso=',ifrso,' ifgsc=',ifgsc,' ifenrg=',ifenrg,
@@ -2536,6 +2541,8 @@ c
        do n=1,nmax
          ia     = npla(n+1,js+isnpad)
          call derv15(wf(ia),wfs(ia),sig,ngrid,rstep)
+         IF(thfbfold) Gauss_folding_m(wf(ia),wffold(ia),rstep,ngrid,js,
+     &                                hfbwidth,MAXVAL(jsmax(1:2)))
        enddo
 c
       endif
@@ -3512,7 +3519,7 @@ c                                  the case r=0.0 needs special treatment
       if(ll.lt.1) then
        x      = wfs(im+nadd)
        rho(im) = (x*x)*om + rho(im)
-       paircr(im) = (x*x)*ompair + paircr(im)
+       IF(.NOT.thfbwidth) paircr(im) = (x*x)*ompair + paircr(im)
       elseif(ll.eq.1) then
        x      = (16.0*wf(ia+nadd)-wf(ia+nadd+1))/(6.0*rstep*rstep)
        tau(im) =.75*om*(x*x) + tau(im)
@@ -3534,6 +3541,7 @@ c
          wfas   = wfs(nadd+i)
          tau(i) = (wfas*wfas - ((wfa*wfas)+(wfa*wfas)-xlp*wfa2*ri)*ri)
      &           *phas + tau(i)
+         IF(thfbfold) wfa2=wffold(nadd+i)**2
          paircr(i) = ompair*(ri*ri)*wfa2 + paircr(i)
 c     endif
       enddo
@@ -3541,7 +3549,7 @@ c
    30 continue
 c
 c     some derivatives: d/dr 'rho' --> 'd1r'
-c                       d/dr**2 'rho' + 2/r d/dr 'rho' --> 'd2r'
+´c                       d/dr**2 'rho' + 2/r d/dr 'rho' --> 'd2r'
 c                       d/dr 'sj' + 2/r 'sj' --> 'sjs'
 c     'im' is the initial position for given 'iso'.
 c
@@ -3566,6 +3574,9 @@ c
       do i=im+1,ie
         sjs(i) = sjs(i) + zwh*sj(i)/(i-im)
       enddo
+
+!    extrapolate to r=0.0
+      IF(thfbfold) CALL extrap(paircr(im),1D0)
 c
 c     end iso-loop
 c
@@ -4510,6 +4521,8 @@ c
        do n=1,nmax
          npl    = npla(n+1,jsnpl)
          call derv15(wf(npl),wfs(npl),sig,ngrid,rstep)
+         IF(thfbfold) Gauss_folding_m(wf(ia),wffold(ia),rstep,ngrid,js,
+     &                                hfbwidth,MAXVAL(jsmax(1:2)))
        enddo
 c
       endif
@@ -4755,6 +4768,8 @@ c
        do n=1,nmax
          npl    = npla(n+1,jsnpl)
          call derv17(wf(npl),wfs(npl),sig,ngrid,rstep)
+         IF(thfbfold) Gauss_folding_m(wf(ia),wffold(ia),rstep,ngrid,js,
+     &                                hfbwidth,MAXVAL(jsmax(1:2)))
        enddo
 c
       endif
@@ -8614,6 +8629,8 @@ c
               do n=1,nmax
                 ia=npla(n+1,js+isnpad)
                 call derv15(wf(ia),wfs(ia),sig,ngrid,rstep)
+                IF(thfbfold) Gauss_folding_m(wf(ia),wffold(ia),rstep,
+     &                           ngrid,js,hfbwidth,MAXVAL(jsmax(1:2)))
               enddo
             endif
           enddo
