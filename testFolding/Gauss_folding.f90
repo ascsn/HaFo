@@ -36,6 +36,7 @@ REAL(8), ALLOCATABLE, SAVE :: fold1D(:,:,:) ! array containing the folding matri
 INTEGER, ALLOCATABLE, SAVE :: nmin(:)     ! minimal grid point above threshold
 INTEGER, ALLOCATABLE, SAVE :: nmax(:)     ! maximal grid point above threshold
 LOGICAL, SAVE :: tfirst=.TRUE.            ! triggers initializaton at first call
+REAL(8), SAVE :: old_foldwidth=0D0        ! triggers initialization for new width
 
 INTEGER :: ll      ! spatial angular momentum of 'psi_in'
 INTEGER :: j2      ! twice total angular momentum of 'psi_in'
@@ -43,10 +44,11 @@ INTEGER :: i
 
 REAL(8), DIMENSION(ngrid) :: hwfout, d2wfin
 
-IF(tfirst) THEN
+IF(foldwid.NE.old_foldwidth) THEN
   IF(jsmax<0) STOP 'folding must be intialized already in that call'
   CALL Init_Gauss_folding
-  tfirst = .FALSE.
+  old_foldwidth = foldwid
+!  tfirst = .FALSE.
 END IF
 
 ll=js/2
@@ -80,7 +82,7 @@ CONTAINS
 SUBROUTINE Init_Gauss_folding
 
 
-integer :: ndimlin, i, la, j, k, lang, l
+integer :: ndimlin, i, la, j, k, lang, jsinit
 integer :: xlp, parity
 real(8) :: jn
 !real(8), dimension(ngrid) :: r
@@ -88,9 +90,11 @@ real(8), dimension(SIZE(psi_in), SIZE(psi_in)) :: hwfArray
 real(8), ALLOCATABLE :: exp_uv(:), d2psi_uv(:,:), eigVals(:), eigVects(:,:)
 real(8), ALLOCATABLE :: psi_u(:)
 logical,parameter :: ttestfold=.FALSE.
+logical :: talloc
 
 ! initializes folding matrix and selection of active elements
-ALLOCATE(fold1D(1:ngrid,1:ngrid,jsmax),nmin(1:ngrid),nmax(1:ngrid))
+
+IF(.NOT.ALLOCATED(fold1D)) ALLOCATE(fold1D(1:ngrid,1:ngrid,jsmax),nmin(1:ngrid),nmax(1:ngrid))
 ALLOCATE(exp_uv(1:ngrid), d2psi_uv(1:ngrid, 1:ngrid))
 ALLOCATE(eigVals(1:ngrid), eigVects(1:ngrid, 1:ngrid))
 ALLOCATE(psi_u(1:ngrid))
@@ -112,8 +116,8 @@ ALLOCATE(psi_u(1:ngrid))
 
 ! Define bessel-fourier grid for the same matrix
 ndimlin = ngrid*(ngrid+1)/2
-do l = 1, jsmax             ! loop over total angular momenta
-  lang=l/2                  ! orbital angular momentum
+do jsinit = 1, jsmax             ! loop over total angular momenta
+  lang=jsinit/2                  ! orbital angular momentum
 
 ! compose matrix of -partial_r^2 on the grid points 
   d2psi_uv(:,1)=0D0
@@ -122,7 +126,7 @@ do l = 1, jsmax             ! loop over total angular momenta
     psi_u(j) = 1D0
 
 !    Calculate the matrix of -nabla**2
-    call k2psi(psi_u, hwfout, d2wfin, l)
+    call k2psi(psi_u, hwfout, d2wfin, jsinit)
     d2psi_uv(:,j) = hwfout(:)
   end do
   IF(ttestfold) THEN
@@ -149,20 +153,23 @@ do l = 1, jsmax             ! loop over total angular momenta
 ! finally compose folding matrix 
   do i=1,ngrid; do j = 1, ngrid
 !   sum over "Bessel" eigenstates  
-    fold1D(i,j,l)=0D0
+    fold1D(i,j,jsinit)=0D0
     do k = 2, ngrid
-      fold1D(i,j,l) = fold1D(i,j,l) + eigVects(i,k)*exp_uv(k)*eigVects (j, k)
+      fold1D(i,j,jsinit) = fold1D(i,j,jsinit) + eigVects(i,k)*exp_uv(k)*eigVects (j, k)
     end do
   end do; end do
   IF(ttestfold) THEN
-    WRITE(6,'(/a,i3)') 'The folding matrix for js=',l
+    WRITE(6,'(/a,i3)') 'The folding matrix for js=',jsinit
     do i=1,ngrid
-      write(6,'(200(1pg13.5))') fold1D(:,i,l)
+      write(6,'(200(1pg13.5))') fold1D(:,i,jsinit)
       write(6,'(1x)')
     end do
   END IF
 
 end do                     ! end loop over total angular momenta
+DEALLOCATE(exp_uv, d2psi_uv)
+DEALLOCATE(eigVals, eigVects)
+DEALLOCATE(psi_u)
 
 END SUBROUTINE Init_Gauss_folding
 
