@@ -8,7 +8,7 @@ PROGRAM test_folding
 
 !   set the model parameters here by PARAMETER statements
 !   (may be changed to be read in later)
-    INTEGER, PARAMETER :: n_grid = 200      ! number of radial grid points
+    INTEGER, PARAMETER :: n_grid = 150      ! number of radial grid points
     ! INTEGER, PARAMETER :: js=2             ! angular momentum
     INTEGER, PARAMETER :: jsmax=15          ! maximum angular momentum
     INTEGER :: js

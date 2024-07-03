@@ -34,6 +34,7 @@ def plot():
     fwList = []
     for file in os.listdir(testResultsPath):
         fileSplit = file.strip("test.dat").split("_")
+        print(fileSplit)
         jsList.append(fileSplit[2])
         wpList.append(fileSplit[-1])
         fwList.append(fileSplit[4])
