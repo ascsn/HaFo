@@ -1397,7 +1397,7 @@ c        wl     = wls(js)
         om     = zwj(js)*uv*0.5              ! factor 1/2 because "state>0"
 c        write(*,*) ' iso,nshl,js,uv,om=',iso,nshl,js,uv,om
         nadd   = nadd+ngrid
-        if(om.lt.xsmall) CYCLE
+        if(om.lt.xsmall) goto 30
 c                                    the case r=0.0 needs special treatment
         if(ll.lt.1) then
          x      = wfs(im+nadd)
@@ -1420,6 +1420,7 @@ c                                    now all r>0.0
               paircr(ir) = om*(wfa*wfa) + paircr(ir)
             END DO
         END IF
+   30   continue
    20   continue
       END IF
 c
@@ -2299,7 +2300,7 @@ c
        v2a    = v2*accel
        uva    = uv*accel
        IF(thfbfold) THEN
-         IF(ifkincut==1) "STOP kinetic cutoff incompatible with folding"
+         IF(ifkincut==1) STOP "kinetic cutoff incompatible with folding"
          CALL gapoperator(wffold(nplm+1:nplm+ngrid),aux2(1:ngrid),
      &                    rstep,ngrid,js,pairpt)
          do ir=1,ngrid
