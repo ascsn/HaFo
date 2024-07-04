@@ -1,4 +1,3 @@
-
 C INCLUDE BLOCK: SKYPAR
 C
 C      THE VARIABLES IN COMMON /SKYPAR/ MEAN:
@@ -127,6 +126,7 @@ C
      &                 rspln,suv2r,
      *                 PAIRFP,PAIRFN,rho0pr,pptmax, ! pairing strength & cut dens.
      &                 xparsh,cutfac,atajima,pairgm,
+     &                 hfbwidth,           ! folding width    
      &                 ecstab,             ! cut-off energy for stabil. pairing
      &                 alpinv,betinv,      ! parameters for pade-appr. densit.dep.
      &                 alpin2,betin2,      ! parameters for pade-appr. densit.dep.
@@ -151,14 +151,15 @@ c      'tkininv'= inv. rho-dependent kinetic and l*s (itopsk=6)
 c      'talpinv'= rho dependence rho/(1+alpinv*rho)
 c      'tpairFy'= pairing switch for Fayans functional
 c      'tlipnog'= activates Lipkin-Nogami
+c      'thfbfold'= folding of the apiring density in HFB
 c
       logical tyukaw,texten,texcha,tssmas,tpair,texmas,tdirpa,trmfki,
      &        tbhfen,tb3til,tb11,tb12,tdens2,tpowerp,tkindir,tkininv,
-     &        talpinv,talpin2,tdenslow,tpairFy,tlipnog
+     &        talpinv,talpin2,tdenslow,tpairFy,tlipnog,thfbfold
       common /tswitc/tyukaw,texten,texcha,tssmas,tpair,tpowerp,
      &               texmas,tdirpa,trmfki,tbhfen,tb3til,tb11,tb12,
      &               tdens2,tkindir,tkininv,talpinv,talpin2,tdenslow,
-     &               tlipnog
+     &               tlipnog,thfbfold
 c
 c     Parameters for the Fayans functional
 c

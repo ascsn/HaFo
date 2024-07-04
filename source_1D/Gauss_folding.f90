@@ -205,7 +205,7 @@ SUBROUTINE gapoperator(fpsi_in,gappsi_out,rstep,ngrid,js,pairpt)
 ! number of grid points 'ngrid'.
 ! The local part of the gap potential is enetered via'pairpt'.
 !
-! The routine is written in Fortran 90 and *.f90 foramt. This is not
+! The routine is written in Fortran 90 and *.f90 format. This is not
 ! compatible with the *.inc files for communcation via common blocks.
 ! Thus all communcation goes through list parameters.
 

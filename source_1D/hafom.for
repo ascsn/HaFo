@@ -286,7 +286,8 @@ c        write(6,*)     x5,x6,x7,x8
        END IF
        read(05,*,err=991,end=991)
      &              power,acoul,ipair,pairfp,pairfn,ilnrsp,temprt,cutfac
-       WRITE(6,*) acoul,ipair,cutfac
+     &              ,hfbwidth
+       WRITE(6,*) acoul,ipair,cutfac,hfbwidth
        read(05,*)     nprot,nneut,nmaxp,nmaxn,xparsh
 !       WRITE(6,'(a,4i4,1pg13.5)')'HAFOM:',nprot,nneut,nmaxp,nmaxn,xparsh
        read(05,*)     ifgsc
