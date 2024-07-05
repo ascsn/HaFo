@@ -1401,7 +1401,7 @@ c        write(*,*) ' iso,nshl,js,uv,om=',iso,nshl,js,uv,om
 c                                    the case r=0.0 needs special treatment
         if(ll.lt.1) then
          x      = wfs(im+nadd)
-         IF(thfbfold) paircr(im) = (x*x)*om + paircr(im)
+         IF(.NOT.thfbfold) paircr(im) = (x*x)*om + paircr(im)
         endif
 c                                    now all r>0.0
         r      = zero
@@ -1421,6 +1421,10 @@ c                                    now all r>0.0
             END DO
         END IF
    30   continue
+
+!    extrapolate to r=0.0
+        IF(thfbfold) CALL extrap(paircr(im),1D0)
+
    20   continue
       END IF
 c
@@ -2180,6 +2184,7 @@ c
       INTEGER,INTENT(IN) :: iter
 
       REAL(8), ALLOCATABLE :: symatrix(:,:)
+      REAL(8), ALLOCATABLE :: workt1(:),workt2(:)
       LOGICAL,PARAMETER :: tblocknew=.FALSE.  ! corrected blocking factor
 c
       dimension savpri(KNMX)
@@ -2209,6 +2214,7 @@ c      'isoadd' is a pointer for the potential and mass fields;
 c      'isnpad' is a pointer for the wave function pointer 'npla';
 c      on 'egx' is accumulated lateron the shell-energy.
 c
+      ALLOCATE(workt1(1:ngrid),workt2(1:ngrid))
       do 1000 iso=1,2
       if(iso.eq.1) then
         isoadd = 0
@@ -2301,10 +2307,23 @@ c
        uva    = uv*accel
        IF(thfbfold) THEN
          IF(ifkincut==1) STOP "kinetic cutoff incompatible with folding"
-         CALL gapoperator(wffold(nplm+1:nplm+ngrid),aux2(1:ngrid),
-     &                    rstep,ngrid,js,pairpt)
+!         CALL gapoperator(wffold(nplm+1:nplm+ngrid),aux2(1:ngrid),
+!     &                    rstep,ngrid,js,pairpt(isoadd+1:isoadd+ngrid))
+!         aux1(1:ngrid)=pairpt(isoadd+1:isoadd+ngrid)*
+!     &                 wffold(nplm+1:nplm+ngrid)
+         workt1(1:ngrid)=pairpt(isoadd+1:isoadd+ngrid)*
+     &                 wffold(nplm+1:nplm+ngrid)
+         WRITE(6,'(a,4i4)') 'before Call Gaussian:',js,jsmax(iso),nplshl
+         CALL Gauss_folding_m(workt1(1:ngrid),workt2(1:ngrid),
+     &                        rstep,ngrid,js,hfbwidth,jsmax(iso))
+!         CALL Gauss_folding_m(aux1(1:ngrid),aux2(1:ngrid),rstep,ngrid,js,
+!     &                        hfbwidth,jsmax(iso))
+!         wfdiff=rstep*SUM((aux2(1:ngrid)-aux1(1:ngrid))**2)
+!         IF(wfdiff>1D-5 .AND. uva>1D-3) THEN
+!           WRITE(6,'(a,2i4,2(1pg13.5))') 'WFDIFF:',js,nplshl,uva,wfdiff
+!         END IF
          do ir=1,ngrid
-           aux3(ir) = v2a*aux3(ir)+uva*aux2(ir)
+           aux3(ir) = v2a*aux3(ir)+uva*workt2(ir)  !aux2(ir)
            savlr(nplm+ir,1) = aux3(ir)                    ! save action of HFB
          enddo
        ELSE
@@ -2330,24 +2349,24 @@ c
        nplb   = npla(nb+1,jsnpl)
        nplmb  = nplb-1
        nplshb = nplb/ngrid+1
-       sum    = zero
+       acc    = zero
        do ir=2,ngrid
-         sum    = wf(nplmb+ir)*aux3(ir) + sum
+         acc    = wf(nplmb+ir)*aux3(ir) + acc
        enddo
-cold       sum    = 0.5*rstep*sum
-       sum    = rstep*sum
+cold       acc    = 0.5*rstep*acc
+       acc    = rstep*acc
        facmix = 1.0/max(weight(nplshb)**(atajima),xsmall)
      &         +1.0/max(weight(nplshl)**(atajima),xsmall)
        if(iso.eq.1) then
-         pairmp(nplshb,nplshl) = sum/facmix + pairmp(nplshb,nplshl)
-         pairmp(nplshl,nplshb) = sum/facmix + pairmp(nplshl,nplshb)
-         symatrix(nplshb,nplshl) = sum
+         pairmp(nplshb,nplshl) = acc/facmix + pairmp(nplshb,nplshl)
+         pairmp(nplshl,nplshb) = acc/facmix + pairmp(nplshl,nplshb)
+         symatrix(nplshb,nplshl) = acc
        else
          nxa = nplshl-nmaxp
          nxb = nplshb-nmaxp
-         pairmn(nxb,nxa) = sum/facmix + pairmn(nxb,nxa)
-         pairmn(nxa,nxb) = sum/facmix + pairmn(nxa,nxb)
-         symatrix(nxb,nxa) = sum
+         pairmn(nxb,nxa) = acc/facmix + pairmn(nxb,nxa)
+         pairmn(nxa,nxb) = acc/facmix + pairmn(nxa,nxb)
+         symatrix(nxb,nxa) = acc
        endif
    71  continue
 c
@@ -2438,6 +2457,7 @@ c
 !      END IF
       DEALLOCATE(symatrix)
  1000 continue
+      DEALLOCATE(workt1,workt2)
 c
 !      WRITE(6,'(a,i5,2(1pg13.5))') 'symmcond:',iter,symmcond
 !      WRITE(96,'(a,i5,2(1pg13.5))') 'HFB symmcond:',iter,symmcond

@@ -43,6 +43,7 @@ INTEGER :: i
 
 REAL(8), DIMENSION(ngrid) :: hwfout, d2wfin
 
+!WRITE(6,'(a,4i4)') 'entry Gaussian:',js,jsmax
 IF(tfirst) THEN
   IF(jsmax<0) STOP 'folding must be intialized already in that call'
   CALL Init_Gauss_folding
@@ -66,11 +67,13 @@ END IF
 !      folding and restored after.
 !  ...
 
+!WRITE(6,'(a,4i4)') 'before folding:',js,jsmax
 fpsi_out = 0d0
 !fpsi_out = matmul(fold1D(1:ngrid, 1:ngrid, j2), psi_in)
 do i=1,ngrid
   fpsi_out(i) = SUM(fold1D(i,:,js)*psi_in(:))
 end do
+!WRITE(6,'(a,4i4)') 'after folding:',js,jsmax
 
 CONTAINS
 
@@ -227,7 +230,8 @@ psiwork = pairpt*fpsi_in
 
 ! action of the second folding (last two entries dummy)
 
-CALL  Gauss_folding_m(psiwork,gappsi_out,rstep,ngrid,js,1D0,-1)
+CALL  Gauss_folding_m(psiwork,gappsi_out,rstep,ngrid,js,0D0,-1)
+!gappsi_out=psiwork
 
 DEALLOCATE(psiwork)
 

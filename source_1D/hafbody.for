@@ -4521,7 +4521,7 @@ c
        do n=1,nmax
          npl    = npla(n+1,jsnpl)
          call derv15(wf(npl),wfs(npl),sig,ngrid,rstep)
-         IF(thfbfold) CALL Gauss_folding_m(wf(ia),wffold(ia),rstep,
+         IF(thfbfold) CALL Gauss_folding_m(wf(npl),wffold(npl),rstep,
      &                           ngrid,js,hfbwidth,MAXVAL(jsmax(1:2)))
        enddo
 c
@@ -4768,7 +4768,7 @@ c
        do n=1,nmax
          npl    = npla(n+1,jsnpl)
          call derv17(wf(npl),wfs(npl),sig,ngrid,rstep)
-         IF(thfbfold) CALL Gauss_folding_m(wf(ia),wffold(ia),rstep,
+         IF(thfbfold) CALL Gauss_folding_m(wf(npl),wffold(npl),rstep,
      &                         ngrid,js,hfbwidth,MAXVAL(jsmax(1:2)))
        enddo
 c
