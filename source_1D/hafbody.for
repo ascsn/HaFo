@@ -432,6 +432,9 @@ c
       INQUIRE(FILE='hfbparams',EXIST=tprint96)
       tprint96=thfbnatprint .AND. thfbnatural .AND. tprint96
       IF(tprint96) THEN
+        !  preliminary test switch, implement folding in HFB sub.
+        IF(thfbfold.AND.iternat>0) 
+     &      STOP 'folding and HFB subiterations yet incompatible'
         OPEN(111,file='hfbparams')
         READ(111,*) iterhfb,iternat,modnat,pairenhance,iterbcs
         WRITE(96,'(1x/1x)')

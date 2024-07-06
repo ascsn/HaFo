@@ -2313,7 +2313,7 @@ c
 !     &                 wffold(nplm+1:nplm+ngrid)
          workt1(1:ngrid)=pairpt(isoadd+1:isoadd+ngrid)*
      &                 wffold(nplm+1:nplm+ngrid)
-         WRITE(6,'(a,4i4)') 'before Call Gaussian:',js,jsmax(iso),nplshl
+!         WRITE(6,'(a,4i4)') 'before Call Gaussian:',js,jsmax(iso),nplshl
          CALL Gauss_folding_m(workt1(1:ngrid),workt2(1:ngrid),
      &                        rstep,ngrid,js,hfbwidth,jsmax(iso))
 !         CALL Gauss_folding_m(aux1(1:ngrid),aux2(1:ngrid),rstep,ngrid,js,
