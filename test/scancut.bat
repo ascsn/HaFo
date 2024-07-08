@@ -1,3 +1,4 @@
+#!/bin/bash
 # Batch file for systematic variation of cutoff and folding width.
 # Test case is 120Sn with 51 radial grid points and 17 shell above
 # the Fermi energy. Proton pairing is practically switched off.
@@ -6,6 +7,11 @@
 #  $2   = folding width 'hfbwidth'
 #  $3   = neutron pairing strength
 
+# Set pairing strength and hfbwidth
+pairStrength="258.118"
+hfbwidth="2d0"
+for i in $(seq 18.0 1. 120.0)
+do
 echo " 1,                   IWUNIT " > for005
 echo " 'UNEDF1' " >> for005
 echo " 51,0.3,,,,                  NGRID,RSTEP" >> for005
@@ -20,12 +26,14 @@ echo " 0.543043709322549584E-01, -5.07814768633786962, -1.36657048130840808,-0.1
 echo " 0.000,0.000,0.000,0.000,0.000,    t5,t6,t7,t8,t9" >> for005
 echo " 0.000,0.000,0.000,0.000000,       x5,x6,x7,x8" >> for005
 echo " 0.000,0.000,0.000,                tyuk,xyuk,ayuk" >> for005
-echo " 0.2700180115,1.0,5,25.0,$3,0,0.0,-$1,$2,,,,,power,acoul,ipair,pairfp,pairfn,ilnrsp,temprt,cutfac,hfbwidth" >> for005
+echo " 0.2700180115,1.0,5,25.0,$3,0,0.0,-${i},${hfbwidth},,,,,power,acoul,ipair,pairfp,pairfn,ilnrsp,temprt,cutfac,hfbwidth" >> for005
 echo " 50,70,,,17,,  nprot,nneut,nmaxp,nmaxn,iparsh" >> for005
 echo " 0,     ifgsc" >> for005
 echo " -1,                   IWUNIT" >> for005
 
 ../hafom_huge.exe < for005 > /dev/null
 
-echo "cutoff=-$1,hfbwidth=$2,pair.strength=$3" >> collect_cat.dat
+echo "cutoff=-${i},hfbwidth=${hfbwidth},pair.strength=${pairStrength}" >> collect_cat.dat
 grep Z,N for011 >>  collect_cat.dat
+
+done
