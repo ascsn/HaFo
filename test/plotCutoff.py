@@ -13,6 +13,27 @@ plt.style.use("science")
 mpl.rcParams["text.usetex"] = True
 mpl.rcParams["axes.linewidth"] = 1.5
 
+colors = [
+    "r",
+    "b",
+    "g",
+    "k",
+    "orange",
+    "purple",
+    "y",
+    "m",
+    "#1f77b4",
+    "#ff7f0e",
+    "#2ca02c",
+    "#d62728",
+    "#9467bd",
+    "#8c564b",
+    "#e377c2",
+    "#7f7f7f",
+    "#bcbd22",
+    "#17becf",
+]
+
 
 def make_plots(data, legends, **kwargs):
     xl = kwargs["xlabel"]
@@ -21,7 +42,9 @@ def make_plots(data, legends, **kwargs):
     ttl = kwargs["title"]
     fig, ax = plt.subplots(figsize=(8, 6), dpi=600)
     for i, val in enumerate(data):
-        ax.plot(cutoff, val, label=f"hfbwidth={legends[i]}", linewidth=2)
+        ax.plot(
+            cutoff, val, label=f"hfbwidth={legends[i]}", linewidth=2, color=colors[i]
+        )
 
     ax.set_xlabel(r"$\epsilon_{{cut}}$", fontsize=22)
     ax.set_ylabel(yl, fontsize=22)

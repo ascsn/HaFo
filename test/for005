@@ -12,7 +12,7 @@
  0.000,0.000,0.000,0.000,0.000,    t5,t6,t7,t8,t9
  0.000,0.000,0.000,0.000000,       x5,x6,x7,x8
  0.000,0.000,0.000,                tyuk,xyuk,ayuk
- 0.2700180115,1.0,6,25.0,215,0,0.0,-120.0,0d0,,,,,power,acoul,ipair,pairfp,pairfn,ilnrsp,temprt,cutfac,hfbwidth
+ 0.2700180115,1.0,6,25.0,1900,0,0.0,-16.0,1.3d0,,,,,power,acoul,ipair,pairfp,pairfn,ilnrsp,temprt,cutfac,hfbwidth
  50,70,,,17,,  nprot,nneut,nmaxp,nmaxn,iparsh
  0,     ifgsc
  -1,                   IWUNIT
