@@ -74,8 +74,9 @@ def make_plots(data, legends, **kwargs):
     plt.close()
 
 
-def read_data(pairingType="bcs"):
+def read_data(pairingType=None):
     # Read data from collect_cat files
+    hfbwidths = []
     totalEnergyArray = []
     chargeRadiusArray = []
     pairingEnergyArray = []
@@ -86,6 +87,8 @@ def read_data(pairingType="bcs"):
         pairingEnergy = []
         neutronGap = []
         if pairingType in file:
+            fileName = file.rstrip().split("_")
+            hfbwidths.append(fileName[-2])
             with open(dataPath + "/" + file) as f:
                 for line in f:
                     dataLine = line.rstrip().split()
@@ -107,17 +110,25 @@ def read_data(pairingType="bcs"):
     chargeRadiusArray = np.array(chargeRadiusArray)
     pairingEnergyArray = np.array(pairingEnergyArray)
     neutronGapArray = np.array(neutronGapArray)
-    return totalEnergyArray, chargeRadiusArray, pairingEnergyArray, neutronGapArray
+    return (
+        hfbwidths,
+        totalEnergyArray,
+        chargeRadiusArray,
+        pairingEnergyArray,
+        neutronGapArray,
+    )
 
 
 def main():
     pairingType = ["bcs", "hfb"]
-    hfbwidths = ["0.0", "0.5", "1.0", "1.5", "2.0"]
     for pairtype in pairingType:
-        totalEnergyArray, chargeRadiusArray, pairingEnergyArray, neutronGapArray = (
-            read_data(pairtype)
-        )
-
+        (
+            hfbwidth,
+            totalEnergyArray,
+            chargeRadiusArray,
+            pairingEnergyArray,
+            neutronGapArray,
+        ) = read_data(pairtype)
         # Total Energy plot
         labels = {
             "xlabel": r"$\epsilon_{{cut}}$",
@@ -125,7 +136,7 @@ def main():
             "filename": f"TotalEnergy_{pairtype}.pdf",
             "title": r"Total Energy",
         }
-        make_plots(totalEnergyArray, hfbwidths, **labels)
+        make_plots(totalEnergyArray, hfbwidth, **labels)
 
         # Total Energy plot
         labels = {
@@ -134,7 +145,7 @@ def main():
             "filename": f"TotalEnergy_{pairtype}.pdf",
             "title": r"$^{120}$Sn",
         }
-        make_plots(totalEnergyArray, hfbwidths, **labels)
+        make_plots(totalEnergyArray, hfbwidth, **labels)
 
         # Radii plot
         labels = {
@@ -143,7 +154,7 @@ def main():
             "filename": f"Radius_{pairtype}.pdf",
             "title": r"$^{120}$Sn",
         }
-        make_plots(chargeRadiusArray, hfbwidths, **labels)
+        make_plots(chargeRadiusArray, hfbwidth, **labels)
 
         # Neutron pairing energy plot
         labels = {
@@ -152,7 +163,7 @@ def main():
             "filename": f"PairingEnergy_{pairtype}.pdf",
             "title": r"$^{120}$Sn",
         }
-        make_plots(pairingEnergyArray, hfbwidths, **labels)
+        make_plots(pairingEnergyArray, hfbwidth, **labels)
 
         # Average neutron pairing gap plot
         labels = {
@@ -161,7 +172,7 @@ def main():
             "filename": f"PairingGap_{pairtype}.pdf",
             "title": r"$^{120}$Sn",
         }
-        make_plots(neutronGapArray, hfbwidths, **labels)
+        make_plots(neutronGapArray, hfbwidth, **labels)
 
     os.system(f"mv *.pdf plots/")
 

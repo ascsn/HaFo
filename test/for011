@@ -6,8 +6,8 @@
  force:    t0-t4=     -2078.328   239.401  1574.243   14263.6    76.736
            x0-x3,b4p=   0.05430  -5.07815  -1.36657  -0.16117  71.31652
            power=     0.27002  amfc0=  20.73553  20.73553
-           ipair=  6 pairfp/n=  25.0001900.000 temprt=   0.000 ilnrsp=  0
-           oldcut=T cutfac=-16.000 hfbwid=  1.300 acoul=  1.000
+           ipair=  6 pairfp/n=  25.0001835.000 temprt=   0.000 ilnrsp=  0
+           oldcut=T cutfac=-61.000 hfbwid=  1.300 acoul=  1.000
  cases:     ifex=    1  iftm=    0  ifzpe=   -2 ifdfms=    2 ifrhoc=    0
            ifrso=    1 ifgsc=    0 ifenrg=    0 ifplot=    3 imfold=    0
           ioptsk=    0

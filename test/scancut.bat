@@ -11,16 +11,16 @@
 ipair=(5 6)
 
 # Set hfbwidth
-hfbwidth="0d0"
+hfbwidth="1.3d0"
 
 # for j in "${hfbwidth[@]}"; do
 for j in "${ipair[@]}"; do
 if [ $j -eq 5 ]; then
     cond="bcs"
-    pairStrength="240"
+    pairStrength="1874"
 else
     cond="hfb"
-    pairStrength="215"
+    pairStrength="1835"
 fi
 echo "cond = ${j}, pairStrength = ${pairStrength}" 
 for i in $(seq 15.0 1. 120.0); do
