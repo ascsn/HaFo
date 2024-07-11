@@ -8,16 +8,16 @@
 #  $3   = neutron pairing strength
 # hfbwidth=(0d0 0.5d0 1d0 1.5d0 2d0)
 
-ipair=(5 6)
+ipair=(5)
 
 # Set hfbwidth
-hfbwidth="1.3d0"
+hfbwidth="1.9d0"
 
 # for j in "${hfbwidth[@]}"; do
 for j in "${ipair[@]}"; do
 if [ $j -eq 5 ]; then
     cond="bcs"
-    pairStrength="1874"
+    pairStrength="9261"
 else
     cond="hfb"
     pairStrength="1835"

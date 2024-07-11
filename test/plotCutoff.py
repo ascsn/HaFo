@@ -76,12 +76,16 @@ def make_plots(data, legends, **kwargs):
 
 def read_data(pairingType=None):
     # Read data from collect_cat files
+    fileList = []
     hfbwidths = []
     totalEnergyArray = []
     chargeRadiusArray = []
     pairingEnergyArray = []
     neutronGapArray = []
     for file in os.listdir(dataPath):
+        fileList.append(file)
+    fileList = sorted(fileList)
+    for file in fileList:
         totalEnergy = []
         chargeRadius = []
         pairingEnergy = []
@@ -120,7 +124,7 @@ def read_data(pairingType=None):
 
 
 def main():
-    pairingType = ["bcs", "hfb"]
+    pairingType = ["bcs"]
     for pairtype in pairingType:
         (
             hfbwidth,
