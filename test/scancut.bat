@@ -6,12 +6,24 @@
 #  $1   = cutoff energy 'cutfac'
 #  $2   = folding width 'hfbwidth'
 #  $3   = neutron pairing strength
+# hfbwidth=(0d0 0.5d0 1d0 1.5d0 2d0)
 
-# Set pairing strength and hfbwidth
-pairStrength="258.118"
-hfbwidth="2d0"
-for i in $(seq 18.0 1. 120.0)
-do
+ipair=(5 6)
+
+# Set hfbwidth
+hfbwidth="0d0"
+
+# for j in "${hfbwidth[@]}"; do
+for j in "${ipair[@]}"; do
+if [ $j -eq 5 ]; then
+    cond="bcs"
+    pairStrength="240"
+else
+    cond="hfb"
+    pairStrength="215"
+fi
+echo "cond = ${j}, pairStrength = ${pairStrength}" 
+for i in $(seq 15.0 1. 120.0); do
 echo " 1,                   IWUNIT " > for005
 echo " 'UNEDF1' " >> for005
 echo " 51,0.3,,,,                  NGRID,RSTEP" >> for005
@@ -26,14 +38,16 @@ echo " 0.543043709322549584E-01, -5.07814768633786962, -1.36657048130840808,-0.1
 echo " 0.000,0.000,0.000,0.000,0.000,    t5,t6,t7,t8,t9" >> for005
 echo " 0.000,0.000,0.000,0.000000,       x5,x6,x7,x8" >> for005
 echo " 0.000,0.000,0.000,                tyuk,xyuk,ayuk" >> for005
-echo " 0.2700180115,1.0,5,25.0,$3,0,0.0,-${i},${hfbwidth},,,,,power,acoul,ipair,pairfp,pairfn,ilnrsp,temprt,cutfac,hfbwidth" >> for005
+echo " 0.2700180115,1.0,${j},25.0,${pairStrength},0,0.0,-${i},${hfbwidth},,,,,power,acoul,ipair,pairfp,pairfn,ilnrsp,temprt,cutfac,hfbwidth" >> for005
 echo " 50,70,,,17,,  nprot,nneut,nmaxp,nmaxn,iparsh" >> for005
 echo " 0,     ifgsc" >> for005
 echo " -1,                   IWUNIT" >> for005
 
 ../hafom_huge.exe < for005 > /dev/null
 
-echo "cutoff=-${i},hfbwidth=${hfbwidth},pair.strength=${pairStrength}" >> collect_cat.dat
-grep Z,N for011 >>  collect_cat.dat
+echo "cutoff=-${i},hfbwidth=${hfbwidth},pair.strength=${pairStrength}" >> collect_cat_${hfbwidth}_${cond}.dat
+grep Z,N for011 >>  collect_cat_${hfbwidth}_${cond}.dat
 
+done
+echo "${cond} Done!"
 done

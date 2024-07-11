@@ -1,41 +1,146 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 import os
+import scienceplots
+
 
 dataPath = "./collect_cat"
-cutoff = np.arange(18, 121)
+cutoff = np.arange(15, 121)
 
 
-def make_plots(energy, legends):
-    fig, ax = plt.subplots(dpi=150)
-    for i, val in enumerate(energy):
-        ax.plot(cutoff, energy[i], label=f"{legends[i]}")
+plt.style.use("science")
+mpl.rcParams["text.usetex"] = True
+mpl.rcParams["axes.linewidth"] = 1.5
 
-    ax.set_xlabel(rf"$\epsilon_{{cut}}$")
-    ax.set_ylabel("Total Energy (MeV)")
-    plt.legend()
-    plt.savefig("TotalEnergy.pdf")
+
+def make_plots(data, legends, **kwargs):
+    xl = kwargs["xlabel"]
+    yl = kwargs["ylabel"]
+    fl = kwargs["filename"]
+    ttl = kwargs["title"]
+    fig, ax = plt.subplots(figsize=(8, 6), dpi=600)
+    for i, val in enumerate(data):
+        ax.plot(cutoff, val, label=f"hfbwidth={legends[i]}", linewidth=2)
+
+    ax.set_xlabel(r"$\epsilon_{{cut}}$", fontsize=22)
+    ax.set_ylabel(yl, fontsize=22)
+    ax.set_title(ttl, fontsize=18)
+    ax.tick_params(
+        axis="both",
+        which="major",
+        labelsize=18,
+        labelright=False,
+        direction="in",
+        right=True,
+        top=True,
+        size=8,
+    )
+    ax.tick_params(
+        axis="both",
+        which="minor",
+        labelsize=18,
+        labelright=False,
+        direction="in",
+        right=True,
+        top=True,
+        size=4,
+    )
+    plt.legend(loc="lower left", prop={"size": 10})
+    plt.savefig(fl)
     plt.close()
 
 
-def main():
+def read_data(pairingType="bcs"):
     # Read data from collect_cat files
-    hfbwidths = ["0.0", "1.0", "2.0"]
     totalEnergyArray = []
+    chargeRadiusArray = []
+    pairingEnergyArray = []
+    neutronGapArray = []
     for file in os.listdir(dataPath):
         totalEnergy = []
-        if "collect" in file:
+        chargeRadius = []
+        pairingEnergy = []
+        neutronGap = []
+        if pairingType in file:
             with open(dataPath + "/" + file) as f:
                 for line in f:
                     dataLine = line.rstrip().split()
                     if len(dataLine) > 1:
                         totalEnergy.append(float(dataLine[4]))
+                        chargeRadius.append(float(dataLine[3]))
+                        pairingEnergy.append(float(dataLine[6]))
+                        neutronGap.append(float(dataLine[8]))
                 totalEnergy = np.array(totalEnergy)
+                chargeRadius = np.array(chargeRadius)
+                pairingEnergy = np.array(pairingEnergy)
+                neutronGap = np.array(neutronGap)
         if len(totalEnergy) > 0:
             totalEnergyArray.append(totalEnergy)
+            chargeRadiusArray.append(chargeRadius)
+            pairingEnergyArray.append(pairingEnergy)
+            neutronGapArray.append(neutronGap)
     totalEnergyArray = np.array(totalEnergyArray)
+    chargeRadiusArray = np.array(chargeRadiusArray)
+    pairingEnergyArray = np.array(pairingEnergyArray)
+    neutronGapArray = np.array(neutronGapArray)
+    return totalEnergyArray, chargeRadiusArray, pairingEnergyArray, neutronGapArray
 
-    make_plots(totalEnergyArray, hfbwidths)
+
+def main():
+    pairingType = ["bcs", "hfb"]
+    hfbwidths = ["0.0", "0.5", "1.0", "1.5", "2.0"]
+    for pairtype in pairingType:
+        totalEnergyArray, chargeRadiusArray, pairingEnergyArray, neutronGapArray = (
+            read_data(pairtype)
+        )
+
+        # Total Energy plot
+        labels = {
+            "xlabel": r"$\epsilon_{{cut}}$",
+            "ylabel": r"Total Energy (MeV)",
+            "filename": f"TotalEnergy_{pairtype}.pdf",
+            "title": r"Total Energy",
+        }
+        make_plots(totalEnergyArray, hfbwidths, **labels)
+
+        # Total Energy plot
+        labels = {
+            "xlabel": r"$\epsilon_{{cut}}$",
+            "ylabel": r"Total Energy (MeV)",
+            "filename": f"TotalEnergy_{pairtype}.pdf",
+            "title": r"$^{120}$Sn",
+        }
+        make_plots(totalEnergyArray, hfbwidths, **labels)
+
+        # Radii plot
+        labels = {
+            "xlabel": r"$\epsilon_{{cut}}$",
+            "ylabel": r"Charge Radius (fm)",
+            "filename": f"Radius_{pairtype}.pdf",
+            "title": r"$^{120}$Sn",
+        }
+        make_plots(chargeRadiusArray, hfbwidths, **labels)
+
+        # Neutron pairing energy plot
+        labels = {
+            "xlabel": r"$\epsilon_{{cut}}$",
+            "ylabel": r"Pairing Energy (MeV)",
+            "filename": f"PairingEnergy_{pairtype}.pdf",
+            "title": r"$^{120}$Sn",
+        }
+        make_plots(pairingEnergyArray, hfbwidths, **labels)
+
+        # Average neutron pairing gap plot
+        labels = {
+            "xlabel": r"$\epsilon_{{cut}}$",
+            "ylabel": r"Pairing Gap (MeV)",
+            "filename": f"PairingGap_{pairtype}.pdf",
+            "title": r"$^{120}$Sn",
+        }
+        make_plots(neutronGapArray, hfbwidths, **labels)
+
+    os.system(f"mv *.pdf plots/")
 
 
 if __name__ == "__main__":

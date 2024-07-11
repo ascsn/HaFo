@@ -13,7 +13,7 @@
  0.000,0.000,0.000,0.000000,       x5,x6,x7,x8
  0.000,0.000,0.000,                tyuk,xyuk,ayuk
  0.270018011502708211,1.0,5,253.09138,258.11805,0,0.0,1.65,0D0,,,,,power,acoul,ipair,pairfp,pairfn,ilnrsp,temprt
- 50,70,,,3,,  nprot,nneut,nmaxp,nmaxn,iparsh
+ 64,82,,,3,,  nprot,nneut,nmaxp,nmaxn,iparsh
  0,     ifgsc
   1,                   IWUNIT 
  'UNEDF1 BCS' 
@@ -29,8 +29,8 @@
  0.000,0.000,0.000,0.000,0.000,    t5,t6,t7,t8,t9
  0.000,0.000,0.000,0.000000,       x5,x6,x7,x8
  0.000,0.000,0.000,                tyuk,xyuk,ayuk
- 0.270018011502708211,1.0,5,253.09138,258.11805,0,0.0,1.65,1D0,,,,,power,acoul,ipair,pairfp,pairfn,ilnrsp,temprt
- 50,70,,,3,,  nprot,nneut,nmaxp,nmaxn,iparsh
+ 0.270018011502708211,1.0,5,845.09138,258.11805,0,0.0,1.65,1D0,,,,,power,acoul,ipair,pairfp,pairfn,ilnrsp,temprt
+ 64,82,,,3,,  nprot,nneut,nmaxp,nmaxn,iparsh
  0,     ifgsc
  1,                   IWUNIT 
  'UNEDF1 HFB' 
@@ -47,7 +47,7 @@
  0.000,0.000,0.000,0.000000,       x5,x6,x7,x8
  0.000,0.000,0.000,                tyuk,xyuk,ayuk
  0.270018011502708211,1.0,6,253.09138,258.11805,0,0.0,1.65,0D0,,,,,power,acoul,ipair,pairfp,pairfn,ilnrsp,temprt
- 50,70,,,3,,  nprot,nneut,nmaxp,nmaxn,iparsh
+ 64,82,,,3,,  nprot,nneut,nmaxp,nmaxn,iparsh
  0,     ifgsc
  1,                   IWUNIT 
  'UNEDF1 HFB' 
@@ -63,7 +63,7 @@
  0.000,0.000,0.000,0.000,0.000,    t5,t6,t7,t8,t9
  0.000,0.000,0.000,0.000000,       x5,x6,x7,x8
  0.000,0.000,0.000,                tyuk,xyuk,ayuk
- 0.270018011502708211,1.0,6,253.09138,258.11805,0,0.0,1.65,1D0,,,,,power,acoul,ipair,pairfp,pairfn,ilnrsp,temprt
- 50,70,,,3,,  nprot,nneut,nmaxp,nmaxn,iparsh
+ 0.270018011502708211,1.0,6,864.09138,258.11805,0,0.0,1.65,1D0,,,,,power,acoul,ipair,pairfp,pairfn,ilnrsp,temprt
+ 64,82,,,3,,  nprot,nneut,nmaxp,nmaxn,iparsh
  0,     ifgsc
  -1,                   IWUNIT
