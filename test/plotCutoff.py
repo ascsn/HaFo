@@ -18,9 +18,7 @@ colors = [
     "b",
     "g",
     "k",
-    "orange",
     "purple",
-    "y",
     "m",
     "#1f77b4",
     "#ff7f0e",
@@ -32,6 +30,8 @@ colors = [
     "#7f7f7f",
     "#bcbd22",
     "#17becf",
+    "orange",
+    "y",
 ]
 
 
