@@ -15,16 +15,16 @@
 ipair=(5)
 
 # Set hfbwidth
-hfbwidth="1.9d0"
+hfbwidth="2.0d0"
 
 # for j in "${hfbwidth[@]}"; do
 for j in "${ipair[@]}"; do
 if [ $j -eq 5 ]; then
     cond="bcs"
-    pairStrength="9261"
+    pairStrength="11300"
 else
     cond="hfb"
-    pairStrength="1835"
+    pairStrength="10850"
 fi
 echo "cond = ${j}, pairStrength = ${pairStrength}" 
 for i in $(seq 15.0 1. 120.0); do
@@ -49,7 +49,7 @@ echo " -1,                   IWUNIT" >> for005
 
 ../hafom_huge.exe < for005 > /dev/null
 
-echo "cutoff=-${i},hfbwidth=${hfbwidth},pair.strength=${pairStrength}" >> collect_cat_${hfbwidth}_${cond}.dat
+echo "cutoff=-${i},hfbwidth=${hfbwidth},pair.strength=${pairStrength}" >> collect_146Gd_${hfbwidth}_${cond}.dat
 grep Z,N for011 >>  collect_146Gd_${hfbwidth}_${cond}.dat
 
 done
