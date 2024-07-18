@@ -12,25 +12,25 @@
 #  1.5         2980                   3080
 #  2.0        11300                  10850
 
-ipair=(5)
+ipair=(6)
 
 # Set hfbwidth
-hfbwidth="2.0d0"
+hfbwidth="1.0d0"
 
 # for j in "${hfbwidth[@]}"; do
 for j in "${ipair[@]}"; do
 if [ $j -eq 5 ]; then
     cond="bcs"
-    pairStrength="11300"
+    pairStrength="855"
 else
     cond="hfb"
-    pairStrength="10850"
+    pairStrength="893"
 fi
 echo "cond = ${j}, pairStrength = ${pairStrength}" 
 for i in $(seq 15.0 1. 120.0); do
 echo " 1,                   IWUNIT " > for005
 echo " 'UNEDF1' " >> for005
-echo " 51,0.3,,,,                  NGRID,RSTEP" >> for005
+echo " 71,0.3,,,,                  NGRID,RSTEP" >> for005
 echo "-1,1.E-8,1.E-9,278,9000,3,-1,,   IWR,DABR,DABE,ITPR,ITMAX,IRAD,IFPLOT,IDISC " >> for005
 echo " 0.4,100.,0.2,-1.0,,,              XODAMP,E0DAMP,ADDNEW,WALL" >> for005
 echo " 1,0,0,1,-2,2,0,0,,,,,      IF:EX,TM,ENRG,RSO,ZPE,DFMS,RHOC,ENAV" >> for005
@@ -51,7 +51,7 @@ echo " -1,                   IWUNIT" >> for005
 
 echo "cutoff=-${i},hfbwidth=${hfbwidth},pair.strength=${pairStrength}" >> collect_146Gd_${hfbwidth}_${cond}.dat
 grep Z,N for011 >>  collect_146Gd_${hfbwidth}_${cond}.dat
-
+echo "Cutoff = ${i}"
 done
 echo "${cond} Done!"
 done
