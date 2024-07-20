@@ -18,22 +18,27 @@
 #  1.5         2935                   2882
 #  2.0        11105                  10015 
 
-ipair=(6)
+ipair=(5)
 
 # Set hfbwidth
 hfbwidth="1.5d0"
+#hfbwidth="3.0d0"
+#hfbwidth="4.0d0"
+hfbwidth="5.0d0"
 
 # for j in "${hfbwidth[@]}"; do
 for j in "${ipair[@]}"; do
 if [ $j -eq 5 ]; then
     cond="bcs"
-    pairStrength="237.8"
+#    pairStrength="46950"
+#    pairStrength="124800"
+    pairStrength="306500"
 else
     cond="hfb"
     pairStrength="2882"
 fi
 echo "cond = ${j}, pairStrength = ${pairStrength}" 
-for i in $(seq 15.0 1. 100.0); do
+for i in $(seq 15 1 100); do
 echo " 1,                   IWUNIT " > for005
 echo " 'UNEDF1' " >> for005
 echo " 71,0.3,,,,                  NGRID,RSTEP" >> for005
