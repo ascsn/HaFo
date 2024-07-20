@@ -5,8 +5,8 @@ import os
 import scienceplots
 
 
-dataPath = "./collect_146Gd"
-cutoff = np.arange(15, 121)
+dataPath = "./collect_146Gd_CutOff100"
+cutoff = np.arange(15, 101)
 
 
 plt.style.use("science")
@@ -139,7 +139,7 @@ def main():
         labels = {
             "xlabel": r"$\epsilon_{{cut}}$",
             "ylabel": r"Total Energy (MeV)",
-            "filename": rf"TotalEnergy_{pairtype}_{eltName}.pdf",
+            "filename": rf"TotalEnergy_{pairtype}_{eltName}_Cutoff100.pdf",
             "title": f"{eltName}",
         }
         make_plots(totalEnergyArray, hfbwidth, **labels)
@@ -148,7 +148,7 @@ def main():
         labels = {
             "xlabel": r"$\epsilon_{{cut}}$",
             "ylabel": r"Total Energy (MeV)",
-            "filename": rf"TotalEnergy_{pairtype}_{eltName}.pdf",
+            "filename": rf"TotalEnergy_{pairtype}_{eltName}_Cutoff100.pdf",
             "title": f"{eltName}",
         }
         make_plots(totalEnergyArray, hfbwidth, **labels)
@@ -157,7 +157,7 @@ def main():
         labels = {
             "xlabel": r"$\epsilon_{{cut}}$",
             "ylabel": r"Charge Radius (fm)",
-            "filename": rf"Radius_{pairtype}_{eltName}.pdf",
+            "filename": rf"Radius_{pairtype}_{eltName}_Cutoff100.pdf",
             "title": f"{eltName}",
         }
         make_plots(chargeRadiusArray, hfbwidth, **labels)
@@ -166,7 +166,7 @@ def main():
         labels = {
             "xlabel": r"$\epsilon_{{cut}}$",
             "ylabel": r"Pairing Energy (MeV)",
-            "filename": rf"PairingEnergy_{pairtype}_{eltName}.pdf",
+            "filename": rf"PairingEnergy_{pairtype}_{eltName}_Cutoff100.pdf",
             "title": eltName,
         }
         make_plots(pairingEnergyArray, hfbwidth, **labels)
@@ -175,7 +175,7 @@ def main():
         labels = {
             "xlabel": r"$\epsilon_{{cut}}$",
             "ylabel": r"Pairing Gap (MeV)",
-            "filename": rf"PairingGap_{pairtype}_{eltName}.pdf",
+            "filename": rf"PairingGap_{pairtype}_{eltName}_Cutoff100.pdf",
             "title": eltName,
         }
         make_plots(neutronGapArray, hfbwidth, **labels)

@@ -38,27 +38,23 @@ C               set to 1 if separable interaction is disenabled,
 C               set KX11 if you want to use separable interaction.
 C       KICHR = size of array ICHR which contains the keys for BUFFIO.
 C       KSCDIP= switch to r**3 for isoscalar dipole modes
-C       KCMCORR = approximate c.m. subtraction in r**3 mode and toroidal str.
 C       TMONOPC = switch to monopole constraint (using 'wall' variable)
 c       TLSYMM  = re-scale slope of asymmetry energy --> 3*rho*dasymm
-c       TEPAIR  = direct pairing energy for stabilized pairing
-c       TPHPAIR = switch to old handling of pairing space (weight only on
-c                   Delta, not on v**2)
-c       TLOWERCUT = activates also pairing cutoff below Fermi surface
 C
       logical TMONOPC,TADSIC,TLSYMM,TFORMW,TEPAIR,TPHPAIR,TLOWERCUT
       LOGICAL, PARAMETER :: tregpair=.FALSE.  ! .TRUE. for regularized pairing
+C
 csmall       PARAMETER (KG1=61,KNMX=7,KJMX=27,KMAXN=56,KMAXP=46,                 !
 cmed       PARAMETER (KG1=199,KNMX=11,KJMX=47,KMAXN=56,KMAXP=56,                 !
-      PARAMETER (KG1=301,KNMX=11,KJMX=47,KMAXN=277,KMAXP=277,              !
+chuge      PARAMETER (KG1=89,KNMX=11,KJMX=47,KMAXN=277,KMAXP=277,              !
 cold       PARAMETER (KG1=99,KNMX=11,KJMX=47,KMAXN=56,KMAXP=56,                 !
-!      PARAMETER (KG1=2289,KNMX=11,KJMX=47,KMAXN=277,KMAXP=277,              !
-chuge       PARAMETER (KG1=230,KNMX=30,KJMX=140,KMAXN=3000,KMAXP=3000,              !
-!      PARAMETER (KG1=199,KNMX=11,KJMX=47,KMAXN=137,KMAXP=121,                 !
-     *            KFRM=KG1,KFILE=400,KQMAX=KG1,KLRPA=25,KRPMAX=599,          !
+cold      PARAMETER (KG1=89,KNMX=11,KJMX=47,KMAXN=277,KMAXP=277,              !
+      PARAMETER (KG1=303,KNMX=80,KJMX=277,KMAXN=30000,KMAXP=30000, 
+!      PARAMETER (KG1=92,KNMX=80,KJMX=277,KMAXN=30000,KMAXP=30000,
+     *            KFRM=KG1,KFILE=400,KQMAX=KG1,KLRPA=1,KRPMAX=1,          
      *            KICHR=KRPMAX,
      *            KIFHFB=1,
-     *            KSCDIP=0,KCMCORR=1,
+     *            KSCDIP=0,
      *            KHFBN= (KMAXN-1)*KIFHFB+1,
      *            KHFBP= (KMAXP-1)*KIFHFB+1,
      *            KNMXP=KNMX+1,KJMX2=2*KJMX,
@@ -67,7 +63,7 @@ chuge       PARAMETER (KG1=230,KNMX=30,KJMX=140,KMAXN=3000,KMAXP=3000,          
      *            KJRPMX=KJMX+KLRPA/2,KSTART=KNMXP*KJMX+1,
      *            KRESWF=1,
      *            KTIMWF=KX11,TMONOPC=.false.,TADSIC=.false.,
-     &            TLSYMM=.true.,TFORMW=.FALSE.,TEPAIR=.TRUE.,
+     &            TLSYMM=.true.,TFORMW=.false.,TEPAIR=.FALSE.,
      &            TPHPAIR=.TRUE.,TLOWERCUT=.FALSE.)
 c
 c      parameters for switches in the RPA part

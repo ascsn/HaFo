@@ -12,22 +12,28 @@
 #  1.5         2980                   3080
 #  2.0        11300                  10850
 
+#  0.0          237.8                 186      -- cutoff=100 pairing gap=1.835/1.838
+#  0.5          332.25                 270.7
+#  1.0          829                    798
+#  1.5         2935                   2882
+#  2.0        11105                  10015 
+
 ipair=(6)
 
 # Set hfbwidth
-hfbwidth="1.0d0"
+hfbwidth="1.5d0"
 
 # for j in "${hfbwidth[@]}"; do
 for j in "${ipair[@]}"; do
 if [ $j -eq 5 ]; then
     cond="bcs"
-    pairStrength="855"
+    pairStrength="237.8"
 else
     cond="hfb"
-    pairStrength="893"
+    pairStrength="2882"
 fi
 echo "cond = ${j}, pairStrength = ${pairStrength}" 
-for i in $(seq 15.0 1. 120.0); do
+for i in $(seq 15.0 1. 100.0); do
 echo " 1,                   IWUNIT " > for005
 echo " 'UNEDF1' " >> for005
 echo " 71,0.3,,,,                  NGRID,RSTEP" >> for005
@@ -43,7 +49,7 @@ echo " 0.000,0.000,0.000,0.000,0.000,    t5,t6,t7,t8,t9" >> for005
 echo " 0.000,0.000,0.000,0.000000,       x5,x6,x7,x8" >> for005
 echo " 0.000,0.000,0.000,                tyuk,xyuk,ayuk" >> for005
 echo " 0.2700180115,1.0,${j},${pairStrength},28,0,0.0,-${i},${hfbwidth},,,,,power,acoul,ipair,pairfp,pairfn,ilnrsp,temprt,cutfac,hfbwidth" >> for005
-echo " 64,82,,,17,,  nprot,nneut,nmaxp,nmaxn,iparsh" >> for005
+echo " 64,82,,,3,,  nprot,nneut,nmaxp,nmaxn,iparsh" >> for005
 echo " 0,     ifgsc" >> for005
 echo " -1,                   IWUNIT" >> for005
 
