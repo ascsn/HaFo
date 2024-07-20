@@ -30,8 +30,8 @@ echo " 0.543043709322549584E-01, -5.07814768633786962, -1.36657048130840808,-0.1
 echo " 0.000,0.000,0.000,0.000,0.000,    t5,t6,t7,t8,t9" >> for005
 echo " 0.000,0.000,0.000,0.000000,       x5,x6,x7,x8" >> for005
 echo " 0.000,0.000,0.000,                tyuk,xyuk,ayuk" >> for005
-echo " 0.270018011502708211,1.0,$3,$1,25.8,0,0.0,-15,$2,,,,,power,acoul,ipair,pairfp,pairfn,ilnrsp,temprt" >> for005
-echo " 64,82,,,3,,  nprot,nneut,nmaxp,nmaxn,iparsh" >> for005
+echo " 0.270018011502708211,1.0,$3,$1,25.8,0,0.0,-100,$2,,,,,power,acoul,ipair,pairfp,pairfn,ilnrsp,temprt" >> for005
+echo " 64,82,,,17,,  nprot,nneut,nmaxp,nmaxn,iparsh" >> for005
 echo " 0,     ifgsc" >> for005
 #echo " 1,                   IWUNIT " >> for005
 #echo " 'UNEDF1' " >> for005
@@ -53,5 +53,5 @@ echo " 0,     ifgsc" >> for005
 echo " -1,                   IWUNIT" >> for005
 
 
-../haforpa.exe < for005 > /dev/null
+../hafom_huge.exe < for005 > /dev/null
 grep Z,N for011
