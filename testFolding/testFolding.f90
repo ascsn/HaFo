@@ -8,7 +8,7 @@ PROGRAM test_folding
 
 !   set the model parameters here by PARAMETER statements
 !   (may be changed to be read in later)
-    INTEGER, PARAMETER :: n_grid = 71      ! number of radial grid points
+    INTEGER, PARAMETER :: n_grid = 50      ! number of radial grid points
     ! INTEGER, PARAMETER :: js=2             ! angular momentum
     INTEGER, PARAMETER :: jsmax=15          ! maximum angular momentum
     INTEGER :: js
@@ -26,17 +26,17 @@ PROGRAM test_folding
     REAL(8), DIMENSION(n_grid) :: redPsi_in
     COMPLEX(8) :: Yll
     CHARACTER(len=100) :: filename
-    CHARACTER(*), parameter :: filepath="./results_data/"
+    CHARACTER(*), parameter :: filepath="./test_foldwidth/"
 !    CHARACTER(*), parameter :: filepath="./results_data2/"
     ngrid = n_grid            ! to be available in 'k2psi'
     rstep = rstep_in          ! to be available in 'k2psi'
 
     ! Define a loop over js, foldwidth, wpwidth
     jsLoop: do js = 1, jsmax
-    fwLoop: do fw = 1, 5
+    fwLoop: do fw = 1, 20
         foldwidth = 0.3d0 + dble(fw - 1)*0.3d0
     wpLoop: do wp = 1, 8
-        wpwidth = 1d0 + dble(wp-1)*0.5d0
+        wpwidth = 1.0d0 + dble(wp-1)*0.5d0
         ll = js/2  ! orbital angular momentum to combined a.m. quantum number 'js'
 
         ! Define the wavefunction to be folded

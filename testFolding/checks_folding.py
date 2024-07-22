@@ -3,8 +3,8 @@ import subprocess
 import numpy as np
 import matplotlib.pyplot as plt
 
-testResultsPath = "./results_data/"
-plotResultsPath = "./plots_data/"
+testResultsPath = "./test_foldwidth/"
+plotResultsPath = "./plots_foldwidth/"
 
 colors = [
     "r",
@@ -74,7 +74,7 @@ def plot():
             ax.set_xlabel("r (fm)")
             ax.set_ylabel(r"folded $\varphi$")
             ax.set_title(f"js = {js}, foldwidth = {fw}")
-            # plt.legend(prop={"size": 4}, loc="upper right")
+            plt.legend(prop={"size": 4}, loc="upper right")
             plotFileName = f"Fig_Js_{js}_fw_{fw}.pdf"
             plt.savefig(plotFileName)
             os.system(f"mv {plotFileName} {plotResultsPath}")
