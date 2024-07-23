@@ -51,7 +51,8 @@ def plot():
             for i, wp in enumerate(wpList):
                 fileName = f"test_js_{js}_fw_{fw}_wp_{wp}.dat"
                 print(fileName)
-                data = np.loadtxt(f"{testResultsPath}{fileName}")
+                data = np.genfromtxt(f"{testResultsPath}{fileName}")
+                # data = np.loadtxt(f"{testResultsPath}{fileName}")
                 ax.plot(
                     data.T[0],
                     data.T[2],
