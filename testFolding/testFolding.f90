@@ -8,7 +8,7 @@ PROGRAM test_folding
 
 !   set the model parameters here by PARAMETER statements
 !   (may be changed to be read in later)
-    INTEGER, PARAMETER :: n_grid = 100      ! number of radial grid points
+    INTEGER, PARAMETER :: n_grid = 50      ! number of radial grid points
     ! INTEGER, PARAMETER :: js=2             ! angular momentum
     INTEGER, PARAMETER :: jsmax=15          ! maximum angular momentum
     INTEGER :: js
@@ -26,7 +26,7 @@ PROGRAM test_folding
     REAL(8), DIMENSION(n_grid) :: redPsi_in
     COMPLEX(8) :: Yll
     CHARACTER(len=100) :: filename
-    CHARACTER(*), parameter :: filepath="./test_foldwidth/"
+    CHARACTER(*), parameter :: filepath="./test_foldwidth_15fm/"
 !    CHARACTER(*), parameter :: filepath="./results_data2/"
     ngrid = n_grid            ! to be available in 'k2psi'
     rstep = rstep_in          ! to be available in 'k2psi'

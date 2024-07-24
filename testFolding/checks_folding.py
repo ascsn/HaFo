@@ -3,8 +3,8 @@ import subprocess
 import numpy as np
 import matplotlib.pyplot as plt
 
-testResultsPath = "./test_foldwidth/"
-plotResultsPath = "./plots_foldwidth/"
+testResultsPath = "./test_foldwidth_15fm/"
+plotResultsPath = "./plots_foldwidth_15fm/"
 
 colors = [
     "r",
