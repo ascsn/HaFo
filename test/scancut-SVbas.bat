@@ -18,13 +18,16 @@ hfbwidth="0d0"
 for j in "${ipair[@]}"; do
 if [ $j -eq 7 ]; then
     cond="bcs"
-    pairStrength="607"   #  width=0
+    pairStrength="640"   #  width=0
 #    pairStrength="2280"   #  width=1
 #    pairStrength="11800"   #  width=2
 #    pairStrength="34600"   #  width=3
 else
     cond="hfb"
-    pairStrength="607"
+    pairStrength="350"    # width=0
+#    pairStrength="1660"   # width=1
+#    pairStrength="10450"   # width=2
+#    pairStrength="30750"   # width=3
 fi
 echo "cond = ${j}, pairStrength = ${pairStrength}" 
 for i in $(seq 15 1 16); do
