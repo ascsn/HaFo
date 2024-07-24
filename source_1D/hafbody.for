@@ -2320,6 +2320,8 @@ c       an oscillator model plus a margin of 'iparsh' oscillator quanta.
 c       States are sorted in order of 'js' the combined ang.mom. label.
 c       For each 'js', as much states are taken as fit below the Fermi energy.
 c
+        write(6,'(a,3i5)')
+     &   ' old params: nmaxp,nmaxn,nmaxto=',nmaxp,nmaxn,nmaxto
         hbom = hbom0*anumb**(-edr)
         xkm  = xkap0*xmu0
         nshell = 0
@@ -2333,7 +2335,9 @@ c            eocc = (1.4D0*aneut**edr + xparsh)*hbom
 c          ENDIF
           write(6,'(a,2(1pg13.5))') ' hbom,eocc=',hbom,eocc
           partnum = zero
+          jslast=0
           do js=1,kjmx
+            IF(js-jslast>5) EXIT
             jx     = (iso-1)*kjmx+js
             isoadd = ngrid*nmaxp*(iso-1)
             if(iso.eq.1) then
@@ -2347,7 +2351,7 @@ c          ENDIF
             do n=1,knmx+1
               energy = hbom*( (2*(n-1)+ll) - xkap0*wls(js)
      &                       - xkm*(ll+ll*ll)                )
-              write(6,'(a,3i5,1pg13.5)')
+                write(6,'(a,3i5,1pg13.5)')
      &           ' iso,js,n,energy=',iso,js,n,energy
               IF(energy.LE.eocc) THEN
                 IF(n.GT.knmx) THEN
@@ -2355,6 +2359,7 @@ c          ENDIF
      &             ' KNMX too small: iso,js,n=',iso,js,n
                   STOP ' KNMX too small '
                 ENDIF
+                jslast=js
                 jsmax(iso) = js
                 nshell = 1 + nshell
                 IF(nshell.GT.KSL2) 
@@ -6399,6 +6404,7 @@ c
 c      data one/1.0/
       data ifexpr/0/              ! switch for computing and printing exch.
 c
+      INTEGER, ALLOCATABLE :: isort(:)
       LOGICAL,PARAMETER :: TSCANPH=.FALSE.
       LOGICAL,PARAMETER :: TFOLDENS=.FALSE.
 !      CHARACTER(7),PARAMETER :: gform='1pg13.5',gform6='1pg14.6'
@@ -6621,10 +6627,28 @@ c       multmx = 999                            ! set large to get multiplicity
      &  '  proton spectrum:',
      &  '  2j    l    energy       weight    e-variance  rms    ',
      &  '  multipl.   dyn.gap  wgtherm '
+       ALLOCATE(isort(nmaxp))
+       DO n=1,nmaxp
+         isort(n) = n
+       END DO
+       DO n=1,nmaxp
+         emin=1D3
+         imin=n
+         DO n2=n,nmaxp
+           nact=isort(n2)
+           IF(spenrg(nact)<emin) THEN
+             emin=spenrg(nact)
+             isn=isort(n)
+             isort(n)=isort(n2)
+             isort(n2)=isn
+           END IF
+         END DO
+       END DO
        sumuvp = zero
        sumcon = zero
        sencon = zero
-       do 20 n=1,nmaxp
+       do 20 n2=1,nmaxp
+       n=isort(n2)
        js=jsp(n)
        ll=js/2
        xlp    = float(ll*ll+ll+1)
@@ -6706,7 +6730,26 @@ c     &           deltaf(n),phpair(n)
         WRITE(16,'(2i4,86(1pg11.3))')
      &   nprot,nneut,(SQRT(v2occ(i)-v2occ(i)**2),i=1,nmaxp)
         CALL flush(16)
+       DEALLOCATE(isort)
 c
+       ALLOCATE(isort(nmaxn))
+       DO n=1,nmaxn
+         isort(n) = n+nmaxp
+       END DO
+       DO n=1,nmaxn
+         nn=n+nmaxp
+         emin=1D3
+         imin=n
+         DO n2=n,nmaxn
+           nact=isort(n2)
+           IF(spenrg(nact)<emin) THEN
+             emin=spenrg(nact)
+             isn=isort(n)
+             isort(n)=isort(n2)
+             isort(n2)=isn
+           END IF
+         END DO
+       END DO
        write(ifile,'(/a/2a)')
      &  '  neutron spectrum:',
      &  '  2j    l    energy       weight    e-variance  rms    ',
@@ -6715,8 +6758,8 @@ c
        sencon = zero
        sumuvn=zero
        do 30 nn=1,nmaxn
-       n=nn+nmaxp
-       js=jsp(nn)
+       n=isort(nn)  !       n=nn+nmaxp
+       js=jsp(n-nmaxp)
        ll=js/2
        xlp    = float(ll*ll+ll+1)
        if(2*ll.eq.js) js=js-1
@@ -6797,6 +6840,7 @@ c     &           deltaf(n),phpair(n)
      &   ' maximum potential:',potmxn
 !       endif
       endif
+       DEALLOCATE(isort)
 c
 c     quick hack to print s.p. energies in columns (for Pb isotopes)
 c

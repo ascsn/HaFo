@@ -8,18 +8,18 @@
 #  $3   = neutron pairing strength
 # hfbwidth=(0d0 0.5d0 1d0 1.5d0 2d0)
 
-#ipair=(7)    # for BCS
-ipair=(8)    # for HFB
+ipair=(7)    # for BCS
+#ipair=(8)    # for HFB
 
 # Set hfbwidth
-hfbwidth="0d0"
+hfbwidth="1d0"
 
 # for j in "${hfbwidth[@]}"; do
 for j in "${ipair[@]}"; do
 if [ $j -eq 7 ]; then
     cond="bcs"
-    pairStrength="640"   #  width=0
-#    pairStrength="2280"   #  width=1
+#    pairStrength="640"   #  width=0
+    pairStrength="2280"   #  width=1
 #    pairStrength="11800"   #  width=2
 #    pairStrength="34600"   #  width=3
 else
@@ -30,7 +30,7 @@ else
 #    pairStrength="30750"   # width=3
 fi
 echo "cond = ${j}, pairStrength = ${pairStrength}" 
-for i in $(seq 15 1 16); do
+for i in $(seq 15 2 100); do
 echo "1,,    IWUNIT" > for005
 echo "'SV-bas HFB'" >> for005
 echo "71,0.3,              NGRID,RSTEP" >> for005
