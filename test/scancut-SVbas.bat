@@ -6,31 +6,43 @@
 #  $1   = cutoff energy 'cutfac'
 #  $2   = folding width 'hfbwidth'
 #  $3   = neutron pairing strength
-# hfbwidth=(0d0 0.5d0 1d0 1.5d0 2d0)
 
-ipair=(7)    # for BCS
-#ipair=(8)    # for HFB
+# Set HFB widths
+hfbwidths=("0.0d0" "1.0d0" "2.0d0" "3.0d0")
 
-# Set hfbwidth
-hfbwidth="1d0"
-
-# for j in "${hfbwidth[@]}"; do
-for j in "${ipair[@]}"; do
-if [ $j -eq 7 ]; then
-    cond="bcs"
+# Set BCS pairing strengths corresponding to those hfbwidths
 #    pairStrength="640"   #  width=0
-    pairStrength="2280"   #  width=1
+#    pairStrength="2280"   #  width=1
 #    pairStrength="11800"   #  width=2
 #    pairStrength="34600"   #  width=3
-else
-    cond="hfb"
-    pairStrength="350"    # width=0
+pairStrengthsBCS=("577" "1884" "18700" "43510")
+
+# Set HFB pairing strengths corresponding to those hfbwidths
+#    pairStrength="350"    # width=0
 #    pairStrength="1660"   # width=1
 #    pairStrength="10450"   # width=2
 #    pairStrength="30750"   # width=3
+pairStrengthsHFB=("529" "1725" "13460" "35064")
+
+#ipair=(7)    # for BCS
+ipair=(7 8)    # for HFB
+
+# Set hfbwidth
+hfbwidth="0.0d0"
+
+for j in "${ipair[@]}"; do
+if [ $j -eq 7 ]; then
+    cond="bcs"
+    #pairStrength="13000"
+    combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsBCS[@]}"))
+else
+    cond="hfb"
+#    pairStrength="529"
+    combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsHFB[@]}"))
 fi
-echo "cond = ${j}, pairStrength = ${pairStrength}" 
-for i in $(seq 15 2 100); do
+while IFS=, read -r hfbwidth pairStrength; do
+echo "cond = ${cond}, hfbwidth=${hfbwidth}, pairStrength = ${pairStrength}" 
+for i in $(seq 15 1 120); do
 echo "1,,    IWUNIT" > for005
 echo "'SV-bas HFB'" >> for005
 echo "71,0.3,              NGRID,RSTEP" >> for005
@@ -46,7 +58,7 @@ echo "0.25854594    ,-.38168900    ,-2.8236379    ,0.12322898    ,   34.11167,  
 echo "   0.00000   0.20113   0.00000,,,      riftm,rho0pr,powerp" >> for005
 echo "     0.000,  0.000000,  0.000000,           tyuk,xyuk,ayuk" >> for005
 echo "  0.300000,1.0,${j},67.4618,${pairStrength},0,0.0,-${i},${hfbwidth},,,   POWER,ACOUL,IPAIR,PAIRFP/N,ILNRESP,..." >> for005
-echo "50,74,,,17,,,,,,  nprot,nneut,nmaxp,nmaxn,iparsh" >> for005
+echo "50,70,,,17,,,,,,  nprot,nneut,nmaxp,nmaxn,iparsh" >> for005
 echo " 0         IFGSC" >> for005
 echo "-1,,    IWUNIT" >> for005
 
@@ -59,4 +71,5 @@ grep Z,N for011 >>  collect_cat_SVbas_${hfbwidth}_${cond}.dat
 done
 echo "${cond} Done!"
 mv collect_cat_SVbas_${hfbwidth}_${cond}.dat collect_cat/
+done <<< "${combined}"
 done
