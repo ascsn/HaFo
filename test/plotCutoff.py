@@ -82,7 +82,7 @@ def make_plots(data, legends, **kwargs):
     plt.close()
 
 
-def read_data(pairingType=None):
+def read_data(pairingType=None, functional=None):
     # Read data from collect_cat files
     fileList = []
     hfbwidths = []
@@ -98,7 +98,7 @@ def read_data(pairingType=None):
         chargeRadius = []
         pairingEnergy = []
         neutronGap = []
-        if pairingType in file and "SVbas" in file:
+        if pairingType in file and functional in file:
             print("Pair type", pairingType)
             fileName = file.rstrip().split("_")
             hfbwidths.append(fileName[-2])
@@ -138,9 +138,9 @@ def read_data(pairingType=None):
 
 
 def main():
-    pairingType = ["bcs", "hfb"]
+    pairingType = ["hfb"]
     eltName = r"$^{120}$Sn"
-    functional = "SVbas"
+    functional = "FyDr"
     for pairtype in pairingType:
         (
             hfbwidth,
@@ -148,7 +148,7 @@ def main():
             chargeRadiusArray,
             pairingEnergyArray,
             neutronGapArray,
-        ) = read_data(pairtype)
+        ) = read_data(pairtype, functional)
 
         # Total Energy plot
         labels = {

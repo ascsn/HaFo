@@ -1,4 +1,0 @@
-cutoff=-15,hfbwidth=0.5d0,pair.strength=4.472
- Z,N,r_C,E,epair,gap,sumuv=  50  70  4.643944  -1014.69      -0.000  -6.929   0.000   0.901   0.000   7.689
-cutoff=-16,hfbwidth=0.5d0,pair.strength=4.472
- Z,N,r_C,E,epair,gap,sumuv=  50  70  4.644046  -1014.72      -0.000  -7.073   0.000   0.901   0.000   7.848

@@ -12,25 +12,31 @@
 # parameter is negative. To have a üpositive entry, we enter the absolute
 # value and augment the minus sign in the procedure.
 
-# hfbwidth=(0d0 0.5d0 1d0 1.5d0 2d0)
+# Set HFB widths
+hfbwidths=("0.0d0" "1.0d0" "1.5d0" "2.0d0" "3.0d0")
 
-#ipair=(7)    # for BCS
-ipair=(8)    # for HFB
+ipair=(7 8)    # for BCS
+#ipair=(8)    # for HFB
 
 # Set hfbwidth
-hfbwidth="0d0"
+#hfbwidth="3.0d0"
 
-# for j in "${hfbwidth[@]}"; do
+pairStrengthsBCS=("4.485" "6.548" "14.1" "43.4" "137.9")
+pairStrengthsHFB=("4.358" "6.375" "13.62" "37.3" "114.4")
+
 for j in "${ipair[@]}"; do
 if [ $j -eq 7 ]; then
     cond="bcs"
-    pairStrength="4.472"
+#    pairStrength="137.9"
+    combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsBCS[@]}"))
 else
     cond="hfb"
-    pairStrength="4.472"
+#    pairStrength="114.4"
+    combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsHFB[@]}"))
 fi
+while IFS=, read -r hfbwidth pairStrength; do
 echo "cond = ${j}, pairStrength = ${pairStrength}" 
-for i in $(seq 15 1 16); do
+for i in $(seq 15 1 120); do
 echo "1,,    IWUNIT" > for005
 echo " 'Fy(Dr)' " >> for005
 echo " 71,0.3,,,,                  NGRID,RSTEP" >> for005
@@ -52,7 +58,7 @@ echo "   0.0  0.0  0 0 1,,,     delfxi ecstab isovectormodel" >> for005
 echo "   0.000000    0.000000     c0tau,c1tau " >> for005
 echo "   0.1879220  -2.3700000E-02 0.000000  0.000000,,,    c0nabj,c1nabj,c0tens,c1tens" >> for005
 echo "  0,1.0,${j},700,700,0,0,-${i},${hfbwidth},,,       power,acoul,ipair,pairfp,pairfn,ilnrsp,temprt,cutfac" >> for005
-echo "50,74,,,17,,,,,,  nprot,nneut,nmaxp,nmaxn,iparsh" >> for005
+echo "50,70,,,17,,,,,,  nprot,nneut,nmaxp,nmaxn,iparsh" >> for005
 echo " 0         IFGSC" >> for005
 echo "-1,,    IWUNIT" >> for005
 
@@ -65,4 +71,5 @@ grep Z,N for011 >>  collect_cat_FyDr_${hfbwidth}_${cond}.dat
 done
 echo "${cond} Done!"
 mv collect_cat_FyDr_${hfbwidth}_${cond}.dat collect_cat/
+done <<< "${combined}"
 done

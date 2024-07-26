@@ -11,17 +11,12 @@
 hfbwidths=("0.0d0" "1.0d0" "2.0d0" "3.0d0")
 
 # Set BCS pairing strengths corresponding to those hfbwidths
-#    pairStrength="640"   #  width=0
-#    pairStrength="2280"   #  width=1
-#    pairStrength="11800"   #  width=2
-#    pairStrength="34600"   #  width=3
+# fixing lower cutoff pairing gap
 pairStrengthsBCS=("577" "1884" "18700" "43510")
+# fixing higher cutoff pairing gap
+
 
 # Set HFB pairing strengths corresponding to those hfbwidths
-#    pairStrength="350"    # width=0
-#    pairStrength="1660"   # width=1
-#    pairStrength="10450"   # width=2
-#    pairStrength="30750"   # width=3
 pairStrengthsHFB=("529" "1725" "13460" "35064")
 
 #ipair=(7)    # for BCS
@@ -65,11 +60,11 @@ echo "-1,,    IWUNIT" >> for005
 
 ../hafom_huge.exe < for005 > /dev/null
 
-echo "cutoff=-${i},hfbwidth=${hfbwidth},pair.strength=${pairStrength}" >> collect_cat_SVbas_${hfbwidth}_${cond}.dat
-grep Z,N for011 >>  collect_cat_SVbas_${hfbwidth}_${cond}.dat
+echo "cutoff=-${i},hfbwidth=${hfbwidth},pair.strength=${pairStrength}" >> collect_cat_SVbas_${hfbwidth}_${cond}_Cut100.dat
+grep Z,N for011 >>  collect_cat_SVbas_${hfbwidth}_${cond}_Cut100.dat
 
 done
 echo "${cond} Done!"
-mv collect_cat_SVbas_${hfbwidth}_${cond}.dat collect_cat/
+mv collect_cat_SVbas_${hfbwidth}_${cond}_Cut100.dat collect_cat/
 done <<< "${combined}"
 done
