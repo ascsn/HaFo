@@ -12,32 +12,35 @@ hfbwidths=("0.0d0" "1.0d0" "2.0d0" "3.0d0")
 
 # Set BCS pairing strengths corresponding to those hfbwidths
 # fixing lower cutoff pairing gap
-pairStrengthsBCS=("577" "1884" "18700" "43510")
+#pairStrengthsBCS=("700" "1884" "18700" "43510")
+pairStrengthsBCS=("630.5" "2297" "12360" "36100") # for pairgap = 1.867
 # fixing higher cutoff pairing gap
 
 
 # Set HFB pairing strengths corresponding to those hfbwidths
-pairStrengthsHFB=("529" "1725" "13460" "35064")
+#pairStrengthsHFB=("529" "1610" "13460" "35064")
+pairStrengthsHFB=("342" "1610" "10815" "30301")
 
 #ipair=(7)    # for BCS
 ipair=(7 8)    # for HFB
 
 # Set hfbwidth
-hfbwidth="0.0d0"
+#hfbwidth="3.0d0"
 
 for j in "${ipair[@]}"; do
 if [ $j -eq 7 ]; then
     cond="bcs"
-    #pairStrength="13000"
+#    pairStrength="630.5"
     combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsBCS[@]}"))
 else
     cond="hfb"
-#    pairStrength="529"
+#    pairStrength="30290."
     combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsHFB[@]}"))
 fi
+echo "${hfbwidth}"
 while IFS=, read -r hfbwidth pairStrength; do
 echo "cond = ${cond}, hfbwidth=${hfbwidth}, pairStrength = ${pairStrength}" 
-for i in $(seq 15 1 120); do
+for i in $(seq 15 1 100); do
 echo "1,,    IWUNIT" > for005
 echo "'SV-bas HFB'" >> for005
 echo "71,0.3,              NGRID,RSTEP" >> for005
