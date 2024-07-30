@@ -107,7 +107,7 @@ def read_data(pairingType=None, functional=None):
             print("Pair type", pairingType)
             fileName = file.rstrip().split("_")
             print(fileName)
-            hfbwidths.append(fileName[-3])
+            hfbwidths.append(fileName[4])
             with open(dataPath + "/" + file) as f:
                 data = f.read()
             for line in data.splitlines():
