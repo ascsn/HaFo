@@ -6,7 +6,7 @@ import scienceplots
 
 
 dataPath = "./collect_cat"
-cutoff = np.arange(15, 121)
+cutoff = np.arange(15, 101)
 
 
 plt.style.use("science")
@@ -102,7 +102,7 @@ def read_data(pairingType=None, functional=None):
             pairingType in file
             and functional in file
             and "146Gd" in file
-            and "Cut100" not in file
+            and "Cut100" in file
         ):
             print("Pair type", pairingType)
             fileName = file.rstrip().split("_")
@@ -161,7 +161,7 @@ def main():
         labels = {
             "xlabel": r"$\epsilon_{{cut}}$",
             "ylabel": r"Total Energy (MeV)",
-            "filename": f"TotalEnergy_{pairtype}_{eltName}_{functional}.pdf",
+            "filename": f"TotalEnergy_{pairtype}_{eltName}_{functional}_Cut100.pdf",
             "title": f"{eltName}",
         }
         make_plots(totalEnergyArray, hfbwidth, **labels)
@@ -170,7 +170,7 @@ def main():
         labels = {
             "xlabel": r"$\epsilon_{{cut}}$",
             "ylabel": r"Total Energy (MeV)",
-            "filename": rf"TotalEnergy_{pairtype}_{eltName}_{functional}.pdf",
+            "filename": rf"TotalEnergy_{pairtype}_{eltName}_{functional}_Cut100.pdf",
             "title": f"{eltName}",
         }
         make_plots(totalEnergyArray, hfbwidth, **labels)
@@ -179,7 +179,7 @@ def main():
         labels = {
             "xlabel": r"$\epsilon_{{cut}}$",
             "ylabel": r"Charge Radius (fm)",
-            "filename": rf"Radius_{pairtype}_{eltName}_{functional}.pdf",
+            "filename": rf"Radius_{pairtype}_{eltName}_{functional}_Cut100.pdf",
             "title": f"{eltName}",
         }
         make_plots(chargeRadiusArray, hfbwidth, **labels)
@@ -188,7 +188,7 @@ def main():
         labels = {
             "xlabel": r"$\epsilon_{{cut}}$",
             "ylabel": r"Pairing Energy (MeV)",
-            "filename": rf"PairingEnergy_{pairtype}_{eltName}_{functional}.pdf",
+            "filename": rf"PairingEnergy_{pairtype}_{eltName}_{functional}_Cut100.pdf",
             "title": eltName,
         }
         make_plots(pairingEnergyArray, hfbwidth, **labels)
@@ -197,7 +197,7 @@ def main():
         labels = {
             "xlabel": r"$\epsilon_{{cut}}$",
             "ylabel": r"Pairing Gap (MeV)",
-            "filename": rf"PairingGap_{pairtype}_{eltName}_{functional}.pdf",
+            "filename": rf"PairingGap_{pairtype}_{eltName}_{functional}_Cut100.pdf",
             "title": eltName,
         }
         make_plots(neutronGapArray, hfbwidth, **labels)
