@@ -18,25 +18,25 @@ edf="FyDr"
 # Set HFB widths
 hfbwidths=("0.0d0" "1.0d0" "1.5d0" "2.0d0" "3.0d0")
 
-ipair=(7)    # for BCS
-#ipair=(8)    # for HFB
+#ipair=(7)    # for BCS
+ipair=(8)    # for HFB
 
 # Set hfbwidth
 hfbwidth="0.0d0"
 
 #pairStrengthsBCS=("4.485" "6.548" "14.1" "43.4" "137.9")
-pairStrengthsBCS=("3.073" "7.0" "16.1" "39.08" "116") # Cut100
+pairStrengthsBCS=("3.072" "6.615" "13.55" "42.65" "150.05") # Cut100
 #pairStrengthsHFB=("4.358" "6.375" "13.62" "37.3" "114.4")
 pairStrengthsHFB=("2.987" "6.23" "13.78" "34.07" "100.2") # Cut100
 
 for j in "${ipair[@]}"; do
 if [ $j -eq 7 ]; then
     cond="bcs"
-    pairStrength="50"
-#    combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsBCS[@]}"))
+#    pairStrength="3.072"
+    combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsBCS[@]}"))
 else
     cond="hfb"
-    pairStrength="2.989"
+    pairStrength="3.347"
 #    combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsHFB[@]}"))
 fi
 #while IFS=, read -r hfbwidth pairStrength; do

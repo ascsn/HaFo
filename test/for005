@@ -13,11 +13,11 @@
   0.6047266    0.000000  0.6656000  asp,hsp,hgradp 
    0.000000   -2000.0     0.000000  asm,hsm,hgradm 
    0.000000    0.3333333  hcoul,sigmacoul
-  -50    4.229000    3.227000  0.6666667   0.1600000  fxi,h1xi,hgradxi,gammaxi,rho0xi
+  -3.347    4.229000    3.227000  0.6666667   0.1600000  fxi,h1xi,hgradxi,gammaxi,rho0xi
    0.0  0.0  0 0 1,,,     delfxi ecstab isovectormodel
    0.000000    0.000000     c0tau,c1tau 
    0.1879220  -2.3700000E-02 0.000000  0.000000,,,    c0nabj,c1nabj,c0tens,c1tens
-  0,1.0,7,700,700,0,0,-100,0.0d0,,,       power,acoul,ipair,pairfp,pairfn,ilnrsp,temprt,cutfac
+  0,1.0,8,700,700,0,0,-100,0.0d0,,,       power,acoul,ipair,pairfp,pairfn,ilnrsp,temprt,cutfac
 64,82,,,17,,,,,,  nprot,nneut,nmaxp,nmaxn,iparsh
  0         IFGSC
 -1,,    IWUNIT

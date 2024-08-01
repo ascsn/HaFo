@@ -145,9 +145,9 @@ def read_data(pairingType=None, functional=None):
 
 
 def main():
-    pairingType = ["bcs", "hfb"]
+    pairingType = ["bcs"]
     eltName = r"$^{146}$Gd"
-    functional = "SVbas"
+    functional = "FyDr"
     for pairtype in pairingType:
         (
             hfbwidth,
