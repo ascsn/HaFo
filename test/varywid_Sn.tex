@@ -72,24 +72,27 @@
 
 \bigskip
 To state the problem, we start with the above figure. It shows the
-$uv$-averaged pairing gap (left) abnd pairing energy (right) as
+$uv$-averaged pairing gap (left) and pairing energy (right) as
 function of the cutoff $\epsilon_\mathrm{cut}$ for four different folding widths. Test case is
 neutron pairing in $^{120}$Sn computed with SV-bas and BCS
 pairing. The trends are the same for other nuclei, functionals, and
-HFB. Pairing strength are calibrated to yield the same averge gap at
+HFB. Pairing strength are calibrated to yield the same average gap at
 the largest cutoff  $\epsilon_\mathrm{cut}=100$ MeV. 
 
 We expect faster convergence with $\epsilon_\mathrm{cut}$ for
 increasing width. This seem to be given. Nonetheless, the results are
-puzzling. The group of widths 0 and 1 fm behaves much diifferent from
+puzzling. The group of widths 0 and 1 fm behaves much different from
 the group of widths 2 and 3 fm. From 0 fm up to 1.5 fm (not shown
-here), there are monotoneous trends. Above 1.5 fm, i.e. for widths 2
+here), there are monotonous trends. Above 1.5 fm, i.e. for widths 2
 and 3 fm, the trends are reverted. Somewhat surprisingly, the larger
 widths undergo larger changes and show even a pairing break-down
-toward small  $\epsilon_\mathrm{cut}$. This is disquiteing as it
+toward small  $\epsilon_\mathrm{cut}$. This is disquieting as it
 indicates that widths above 1.5 fm are unsafe to use.
 
-To understand what is going on, we investigate the behavior in more detail.
+To understand what is going on, we investigate the behavior in more
+detail looking at the state-dependent gap and state-dependent rms
+radii. 
+
 
 
 \bigskip
@@ -97,7 +100,44 @@ To understand what is going on, we investigate the behavior in more detail.
 \centerline{\includegraphics[width=0.8\linewidth]{varywid_BCS}}
 
 \bigskip
+The above figure shows the state-dependent gap $\Delta_\alpha$ (left)
+and state-dependent rms radii $r_\alpha$ (right) as function of the
+s.p. energy for BCS and the maximum cutoff $\epsilon_\mathrm{cut}=100$
+MeV. The gaps are the expectation values of the gap potentials before
+attenuation with pairing cutoff (which is, anyway, irrelevant here for
+ $\epsilon_\mathrm{cut}=100$ MeV).
 
+The radii (right panels) are, in case of BCS, independent of the
+width. The do a big jump at the continuum threshold and fill more or
+less the numerical box (box radius 21 fm).  Note that a few continuum
+states have visibly smaller radii. These are localized state in the
+continuum.
+
+The evolution of the gaps depends sensitively on the width. Reference
+case is width 0.0 where the gaps reach a maximum around the Fermi
+energy and decrease to both sides. The few states in the continuum
+having larger gaps belong to the group of still localized states.
+Their gaps decrease with increasing energy.  The de-localized state
+tend to generally small gaps, however, some of them increasing with
+energy. The supply stops at around 70 MeV, simply due to a numerical
+limitation of pairing space.
+
+Proceeding to widths 1 and 1.5 fm improves the trend. The maximum of
+gaps remains around the Fermi energy and the gaps of all states nicely 
+decrease in the continuum, faster for 1.5 fm width than for 1 fm
+width. That was exactly the intention  with introducing finite-width
+pairing. 
+
+Something disquieting happens for the even larger widths. All of a
+sudden, the gaps jump to large values at the continuum threshold.
+The jump is the larger the larger the width. For width 3 fm, e.g.,
+the jump leads to large values  for the gap of more than
+4 MeV. Although the gaps then decrease quickly, this huge spike 
+is unphysical and is most probably the reason for the reverted trends
+in the first figure. 
+
+So far, we can conclude that widths above 1.5 fm are unsafe. We need
+yet to check the situation for HFB which will be done in the next figure.
 
 
 \bigskip
@@ -105,6 +145,85 @@ To understand what is going on, we investigate the behavior in more detail.
 \centerline{\includegraphics[width=0.8\linewidth]{varywid_HFB}}
 
 \bigskip
+The radii (right panels) behave much different than for BCS.  For zero
+width (lowest right panel), they remain limited to rather small 6 fm
+due to confinement in the rather narrow pocket of the pairing
+potential. This changes with increasing widths. The finite folding
+widens the potential pocket and so gives way to larger radii. The most
+plausible trend is provided by width 1.5 fm where the radii increase
+steadily with increasing continuum energy while the whole trend
+remains continuous. Larger widths create a sudden jump of radii at
+threshold which is, intuitively, unphysical and counter-productive.
+The case of width 1 fm poses a puzzle. There seem to be two branches
+of radii. One increases continuously, as in case of 1.5 fm width while
+another one jumps immediately. The reason for that strange behavior
+is unclear and it is also unclear whether that appears for other
+widths too.
+
+The trend for the gaps for width zero (lowest left panel) differs from
+the corresponding BCS case. Here for HFB, the gaps have no maximum at
+the Fermi energy, but increase further and level off at large value
+later. This case has surely diverging pairing energy with increasing
+cutoff.
+
+For all non-zero widths, the trends for the gaps are similar to those
+in BCS. We have, again, these unwanted spikes at continuum threshold
+for widths 2 and 3 fm. For width 1 and 1.5 fm, We see a nice maximum at
+Fermi energy and steady decrease to both sides. There is an additional
+branch with near zero gap for width 1 fm which correlates with the
+branch of large radii. The optimal case, again, turns out to be the
+width 1.5 fm. Here with HFB, the gaps converge within less than 30MeV
+which indicates that this case could live with moderate pairing space
+(about 30 MeV above Fermi energy) without the need for further pairing
+cutoff. 
+
+\bigskip
+
+\noindent
+Preliminary conclusions:
+\begin{denselist}{\arabic}
+ \item
+   Large folding widths above 1.5 fm can produce unphysical behavior
+   and should be excluded.
+ \item
+   Reasonably small folding width (at and below 1.5 fm) produce nice
+   convergence of the pairing gaps with increasing s.p. energy. That
+   is progress as compared to zero folding where pairing gaps level
+   off, thus giving rise to pairing divergence. 
+ \item
+   So far, folding width 1.5 fm seems to be the best compromise. It
+   allows to deal with pairing spaces 30-40 MeV above Fermi energy
+   without further pairing  cutoff. If smaller spaces are wanted for
+   technical reasons, it may be combined with a cutoff and even then
+   the dependence on numerical representation should be much reduced
+   as compared to zero width.
+\end{denselist}
+
+
+\vspace*{0.5cm}
+
+
+\noindent
+Aftermath: 
+\\
+HFB displays one more problem for large widths as documented in the
+figure below.
+
+\medskip
+
+\centerline{\includegraphics[width=0.5\linewidth]{plots/PairingGap_hfb_120Sn_SVbas_Cut100}}
+
+\bigskip
+It shows the trend of the pairing gaps with pairing cutoff, as in the
+first figure, but here for HFB. The trends are not always as smooth as
+for BCS which is a known effect. The small fluctuations, particularly
+visible for the red and blue line, are due to state-wise pairing
+break-down leading to pairing isomers. That effect is dramatically
+enlarged for the black line representing width 3 fm. Here we see at
+least two different solution branches developing in parallel with
+increasing cutoff. It is not yet clear why this isomeric effect is so
+much enhanced for the large width. But we one more strong reason to
+exclude large widths.
 
 
 \end{document}
