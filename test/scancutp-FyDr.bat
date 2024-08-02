@@ -22,12 +22,12 @@ hfbwidths=("0.0d0" "1.0d0" "1.5d0" "2.0d0" "3.0d0")
 ipair=(8)    # for HFB
 
 # Set hfbwidth
-hfbwidth="0.0d0"
+#hfbwidth="3.0d0"
 
 #pairStrengthsBCS=("4.485" "6.548" "14.1" "43.4" "137.9")
 pairStrengthsBCS=("3.072" "6.615" "13.55" "42.65" "150.05") # Cut100
 #pairStrengthsHFB=("4.358" "6.375" "13.62" "37.3" "114.4")
-pairStrengthsHFB=("2.987" "6.23" "13.78" "34.07" "100.2") # Cut100
+pairStrengthsHFB=("3.349" "6.21" "12.83" "36.2" "143.35") # Cut100
 
 for j in "${ipair[@]}"; do
 if [ $j -eq 7 ]; then
@@ -36,12 +36,12 @@ if [ $j -eq 7 ]; then
     combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsBCS[@]}"))
 else
     cond="hfb"
-    pairStrength="3.347"
-#    combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsHFB[@]}"))
+#    pairStrength="143.35"
+    combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsHFB[@]}"))
 fi
-#while IFS=, read -r hfbwidth pairStrength; do
+while IFS=, read -r hfbwidth pairStrength; do
 echo "cond = ${j}, pairStrength = ${pairStrength}" 
-for i in $(seq 99 1 100); do
+for i in $(seq 15 1 100); do
 echo "1,,    IWUNIT" > for005
 echo " 'Fy(Dr)' " >> for005
 echo " 71,0.3,,,,                  NGRID,RSTEP" >> for005
@@ -77,5 +77,5 @@ grep Z,N for011 >> ${fileName}
 done
 echo "${cond} Done!"
 mv ${fileName} collect_cat/
-#done <<< "${combined}"
+done <<< "${combined}"
 done
