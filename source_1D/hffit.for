@@ -673,7 +673,8 @@ c
 c     continue reading fit options
 c
       read(1,*) nminv,ifex,iftm,ifenrg,ifrso,ifzpe,ifrhoc,ifdfms,imfold
-      read(1,*) acoul,addnew,dabe,dabr,ipair,ilnrsp,iparsh,cutfac
+      read(1,*) acoul,addnew,dabe,dabr,ipair,ilnrsp,iparsh,cutfac,
+     &          hfbwidth
       ipairsav=ipair
       IF(cutfac>0D0) itpr=10
       itpr=200
@@ -686,7 +687,7 @@ cold      if(ipair.eq.2) iparol = 0
       write(6,'(3g12.5)') acoul
       write(2,223) acoul,ifex,iftm,ifenrg,ifrso,
      *             ifzpe,ifrhoc,ifdfms,ipair,ilnrsp,iparsh,imfold,
-     *             cutfac,isovectormodel
+     *             cutfac,hfbwid,isovectormodel
   223 format(/5x,
      +     'coulomb-kraft multipliziert mit', f6.3/
      +5x,'ifex  = ',i2,'  ( 0: ohne     , 1: mit coulomb exch.)'/
@@ -702,6 +703,7 @@ cold      if(ipair.eq.2) iparol = 0
      +5x,'iparsh= ',i2,'  ( nr. of extra shells for BCS )'/
      +5x,'imfold= ',i2,'  ( 0: sing. fold. 1: doub.fold.  )'/
      +5x,'cutfac= ',f6.2, ' (cutoff factor in pairing)'/
+     +5x,'hfbwidth= ',f6.2, ' (folding width in pairing)'/
      +5x,'isovectormodel= ',i2/)
       write(2,'(a,3(a,g12.3))') '     convergence parameters:',
      &          ' addnew=',addnew,' dabe=',dabe,' dabr=',dabr

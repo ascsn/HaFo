@@ -48,8 +48,8 @@ c
 !     &    / 1.65 ,    0.5,   0D0, 0.0D0, 0.0D0, 0.0D0, 0.0D0,   0D0/
       data b3tilde,b12,b12p,b7,b7p,pow7
      &    /    0D0,0D0,0D0,0D0,0D0, 0D0/
-      data rho0pr,pairgm,rhoswm,exmass,powerp
-     &    /  0.16,   1.0,   0.0,   0.0, 0.0D0/
+      data rho0pr,pairgm,rhoswm,exmass,powerp,hfbwidth
+     &    /  0.16,   1.0,   0.0,   0.0, 0.0D0, 0.0D0/
 c     &    /  0.16,0.1666,   0.0,   0.0/
       data str_squark
      &    /  -0.24/
