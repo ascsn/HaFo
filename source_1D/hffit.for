@@ -4676,9 +4676,10 @@ c
      &     write(iu,'((1pg20.12,a),2(1pg20.12,a))')
      &      tyuk,',',xyuk,',',ayuk,',           tyuk,xyuk,ayuk'
         write(iu,
-     &        '(g21.12,a,i2,a,1pg20.12,a,1pg20.12,a,1pg20.12,a)')
+     &        '(g21.12,a,i2,a,1pg20.12,a,1pg20.12,a,1pg20.12,f8.2,a)')
      &     power,',1.0,',ipair,',',pairfp,',',pairfn,
-     &  ',0,,',cutfac,',,   POWER,ACOUL,IPAIR,PAIRFP/N,ILNRESP,...'
+     &  ',0,,',cutfac,hfbwidth,
+     &  ',,   POWER,ACOUL,IPAIR,PAIRFP/N,ILNRESP,...'
         WRITE(iu,'(4i5,f8.2,a)') 
      &    nprota,nneuta,nmaxp,nmaxn,iparsh*1D0,
      &    '  nprot,nneut,nmaxp,nmaxn,iparsh'
