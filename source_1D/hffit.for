@@ -687,7 +687,7 @@ cold      if(ipair.eq.2) iparol = 0
       write(6,'(3g12.5)') acoul
       write(2,223) acoul,ifex,iftm,ifenrg,ifrso,
      *             ifzpe,ifrhoc,ifdfms,ipair,ilnrsp,iparsh,imfold,
-     *             cutfac,hfbwid,isovectormodel
+     *             cutfac,hfbwidth,isovectormodel
   223 format(/5x,
      +     'coulomb-kraft multipliziert mit', f6.3/
      +5x,'ifex  = ',i2,'  ( 0: ohne     , 1: mit coulomb exch.)'/
@@ -702,7 +702,7 @@ cold      if(ipair.eq.2) iparol = 0
      +5x,'ilnrsp= ',i2,'  ( 1: response in Lipkin Nogami )'/
      +5x,'iparsh= ',i2,'  ( nr. of extra shells for BCS )'/
      +5x,'imfold= ',i2,'  ( 0: sing. fold. 1: doub.fold.  )'/
-     +5x,'cutfac= ',f6.2, ' (cutoff factor in pairing)'/
+     +5x,'cutfac= ',f7.2, ' (cutoff factor in pairing)'/
      +5x,'hfbwidth= ',f6.2, ' (folding width in pairing)'/
      +5x,'isovectormodel= ',i2/)
       write(2,'(a,3(a,g12.3))') '     convergence parameters:',

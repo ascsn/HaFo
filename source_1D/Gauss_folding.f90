@@ -36,6 +36,7 @@ REAL(8), ALLOCATABLE, SAVE :: fold1D(:,:,:) ! array containing the folding matri
 INTEGER, ALLOCATABLE, SAVE :: nmin(:)     ! minimal grid point above threshold
 INTEGER, ALLOCATABLE, SAVE :: nmax(:)     ! maximal grid point above threshold
 LOGICAL, SAVE :: tfirst=.TRUE.            ! triggers initializaton at first call
+INTEGER, SAVE :: jsmaxsav=0
 
 INTEGER :: ll      ! spatial angular momentum of 'psi_in'
 INTEGER :: j2      ! twice total angular momentum of 'psi_in'
@@ -43,11 +44,15 @@ INTEGER :: i
 
 REAL(8), DIMENSION(ngrid) :: hwfout, d2wfin
 
-!WRITE(6,'(a,4i4)') 'entry Gaussian:',js,jsmax
-IF(tfirst) THEN
+IF(tfirst .OR. jsmaxsav.NE.jsmax) THEN
+!  WRITE(6,'(a,4i4)') 'initialize Gaussian:',js,jsmax
   IF(jsmax<0) STOP 'folding must be intialized already in that call'
+  IF(ALLOCATED(nmin)) DEALLOCATE(fold1D,nmin,nmax)
   CALL Init_Gauss_folding
   tfirst = .FALSE.
+  jsmaxsav = jsmax
+ELSE
+!  WRITE(6,'(a,4i4)') 'entry Gaussian:',js,jsmax
 END IF
 
 ll=js/2
@@ -95,10 +100,11 @@ logical,parameter :: ttestfold=.FALSE.
 
 ! initializes folding matrix and selection of active elements
 ALLOCATE(fold1D(1:ngrid,1:ngrid,jsmax),nmin(1:ngrid),nmax(1:ngrid))
-ALLOCATE(exp_uv(1:ngrid), d2psi_uv(1:ngrid, 1:ngrid))
-ALLOCATE(eigVals(1:ngrid), eigVects(1:ngrid, 1:ngrid))
-ALLOCATE(psi_u(1:ngrid))
-
+IF(.NOT.ALLOCATED(exp_uv)) THEN
+  ALLOCATE(exp_uv(1:ngrid), d2psi_uv(1:ngrid, 1:ngrid))
+  ALLOCATE(eigVals(1:ngrid), eigVects(1:ngrid, 1:ngrid))
+  ALLOCATE(psi_u(1:ngrid))
+END IF
 
 
 !  ...
