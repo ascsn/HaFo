@@ -32,15 +32,16 @@ REAL(8), INTENT(IN) :: foldwid            ! spatial width of the folding
 INTEGER, INTENT(IN) :: jsmax              ! maximum 'js' supported
 
 REAL(8), PARAMETER :: folding_limit=1D-6  ! threshold above which folding acts
+
 REAL(8), ALLOCATABLE, SAVE :: fold1D(:,:,:) ! array containing the folding matrix
-INTEGER, ALLOCATABLE, SAVE :: nmin(:)     ! minimal grid point above threshold
-INTEGER, ALLOCATABLE, SAVE :: nmax(:)     ! maximal grid point above threshold
+INTEGER, ALLOCATABLE, SAVE :: nmin(:,:)     ! minimal grid point above threshold
+INTEGER, ALLOCATABLE, SAVE :: nmax(:,:)     ! maximal grid point above threshold
 LOGICAL, SAVE :: tfirst=.TRUE.            ! triggers initializaton at first call
 INTEGER, SAVE :: jsmaxsav=0
 
 INTEGER :: ll      ! spatial angular momentum of 'psi_in'
 INTEGER :: j2      ! twice total angular momentum of 'psi_in'
-INTEGER :: i
+INTEGER :: i,nmi,nma
 
 REAL(8), DIMENSION(ngrid) :: hwfout, d2wfin
 
@@ -75,9 +76,20 @@ END IF
 !WRITE(6,'(a,4i4)') 'before folding:',js,jsmax
 fpsi_out = 0d0
 !fpsi_out = matmul(fold1D(1:ngrid, 1:ngrid, j2), psi_in)
-do i=1,ngrid
-  fpsi_out(i) = SUM(fold1D(i,:,js)*psi_in(:))
-end do
+IF(folding_limit<1D-12) THEN
+  do i=1,ngrid
+    fpsi_out(i) = SUM(fold1D(i,:,js)*psi_in(:))
+  end do
+!  WRITE(6,'(a,4i4)') 'full folding:',js
+ELSE
+  do i=1,ngrid
+    nmi=nmin(i,js)
+    nma=nmax(i,js)
+    fpsi_out(i) = SUM(fold1D(i,nmi:nma,js)*psi_in(nmi:nma))
+!    fpsi_out(i) = SUM(fold1D(i,:,js)*psi_in(:))
+  end do
+!  WRITE(6,'(a,4i4)') 'short folding:',js
+END IF
 !WRITE(6,'(a,4i4)') 'after folding:',js,jsmax
 
 CONTAINS
@@ -91,15 +103,18 @@ SUBROUTINE Init_Gauss_folding
 
 integer :: ndimlin, i, la, j, k, lang, l
 integer :: xlp, parity
-real(8) :: jn
+real(8) :: jn,foldmax,foldlim
 !real(8), dimension(ngrid) :: r
 real(8), dimension(SIZE(psi_in), SIZE(psi_in)) :: hwfArray
 real(8), ALLOCATABLE :: exp_uv(:), d2psi_uv(:,:), eigVals(:), eigVects(:,:)
 real(8), ALLOCATABLE :: psi_u(:)
+logical :: tup
+
+!real(8),parameter :: flimit=1D-5
 logical,parameter :: ttestfold=.FALSE.
 
 ! initializes folding matrix and selection of active elements
-ALLOCATE(fold1D(1:ngrid,1:ngrid,jsmax),nmin(1:ngrid),nmax(1:ngrid))
+ALLOCATE(fold1D(1:ngrid,1:ngrid,jsmax),nmin(1:ngrid,1:jsmax),nmax(1:ngrid,1:jsmax))
 IF(.NOT.ALLOCATED(exp_uv)) THEN
   ALLOCATE(exp_uv(1:ngrid), d2psi_uv(1:ngrid, 1:ngrid))
   ALLOCATE(eigVals(1:ngrid), eigVects(1:ngrid, 1:ngrid))
@@ -171,6 +186,33 @@ do l = 1, jsmax             ! loop over total angular momenta
       write(6,'(1x)')
     end do
   END IF
+
+!  evaluate bounds of relevant region
+  nmin(:,l)=1
+  nmax(:,l)=ngrid
+  IF(folding_limit>1D-12) THEN
+    do i=1,ngrid
+      foldmax = MAXVAL(fold1D(i,:,l))
+      foldlim = foldmax*folding_limit
+      tup = .TRUE.
+!      nmin(i,l)=1
+!      nmax(i,l)=ngrid
+      do k = 1, ngrid
+        IF(tup) THEN
+          IF(fold1D(i,k,l)>foldlim) THEN
+            nmin(i,l)=k
+            tup = .FALSE.
+          END IF
+        ELSE
+          IF(fold1D(i,k,l)<foldlim) THEN
+            nmax(i,l)=k
+            EXIT
+          END IF
+        END IF
+      enddo
+    end do
+  END IF
+
 
 end do                     ! end loop over total angular momenta
 
