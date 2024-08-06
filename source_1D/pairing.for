@@ -1406,8 +1406,10 @@ c                                    the case r=0.0 needs special treatment
 c                                    now all r>0.0
         r      = zero
         IF (thfbfold) THEN
+!            WRITE(6,'(a,i4)') 'HFBPOT js=',js
             call Gauss_folding_m(wf(nadd+1:nadd+ngrid), 
-     &       fpsi(nadd+1:nadd+ngrid), rstep, ngrid, js, 1D0, -1)
+     &       fpsi(nadd+1:nadd+ngrid), rstep, ngrid, js, hfbwidth, 
+     &            MAXVAL(jsmax(1:2)))
             DO ir=ia,ie
               r      = r+rstep
               wfa    = wffold(nadd+ir)/r
@@ -1822,7 +1824,7 @@ ctest      if(eferm.ne.zero .and. ifcut.eq.1 .and. icount.gt.120) then
      &      (1D0+EXP(-(e(1:nmax)-eferm-cutfac)/(-0.1D0*cutfac)))
         END IF
         acc = SUM(pairgw(1:nmax)*ph(1:nmax))
-        WRITE(6,'(a,2i4,1pg13.5)') 'pairing space=',iterin,nmax,acc
+!        WRITE(6,'(a,2i4,1pg13.5)') 'pairing space=',iterin,nmax,acc
 !        WRITE(6,'(a,1pg13.5)') 'PAIRGW updated before: efcut=',efcut
 !        WRITE(6,*) '2. s.p.energies:'
 !        WRITE(6,'(5(1pg13.5))') e(1:nmax)
@@ -2315,7 +2317,7 @@ c
      &                 wffold(nplm+1:nplm+ngrid)
 !         WRITE(6,'(a,4i4)') 'before Call Gaussian:',js,jsmax(iso),nplshl
          CALL Gauss_folding_m(workt1(1:ngrid),workt2(1:ngrid),
-     &                        rstep,ngrid,js,hfbwidth,jsmax(iso))
+     &                       rstep,ngrid,js,hfbwidth,MAXVAL(jsmax(1:2)))
 !         CALL Gauss_folding_m(aux1(1:ngrid),aux2(1:ngrid),rstep,ngrid,js,
 !     &                        hfbwidth,jsmax(iso))
 !         wfdiff=rstep*SUM((aux2(1:ngrid)-aux1(1:ngrid))**2)

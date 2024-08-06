@@ -31,7 +31,7 @@ INTEGER, INTENT(IN) :: js                 ! combinded ang.mom. quantum number
 REAL(8), INTENT(IN) :: foldwid            ! spatial width of the folding 
 INTEGER, INTENT(IN) :: jsmax              ! maximum 'js' supported
 
-REAL(8), PARAMETER :: folding_limit=1D-6  ! threshold above which folding acts
+REAL(8), PARAMETER :: folding_limit=1D-14  !1D-6  ! threshold above which folding acts
 
 REAL(8), ALLOCATABLE, SAVE :: fold1D(:,:,:) ! array containing the folding matrix
 INTEGER, ALLOCATABLE, SAVE :: nmin(:,:)     ! minimal grid point above threshold
@@ -46,7 +46,7 @@ INTEGER :: i,nmi,nma
 REAL(8), DIMENSION(ngrid) :: hwfout, d2wfin
 
 IF(tfirst .OR. jsmaxsav.NE.jsmax) THEN
-!  WRITE(6,'(a,4i4)') 'initialize Gaussian:',js,jsmax
+  WRITE(6,'(a,4i4)') 'initialize Gaussian:',js,jsmax,jsmaxsav
   IF(jsmax<0) STOP 'folding must be intialized already in that call'
   IF(ALLOCATED(nmin)) DEALLOCATE(fold1D,nmin,nmax)
   CALL Init_Gauss_folding
@@ -113,6 +113,7 @@ logical :: tup
 !real(8),parameter :: flimit=1D-5
 logical,parameter :: ttestfold=.FALSE.
 
+!WRITE(6,'(a,i4)') 'INIT Gaussian with jsmax=',jsmax
 ! initializes folding matrix and selection of active elements
 ALLOCATE(fold1D(1:ngrid,1:ngrid,jsmax),nmin(1:ngrid,1:jsmax),nmax(1:ngrid,1:jsmax))
 IF(.NOT.ALLOCATED(exp_uv)) THEN
@@ -211,6 +212,8 @@ do l = 1, jsmax             ! loop over total angular momenta
         END IF
       enddo
     end do
+!    WRITE(6,'(a,i3,a,400i3)') 'nmin l=',l,':',nmin(:,l)
+!    WRITE(6,'(a,i3,a,400i3)') 'nmax l=',l,':',nmax(:,l)
   END IF
 
 
