@@ -3522,8 +3522,11 @@ c        WRITE(6,'(a,2(1pg13.5))') ' before ESIMPLE:',par(jp(1)),t0
           CLOSE(iu)
           IF(ttest) WRITE(2,'(a,4i4)') nodename(myn)//':result read',
      &             nprot,nneut,nprotc,nneutc
-          IF(nprotc.NE.nprot .OR. nneutc.NE.nneut) 
-     &      STOP 'reading RESULT.000: nucleus not matching'
+          IF(nprotc.NE.nprot .OR. nneutc.NE.nneut) THEN
+            WRITE(2,'(a,4i5)') 'RESULT.000 mismatch:',
+     &                        nprotc,nprot,nneutc,nneut
+            STOP 'reading RESULT.000: nucleus not matching'
+          END IF
          ELSE
           ipair=ipairsav
           call blocking
