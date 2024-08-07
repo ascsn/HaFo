@@ -6,27 +6,37 @@
 #  $1   = cutoff energy 'cutfac'
 #  $2   = folding width 'hfbwidth'
 #  $3   = neutron pairing strength
-# hfbwidth=(0d0 0.5d0 1d0 1.5d0 2d0)
 
-ipair=(5)
+nucleus="146Gd"
+edf="UNEDF1"
 
-# Set hfbwidth
-hfbwidth="0d0"
+ipair=(5) # For BCS
+#ipair=(6) # For HFB
 
-# for j in "${hfbwidth[@]}"; do
+# Set hfbwidths
+hfbwidths=("0.0d0" "1.0d0" "1.5d0" "2.0d0" "3.0d0")
+
+#hfbwidth="0.0d0"
+
+pairStrengthsBCS=("253" "858" "2981" "11150" "25000")
+pairStrengthsHFB=("4.358" "6.375" "13.62" "37.3" "114.4")
+
 for j in "${ipair[@]}"; do
 if [ $j -eq 5 ]; then
     cond="bcs"
-    pairStrength="253.0"
+#    pairStrength="254.7"
+    combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsBCS[@]}"))
 else
     cond="hfb"
     pairStrength="1835"
+#    combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsHFB[@]}"))
 fi
+while IFS=, read -r hfbwidth pairStrength; do
 echo "cond = ${j}, pairStrength = ${pairStrength}" 
-for i in $(seq 15.0 1. 16.0); do
+for i in $(seq 15 1 120); do
 echo " 1,                   IWUNIT " > for005
 echo " 'UNEDF1' " >> for005
-echo " 51,0.3,,,,                  NGRID,RSTEP" >> for005
+echo " 71,0.3,,,,                  NGRID,RSTEP" >> for005
 echo "-1,1.E-8,1.E-9,278,9000,3,-1,,   IWR,DABR,DABE,ITPR,ITMAX,IRAD,IFPLOT,IDISC " >> for005
 echo " 0.4,100.,0.2,-1.0,,,              XODAMP,E0DAMP,ADDNEW,WALL" >> for005
 echo " 1,0,0,1,-2,2,0,0,,,,,      IF:EX,TM,ENRG,RSO,ZPE,DFMS,RHOC,ENAV" >> for005
@@ -39,16 +49,18 @@ echo " 0.000,0.000,0.000,0.000,0.000,    t5,t6,t7,t8,t9" >> for005
 echo " 0.000,0.000,0.000,0.000000,       x5,x6,x7,x8" >> for005
 echo " 0.000,0.000,0.000,                tyuk,xyuk,ayuk" >> for005
 echo " 0.2700180115,1.0,${j},${pairStrength},258.11805,0,0.0,-${i},${hfbwidth},,,,,power,acoul,ipair,pairfp,pairfn,ilnrsp,temprt,cutfac,hfbwidth" >> for005
-echo " 64,82,,,3,,  nprot,nneut,nmaxp,nmaxn,iparsh" >> for005
+echo " 64,82,,,17,,  nprot,nneut,nmaxp,nmaxn,iparsh" >> for005
 echo " 0,     ifgsc" >> for005
 echo " -1,                   IWUNIT" >> for005
 
 ../hafom_huge.exe < for005 > /dev/null
 
-echo "cutoff=-${i},hfbwidth=${hfbwidth},pair.strength=${pairStrength}" >> collect_cat_${hfbwidth}_${cond}.dat
-grep Z,N for011 >>  collect_cat_${hfbwidth}_${cond}.dat
+fileName="collect_cat_${edf}_${nucleus}_${hfbwidth}_${cond}.dat"
+echo "cutoff=-${i},hfbwidth=${hfbwidth},pair.strength=${pairStrength}" >> ${fileName}
+grep Z,N for011 >>  ${fileName}
 
 done
 echo "${cond} Done!"
-mv collect_cat_${hfbwidth}_${cond}.dat collect_cat/
+mv ${fileName} collect_cat/
+done <<< "${combined}"
 done

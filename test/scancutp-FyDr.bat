@@ -18,21 +18,21 @@ edf="FyDr"
 # Set HFB widths
 hfbwidths=("0.0d0" "1.0d0" "1.5d0" "2.0d0" "3.0d0")
 
-#ipair=(7)    # for BCS
-ipair=(8)    # for HFB
+ipair=(7)    # for BCS
+#ipair=(8)    # for HFB
 
 # Set hfbwidth
 #hfbwidth="3.0d0"
 
-#pairStrengthsBCS=("4.485" "6.548" "14.1" "43.4" "137.9")
-pairStrengthsBCS=("3.072" "6.615" "13.55" "42.65" "150.05") # Cut100
-#pairStrengthsHFB=("4.358" "6.375" "13.62" "37.3" "114.4")
-pairStrengthsHFB=("3.349" "6.21" "12.83" "36.2" "143.35") # Cut100
+pairStrengthsBCS=("4.5361" "6.452" "13.15" "39.4" "253.3")
+#pairStrengthsBCS=("3.072" "6.615" "13.55" "42.65" "150.05") # Cut100
+pairStrengthsHFB=("4.358" "6.375" "13.62" "37.3" "114.4")
+#pairStrengthsHFB=("3.349" "6.21" "12.83" "36.2" "143.35") # Cut100
 
 for j in "${ipair[@]}"; do
 if [ $j -eq 7 ]; then
     cond="bcs"
-#    pairStrength="3.072"
+    pairStrength="253.3"
     combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsBCS[@]}"))
 else
     cond="hfb"
@@ -41,7 +41,7 @@ else
 fi
 while IFS=, read -r hfbwidth pairStrength; do
 echo "cond = ${j}, pairStrength = ${pairStrength}" 
-for i in $(seq 15 1 100); do
+for i in $(seq 15 1 120); do
 echo "1,,    IWUNIT" > for005
 echo " 'Fy(Dr)' " >> for005
 echo " 71,0.3,,,,                  NGRID,RSTEP" >> for005
@@ -70,7 +70,7 @@ echo "-1,,    IWUNIT" >> for005
 
 ../hafom_huge.exe < for005 > /dev/null
 
-fileName="collect_cat_${edf}_${nucleus}_${hfbwidth}_${cond}_Cut100.dat"
+fileName="collect_cat_${edf}_${nucleus}_${hfbwidth}_${cond}.dat"
 echo "cutoff=-${i},hfbwidth=${hfbwidth},pair.strength=${pairStrength}" >> ${fileName}
 grep Z,N for011 >> ${fileName}
 
