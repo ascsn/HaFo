@@ -101,13 +101,13 @@ def read_data(pairingType=None, functional=None):
         if (
             pairingType in file
             and functional in file
-            and "146Gd" in file
+            and "120Sn" in file
             and "Cut100" in file
         ):
             print("Pair type", pairingType)
             fileName = file.rstrip().split("_")
             print(fileName)
-            hfbwidths.append(fileName[4])
+            hfbwidths.append(fileName[4].split("d")[0])
             with open(dataPath + "/" + file) as f:
                 data = f.read()
             for line in data.splitlines():
@@ -118,8 +118,8 @@ def read_data(pairingType=None, functional=None):
                 if len(dataLine) > 1:
                     totalEnergy.append(float(dataLine[4]))
                     chargeRadius.append(float(dataLine[3]))
-                    pairingEnergy.append(float(dataLine[5]))
-                    neutronGap.append(float(dataLine[7]))
+                    pairingEnergy.append(float(dataLine[6]))
+                    neutronGap.append(float(dataLine[8]))
             totalEnergy = np.array(totalEnergy)
             chargeRadius = np.array(chargeRadius)
             pairingEnergy = np.array(pairingEnergy)
@@ -145,9 +145,9 @@ def read_data(pairingType=None, functional=None):
 
 
 def main():
-    pairingType = ["hfb"]
-    eltName = r"$^{146}$Gd"
-    functional = "FyDr"
+    pairingType = ["bcs"]
+    eltName = r"$^{120}$Sn"
+    functional = "SVbas"
     for pairtype in pairingType:
         (
             hfbwidth,

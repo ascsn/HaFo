@@ -7,13 +7,16 @@
 #  $2   = folding width 'hfbwidth'
 #  $3   = neutron pairing strength
 
+nucleus="120Sn"
+edf="SVbas"
+
 # Set HFB widths
-hfbwidths=("0.0d0" "1.0d0" "2.0d0" "3.0d0")
+hfbwidths=("0.0d0" "1.0d0" "1.5d0" "2.0d0" "3.0d0")
 
 # Set BCS pairing strengths corresponding to those hfbwidths
 # fixing lower cutoff pairing gap
 #pairStrengthsBCS=("700" "1884" "18700" "43510")
-pairStrengthsBCS=("630.5" "2297" "12360" "36100") # for pairgap = 1.867
+pairStrengthsBCS=("630.5" "2297" "5984" "12360" "36100") # for pairgap = 1.867
 # fixing higher cutoff pairing gap
 
 
@@ -21,16 +24,16 @@ pairStrengthsBCS=("630.5" "2297" "12360" "36100") # for pairgap = 1.867
 #pairStrengthsHFB=("529" "1610" "13460" "35064")
 pairStrengthsHFB=("342" "1610" "10815" "30301")
 
-#ipair=(7)    # for BCS
-ipair=(7 8)    # for HFB
+ipair=(7)    # for BCS
+#ipair=(7 8)    # for HFB
 
 # Set hfbwidth
-#hfbwidth="3.0d0"
+#hfbwidth="1.5d0"
 
 for j in "${ipair[@]}"; do
 if [ $j -eq 7 ]; then
     cond="bcs"
-#    pairStrength="630.5"
+#    pairStrength="5984"
     combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsBCS[@]}"))
 else
     cond="hfb"
@@ -63,11 +66,12 @@ echo "-1,,    IWUNIT" >> for005
 
 ../hafom_huge.exe < for005 > /dev/null
 
-echo "cutoff=-${i},hfbwidth=${hfbwidth},pair.strength=${pairStrength}" >> collect_cat_SVbas_${hfbwidth}_${cond}_Cut100.dat
-grep Z,N for011 >>  collect_cat_SVbas_${hfbwidth}_${cond}_Cut100.dat
+fileName="collect_cat_${edf}_${nucleus}_${hfbwidth}_${cond}_Cut100.dat"
+echo "cutoff=-${i},hfbwidth=${hfbwidth},pair.strength=${pairStrength}" >> ${fileName}
+grep Z,N for011 >> ${fileName}
 
 done
 echo "${cond} Done!"
-mv collect_cat_SVbas_${hfbwidth}_${cond}_Cut100.dat collect_cat/
+mv ${fileName} collect_cat/
 done <<< "${combined}"
 done
