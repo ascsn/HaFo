@@ -2281,7 +2281,7 @@ c
           chimin = chisqr
           rewind(3)
           do j=1,nparin
-           write(3,'(1pg18.10,a,1pg12.4,a,i2,a,a)')  
+           write(3,'(1pg20.12,a,1pg12.4,a,i2,a,a)')  
      &        a(j),',',dparmo(j),',',iparva(j),',',zuord(iparva(j))
           enddo
           write(3,'(a/a,i4,1pg13.5)')

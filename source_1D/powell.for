@@ -211,6 +211,7 @@ c      write(2,'(a,20(1pg14.6))')
 c     &  ' F1DIM: params=',(xt(j),j=1,ncom)
 c      f1dim=func(xt)
       chiact = ffverg(xt)
+!      WRITE(2,'(a,1pg13.5,38(1pg18.10))') 'F1dim:',chiact,xt(1:ncom)
       IF(chiact<chiminsav) THEN
         chiminsav = chiact
         CALL write_params(xt,chiminsav,iter)
