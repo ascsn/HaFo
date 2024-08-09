@@ -246,7 +246,7 @@ c
       CALL naming(zuord,ioptsk)
       REWIND(3)
       DO j=1,nparin
-        WRITE(3,'(g15.8,a,e12.5,a,i2,a,a)')  
+        WRITE(3,'(1pg20.12,a,0pg12.5,a,i2,a,a)')  
      &        paract(j),',',dparmo(j),',',
      &        iparva(j),',',zuord(iparva(j))
       END DO
