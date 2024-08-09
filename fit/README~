@@ -1,0 +1,11 @@
+This subdirectory 'fit' contains input and output of fits with finite-range
+pairing. 
+
+It contains sample input in the file 'for001.<name>' and corresponding
+output in the file 'for002.<name>' where '<name>' is an obvious name
+describing the actual case. The name is derived from the corresponding
+functional with soft cutoff pairing. The ending 'all' means a refit of
+all model parameters, while 'pairpar' indicates a fit where only the
+pairing parameters had been re-fitted.
+
+

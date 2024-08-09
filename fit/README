@@ -1,0 +1,34 @@
+This subdirectory 'fit' contains input and output of fits with finite-range
+pairing. 
+
+It contains sample input in the file 'for001.<name>' and corresponding
+output in the file 'for002.<name>' where '<name>' is an obvious name
+describing the actual case. The name is derived from the corresponding
+functional with soft cutoff pairing. The ending 'all' means a refit of
+all model parameters, while 'pairpar' indicates a fit where only the
+pairing parameters had been re-fitted.
+
+The fits are preformed by the routine 'hffit.exe' which was compiled
+in the main directory with './clfit'. The fitting routine handles input
+and output with fixed file names:
+ 'for010'    = input for basic pool of fit data,
+ 'for009'    = input for choice of difference data,
+ 'for001'    = input for detailed instructions (selection of data from 
+               data files, model options, starting parameters, ...),
+ 'for002'    = output of fit protocol (steps, covariance matrices, 
+               table with final results).
+If one want to (re-)do a fit from the given 'for001.<name>', one must
+copy 'for001.<name>' to for001,  'for009.<name>' to for009, and
+'for010.<name>' to for010. Then one can issue a 
+'<base-directory>/hffit.exe > /dev/null'. (Without the '/dev/null', the
+code will print a lot of grab to the screen.)´
+
+The 'hffit.exe' is a sequential code and can be slow, particularly in
+connection with HFB calculations. The exists an OpenMP version. It can
+be generated with './clfit_omp' which produces an executable 'hffit.omp'.
+To run this, one must have a copy of the HF routine 'haforpa.exe' in
+the woring directory. This exectuable is produced by 'clrpa' in the
+base directory. It then can either be copied to the working directory
+or linked.
+
+
