@@ -1,0 +1,14 @@
+The subdirectory 'testocc' contains a variant of the 1D SHF package
+which contains the option to run an occupation constraint calculation.
+Only three file which contain reevant modifications are contained as
+such. All other files are linked to the mother code in 'source_1D'.
+
+To compile and link issue './clocc' for Intel Fortran or './clocc_g77'
+for GNU Fortran while being in the base directory. This produces the
+executable 'hafotest.exe'.
+
+The input file contains a new line at the end which reads the number
+of the contraint state in the level sequence of the code and the
+wanted occupation (between 0 and 1) for that state. For an example
+see the batch file 'scanv2.bat' in the subrdirctory 'test'.
+
