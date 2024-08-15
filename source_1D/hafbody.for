@@ -3665,7 +3665,7 @@ c     &     '  r      rho_state  r*wavefunction '
      &     'ons, info in order: nr,iso,n,j,l,spenerg,occup,ngrid=','#',
      &     ntotal,
      &     iso,n,j2*0.5d0,ll,spenrg(isoadd+n),weight(isoadd+n),ngrid,
-     &     '#  r      rho_state: '
+     &     '#  r      rho_state   r*wavefunction: '
 c     &     '  r   r**2   rho_state   r**2*rho_state   rho_stat*occup: '
 c          write(28,'(1x,f5.2,f7.2,3(1pg13.5))') 
 c     &      0.0,0.0,rhosp,0.0,rhosp*occfac
