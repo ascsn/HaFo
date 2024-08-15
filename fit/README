@@ -32,3 +32,18 @@ base directory. It then can either be copied to the working directory
 or linked.
 
 
+So far, the following cases are deposited:
+
+SVmin-softcut         original SV-min with soft cutoff of
+                      window approximately 5 MeV.
+
+SVmin-width15         refit SV-min with finite-range pairing
+                      of width 1.5 fm, window 100 MeV
+
+FyIVPeven-softcut     originval Fy(IVP) with soft cutoff
+                      window 15 MeV
+FyIVPeven-width15     refit Fy(IVP) with finite-range pairing
+                      of width 1.5 fm, window 100 MeV
+                      
+
+

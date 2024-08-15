@@ -1,0 +1,36 @@
+011,'SV-min'
+1,0,,,,,,      NWDR
+  1,    2,   3,   4,  5,  6,  11,  9, 10,  12,   8,0,0,0,0,0,  AUSWAHL DER MESSGROESSEN
+1.0,0.040,0.04,0.02,20.,20.,0.36,0.12,0.12,0.01,9000.1,0.,0.,0., FEHLER AN DATEN
+1.0,  1.0, 1.0, 1.0,0.0,0.0, 1.0,1.0,1.0, 1.0, 1.0,0.,0.,0.,0,0,0,   % ODER ABSOLUT
+00.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0., KORRREKTUR
+016,250,5,0,,,,         IAUNT,IAOB,
+ 214,82,208,82,4,80.4,   nuc1a,nuc1z,nuc2a,nuc2z,iobstp,errdif
+ 208,82,202,82,4,80.4,   nuc1a,nuc1z,nuc2a,nuc2z,iobstp,errdif
+ 48,20,40,20,4,80.4,   nuc1a,nuc1z,nuc2a,nuc2z,iobstp,errdif
+ 44,20,48,20,4,80.4,   nuc1a,nuc1z,nuc2a,nuc2z,iobstp,errdif
+ 52,20,48,20,4,80.4,   nuc1a,nuc1z,nuc2a,nuc2z,iobstp,errdif
+0,1,0,0,-1,1,0,3,0,,,,  NMINV,IF:EX,TM,ENRG,RSO,ZPE,GSC,TOND,MFOLD  ifrso=1
+1.0,0.15,.1E-8,.1E-7,7,0,2,,,,   ACOUL,ADDNEW,DABE,DABR,ipair,ilnrsp,iparsh
+0.2,0,0.25,25,            RSYMAX,NSYMAX,RNTMAX,NNTMAX
+0,0,4,5780,2,,                IWRTE,IST1,IFCURV,ITMAX,IEXTAN
+17,14,0,1.0,0.0001,3,,10,, NPARIN,NUMAX,IVAR,FREEP,ENDCON,IFTINP   14
+ -475.21059    , 0.40327E-01, 1,    c0
+ -2761.7526    , 0.16212E+01, 4,    c3
+  6.5222893    , 0.70651E+00, 2,    b1
+ 0.25536789    , 0.20000E-03,10, power
+ -464.42149    , 0.24630E+01, 6,   c0p
+ -2678.1236    , 0.63717E+02, 9,   c3p
+  6.4785525    , 0.82379E+00, 7,   b1p
+  157.22701    , 0.87035E+00, 5,    t4
+ -141.50592    , 0.15911E+02, 8,   b2p
+  107.65667    , 0.20738E+00, 3,    b2
+  601.16013    , 0.23824E+02,16,pairfp
+  567.19111    , 0.37438E+02,17,pairfn
+  45.936151    , 0.23807E+02,15,   b4p
+ 0.21159107    , 0.58636E-02,12,rho0pr
+  0.0000000    , 0.20000E+00,11, riftm
+  0.0000000    , 0.00000E+00,13,powerp
+  0.0000000    , 0.00000E+00,14, undef
+-11, "to stop"
+ iteration,chi**2=   1   53.161    

@@ -1,0 +1,15 @@
+This subsdirectory 'doc' contains, besides actual disuccions files,
+a few basic papers on the calibration of Skyrme and Fayans functionals:
+  hf_artic.pdf                                      old basic paper in 1D sphwerical code
+  ArXiV.0804.3385-VariationsSkyrme.pdf              large-scale fit of Skymre functional
+                                                    yielding SV-min and SV-bas, contains
+                                                    contains detailed protocol of pool
+                                                    of fit data
+  ArXiV.1704.07430-2017-Fayansfunctional.pdf        first fit of Fayans functional to the
+                                                    same data pool as SV-min plus a couple
+                                                    of isotopitc difference radii
+  JPhysG-2024-Fayans-isovector.pdf                  fit of Fayans functional extended by
+                                                    proton-neutron distinguished pairing,
+                                                    contains a detailed list of fit data
+
+
