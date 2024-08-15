@@ -6626,7 +6626,7 @@ c       multmx = 999                            ! set large to get multiplicity
        write(ifile,'(/a/2a)')
      &  '  proton spectrum:',
      &  '  2j    l    energy       weight    e-variance  rms    ',
-     &  '  multipl.   dyn.gap  wgtherm '
+     &  '  multipl.   dyn.gap  wgtherm s.p.kinetic'
        ALLOCATE(isort(nmaxp))
        DO n=1,nmaxp
          isort(n) = n
@@ -6753,7 +6753,7 @@ c
        write(ifile,'(/a/2a)')
      &  '  neutron spectrum:',
      &  '  2j    l    energy       weight    e-variance  rms    ',
-     &  '  multipl.   dyn.gap  wgtherm '
+     &  '  multipl.   dyn.gap  wgtherm   s.p.kinetic'
        sumcon = zero
        sencon = zero
        sumuvn=zero
