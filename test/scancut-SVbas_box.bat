@@ -17,22 +17,25 @@ hfbwidths=("0.0d0" "1.0d0" "1.5d0" "2.0d0" "3.0d0")
 # fixing lower cutoff pairing gap
 #pairStrengthsBCS=("700" "1884" "18700" "43510")
 #pairStrengthsBCS=("630.5" "2297" "5984" "12360" "36100") # for pairgap = 1.867
-# fixing higher cutoff pairing gap
+# fixing higher cutoff pairing gap for a fixed width = 1.5
 pairStrengthsBCS=("5794" "5953.5" "6106" "6413" "7622")
 
 # Set HFB pairing strengths corresponding to those hfbwidths
 #pairStrengthsHFB=("529" "1610" "13460" "35064")
-pairStrengthsHFB=("342" "1610" "10815" "30301")
+# pairStrengthsHFB=("342" "1610" "10815" "30301")
 
-ipair=(7)    # for BCS
-#ipair=(7 8)    # for HFB
+# To test box size variation for width = 1.5
+pairStrengthsHFB=("4833" "4833" "4833" "4833" "4833")  # pairgap = 1.867 at boxsize=20 fm
+
+#ipair=(7)    # for BCS
+ipair=(8)    # for HFB
 
 # Set hfbwidth
 hfbwidth="1.5d0"
 
 # Set grid size
 gridSize=("51" "67" "83" "100" "133")
-#ngrid="133"
+#ngrid="67"
 
 for j in "${ipair[@]}"; do
 if [ $j -eq 7 ]; then
@@ -42,13 +45,14 @@ if [ $j -eq 7 ]; then
     combined=$(paste -d "," <(printf "%s\n" "${gridSize[@]}") <(printf "%s\n" "${pairStrengthsBCS[@]}"))
 else
     cond="hfb"
-#    pairStrength="30290."
+    pairStrength="4833"
 #    combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsHFB[@]}"))
+    combined=$(paste -d "," <(printf "%s\n" "${gridSize[@]}") <(printf "%s\n" "${pairStrengthsHFB[@]}"))
 fi
-echo "${hfbwidth}"
+i=100
 while IFS=, read -r ngrid pairStrength; do
 echo "cond = ${cond}, hfbwidth=${hfbwidth}, pairStrength = ${pairStrength}" 
-for i in $(seq 15 1 100); do
+#for i in $(seq 99 1 100); do
 echo "1,,    IWUNIT" > for005
 echo "'SV-bas HFB'" >> for005
 echo "${ngrid},0.3,              NGRID,RSTEP" >> for005
@@ -75,7 +79,7 @@ fileName="collect_cat_${edf}_${nucleus}_${hfbwidth}_${cond}_Cut100_${ngrid}.dat"
 echo "cutoff=-${i},hfbwidth=${hfbwidth},pair.strength=${pairStrength}" >> ${fileName}
 grep Z,N for011 >> ${fileName}
 
-done
+#done
 echo "${cond} Done!"
 mv ${fileName} collect_cat_box/
 done <<< "${combined}"

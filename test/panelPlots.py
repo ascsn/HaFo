@@ -1,3 +1,10 @@
+"""
+This code is used to generate panel plots by reading data from the collect_cat_ files.
+The code reads data using read_data function, and then plots the data using make_plots
+function. The preprocess_line function is used to preprocess data that is not separated 
+by space.
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
@@ -53,12 +60,15 @@ def read_data(pairingType=None, functional=None):
     neutronGapArray = []
     for file in os.listdir(dataPath):
         fileList.append(file)
+    # Sort the files in increasing order of either hfbwidth or box size.
     fileList = sorted(fileList)
     for file in fileList:
         totalEnergy = []
         chargeRadius = []
         pairingEnergy = []
         neutronGap = []
+        # Checks the name of the file to contain pairing type, functional name,
+        # element name and whether a cutoff is set
         if (
             pairingType in file
             and functional in file
@@ -66,9 +76,13 @@ def read_data(pairingType=None, functional=None):
             and "Cut100" in file
         ):
             print("Pair type", pairingType)
+            # Create an array of elements separated by "_" in a filename.
             fileName = file.rstrip().split("_")
             print(fileName)
+            # Split the element in the fileName array separated by "d"
             # hfbwidths.append(fileName[4].split("d")[0])
+            # Split the element in the fileName array separated by "." and round
+            # to the nearest integer
             hfbwidths.append(round(float(fileName[-1].split(".")[0]) * 0.3))
             with open(dataPath + "/" + file) as f:
                 data = f.read()
@@ -77,6 +91,7 @@ def read_data(pairingType=None, functional=None):
                     dataLine = preprocess_line(line).split()
                 else:
                     dataLine = line.rstrip().split()
+                # Check if size of array dataLine > 1
                 if len(dataLine) > 1:
                     totalEnergy.append(float(dataLine[4]))
                     chargeRadius.append(float(dataLine[3]))
@@ -94,6 +109,7 @@ def read_data(pairingType=None, functional=None):
             neutronGap = np.array(neutronGap) - np.array(neutronGap)[-1] * np.ones(
                 len(neutronGap)
             )
+        # Collect all arrays into one big array
         if len(totalEnergy) > 0:
             totalEnergyArray.append(totalEnergy)
             chargeRadiusArray.append(chargeRadius)
