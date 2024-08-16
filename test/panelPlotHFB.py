@@ -15,7 +15,7 @@ import scienceplots
 dataPath = "./collect_cat_box"
 # cutoff = np.arange(15, 16)
 
-
+mpl.use("TkAgg")
 plt.style.use("science")
 mpl.rcParams["text.usetex"] = True
 mpl.rcParams["axes.linewidth"] = 1.5
@@ -59,6 +59,7 @@ def read_data(pairingType=None, functional=None):
     chargeRadiusArray = []
     pairingEnergyArray = []
     neutronGapArray = []
+    boxArray = []
     for file in os.listdir(dataPath):
         fileList.append(file)
     # Sort the files in increasing order of either hfbwidth or box size.
@@ -68,6 +69,7 @@ def read_data(pairingType=None, functional=None):
         chargeRadius = []
         pairingEnergy = []
         neutronGap = []
+        boxList = []
         # Checks the name of the file to contain pairing type, functional name,
         # element name and whether a cutoff is set
         if (
@@ -84,7 +86,8 @@ def read_data(pairingType=None, functional=None):
             # hfbwidths.append(fileName[4].split("d")[0])
             # Split the element in the fileName array separated by "." and round
             # to the nearest integer
-            hfbwidths.append(round(float(fileName[-1].split(".")[0]) * 0.3))
+            hfbwidths.append(fileName[4].split("d")[0])
+            boxList.append(round(float(fileName[-1].split(".")[0]) * 0.3))
             with open(dataPath + "/" + file) as f:
                 data = f.read()
             for line in data.splitlines():
@@ -108,6 +111,7 @@ def read_data(pairingType=None, functional=None):
             chargeRadiusArray.append(chargeRadius)
             pairingEnergyArray.append(pairingEnergy)
             neutronGapArray.append(neutronGap)
+            boxArray.append(boxList)
     totalEnergyArray = np.array(totalEnergyArray)
     chargeRadiusArray = np.array(chargeRadiusArray)
     pairingEnergyArray = np.array(pairingEnergyArray)
@@ -120,6 +124,7 @@ def read_data(pairingType=None, functional=None):
         chargeRadiusArray,
         pairingEnergyArray,
         neutronGapArray,
+        boxArray,
     )
 
 
@@ -130,13 +135,15 @@ def make_plots(data, labels):
         chargeRadiusArray,
         pairingEnergyArray,
         neutronGapArray,
+        boxArray,
     ) = data
-    print(hfbwidth)
+    print(hfbwidth, boxArray)
     labelpadding = [0, 20, 0, 15]
     rows = [0, 1, 0, 1]
     cols = [0, 0, 1, 1]
     # yrange = [[-1037, -1013], [4.618, 4.66], [-99, 10], [-0.2, 2.8]]
     fig, ax = plt.subplots(nrows=2, ncols=2, sharex=False, figsize=(16, 12), dpi=600)
+    fontDict = {"family": "helvetica", "fontsize": 22, "fontweight": "bold"}
     for j in range(4):
         dict1 = labels[j]
         xl = dict1["xlabel"]
@@ -146,19 +153,25 @@ def make_plots(data, labels):
         newData = []
         for i, val in enumerate(data[j + 1]):
             newData.append(val)
-        ax[rows[j], cols[j]].plot(
-            hfbwidth,
-            newData,
-            linestyle="-",
-            marker="o",
-            label=f"box size = {hfbwidth[i]} fm",
-            linewidth=3,
-            color="b",
-        )
+        boxData = np.array(sorted(list(set(np.array(boxArray).flatten()))))
+        num = len(set(hfbwidth))
+        newData = np.array(newData)
+        newData = newData.reshape(num, len(newData) // num)
+        hfbwidth = np.array(list(set(hfbwidth)))
+        for k in range(len(set(hfbwidth))):
+            ax[rows[j], cols[j]].plot(
+                boxData,
+                newData[k],
+                linestyle="-",
+                marker="o",
+                label=f"width = {hfbwidth[k]} fm",
+                linewidth=3,
+                color=colors[k],
+            )
 
         # ax[j].set_ylim(yrange[j])
-        ax[rows[j], cols[j]].set_xlabel(xl, fontsize=18)
-        ax[rows[j], cols[j]].set_ylabel(yl, labelpad=labelpadding[j], fontsize=18)
+        ax[rows[j], cols[j]].set_xlabel(xl, fontdict=fontDict)
+        ax[rows[j], cols[j]].set_ylabel(yl, labelpad=labelpadding[j], fontdict=fontDict)
         ax[rows[j], cols[j]].tick_params(
             axis="both",
             which="major",
@@ -184,13 +197,13 @@ def make_plots(data, labels):
     fig.text(
         0.5,
         0.9,
-        r"$^{120}$Sn, SV-bas, spherical 1D, vary box size",
+        r"$^{120}$Sn, SV-bas, spherical 1D",
         ha="center",
         fontsize=18,
     )
     # ax[0].set_title(r"$^{120}$Sn", fontsize=18)
-    # plt.legend(loc="lower right", prop={"size": 8})
-    fileName = "SVbas_120Sn_hfb_props_Diff_box.pdf"
+    plt.legend(loc="lower right", prop={"size": 16})
+    fileName = "SVbas_120Sn_hfb_props_widths_box_sizes.pdf"
     plt.savefig(fileName)
     plt.close()
 

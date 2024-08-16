@@ -27,15 +27,21 @@ pairStrengthsBCS=("5794" "5953.5" "6106" "6413" "7622")
 # To test box size variation for width = 1.5
 pairStrengthsHFB=("4833" "4833" "4833" "4833" "4833")  # pairgap = 1.867 at boxsize=20 fm
 
+# To test box size variation for width = 3.0
+pairStrengthsHFB=("30301" "30301" "30301" "30301" "30301")  # pairgap = 1.867 at boxsize=21 fm
+
+# To test box size variation for width = 0.0
+pairStrengthsHFB=("342" "342" "342" "342" "342")  # pairgap = 1.86 at boxsize=21 fm
+
 #ipair=(7)    # for BCS
 ipair=(8)    # for HFB
 
 # Set hfbwidth
-hfbwidth="1.5d0"
+hfbwidth="0.0d0"
 
 # Set grid size
 gridSize=("51" "67" "83" "100" "133")
-#ngrid="67"
+#ngrid="71"
 
 for j in "${ipair[@]}"; do
 if [ $j -eq 7 ]; then
@@ -45,7 +51,7 @@ if [ $j -eq 7 ]; then
     combined=$(paste -d "," <(printf "%s\n" "${gridSize[@]}") <(printf "%s\n" "${pairStrengthsBCS[@]}"))
 else
     cond="hfb"
-    pairStrength="4833"
+    pairStrength="35064"
 #    combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsHFB[@]}"))
     combined=$(paste -d "," <(printf "%s\n" "${gridSize[@]}") <(printf "%s\n" "${pairStrengthsHFB[@]}"))
 fi
