@@ -25,23 +25,33 @@ pairStrengthsBCS=("5794" "5953.5" "6106" "6413" "7622")
 # pairStrengthsHFB=("342" "1610" "10815" "30301")
 
 # To test box size variation for width = 1.5
-pairStrengthsHFB=("4833" "4833" "4833" "4833" "4833")  # pairgap = 1.867 at boxsize=20 fm
+#pairStrengthsHFB=("4833" "4833" "4833" "4833" "4833")  # pairgap = 1.867 at boxsize=20 fm
 
 # To test box size variation for width = 3.0
-pairStrengthsHFB=("30301" "30301" "30301" "30301" "30301")  # pairgap = 1.867 at boxsize=21 fm
+#pairStrengthsHFB=("31162" "31162" "31162" "31162" "31162")  # pairgap = 1.867 at boxsize=21 fm
 
 # To test box size variation for width = 0.0
-pairStrengthsHFB=("342" "342" "342" "342" "342")  # pairgap = 1.86 at boxsize=21 fm
+#pairStrengthsHFB=("344.2" "344.2" "344.2" "344.2" "344.2")  # pairgap = 1.86 at boxsize=21 fm
+
+# Test box size, width = 0.0 for pairgap = 1.61 at cutoff = 25 MeV
+#pairStrengthsHFB=("456.9" "456.9" "456.9" "456.9" "456.9")
+
+# Test box size, width = 3.0 for pairgap = 1.61 at cutoff = 25 MeV
+#pairStrengthsHFB=("30710" "30710" "30710" "30710" "30710")
+
+# Test box size, width = 1.5 for pairgap = 1.61 at cutoff = 25 MeV
+pairStrengthsHFB=("4531" "4531" "4531" "4531" "4531")  
+
 
 #ipair=(7)    # for BCS
 ipair=(8)    # for HFB
 
 # Set hfbwidth
-hfbwidth="0.0d0"
+hfbwidth="1.5d0"
 
 # Set grid size
 gridSize=("51" "67" "83" "100" "133")
-#ngrid="71"
+ngrid="71"
 
 for j in "${ipair[@]}"; do
 if [ $j -eq 7 ]; then
@@ -51,11 +61,11 @@ if [ $j -eq 7 ]; then
     combined=$(paste -d "," <(printf "%s\n" "${gridSize[@]}") <(printf "%s\n" "${pairStrengthsBCS[@]}"))
 else
     cond="hfb"
-    pairStrength="35064"
+    pairStrength="4531"
 #    combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsHFB[@]}"))
     combined=$(paste -d "," <(printf "%s\n" "${gridSize[@]}") <(printf "%s\n" "${pairStrengthsHFB[@]}"))
 fi
-i=100
+i=25
 while IFS=, read -r ngrid pairStrength; do
 echo "cond = ${cond}, hfbwidth=${hfbwidth}, pairStrength = ${pairStrength}" 
 #for i in $(seq 99 1 100); do
@@ -81,7 +91,7 @@ echo "-1,,    IWUNIT" >> for005
 
 ../hafom_huge.exe < for005 > /dev/null
 
-fileName="collect_cat_${edf}_${nucleus}_${hfbwidth}_${cond}_Cut100_${ngrid}.dat"
+fileName="collect_cat_${edf}_${nucleus}_${hfbwidth}_${cond}_Cut25_${ngrid}.dat"
 echo "cutoff=-${i},hfbwidth=${hfbwidth},pair.strength=${pairStrength}" >> ${fileName}
 grep Z,N for011 >> ${fileName}
 

@@ -76,7 +76,7 @@ def read_data(pairingType=None, functional=None):
             pairingType in file
             and functional in file
             and "120Sn" in file
-            and "Cut100" in file
+            and "Cut25" in file
         ):
             print("Pair type", pairingType)
             # Create an array of elements separated by "_" in a filename.
@@ -138,7 +138,7 @@ def make_plots(data, labels):
         boxArray,
     ) = data
     print(hfbwidth, boxArray)
-    labelpadding = [0, 20, 0, 15]
+    labelpadding = [0, 7, 4, 7]
     rows = [0, 1, 0, 1]
     cols = [0, 0, 1, 1]
     # yrange = [[-1037, -1013], [4.618, 4.66], [-99, 10], [-0.2, 2.8]]
@@ -157,8 +157,8 @@ def make_plots(data, labels):
         num = len(set(hfbwidth))
         newData = np.array(newData)
         newData = newData.reshape(num, len(newData) // num)
-        hfbwidth = np.array(list(set(hfbwidth)))
-        for k in range(len(set(hfbwidth))):
+        hfbwidth = np.array(sorted(list(set(hfbwidth))))
+        for k in range(len(hfbwidth)):
             ax[rows[j], cols[j]].plot(
                 boxData,
                 newData[k],
@@ -203,7 +203,7 @@ def make_plots(data, labels):
     )
     # ax[0].set_title(r"$^{120}$Sn", fontsize=18)
     plt.legend(loc="lower right", prop={"size": 16})
-    fileName = "SVbas_120Sn_hfb_props_widths_box_sizes.pdf"
+    fileName = "SVbas_120Sn_hfb_props_cut25_widths_box_sizes.pdf"
     plt.savefig(fileName)
     plt.close()
 
