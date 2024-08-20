@@ -1,0 +1,5 @@
+# nr.obs rms-error average-error  subchi error-208Pb observable
+1    0.6201  -0.0034  12.0700   0.4600 energy E [MeV]
+2    0.0271  -0.0232   9.7900  -0.0053 diffr.radius [fm]
+3    0.0232   0.0083   4.6000   0.0097 surface thick. [fm]
+4    0.0155   0.0040  21.4300   0.0115 rms radius [fm]

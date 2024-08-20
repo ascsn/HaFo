@@ -12,8 +12,8 @@ import os, re
 import scienceplots
 
 
-dataPath = "./collect_cat_box"
-cutoff = np.arange(15, 101)
+dataPath = "./collect_cat"
+cutoff = np.arange(15, 61)
 
 
 plt.style.use("science")
@@ -73,17 +73,17 @@ def read_data(pairingType=None, functional=None):
             pairingType in file
             and functional in file
             and "120Sn" in file
-            and "Cut100" in file
+            and "Cut60" in file
         ):
             print("Pair type", pairingType)
             # Create an array of elements separated by "_" in a filename.
             fileName = file.rstrip().split("_")
             print(fileName)
             # Split the element in the fileName array separated by "d"
-            # hfbwidths.append(fileName[4].split("d")[0])
+            hfbwidths.append(fileName[4].split("d")[0])
             # Split the element in the fileName array separated by "." and round
             # to the nearest integer
-            hfbwidths.append(round(float(fileName[-1].split(".")[0]) * 0.3))
+            # hfbwidths.append(round(float(fileName[-1].split(".")[0]) * 0.3))
             with open(dataPath + "/" + file) as f:
                 data = f.read()
             for line in data.splitlines():
@@ -97,18 +97,20 @@ def read_data(pairingType=None, functional=None):
                     chargeRadius.append(float(dataLine[3]))
                     pairingEnergy.append(float(dataLine[6]))
                     neutronGap.append(float(dataLine[8]))
-            totalEnergy = np.array(totalEnergy) - np.array(totalEnergy)[-1] * np.ones(
-                len(totalEnergy)
-            )
-            chargeRadius = np.array(chargeRadius) - np.array(chargeRadius)[
-                -1
-            ] * np.ones(len(chargeRadius))
-            pairingEnergy = np.array(pairingEnergy) - np.array(pairingEnergy)[
-                -1
-            ] * np.ones(len(pairingEnergy))
-            neutronGap = np.array(neutronGap) - np.array(neutronGap)[-1] * np.ones(
-                len(neutronGap)
-            )
+            totalEnergy = np.array(
+                totalEnergy
+            )  # - np.array(totalEnergy)[-1] * np.ones(
+            #     len(totalEnergy)
+            # )
+            chargeRadius = np.array(chargeRadius)  # - np.array(chargeRadius)[
+            #     -1
+            # ] * np.ones(len(chargeRadius))
+            pairingEnergy = np.array(pairingEnergy)  # - np.array(pairingEnergy)[
+            #     -1
+            # ] * np.ones(len(pairingEnergy))
+            neutronGap = np.array(neutronGap)  # - np.array(neutronGap)[-1] * np.ones(
+            #     len(neutronGap)
+            # )
         # Collect all arrays into one big array
         if len(totalEnergy) > 0:
             totalEnergyArray.append(totalEnergy)
@@ -138,15 +140,15 @@ def make_plots(data, labels):
         pairingEnergyArray,
         neutronGapArray,
     ) = data
-    labelpadding = [18, 6, 10, 2]
-    # yrange = [[-1037, -1013], [4.618, 4.66], [-99, 10], [-0.2, 2.8]]
+    labelpadding = [5, 21, 20, 40]
+    # yrange = [[-1023.2, -1015.5], [4.617, 4.652], [-82, -5], [0.6, 3.2]]
     fig, ax = plt.subplots(nrows=4, ncols=1, sharex=True, figsize=(6, 12), dpi=600)
     for j in range(4):
         for i, val in enumerate(data[j + 1]):
             ax[j].plot(
                 cutoff,
                 val,
-                label=f"box size = {hfbwidth[i]} fm",
+                label=f"width = {hfbwidth[i]} fm",
                 linewidth=2,
                 color=colors[i],
             )
@@ -181,7 +183,7 @@ def make_plots(data, labels):
     plt.subplots_adjust(hspace=0)
     ax[0].set_title(r"$^{120}$Sn", fontsize=18)
     plt.legend(loc="lower right", prop={"size": 8})
-    fileName = "SVbas_120Sn_bcs_props_Diff_box.pdf"
+    fileName = "SVbas_120Sn_bcs_props_Cut60.pdf"
     plt.savefig(fileName)
     plt.close()
 
