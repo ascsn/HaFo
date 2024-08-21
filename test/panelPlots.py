@@ -12,8 +12,8 @@ import os, re
 import scienceplots
 
 
-dataPath = "./collect_cat"
-cutoff = np.arange(15, 61)
+dataPath = "./collect_cat_extended"
+cutoff = np.arange(15, 101)
 
 
 plt.style.use("science")
@@ -183,7 +183,7 @@ def make_plots(data, labels):
     plt.subplots_adjust(hspace=0)
     ax[0].set_title(r"$^{120}$Sn", fontsize=18)
     plt.legend(loc="lower right", prop={"size": 8})
-    fileName = "SVbas_120Sn_bcs_props_Cut60.pdf"
+    fileName = "SVbas_120Sn_bcs_props_Cut60_extended.pdf"
     plt.savefig(fileName)
     plt.close()
 
