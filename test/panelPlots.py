@@ -12,7 +12,7 @@ import os, re
 import scienceplots
 
 
-dataPath = "./collect_cat_extended"
+dataPath = "./collect_cat"
 cutoff = np.arange(15, 101)
 
 
@@ -72,8 +72,8 @@ def read_data(pairingType=None, functional=None):
         if (
             pairingType in file
             and functional in file
-            and "120Sn" in file
-            and "Cut60" in file
+            and "146Gd" in file
+            and "Cut100" in file
         ):
             print("Pair type", pairingType)
             # Create an array of elements separated by "_" in a filename.
@@ -132,7 +132,7 @@ def read_data(pairingType=None, functional=None):
     )
 
 
-def make_plots(data, labels):
+def make_plots(data, labels, functional):
     (
         hfbwidth,
         totalEnergyArray,
@@ -140,8 +140,8 @@ def make_plots(data, labels):
         pairingEnergyArray,
         neutronGapArray,
     ) = data
-    labelpadding = [5, 21, 20, 40]
-    # yrange = [[-1023.2, -1015.5], [4.617, 4.652], [-82, -5], [0.6, 3.2]]
+    labelpadding = [5, 21, 20, 30]
+    # yrange = [[-1025.2, -1015.5], [4.617, 4.654], [-92, -2], [0.51, 2.95]]
     fig, ax = plt.subplots(nrows=4, ncols=1, sharex=True, figsize=(6, 12), dpi=600)
     for j in range(4):
         for i, val in enumerate(data[j + 1]):
@@ -152,6 +152,7 @@ def make_plots(data, labels):
                 linewidth=2,
                 color=colors[i],
             )
+            # ax[j].axvline(x=60, color="teal", ls="--")
         dict1 = labels[j]
         xl = dict1["xlabel"]
         yl = dict1["ylabel"]
@@ -181,9 +182,9 @@ def make_plots(data, labels):
         )
     fig.text(0.5, 0.07, r"$\epsilon_{{cut}}$ [MeV]", ha="center", fontsize=16)
     plt.subplots_adjust(hspace=0)
-    ax[0].set_title(r"$^{120}$Sn", fontsize=18)
-    plt.legend(loc="lower right", prop={"size": 8})
-    fileName = "SVbas_120Sn_bcs_props_Cut60_extended.pdf"
+    ax[0].set_title(rf"$^{{{146}}}$Gd - {functional} - bcs", fontsize=18)
+    plt.legend(loc="lower right", prop={"size": 7})
+    fileName = f"{functional}_146Gd_bcs_props_Cut100.pdf"
     plt.savefig(fileName)
     plt.close()
 
@@ -191,7 +192,7 @@ def make_plots(data, labels):
 def main():
     pairingType = ["bcs"]
     eltName = r"$^{120}$Sn"
-    functional = "SVbas"
+    functional = "FyDr"
     for pairtype in pairingType:
         data = read_data(pairtype, functional)
         # Total Energy plot
@@ -227,7 +228,7 @@ def main():
         }
 
         labels = [labels1, labels2, labels3, labels4]
-        make_plots(data, labels)
+        make_plots(data, labels, functional)
 
         os.system(rf"mv *_{pairtype}_*.pdf plots_paper/")
 
