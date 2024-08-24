@@ -7,7 +7,7 @@
 #  $2   = folding width 'hfbwidth'
 #  $3   = neutron pairing strength
 
-nucleus="120Sn"
+nucleus="170Yb"
 edf="SVbas"
 
 # Set HFB widths
@@ -63,14 +63,14 @@ echo "0.25854594    ,-.38168900    ,-2.8236379    ,0.12322898    ,   34.11167,  
 echo "   0.00000   0.20113   0.00000,,,      riftm,rho0pr,powerp" >> for005
 echo "     0.000,  0.000000,  0.000000,           tyuk,xyuk,ayuk" >> for005
 echo "  0.300000,1.0,${j},67.4618,${pairStrength},0,0.0,-${i},${hfbwidth},,,   POWER,ACOUL,IPAIR,PAIRFP/N,ILNRESP,..." >> for005
-echo "50,70,,,17,,,,,,  nprot,nneut,nmaxp,nmaxn,iparsh" >> for005
+echo "70,100,,,17,,,,,,  nprot,nneut,nmaxp,nmaxn,iparsh" >> for005
 echo " 0         IFGSC" >> for005
 echo "-1,,    IWUNIT" >> for005
 
 
 ../hafom_huge.exe < for005 > /dev/null
 
-fileName="collect_cat_${edf}_${nucleus}_${hfbwidth}_${cond}_Cut60.dat"
+fileName="collect_cat_${edf}_${nucleus}_${hfbwidth}_${cond}_Cut100.dat"
 echo "cutoff=-${i},hfbwidth=${hfbwidth},pair.strength=${pairStrength}" >> ${fileName}
 grep Z,N for011 >> ${fileName}
 
