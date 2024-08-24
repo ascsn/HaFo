@@ -1524,7 +1524,9 @@ c
           pptmax(iso) = pptacc            
         END IF
 !        deltaf(istate) = (1D0-addnew)*deltaf(istate)-addnew*rstep*acc
-        deltaf(istate) = MAX(-rstep*acc,1D-6)
+!        deltaf(istate) = MAX(-rstep*acc,1D-6)
+!        deltaf(istate) = MAX(-rstep*acc,1D-10)
+        deltaf(istate) = -rstep*acc
       enddo
 c
       if(iwr.ge.-1 .or. ecstab.NE.0D0) then
@@ -1577,10 +1579,10 @@ ctest        write(*,*) ' EPP.EPN=',epp,epn
         epn2 = epn+ecstab**2/max(-epn,1D-8)
 !        write(89,*) ' EPP.EPN=',epp,epp2,epn,epn2
       endif
-      DO istate=1,nmaxto 
+!      DO istate=1,nmaxto 
 !         deltaf(istate)=MAX(deltaf(istate),1D-16)
-         deltaf(istate)=MAX(deltaf(istate),1D-8)
-      END DO
+!         deltaf(istate)=MAX(deltaf(istate),1D-8)
+!      END DO
 c
       if(iwr.gt.-1) then
         write(6,'(a,3(1pg12.4))')

@@ -6515,9 +6515,9 @@ c     &  rmsn-rmsp,rdmsn-rdmsp
      &     ' Z,N,r_C,E,epair,gap,sumuv=',
      &   nprot,nneut,rmsc,
      &   etotal,epp,epn,deltp,deltn,-epp/deltp,-epn/deltn
-      WRITE(654,'(3i4,f12.8,f12.5,3f10.3,1pg13.5)')
+      WRITE(654,'(3i4,f12.8,f12.5,3f10.3,f12.8,1pg13.5)')
      &   nprot,nneut,nexplicit,v2explicit,etotal,epair,epp0+epn0,
-     &   epp+epn,weight(nexplicit)
+     &   epp+epn,rmsc,weight(nexplicit)
       OPEN(26,file='for026',position='APPEND')
       WRITE(26,'(2i4,2(1pg13.5))') nprot,nneut,deltp,deltn
       CLOSE(26)

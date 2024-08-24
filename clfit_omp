@@ -12,7 +12,7 @@ ifort $OPTION1 -c hafbody.for
 ifort $OPTION1 -c sumdum.for
 ifort $OPTION1 -c fbtrans.f
 #ifort -cpp $OPTION1 -o ../hffit.exe hffit.for  weak-charge.o NMP-entry.o hfb-matrix.o hafbody.o sumdum.o fbtrans.o regpair.o GUDE-model.o
-ifort -fpp -Drunomp -qopenmp $OPTION1 -o ../hffit.omp hffit.for  weak-charge.o NMP-entry.o hfb-matrix.o hafbody.o sumdum.o fbtrans.o regpair.o Gauss_folding.o
+ifort -fpp -Drunomp -qopenmp $OPTION1 -o ../hffit.omp_new hffit.for  weak-charge.o NMP-entry.o hfb-matrix.o hafbody.o sumdum.o fbtrans.o regpair.o Gauss_folding.o
 cd ..
 
 # -axsse4.2 -msse4.2 -O3

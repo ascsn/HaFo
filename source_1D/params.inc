@@ -68,7 +68,7 @@ chuge       PARAMETER (KG1=230,KNMX=30,KJMX=140,KMAXN=3000,KMAXP=3000,          
      *            KRESWF=1,
      *            KTIMWF=KX11,TMONOPC=.false.,TADSIC=.false.,
      &            TLSYMM=.true.,TFORMW=.FALSE.,TEPAIR=.TRUE.,
-     &            TPHPAIR=.TRUE.,TLOWERCUT=.FALSE.)
+     &            TPHPAIR=.FALSE.,TLOWERCUT=.FALSE.)
 c
 c      parameters for switches in the RPA part
 c

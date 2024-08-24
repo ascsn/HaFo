@@ -7,5 +7,6 @@ ifort $OPTIONS -c NMP-entry.f90
 ifort $OPTIONS -c Gauss_folding.f90
 ifort $OPTIONS -c hfb-matrix.f
 ifort -g -c givens.f
+#ifort -w -ffpe-summary=none $OPTIONS -o ../hafotest.new_nowall haforpa.f givens.o weak-charge.o  NMP-entry.o hfb-matrix.o xx.o Gauss_folding.o
 ifort -w -ffpe-summary=none $OPTIONS -o ../hafotest.exe haforpa.f givens.o weak-charge.o  NMP-entry.o hfb-matrix.o xx.o Gauss_folding.o
 cd ..
