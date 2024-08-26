@@ -11,7 +11,7 @@
 0.25854594    ,-.38168900    ,-2.8236379    ,0.12322898    ,   34.11167,       x0,x1,x2,x3,b4p
    0.00000   0.20113   0.00000,,,      riftm,rho0pr,powerp
      0.000,  0.000000,  0.000000,           tyuk,xyuk,ayuk
-  0.300000,1.0,7,67.4618,40724,0,0.0,-100,3.0d0,,,   POWER,ACOUL,IPAIR,PAIRFP/N,ILNRESP,...
-50,70,,,17,,,,,,  nprot,nneut,nmaxp,nmaxn,iparsh
+  0.300000,1.0,7,67.4618,5984,0,0.0,-100,1.5d0,,,   POWER,ACOUL,IPAIR,PAIRFP/N,ILNRESP,...
+70,100,,,17,,,,,,  nprot,nneut,nmaxp,nmaxn,iparsh
  0         IFGSC
 -1,,    IWUNIT

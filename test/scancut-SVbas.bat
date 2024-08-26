@@ -18,11 +18,13 @@ hfbwidths=("0.0d0" "1.0d0" "1.5d0" "2.0d0" "3.0d0")
 #pairStrengthsBCS=("700" "1884" "18700" "43510")
 #pairStrengthsBCS=("630.5" "2297" "5984" "12360" "36100") # for pairgap = 1.867
 # for totalEnergy = -1022.72, cutoff = 25
-# pairStrengthsBCS=("567.6" "1881.5" "5984" "14044" "41663") 
-# totalEnergy = -1022.72, cutoff = 60
-pairStrengthsBCS=("520.1" "1808" "5607" "12693" "40724") 
-# totalEnergy = -1026.72, cutoff = 60
-#pairStrengthsBCS=("520.1" "1808" "5984" "12693" "40724") 
+# pairStrengthsBCS=("567.6" "1881.5" "5984" "14044" "41663") # 120Sn
+# totalEnergy = -1022.72, cutoff = 60, 120Sn
+pairStrengthsBCS=("520.1" "1808" "5607" "12693" "40724")  
+# totalEnergy = -1026.72, cutoff = 60, 120Sn
+#pairStrengthsBCS=("520.1" "1808" "5984" "12693" "40724")
+# pairgap = 1.
+pairStrengthsBCS=("520.1" "1808" "5984" "12693" "40724")
 
 
 # Set HFB pairing strengths corresponding to those hfbwidths
@@ -33,21 +35,21 @@ ipair=(7)    # for BCS
 #ipair=(7 8)    # for HFB
 
 # Set hfbwidth
-#hfbwidth="1.5d0"
+hfbwidth="1.5d0"
 
 for j in "${ipair[@]}"; do
 if [ $j -eq 7 ]; then
     cond="bcs"
-    #pairStrength="40724"
-    combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsBCS[@]}"))
+    pairStrength="5984"
+    #combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsBCS[@]}"))
 else
     cond="hfb"
 #    pairStrength="30290."
     combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsHFB[@]}"))
 fi
-while IFS=, read -r hfbwidth pairStrength; do
+#while IFS=, read -r hfbwidth pairStrength; do
 echo "cond = ${cond}, hfbwidth=${hfbwidth}, pairStrength = ${pairStrength}" 
-for i in $(seq 15 1 100); do
+for i in $(seq 99 1 100); do
 echo "1,,    IWUNIT" > for005
 echo "'SV-bas HFB'" >> for005
 echo "71,0.3,              NGRID,RSTEP" >> for005
@@ -76,6 +78,6 @@ grep Z,N for011 >> ${fileName}
 
 done
 echo "${cond} Done!"
-mv ${fileName} collect_cat_extended/
-done <<< "${combined}"
+mv ${fileName} collect_cat/
+#done <<< "${combined}"
 done
