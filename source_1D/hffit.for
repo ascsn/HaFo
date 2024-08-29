@@ -2408,7 +2408,7 @@ c
       parameter (kparsv=3*kparmx)
 c
       logical tdiagz,tinvert
-      parameter (tdiagz=.true.,tinvert=.TRUE.)
+      parameter (tdiagz=.FALSE.,tinvert=.FALSE.)
 c
       character*6 zuord(kparmx)
       character*4 parbra
@@ -2441,7 +2441,7 @@ c
       data parsav/kparsv*0D0/,chisav/3*0D0/,itera/0/
       data ifdrc/0/                         ! switch to direct 2. derivative
       LOGICAL, PARAMETER :: tonestep=.TRUE.  ! evaluation of chi**2 landscape
-      LOGICAL, PARAMETER :: tpreigen=.TRUE.  ! print details eigenvetors
+      LOGICAL, PARAMETER :: tpreigen=.FALSE.  ! print details eigenvetors
       LOGICAL, PARAMETER :: tsensitivity=.TRUE.
 c
 c--------------------------------------------------------------------

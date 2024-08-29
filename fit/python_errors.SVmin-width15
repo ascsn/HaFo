@@ -1,0 +1,5 @@
+# rms_error average_error Sum_chi**2 error_208Pb observable
+     0.650     0.029    13.240     0.580                 energy E[MeV]
+     0.030    -0.028    12.200    -0.012            diffr. radius [fm]
+     0.025     0.011     5.360     0.010        surface thickness [fm]
+     0.015     0.002    20.640     0.008               rms radius [fm]
