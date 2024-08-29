@@ -124,7 +124,8 @@ def main():
         # "gap-neutr.",
     ]
 
-    inputFile = f"for002.SVmin-softcut"
+    inputFile = f"for002.SVmin-width15"
+    names = inputFile.split(".")
     file_content = open(inputFile, "r").read()
     writeData, rms_error, avg_errors = parse_tables(file_content, keywords)
 
@@ -173,7 +174,7 @@ def main():
 
     df = pd.DataFrame(dict_of_obs)
 
-    write_data(df, f"python_errors.SVmin-softcut")
+    write_data(df, f"python_errors.{names[1]}")
 
 
 if __name__ == "__main__":
