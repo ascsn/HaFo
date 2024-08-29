@@ -12,9 +12,9 @@
    0.00000   0.20113   0.00000,,,      riftm,rho0pr,powerp
      0.000,  0.000000,  0.000000,           tyuk,xyuk,ayuk
   0.300000,1.0,8,674.618,606.902,0,0.0,-15,0D0,,,   POWER,ACOUL,IPAIR,PAIRFP/N,ILNRESP,...
-64,82,,,3,,,,,,  nprot,nneut,nmaxp,nmaxn,iparsh
+20,24,,,3,,,,,,  nprot,nneut,nmaxp,nmaxn,iparsh
  0         IFGSC
-1,,    IWUNIT
+-1,,    IWUNIT
 'SV-bas HFB'
 71,0.3,              NGRID,RSTEP
 -1,1E-8,1E-9,100,3780,3,-1, IWR,DABR/E,ITPR/MAX,IFPL
