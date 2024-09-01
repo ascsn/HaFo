@@ -1,1 +1,4 @@
-../source_1D/haforpa.for
+      INCLUDE '\qhq\HAFOM.FOR'
+      INCLUDE '\HAFO\HAFBODY.FOR'
+      INCLUDE '\qhq\RPA.FOR'
+      INCLUDE '\qhq\CORDUM.FOR'

@@ -1,1 +1,4 @@
-../source_1D/hffitall.for
+      include 'hffit.for'
+      include 'hafbody.for'
+      include 'sumdum.for'
+

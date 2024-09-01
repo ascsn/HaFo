@@ -1,1 +1,2 @@
-../source_1D/hafonly.f
+      include 'hafom.f'
+      include 'sumdum.for'

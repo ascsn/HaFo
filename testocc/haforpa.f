@@ -1,1 +1,5 @@
-../source_1D/haforpa.f
+      include 'hafom.for'
+      include 'hafbody.for'
+      include 'rpa.for'
+      include 'cordum.for'
+       include 'fbtrans.f'

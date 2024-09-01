@@ -1,1 +1,5 @@
-../source_1D/hafom.f
+
+       include 'hafom.for'
+       include 'hafbody.for'
+       include 'sumdum.for'
+       include 'fbtrans.f'
