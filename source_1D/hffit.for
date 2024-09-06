@@ -1693,6 +1693,9 @@ c
         do ipar=11,14
           zuord(ipar) = optpool(ipar,ioptsk)
         enddo
+      elseif(ioptsk==10) then
+         zuord(34) ='cutfac'
+         zuord(35) ='hfbwid'
       elseif(ioptsk.eq.11) then
         zuord(14) = optpool(14,ioptsk)
         do ipar=18,kparmx
@@ -1823,6 +1826,8 @@ c
          powerp = par(jpact(13))
          IF(kparmx>29) ecstab = par(jpact(30))
          IF(kparmx>30) hgradxi = par(jpact(31))
+         cutfac = par(jpact(34))
+         hfbwidth = par(jpact(35))
        ELSE IF(ioptsk==11) THEN
          tyuk   = par(jpact(11))
          xyuk   = par(jpact(12))
