@@ -8,8 +8,10 @@
 # see the code 'analyze.f90'.
 #
 # This shell script produces the errors for the whole density distributions
-# of charge, proton, neutron and mass. The output is written to the screen.
-# One can, or should, redirect it to an output file of own choice.
+# of charge, proton, neutron and mass. The output is written to the file
+# 'collect-variances-rho.dat'. The first block of resulots contains the
+# densities together with their extrapolation errors. The second block
+# contains the covariances.
 #
 # Input to the script is the wanted nucleus as:
 #  $1  = proton number Z
@@ -29,4 +31,4 @@ grep -A 61 rho-coul for011  >> collect-error-rho.dat
 done
 
 gfortran analyze-rho.f90
-./a.out 
+./a.out > collect-variances-rho.dat
