@@ -632,6 +632,8 @@ c
       delhgradxi = par(jpact(27))
       rho0xi = par(jpact(18))       ! default 0.16
       gammaxi = par(jpact(20))
+      cutfac = par(jpact(34))
+      hfbwidth = par(jpact(35))
 !
 !               map pairing parameters according to pairing model
 !
@@ -869,6 +871,8 @@ c
        zuord(25)='delfxi'
        zuord(26)= 'delh1xi'
        zuord(27)= 'delhgradxi'
+       zuord(34) ='cutfac'
+       zuord(35) ='hfbwid'
        IF(iftinp==4) THEN
          zuord(1)='EoverA'
          zuord(4)='rho_nm'
