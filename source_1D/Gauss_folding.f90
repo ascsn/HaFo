@@ -12,7 +12,7 @@ SUBROUTINE Gauss_folding_m(psi_in,fpsi_out,rstep,ngrid,js,foldwid,jsmax)
 ! 'foldwid' is given for the case of intializaton.
 !
 ! The folding kernel is generated at the first call of this routine
-! and stored internally on teh array 'foldwid'. To limit the summations
+! and stored internally on the array 'foldwid'. To limit the summations
 ! for folding an array 'nmin' for lower and another one 'nmax' for
 ! upper bound is also computed and stored during initialization  of
 ! the folding kernel.
@@ -38,20 +38,21 @@ INTEGER, ALLOCATABLE, SAVE :: nmin(:,:)     ! minimal grid point above threshold
 INTEGER, ALLOCATABLE, SAVE :: nmax(:,:)     ! maximal grid point above threshold
 LOGICAL, SAVE :: tfirst=.TRUE.            ! triggers initializaton at first call
 INTEGER, SAVE :: jsmaxsav=0
-
+REAL(8), SAVE :: foldwidold=-1D0
 INTEGER :: ll      ! spatial angular momentum of 'psi_in'
 INTEGER :: j2      ! twice total angular momentum of 'psi_in'
 INTEGER :: i,nmi,nma
 
 REAL(8), DIMENSION(ngrid) :: hwfout, d2wfin
 
-IF(tfirst .OR. jsmaxsav.NE.jsmax) THEN
+IF(tfirst .OR. jsmaxsav.NE.jsmax .OR. foldwid.NE.foldwidold) THEN
   WRITE(6,'(a,4i4)') 'initialize Gaussian:',js,jsmax,jsmaxsav
   IF(jsmax<0) STOP 'folding must be intialized already in that call'
   IF(ALLOCATED(nmin)) DEALLOCATE(fold1D,nmin,nmax)
   CALL Init_Gauss_folding
   tfirst = .FALSE.
   jsmaxsav = jsmax
+  foldwidold = foldwid
 ELSE
 !  WRITE(6,'(a,4i4)') 'entry Gaussian:',js,jsmax
 END IF
@@ -324,3 +325,65 @@ Delta_state_folded = SUM(pairpt*fpsi_in**2)*rstep
 
 
 END FUNCTION Delta_state_folded
+
+
+SUBROUTINE test_Gauss_folding(ngrid,rstep,foldwid)
+
+! Subroutine to test the folding routine using a Gaussian
+! as test case.
+
+IMPLICIT NONE
+
+REAL(8), INTENT(IN) :: rstep              ! stepsize of radial grid
+REAL(8), INTENT(IN) :: foldwid            ! folding width
+INTEGER, INTENT(IN) :: ngrid              ! number of grid points
+
+REAL(8), PARAMETER :: testwid = 4D0
+INTEGER, PARAMETER :: jsmax=4
+REAL(8), ALLOCATABLE :: field_in(:),field_out(:),field_tmp(:)
+INTEGER :: js,igrid,ll
+REAL(8) :: r,acc(2),acc2(2)
+
+
+ALLOCATE(field_in(1:ngrid),field_out(1:ngrid),field_tmp(1:ngrid))
+
+DO js=1,jsmax,2
+  ll = js/2
+  DO igrid=1,ngrid
+    r = (igrid-1)*rstep
+    field_in(igrid) = r**(ll+1)*exp(-(r/testwid)**2)
+  END DO
+
+  CALL  Gauss_folding_m(field_in,field_out,rstep,ngrid,js,foldwid,jsmax)
+
+  WRITE(6,'(a,2f7.2)') '# test folding for widths=',testwid,foldwid
+  WRITE(6,'(a)') '# r   field_in   field_out     difference'
+  acc = 0D0
+  acc2 = 0D0
+  DO igrid=1,ngrid
+    r = (igrid-1)*rstep
+    acc(1) = acc(1) + r*field_in(igrid)
+    acc(2) = acc(2) + r*field_out(igrid)
+    acc2(1) = acc2(1) + r*(r*r)*field_in(igrid)
+    acc2(2) = acc2(2) + r*(r*r)*field_out(igrid)
+    WRITE(6,'(f7.2,3(1pg13.5))')  r,field_in(igrid),field_out(igrid),field_in(igrid)-field_out(igrid)
+    IF(igrid>1) THEN
+      field_in(igrid) = field_in(igrid)/r
+      field_out(igrid) = field_out(igrid)/r
+    END IF
+  END DO
+  CALL extrap(field_in,1D0-2D0*MOD(ll,2))
+  CALL extrap(field_out,1D0-2D0*MOD(ll,2))
+  WRITE(6,'(a)') '# r   field_in/r   field_out/r     difference'
+  DO igrid=1,ngrid
+    r = (igrid-1)*rstep
+    WRITE(6,'(f7.2,3(1pg13.5))')  r,field_in(igrid),field_out(igrid),field_in(igrid)-field_out(igrid)
+  END DO
+  WRITE(6,'(a,4(1pg13.5))') '# norms,radii**2:',acc,(acc2/acc)
+
+END DO
+
+DEALLOCATE(field_in,field_out,field_tmp)
+
+
+END SUBROUTINE test_Gauss_folding

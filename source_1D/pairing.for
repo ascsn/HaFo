@@ -1338,7 +1338,7 @@ c
       LOGICAL, PARAMETER :: tpaircur=.FALSE.  ! .TRUE. to revive old version
       REAL(8), PARAMETER :: pairoffset=1D-100  !1D-20  !xsmall
       LOGICAL, PARAMETER :: folding=.TRUE.
-      REAL(8), DIMENSION(ngrid) :: fpsi
+!      REAL(8), DIMENSION(ngrid) :: fpsi
 c
 c--------------------------------------------------------------------
 c
@@ -1405,10 +1405,10 @@ c                                    the case r=0.0 needs special treatment
         endif
 c                                    now all r>0.0
         r      = zero
-        IF (thfbfold) THEN
+        IF(thfbfold) THEN
 !            WRITE(6,'(a,i4)') 'HFBPOT js=',js
             call Gauss_folding_m(wf(nadd+1:nadd+ngrid), 
-     &       fpsi(nadd+1:nadd+ngrid), rstep, ngrid, js, hfbwidth, 
+     &       wffold(nadd+1:nadd+ngrid), rstep, ngrid, js, hfbwidth, 
      &            MAXVAL(jsmax(1:2)))
             DO ir=ia,ie
               r      = r+rstep
@@ -1436,6 +1436,8 @@ c     now multiply with strength to obtain local pair-potential
 c
       IF(tpairFy) THEN
         CALL fy_hfbpot()
+        eppfy = epp
+        epnfy = epn
 !        CALL fy_pairpot()
       ELSE
         if(ipair.le.6) then
@@ -1544,6 +1546,8 @@ c
         epair = epp+epn
         epp0=epp
         epn0=epn
+!        IF(tpairFy) WRITE(6,'(a,4(1pg13.5))') 
+!     &    'EPAIR-Fy:',eppfy,epnfy,epp,epn
 !        WRITE(6,'(a,5(1pg13.5))') 'HFBepair=',epair,epp,epn
 !        CALL pair_stab(spenrg,deltaf,weight,ph,phpair,v2occ,epp3,
 !     &                     0D0,nmaxp,kmaxn,1)
@@ -1600,12 +1604,20 @@ c
         write(6,'(a)') ' contrib. to epair for neutrons:'
         write(6,'(5(1pg12.4))') (deltaf(i)*
      &     sqrt(weight(i)-weight(i)**2)*phpair(i),i=nmaxp+1,nmaxp+nmaxn)
-        acc=0D0
-        DO i=nmaxp+1,nmaxp+nmaxn
-          acc=acc+deltaf(i)*sqrt(weight(i)-weight(i)**2)*phpair(i)*ph(i)
-        END DO
-        WRITE(6,*) 'summed to epair:',acc
       endif
+        accp=0D0
+        DO i=1,nmaxp
+          accp=accp
+     &         +deltaf(i)*sqrt(weight(i)-weight(i)**2)*phpair(i)*ph(i)
+        END DO
+        accn=0D0
+        DO i=nmaxp+1,nmaxp+nmaxn
+          accn=accn
+     &         +deltaf(i)*sqrt(weight(i)-weight(i)**2)*phpair(i)*ph(i)
+        END DO
+        WRITE(6,'(a,2(1pg13.5))') 'summed to epair:',accp,accn
+        IF(tpairFy) WRITE(6,'(a,4(1pg13.5))') 
+     &    'EPAIR-Fy:',eppfy,epnfy,epp,epn
 c
       return
       end

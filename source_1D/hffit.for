@@ -390,6 +390,7 @@ c
 c     preset some control parameters.
 c
       ngrid_explicit  = 0
+      rstep_explicit  = 0D0
       iftinp = 1
       ioptsk = 0
       ib2fix = 0
@@ -727,7 +728,8 @@ c
 c   einlesen anfangs-parameter etc
 c
       read(1,*) RSYMAX,NSYMAX,RNTMAX,NNTMAX                ! EoS analysis
-      read(1,*) iwrte,ist1,ifcurv,itmax,iextan,ngrid_explicit
+      read(1,*) iwrte,ist1,ifcurv,itmax,iextan,ngrid_explicit,
+     &          rstep_explicit
       read(1,*) nparin,numax,ivar,freep,endcon,iftinp,ib2fix,ioptsk
       nparfit=numax
 !      if(nparin.ne.kparmx)
@@ -2413,7 +2415,7 @@ c
       parameter (kparsv=3*kparmx)
 c
       logical tdiagz,tinvert
-      parameter (tdiagz=.FALSE.,tinvert=.FALSE.)
+      parameter (tdiagz=.TRUE.,tinvert=.FALSE.)
 c
       character*6 zuord(kparmx)
       character*4 parbra
@@ -2446,7 +2448,7 @@ c
       data parsav/kparsv*0D0/,chisav/3*0D0/,itera/0/
       data ifdrc/0/                         ! switch to direct 2. derivative
       LOGICAL, PARAMETER :: tonestep=.TRUE.  ! evaluation of chi**2 landscape
-      LOGICAL, PARAMETER :: tpreigen=.FALSE.  ! print details eigenvetors
+      LOGICAL, PARAMETER :: tpreigen=.TRUE.  ! print details eigenvetors
       LOGICAL, PARAMETER :: tsensitivity=.TRUE.
 c
 c--------------------------------------------------------------------
@@ -3445,6 +3447,11 @@ c
 c
       if(tnucmat) 
      &  write(31,'(a)') '     ','      ','#'//commen(1:20)
+!        WRITE(2,'(a,2f8.2)') 'RSTEP before reset:',rstep,rstep_explicit
+      IF(rstep_explicit>0D0) THEN
+        rstep=rstep_explicit
+!        WRITE(2,'(a,2f8.2)') 'RSTEP reset:',rstep,rstep_explicit
+      END IF
 #if(runomp)
 !$OMP PARALLEL DEFAULT(SHARED) PRIVATE(nra,nnumb,anumb,nprot,zrprot,
 !$OMP&   nneut,nmaxp,nmaxn,ngrid,etotal,rdmsc,surfc,rmsc,rmsn,deltp,

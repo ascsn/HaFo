@@ -106,10 +106,18 @@ c
             acch = 0D0
             accgap = 0D0
 !            xnorm=0D0
-            DO i=2,ngrid
-              acch = wf(nplm2+i)*aux3(i) + acch
-              accgap = wf(nplm2+i)*wf(nplm+i)*pairpt(i+isoadd)+accgap
-            END DO
+            IF(thfbfold) THEN
+              DO i=2,ngrid
+                acch = wf(nplm2+i)*aux3(i) + acch
+                accgap = wffold(nplm2+i)*wffold(nplm+i)*pairpt(i+isoadd)
+     &                  +accgap
+              END DO
+            ELSE
+              DO i=2,ngrid
+                acch = wf(nplm2+i)*aux3(i) + acch
+                accgap = wf(nplm2+i)*wf(nplm+i)*pairpt(i+isoadd)+accgap
+              END DO
+            END IF
             acch=rstep*acch
             accgap=rstep*accgap
             IF(n2==n) THEN
@@ -176,7 +184,9 @@ c
       END IF
         avsymcond=0D0
         symcondmax=0D0
+        symcond=0D0
         DO na=1,nmaxa; DO nb=1,nmaxa
+          IF(jsp(na).NE.jsp(nb)) CYCLE
           symcond(na,nb) = 
      &         +(v2a(nb)*hmatrix(na,nb)-v2a(na)*hmatrix(nb,na))
      &         +(uva(nb)*gapmatrix(na,nb)-uva(na)*gapmatrix(nb,na))
@@ -240,6 +250,7 @@ c     matrix of Lagrangian parameters and symmetry condition
         symcond=0D0
         lambda=0D0
         DO na=1,nmaxa; DO nb=1,na
+          IF(jsp(na).NE.jsp(nb)) CYCLE
           cbhca = SUM(cm(:,nb)*hcm(:,na))
           cahcb = SUM(cm(:,na)*hcm(:,nb))
           lambda(na,nb)= 0.5D0*(cbhca+cahcb)
@@ -264,7 +275,9 @@ c     gradient step
         spemin=MINVAL(spenat,nmaxa)
         spemax=MAXVAL(spenat,nmaxa)
         delstep=delstepbas/(spemax-spemin)
+        cmnew=0D0
         DO na=1,nmaxa; DO n1=1,nmaxa
+          IF(jsp(na).NE.jsp(n1)) CYCLE      
           IF(e0bas==0D0) THEN
             dampstep = delstep
           ELSE
@@ -281,6 +294,7 @@ c     ortho-normalize
         cm=cmnew
         DO na=1,nmaxa
           DO nb=1,na-1
+            IF(jsp(na).NE.jsp(nb)) CYCLE
             ovlab=SUM(cm(:,nb)*cm(:,na))
             cm(:,na)=cm(:,na)-cm(:,nb)*ovlab
           END DO
@@ -294,6 +308,7 @@ c     new energies and occupations
           spenat(na) = 0D0
           gapnat(na) = 0D0
           DO n1=1,nmaxa
+            IF(jsp(na).NE.jsp(n1)) CYCLE
             spenat(na) =spenat(na)+cm(n1,na)*SUM(hmatrix(n1,:)*cm(:,na))
             gapnat(na) = gapnat(na)+
      &                   cm(n1,na)*SUM(gapmatrix(n1,:)*cm(:,na))
@@ -652,6 +667,8 @@ c
           nplshl = npl/ngrid+1-isonpl
           wf(npl:nplm+ngrid) = savlr(npl:nplm+ngrid,1)
           call derv17(wf(npl),wfs(npl),sig,ngrid,rstep)
+          IF(thfbfold) CALL Gauss_folding_m(wf(npl),wffold(npl),rstep,
+     &                         ngrid,js,hfbwidth,MAXVAL(jsmax(1:2)))
         END DO
       END DO
 c

@@ -41,7 +41,7 @@ C
      &                varextrap(12,kdat),                  ! estimated error
      *                CHISQR,CHIA,chimin,
      *                SOPROT,SONEUT,WIDPR,WIDNE,FLUC,freep,endcon,
-     &                parmnatfac,
+     &                parmnatfac,rstep_explicit,
      *                IPARVA(kparmx),JP(kparmx),LIFIT(12),IFIT1(12),
      *                NPTS,IWRTE,IST1,IFITR,NPTSG,NDATS,NPARIN,
      *                IFIT,IDAT1,IFALT2,ISTEUR, IFTINP,IB2FIX,nparfit,

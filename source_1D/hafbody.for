@@ -24,7 +24,7 @@ c
 c     data in common /numpar/
 c
       data itmax,itpr,  dabr,  dabe,addnew,x0damp,e0damp, epspr,wall
-     &    /  400,  50,0.0001,0.0001,   0.5,   0.2, 110.0,1.0e-5,-1.0/
+     &    /  400,  50,0.0001,0.0001,   0.5,   0.1, 110.0,1.0e-5,-1.0/
 !     &    /  400,   5,0.0001,0.0001,   0.5,   0.2, 110.0,1.0e-5,-1.0/
       data iwr,ifplot,ifrhoc,ifanlr,ifgrho
      &    / -1,     0,     0,     0,     0/
@@ -433,8 +433,8 @@ c
       tprint96=thfbnatprint .AND. thfbnatural .AND. tprint96
       IF(tprint96) THEN
         !  preliminary test switch, implement folding in HFB sub.
-        IF(thfbfold.AND.iternat>0) 
-     &      STOP 'folding and HFB subiterations yet incompatible'
+!        IF(thfbfold.AND.iternat>0) 
+!     &      STOP 'folding and HFB subiterations yet incompatible'
         OPEN(111,file='hfbparams')
         READ(111,*) iterhfb,iternat,modnat,pairenhance,iterbcs
         WRITE(96,'(1x/1x)')
@@ -543,6 +543,7 @@ ctest       write(*,*) ' INITWF done'
        deltp = deltps            ! restore read value
        deltn = deltns
       endif
+      IF(thfbfold) CALL test_Gauss_folding(ngrid,rstep,hfbwidth)
 !      WRITE(6,*) 'after initialization: tpair,ipair=',tpair,tpairFy,ipair
 !      WRITE(6,'(a,2i3)') 'IFPAIR:',ifpair
 c
