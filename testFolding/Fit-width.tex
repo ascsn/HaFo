@@ -1,0 +1,66 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+
+\textwidth 15.2cm
+\textheight 22.0cm
+\topmargin  -1.5cm
+\oddsidemargin 0.5cm
+\evensidemargin 0.5cm
+%\pagestyle{empty}
+
+%\partopsep -33pt
+%\parsep 0pt
+%\topskip -33pt
+\parskip 0pt
+\parindent 0pt
+\setlength{\topsep}{0pt}
+\setlength{\partopsep}{0pt}
+\setlength{\itemsep}{-30pt}
+\setlength{\parsep}{-30pt}
+
+\makeatletter
+   \def\@listi{\itemsep0pt\parsep0pt}
+\makeatother
+
+
+
+
+%\renewcommand{\baselinestretch}{0.9}
+\renewcommand{\topfraction}{0.8}
+\renewcommand{\textfraction}{0.2}
+\renewcommand{\floatpagefraction}{0.8}
+
+%\settowidth{\leftmargin}{CC}
+%\addtolength{\leftmargin}{-30pt}
+%\setlength{\leftmargin}{5pt}
+
+\begin{document}
+
+\section*{Optimization of functionals with finite width}
+
+The question is what the finite HFB folding width does to the quality
+of a functional. Is it beneficial or harmful? To check this, we have
+performed a couple of $\chi^2$ fits with systematically varied folding
+width. Two series wee done: first, fits of a Skyrme functional to the
+data set of SV-min, and second, fits of a Fayans functional to the
+data set of Fy($\Delta r$,HFB).  SV-min like fits were done with a
+soft pairing cutoff of 30 MeV and with BCS as well as with
+HFB. Fy($\Delta r$,HFB) like fits were done all with HFB and two
+cutoffs, 15 and 30 MeV. The figure below shoe the resulting quality
+measures $\chi^2$ as function of folding width.
+%
+\bigskip
+
+\centerline{\includegraphics[width=\linewidth]{fit-width.pdf}}
+
+\bigskip
+%
+The pattern are similar for both functionals. There is a preference
+for moderate widths between 0.5 and 0.9 fm. The effect is weak for
+SV-min like fits. But Fy($\Delta r$,HFB) like fits gain considerably
+from a finite width and they prefer the larger widths which is rather
+welcome. The good news is that width of about 1 fm are beneficial for
+Fayans functionals, already from quality alone. Moreover, we gain the
+intended better convergence with these widths.
+
+\end{document}
