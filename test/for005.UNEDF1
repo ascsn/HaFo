@@ -12,6 +12,6 @@
    0.00000   0   0.00000,,,      riftm,rho0pr,powerp
      0.000,  0.000000,  0.000000,           tyuk,xyuk,ayuk
  0.270018011502708211,1.0,5,219.1223549,221.2167158,0,0D0,-15D0,0D0,,,,power,acoul,ipair,pairfp,pairfn,ilnrsp,temprt,cutfac,hfbwidth
- 20,24,,,3,,  nprot,nneut,nmaxp,nmaxn,iparsh
+ 50,70,,,3,,  nprot,nneut,nmaxp,nmaxn,iparsh
  0,     ifgsc
  -1,                   IWUNIT

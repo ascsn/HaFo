@@ -1,19 +1,20 @@
 #!/bin/bash
+FC=ifx
 OPTION1="-w -O3 -xsse4.2 -ip -finline-functions -funroll-loops -static -autodouble"
 #OPTION1="-w -g -CB -traceback -autodouble"
-#OPTION1="-w -O3 -xsse4.2 -ip -finline-functions -funroll-loops -autodouble"
+# OPTION1="-w -O3 -xsse4.2 -ip -finline-functions -funroll-loops -autodouble"
 #echo $OPTION1
 cd source_1D
-ifort $OPTION1 -c Gauss_folding.f90
-ifort $OPTION1 -c regpair.f90
-ifort $OPTION1 -c weak-charge.f90
-ifort $OPTION1 -c NMP-entry.f90
-ifort $OPTION1 -c hfb-matrix.f
-ifort $OPTION1 -c hafbody.for
-ifort $OPTION1 -c sumdum.for
-ifort $OPTION1 -c fbtrans.f
+$FC $OPTION1 -c Gauss_folding.f90
+$FC $OPTION1 -c regpair.f90
+$FC $OPTION1 -c weak-charge.f90
+$FC $OPTION1 -c NMP-entry.f90
+$FC $OPTION1 -c hfb-matrix.f
+$FC $OPTION1 -c hafbody.for
+$FC $OPTION1 -c sumdum.for
+$FC $OPTION1 -c fbtrans.f
 #ifort -cpp $OPTION1 -o ../hffit.exe hffit.for  weak-charge.o NMP-entry.o hfb-matrix.o hafbody.o sumdum.o fbtrans.o
-ifort -fpp  $OPTION1 -o ../hffit.exe hffit.for  weak-charge.o NMP-entry.o hfb-matrix.o hafbody.o sumdum.o fbtrans.o regpair.o Gauss_folding.o
+$FC -fpp  $OPTION1 -o ../hffit.exe hffit.for  weak-charge.o NMP-entry.o hfb-matrix.o hafbody.o sumdum.o fbtrans.o regpair.o Gauss_folding.o
 cd ..
 
 # -axsse4.2 -msse4.2 -O3

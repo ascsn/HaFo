@@ -1,4 +1,2 @@
   iter E    r  dE   dr   delta_p   delta_n
-summary even-even:  50  70  -1019.9       4.6419     -3.14236E-12   0.0000    
-summary even-even:  50  70  -1017.4       4.6433     -3.14692E-12   0.0000    
-summary even-even:  50  70  -1017.4       4.6433     -3.14692E-12   0.0000    
+summary even-even:  50  70  -1023.1       4.6437     -1.45099E-04  1.89283-315
