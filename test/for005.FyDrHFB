@@ -18,6 +18,6 @@
    0.000000000       0.000000000    
   0.1983338500      4.4008347000E-02   0.000000000       0.000000000    
   0,1.0,8,700,700,0,0,-15.0,0D0,,       power,acoul,ipair,pairfp,pairfn,ilnrsp,temprt,cutfac,hfbwidth
-20,24,,,3,,  nprot,nneut,nmaxp,nmaxn,iparsh
+50,70,,,3,,  nprot,nneut,nmaxp,nmaxn,iparsh
 0
 -1,,    IWUNIT

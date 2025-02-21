@@ -396,6 +396,8 @@ c
       enddo
 !      CLOSE(767)
       epair = frpirs*epair
+      epn = frpirs*epairn
+      epp = epair-epn
 !      IF(nprot==20 .AND. nneut==20) THEN
 !        WRITE(6,'(a,4(1pg13.5))') 'FYpair:',
 !     &      pfacfy*fxip,pfacfy*h1xip,pfacfy*hgradxip,epair

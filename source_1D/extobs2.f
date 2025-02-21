@@ -1918,9 +1918,9 @@ c
         write(31,'((f10.3,a),2(f10.6,a))')
      &    tyuk,',',xyuk,',',ayuk,',           tyuk,xyuk,ayuk'
       END IF
-        write(31,'(f15.11,a,2(1pg19.11),a,0pf8.2,a)')
+        write(31,'(f15.11,a,2(1pg19.11),a,2(1pg19.11),a)')
      &     power,',1.0,7,',pairfp,pairfn,
-     &  ',0,,',cutfac,',,, POWER,ACOUL,IPAIR,PAIRFP/N,ILNRESP,...'
+     &  ',0,,',cutfac,hfbwidth,',, POWER,ACOUL,IPAIR,PAIRFP/N,ILNRESP,'
 c        write(31,'(f15.11,a,a)')
 c     &     power,',0.0,0,0.2,0.2',
 c     &  ',0,,,,,   POWER,ACOUL,IPAIR,PAIRFP/N,ILNRESP,...'

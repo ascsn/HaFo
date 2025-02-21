@@ -1,2 +1,6 @@
   iter E    r  dE   dr   delta_p   delta_n
+<<<<<<< HEAD
 summary even-even:  50  70  -1023.1       4.6437     -1.45099E-04  1.89283-315
+=======
+summary even-even:  50  70  -1021.0       4.6706     -0.65097       0.0000    
+>>>>>>> pg_quickfix
