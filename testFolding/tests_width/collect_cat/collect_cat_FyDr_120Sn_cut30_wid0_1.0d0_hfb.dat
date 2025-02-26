@@ -1,0 +1,38 @@
+cutoff=-2,hfbwidth=1.0d0,shells=2
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.657415  -1019.79      -1.171 -21.941   0.471   1.759   2.488  12.477
+cutoff=-3,hfbwidth=1.0d0,shells=3
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.657503  -1019.80      -1.183 -22.004   0.471   1.753   2.512  12.549
+cutoff=-4,hfbwidth=1.0d0,shells=4
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.657505  -1019.80      -1.183 -22.004   0.470   1.753   2.516  12.553
+cutoff=-5,hfbwidth=1.0d0,shells=5
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.657514  -1019.80      -1.187 -22.006   0.470   1.753   2.525  12.554
+cutoff=-6,hfbwidth=1.0d0,shells=6
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.657505  -1019.80      -1.183 -22.004   0.470   1.753   2.517  12.555
+cutoff=-7,hfbwidth=1.0d0,shells=7
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.657505  -1019.80      -1.183 -22.004   0.470   1.753   2.517  12.553
+cutoff=-8,hfbwidth=1.0d0,shells=8
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.657514  -1019.80      -1.187 -22.006   0.470   1.753   2.526  12.556
+cutoff=-9,hfbwidth=1.0d0,shells=9
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.657491  -1019.80      -1.178 -22.003   0.470   1.752   2.507  12.555
+cutoff=-10,hfbwidth=1.0d0,shells=10
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.657491  -1019.80      -1.178 -22.003   0.470   1.752   2.507  12.555
+cutoff=-11,hfbwidth=1.0d0,shells=11
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.657491  -1019.80      -1.178 -22.003   0.470   1.752   2.507  12.555
+cutoff=-12,hfbwidth=1.0d0,shells=12
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.657491  -1019.80      -1.178 -22.003   0.470   1.752   2.507  12.556
+cutoff=-13,hfbwidth=1.0d0,shells=13
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.657512  -1019.80      -1.187 -22.005   0.470   1.753   2.526  12.555
+cutoff=-14,hfbwidth=1.0d0,shells=14
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.657512  -1019.80      -1.187 -22.005   0.470   1.753   2.526  12.556
+cutoff=-15,hfbwidth=1.0d0,shells=15
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.657511  -1019.80      -1.187 -22.005   0.470   1.753   2.526  12.556
+cutoff=-16,hfbwidth=1.0d0,shells=16
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.657510  -1019.80      -1.187 -22.005   0.470   1.753   2.526  12.556
+cutoff=-17,hfbwidth=1.0d0,shells=17
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.657514  -1019.80      -1.187 -22.005   0.470   1.753   2.526  12.555
+cutoff=-18,hfbwidth=1.0d0,shells=18
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.657514  -1019.80      -1.187 -22.006   0.470   1.753   2.526  12.556
+cutoff=-19,hfbwidth=1.0d0,shells=19
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.657514  -1019.80      -1.187 -22.006   0.470   1.753   2.526  12.556
+cutoff=-20,hfbwidth=1.0d0,shells=20
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.657514  -1019.80      -1.187 -22.006   0.470   1.753   2.526  12.556
