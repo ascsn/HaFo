@@ -1,0 +1,172 @@
+cutoff=-15,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.648872  -1016.44      -0.000  -4.368   0.000   0.698   0.000   6.255
+cutoff=-16,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.648844  -1016.45      -0.000  -4.423   0.000   0.703   0.000   6.290
+cutoff=-17,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.648897  -1016.46      -0.000  -4.449   0.000   0.704   0.000   6.320
+cutoff=-18,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.648880  -1016.47      -0.000  -4.485   0.000   0.706   0.000   6.355
+cutoff=-19,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.648856  -1016.48      -0.000  -4.535   0.000   0.708   0.000   6.403
+cutoff=-20,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.648710  -1016.52      -0.000  -4.701   0.000   0.719   0.000   6.543
+cutoff=-21,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.648643  -1016.55      -0.000  -4.854   0.000   0.730   0.000   6.649
+cutoff=-22,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.648575  -1016.60      -0.000  -5.035   0.000   0.744   0.000   6.765
+cutoff=-23,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.648497  -1016.64      -0.000  -5.234   0.000   0.761   0.000   6.881
+cutoff=-24,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.648413  -1016.69      -0.000  -5.431   0.000   0.777   0.000   6.993
+cutoff=-25,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.648354  -1016.72      -0.000  -5.572   0.000   0.790   0.000   7.049
+cutoff=-26,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.648284  -1016.76      -0.000  -5.779   0.000   0.805   0.000   7.182
+cutoff=-27,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.648309  -1016.79      -0.000  -5.887   0.000   0.814   0.000   7.234
+cutoff=-28,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.648215  -1016.80      -0.000  -5.943   0.000   0.820   0.000   7.248
+cutoff=-29,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.648157  -1016.85      -0.000  -6.176   0.000   0.834   0.000   7.406
+cutoff=-30,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.648124  -1016.88      -0.000  -6.277   0.000   0.842   0.000   7.458
+cutoff=-31,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.648124  -1016.90      -0.000  -6.383   0.000   0.848   0.000   7.523
+cutoff=-32,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.648085  -1016.92      -0.000  -6.500   0.000   0.857   0.000   7.587
+cutoff=-33,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.648026  -1016.95      -0.000  -6.601   0.000   0.866   0.000   7.624
+cutoff=-34,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.648026  -1016.98      -0.000  -6.754   0.000   0.874   0.000   7.725
+cutoff=-35,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.647881  -1017.02      -0.000  -6.954   0.000   0.888   0.000   7.835
+cutoff=-36,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.647908  -1017.06      -0.000  -7.150   0.000   0.899   0.000   7.952
+cutoff=-37,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.647792  -1017.09      -0.000  -7.266   0.000   0.909   0.000   7.991
+cutoff=-38,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.647731  -1017.14      -0.000  -7.493   0.000   0.924   0.000   8.110
+cutoff=-39,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.647657  -1017.17      -0.000  -7.656   0.000   0.936   0.000   8.183
+cutoff=-40,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.647637  -1017.20      -0.000  -7.803   0.000   0.945   0.000   8.256
+cutoff=-41,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.647594  -1017.23      -0.000  -7.954   0.000   0.954   0.000   8.334
+cutoff=-42,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.647544  -1017.26      -0.000  -8.095   0.000   0.964   0.000   8.395
+cutoff=-43,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.647512  -1017.29      -0.000  -8.231   0.000   0.972   0.000   8.464
+cutoff=-44,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.647454  -1017.33      -0.000  -8.395   0.000   0.982   0.000   8.550
+cutoff=-45,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.647414  -1017.35      -0.000  -8.525   0.000   0.991   0.000   8.607
+cutoff=-46,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.647358  -1017.39      -0.000  -8.706   0.000   1.001   0.000   8.696
+cutoff=-47,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.647323  -1017.41      -0.000  -8.831   0.000   1.010   0.000   8.743
+cutoff=-48,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.647267  -1017.46      -0.000  -9.035   0.000   1.021   0.000   8.845
+cutoff=-49,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.647221  -1017.49      -0.000  -9.208   0.000   1.032   0.000   8.925
+cutoff=-50,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.647208  -1017.52      -0.000  -9.367   0.000   1.041   0.000   9.000
+cutoff=-51,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.647127  -1017.56      -0.000  -9.564   0.000   1.054   0.000   9.077
+cutoff=-52,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.647081  -1017.60      -0.000  -9.745   0.000   1.064   0.000   9.154
+cutoff=-53,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.647035  -1017.63      -0.000  -9.926   0.000   1.075   0.000   9.229
+cutoff=-54,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.646951  -1017.71      -0.000 -10.262   0.000   1.090   0.000   9.419
+cutoff=-55,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.646966  -1017.70      -0.000 -10.277   0.000   1.096   0.000   9.380
+cutoff=-56,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.646901  -1017.74      -0.000 -10.470   0.000   1.107   0.000   9.461
+cutoff=-57,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.646858  -1017.78      -0.000 -10.649   0.000   1.117   0.000   9.530
+cutoff=-58,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.646789  -1017.85      -0.000 -10.911   0.000   1.130   0.000   9.651
+cutoff=-59,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.646771  -1017.85      -0.000 -11.014   0.000   1.138   0.000   9.678
+cutoff=-60,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.646726  -1017.88      -0.000 -11.206   0.000   1.148   0.000   9.761
+cutoff=-61,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.646683  -1017.92      -0.000 -11.385   0.000   1.158   0.000   9.832
+cutoff=-62,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.646638  -1017.95      -0.000 -11.576   0.000   1.170   0.000   9.898
+cutoff=-63,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.646634  -1017.99      -0.000 -11.762   0.000   1.178   0.000   9.984
+cutoff=-64,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.646546  -1018.03      -0.000 -11.984   0.000   1.191   0.000  10.062
+cutoff=-65,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.646504  -1018.07      -0.000 -12.161   0.000   1.202   0.000  10.120
+cutoff=-66,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.646454  -1018.11      -0.000 -12.393   0.000   1.213   0.000  10.215
+cutoff=-67,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.646416  -1018.15      -0.000 -12.598   0.000   1.224   0.000  10.290
+cutoff=-68,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.646424  -1018.18      -0.000 -12.775   0.000   1.232   0.000  10.366
+cutoff=-69,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.646315  -1018.23      -0.000 -13.028   0.000   1.247   0.000  10.450
+cutoff=-70,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.646197  -1018.33      -0.000 -13.557   0.000   1.268   0.000  10.695
+cutoff=-71,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.646160  -1018.33      -0.000 -13.737   0.000   1.277   0.000  10.762
+cutoff=-72,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.646123  -1018.39      -0.000 -13.937   0.000   1.288   0.000  10.825
+cutoff=-73,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.646077  -1018.44      -0.000 -14.179   0.000   1.300   0.000  10.903
+cutoff=-74,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.646032  -1018.45      -0.000 -14.338   0.000   1.307   0.000  10.967
+cutoff=-75,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.645985  -1018.53      -0.000 -14.643   0.000   1.324   0.000  11.060
+cutoff=-76,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.645985  -1018.52      -0.000 -14.599   0.000   1.327   0.000  11.001
+cutoff=-77,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.645937  -1018.56      -0.000 -14.837   0.000   1.339   0.000  11.080
+cutoff=-78,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.645894  -1018.59      -0.000 -15.034   0.000   1.349   0.000  11.148
+cutoff=-79,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.645844  -1018.65      -0.000 -15.321   0.000   1.363   0.000  11.240
+cutoff=-80,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.645801  -1018.69      -0.000 -15.577   0.000   1.376   0.000  11.317
+cutoff=-81,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.645751  -1018.72      -0.000 -15.783   0.000   1.385   0.000  11.394
+cutoff=-82,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.645723  -1018.78      -0.000 -16.093   0.000   1.401   0.000  11.486
+cutoff=-83,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.645649  -1018.81      -0.000 -16.269   0.000   1.411   0.000  11.534
+cutoff=-84,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.645583  -1018.91      -0.000 -16.844   0.000   1.436   0.000  11.727
+cutoff=-85,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.645461  -1018.97      -0.000 -17.338   0.000   1.454   0.000  11.928
+cutoff=-86,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.645417  -1019.02      -0.000 -17.515   0.000   1.462   0.000  11.983
+cutoff=-87,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.645376  -1019.02      -0.000 -17.728   0.000   1.472   0.000  12.042
+cutoff=-88,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.645352  -1019.05      -0.000 -17.893   0.000   1.479   0.000  12.098
+cutoff=-89,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.645262  -1019.18      -0.000 -18.520   0.000   1.509   0.000  12.276
+cutoff=-90,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.645227  -1019.30      -0.000 -18.606   0.000   1.512   0.000  12.305
+cutoff=-91,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.645272  -1019.16      -0.000 -18.368   0.000   1.505   0.000  12.207
+cutoff=-92,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.645223  -1019.24      -0.000 -18.723   0.000   1.524   0.000  12.282
+cutoff=-93,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.645163  -1019.30      -0.000 -18.920   0.000   1.534   0.000  12.334
+cutoff=-94,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.645131  -1019.31      -0.000 -19.201   0.000   1.546   0.000  12.418
+cutoff=-95,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.645055  -1019.40      -0.000 -19.610   0.000   1.565   0.000  12.526
+cutoff=-96,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.645049  -1019.39      -0.000 -19.661   0.000   1.567   0.000  12.546
+cutoff=-97,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.644985  -1019.47      -0.000 -19.984   0.000   1.582   0.000  12.635
+cutoff=-98,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.644922  -1019.48      -0.000 -20.189   0.000   1.591   0.000  12.688
+cutoff=-99,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.644850  -1019.59      -0.000 -20.862   0.000   1.620   0.000  12.874
+cutoff=-100,hfbwidth=0.0d0,pair.strength=330.0
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.644873  -1019.55      -0.000 -20.557   0.000   1.608   0.000  12.787
