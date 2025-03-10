@@ -139,11 +139,11 @@ def make_plots(data, labels):
     ) = data
     print(hfbwidth, boxArray)
     labelpadding = [0, 7, 4, 7]
-    rows = [0, 1, 0, 1]
-    cols = [0, 0, 1, 1]
+    rows = [0, 1, 2, 3]
+    cols = [0, 0, 0, 0]
     # yrange = [[-1037, -1013], [4.618, 4.66], [-99, 10], [-0.2, 2.8]]
-    fig, ax = plt.subplots(nrows=2, ncols=2, sharex=False, figsize=(16, 12), dpi=600)
-    fontDict = {"family": "helvetica", "fontsize": 22, "fontweight": "bold"}
+    fig, ax = plt.subplots(nrows=4, ncols=1, sharex=False, figsize=(8, 20), dpi=600)
+    fontDict = {"family": "helvetica", "fontsize": 24, "fontweight": "bold"}
     for j in range(4):
         dict1 = labels[j]
         xl = dict1["xlabel"]
@@ -159,7 +159,8 @@ def make_plots(data, labels):
         newData = newData.reshape(num, len(newData) // num)
         hfbwidth = np.array(sorted(list(set(hfbwidth))))
         for k in range(len(hfbwidth)):
-            ax[rows[j], cols[j]].plot(
+#            ax[rows[j], cols[j]].plot(
+            ax[rows[j]].plot(
                 boxData,
                 newData[k],
                 linestyle="-",
@@ -170,22 +171,26 @@ def make_plots(data, labels):
             )
 
         # ax[j].set_ylim(yrange[j])
-        ax[rows[j], cols[j]].set_xlabel(xl, fontdict=fontDict)
-        ax[rows[j], cols[j]].set_ylabel(yl, labelpad=labelpadding[j], fontdict=fontDict)
-        ax[rows[j], cols[j]].tick_params(
+#        ax[rows[j], cols[j]].set_xlabel(xl, fontdict=fontDict)
+#        ax[rows[j], cols[j]].set_ylabel(yl, labelpad=labelpadding[j], fontdict=fontDict)
+#        ax[rows[j], cols[j]].tick_params(
+        ax[rows[j]].set_xlabel(xl, fontdict=fontDict)
+        ax[rows[j]].set_ylabel(yl, labelpad=labelpadding[j], fontdict=fontDict)
+        ax[rows[j]].tick_params(
             axis="both",
             which="major",
-            labelsize=16,
+            labelsize=20,
             labelright=False,
             direction="in",
             right=True,
             top=True,
-            size=8,
+            size=20,
         )
-        ax[rows[j], cols[j]].tick_params(
+#        ax[rows[j], cols[j]].tick_params(
+        ax[rows[j]].tick_params(
             axis="both",
             which="minor",
-            labelsize=16,
+            labelsize=20,
             labelright=False,
             direction="in",
             right=True,
