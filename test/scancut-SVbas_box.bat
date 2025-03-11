@@ -40,8 +40,10 @@ pairStrengthsBCS=("5794" "5953.5" "6106" "6413" "7622")
 #pairStrengthsHFB=("30710" "30710" "30710" "30710" "30710")
 
 # Test box size, width = 1.5 for pairgap = 1.61 at cutoff = 25 MeV
-pairStrengthsHFB=("4531" "4531" "4531" "4531" "4531")  
+pairStrengthsHFB=("4531" "4531" "4531" "4531" "4531" "4531" "4531")  
 
+# Test box size, width = 1.5 for pairgap = 1.61 at cutoff = 100 MeV
+pairStrengthsHFB=("4553" "4553" "4553" "4553" "4553" "4553" "4553")  
 
 #ipair=(7)    # for BCS
 ipair=(8)    # for HFB
@@ -50,8 +52,9 @@ ipair=(8)    # for HFB
 hfbwidth="1.5d0"
 
 # Set grid size
-gridSize=("51" "67" "83" "100" "133")
-ngrid="71"
+#gridSize=("51" "67" "83" "100" "133")
+gridSize=("51" "60" "70" "80" "90" "100" "120")
+#ngrid="71"
 
 for j in "${ipair[@]}"; do
 if [ $j -eq 7 ]; then
@@ -61,11 +64,11 @@ if [ $j -eq 7 ]; then
     combined=$(paste -d "," <(printf "%s\n" "${gridSize[@]}") <(printf "%s\n" "${pairStrengthsBCS[@]}"))
 else
     cond="hfb"
-    pairStrength="4531"
+#    pairStrength="4553"
 #    combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsHFB[@]}"))
     combined=$(paste -d "," <(printf "%s\n" "${gridSize[@]}") <(printf "%s\n" "${pairStrengthsHFB[@]}"))
 fi
-i=25
+i=100
 while IFS=, read -r ngrid pairStrength; do
 echo "cond = ${cond}, hfbwidth=${hfbwidth}, pairStrength = ${pairStrength}" 
 #for i in $(seq 99 1 100); do
@@ -91,12 +94,12 @@ echo "-1,,    IWUNIT" >> for005
 
 ../hafom_huge.exe < for005 > /dev/null
 
-fileName="collect_cat_${edf}_${nucleus}_${hfbwidth}_${cond}_Cut25_${ngrid}.dat"
+fileName="collect_cat_${edf}_${nucleus}_${hfbwidth}_${cond}_Cut${i}_${ngrid}.dat"
 echo "cutoff=-${i},hfbwidth=${hfbwidth},pair.strength=${pairStrength}" >> ${fileName}
 grep Z,N for011 >> ${fileName}
 
 #done
 echo "${cond} Done!"
-mv ${fileName} collect_cat_box/
+mv ${fileName} collect_cat_box_Paper/
 done <<< "${combined}"
 done

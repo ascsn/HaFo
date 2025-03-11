@@ -77,6 +77,7 @@ def read_data(pairingType=None, functional=None):
             and functional in file
             and "120Sn" in file
             and "Cut25" in file
+            and "1.5d0" in file
         ):
             print("Pair type", pairingType)
             # Create an array of elements separated by "_" in a filename.
@@ -208,7 +209,7 @@ def make_plots(data, labels):
     )
     # ax[0].set_title(r"$^{120}$Sn", fontsize=18)
     plt.legend(loc="lower right", prop={"size": 16})
-    fileName = "SVbas_120Sn_hfb_props_cut25_widths_box_sizes.pdf"
+    fileName = "SVbas_120Sn_hfb_props_cut25_100_widths_box_sizes.pdf"
     plt.savefig(fileName)
     plt.close()
 
