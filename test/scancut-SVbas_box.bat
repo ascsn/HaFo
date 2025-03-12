@@ -40,16 +40,22 @@ pairStrengthsBCS=("5794" "5953.5" "6106" "6413" "7622")
 #pairStrengthsHFB=("30710" "30710" "30710" "30710" "30710")
 
 # Test box size, width = 1.5 for pairgap = 1.61 at cutoff = 25 MeV
-pairStrengthsHFB=("4531" "4531" "4531" "4531" "4531" "4531" "4531")  
+#pairStrengthsHFB=("4531" "4531" "4531" "4531" "4531" "4531" "4531")  
 
 # Test box size, width = 1.5 for pairgap = 1.61 at cutoff = 100 MeV
-pairStrengthsHFB=("4553" "4553" "4553" "4553" "4553" "4553" "4553")  
+#pairStrengthsHFB=("4553" "4553" "4553" "4553" "4553" "4553" "4553")  
+
+# Test box size, width = 2.0 for pairgap = 1.61 at cutoff = 100 MeV
+pairStrengthsHFB=("10534" "10534" "10534" "10534" "10534" "10534" "10534")  
+
+# Test box size, width = 2.0 for pairgap = 1.61 at cutoff = 25 MeV
+pairStrengthsHFB=("10993" "10993" "10993" "10993" "10993" "10993" "10993")  
 
 #ipair=(7)    # for BCS
 ipair=(8)    # for HFB
 
 # Set hfbwidth
-hfbwidth="1.5d0"
+hfbwidth="2.0d0"
 
 # Set grid size
 #gridSize=("51" "67" "83" "100" "133")
@@ -64,11 +70,11 @@ if [ $j -eq 7 ]; then
     combined=$(paste -d "," <(printf "%s\n" "${gridSize[@]}") <(printf "%s\n" "${pairStrengthsBCS[@]}"))
 else
     cond="hfb"
-#    pairStrength="4553"
+    pairStrength="10993"
 #    combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsHFB[@]}"))
     combined=$(paste -d "," <(printf "%s\n" "${gridSize[@]}") <(printf "%s\n" "${pairStrengthsHFB[@]}"))
 fi
-i=100
+i=25
 while IFS=, read -r ngrid pairStrength; do
 echo "cond = ${cond}, hfbwidth=${hfbwidth}, pairStrength = ${pairStrength}" 
 #for i in $(seq 99 1 100); do

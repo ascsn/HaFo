@@ -22,7 +22,7 @@ fontDictTitle = {"family": "helvetica", "fontsize": 18, "fontweight": "bold"}
 
 
 # Read all relevant data files
-for filename in glob.glob("collect_cat_box_Paper/collect_cat_SVbas_120Sn_1.5d0_hfb_Cut*.dat"):
+for filename in glob.glob("collect_cat_box_Paper/collect_cat_SVbas_120Sn_2.0d0_hfb_Cut*.dat"):
     with open(filename, "r") as file:
         lines = file.readlines()
         
@@ -91,7 +91,7 @@ xvals = [box_sizes_25, box_sizes_100]
 yvals_25 = [r_C_25 - r_C_25[-1], E_25-E_25[-1], epair_25-epair_25[-1], gap_25 - gap_25[-1]]
 yvals_100 = [r_C_100 - r_C_100[-1], E_100-E_100[-1], epair_100-epair_100[-1], gap_100 - gap_100[-1]]
 label_coords = [ (-0.,.5), (-0.5,.5), (-0.5,.5), (-0.5,.5)]
-yranges = [[-0.00019,0.00006], [-0.12,0.42], [-1.49,0.99], [-0.12, 0.14]]
+# yranges = [[-0.00019,0.00006], [-0.12,0.42], [-1.49,0.99], [-0.12, 0.14]]
 # Define custom formatter for first panel
 def scientific_formatter(x, pos):
     return rf"{x:.1f}$\times 10^{-4}$"
@@ -126,7 +126,7 @@ for i in range(4):
         top=True,
         size=4,
     )
-    axs[i].set_ylim(yranges[i])
+    # axs[i].set_ylim(yranges[i])
     axs[i].set_ylabel(ylabelList[i], fontdict=fontDict)  
     axs[i].label_coords = label_coords[i]
 # Apply scientific notation scaling to the y-axis of the third subplot (epair)
@@ -140,7 +140,7 @@ for i in range(4):
 for ax in axs[1:]:
     ax.yaxis.set_major_formatter(ticker.FormatStrFormatter('%.2f'))
 
-axs[0].set_title(r"$^{120}$Sn, SV-bas, spherical 1D, vary box size, width=1.5 fm", fontdict= fontDict)
+axs[0].set_title(r"$^{120}$Sn, SV-bas, spherical 1D, vary box size, width=2.0 fm", fontdict= fontDict)
 axs[3].set_xlabel("Box size [fm]", labelpad = labelpadding[3], fontdict=fontDictTitle)
 
 # # Add legend only in the bottom panel
@@ -151,6 +151,6 @@ axs[3].legend()
 plt.tight_layout()
 
 # Save the plot
-plt.savefig("SVbas_120Sn_hfb_props_cut25_100_widths.pdf")
+plt.savefig("SVbas_120Sn_hfb_props_cut25_100_w20.pdf")
 
 # plt.show()
