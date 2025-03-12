@@ -1,2 +1,6 @@
   iter E    r  dE   dr   delta_p   delta_n
+<<<<<<< HEAD
 summary even-even:  50  70  -1019.8       4.6422     -4.04782E-11   0.0000    
+=======
+summary even-even:  50  70  -1018.6       4.6430     -3.11606E-11   0.0000    
+>>>>>>> 3a0dffb3557caf6093f11443ce5bbe58ec5e1920
