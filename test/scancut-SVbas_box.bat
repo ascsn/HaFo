@@ -82,9 +82,9 @@ echo "1,,    IWUNIT" > for005
 echo "'SV-bas HFB'" >> for005
 echo "${ngrid},0.3,              NGRID,RSTEP" >> for005
 #echo "51,0.3,              NGRID,RSTEP" >> for005
-echo "-1,1E-8,1E-9,100,3780,3,-1, IWR,DABR/E,ITPR/MAX,IFPL" >> for005
-echo "0.2,100.,0.2,-1,,,,,               X0DAMP,E0DAMP,ADDNEW,WALL" >> for005
-echo "1,0,0,1,-1,3,0,0,0,10,,, if:ex,tm,enrg,rso,zpe,dfms,rhoc,enav,mfold,optsk" >> for005
+echo "-1,1E-8,1E-9,200,20000,3,-1, IWR,DABR/E,ITPR/MAX,IFPL" >> for005
+echo "0.3,100.,0.2,-1,,,,,               X0DAMP,E0DAMP,ADDNEW,WALL" >> for005
+echo "1,0,0,-1,1,3,0,0,0,10,,, if:ex,tm,enrg,rso,zpe,dfms,rhoc,enav,mfold,optsk" >> for005
 echo "1,,,                       ifform" >> for005
 echo "0.64,0,0,0,0,   apro0,apro11,apro12,bpro11,bpro12" >> for005
 echo "0.64,0,0,0,0,   aneu0,aneu11,aneu12,bneu11,bneu12" >> for005
