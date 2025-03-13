@@ -88,8 +88,11 @@ cut100_color = "red"
 labelpadding = [None, None, None, None]
 ylabelList = ["Proton rms radius [fm]", "Total energy [MeV]", "Pairing energy [MeV]", "Neutron gap [MeV]"]
 xvals = [box_sizes_25, box_sizes_100]
-yvals_25 = [r_C_25 - r_C_25[-1], E_25-E_25[-1], epair_25-epair_25[-1], gap_25 - gap_25[-1]]
-yvals_100 = [r_C_100 - r_C_100[-1], E_100-E_100[-1], epair_100-epair_100[-1], gap_100 - gap_100[-1]]
+# yvals_25 = [r_C_25 - r_C_25[-1], E_25-E_25[-1], epair_25-epair_25[-1], gap_25 - gap_25[-1]]
+# yvals_100 = [r_C_100 - r_C_100[-1], E_100-E_100[-1], epair_100-epair_100[-1], gap_100 - gap_100[-1]]
+yvals_25 = [r_C_25, E_25, epair_25, gap_25]
+yvals_100 = [r_C_100, E_100, epair_100, gap_100]
+
 label_coords = [ (-0.,.5), (-0.5,.5), (-0.5,.5), (-0.5,.5)]
 # yranges = [[-0.00019,0.00006], [-0.12,0.42], [-1.49,0.99], [-0.12, 0.14]]
 # Define custom formatter for first panel
