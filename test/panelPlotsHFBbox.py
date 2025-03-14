@@ -22,7 +22,7 @@ fontDictTitle = {"family": "helvetica", "fontsize": 18, "fontweight": "bold"}
 
 
 # Read all relevant data files
-for filename in glob.glob("collect_cat_box_Paper/collect_cat_SVbas_120Sn_2.0d0_hfb_Cut*.dat"):
+for filename in glob.glob("collect_cat_box_Paper/collect_cat_SVbas_146Gd_0.0d0_hfb_Cut*.dat"):
     with open(filename, "r") as file:
         lines = file.readlines()
         
@@ -143,7 +143,7 @@ for i in range(4):
 for ax in axs[1:]:
     ax.yaxis.set_major_formatter(ticker.FormatStrFormatter('%.2f'))
 
-axs[0].set_title(r"$^{120}$Sn, SV-bas, spherical 1D, vary box size, width=2.0 fm", fontdict= fontDict)
+axs[0].set_title(r"$^{120}$Sn, SV-bas, spherical 1D, vary box size, width=0.0 fm", fontdict= fontDict)
 axs[3].set_xlabel("Box size [fm]", labelpad = labelpadding[3], fontdict=fontDictTitle)
 
 # # Add legend only in the bottom panel
@@ -154,6 +154,6 @@ axs[3].legend()
 plt.tight_layout()
 
 # Save the plot
-plt.savefig("SVbas_120Sn_hfb_props_cut25_100_w20.pdf")
+plt.savefig("SVbas_146Gd_hfb_props_cut25_100_w00.pdf")
 
 # plt.show()
