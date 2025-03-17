@@ -35,7 +35,8 @@ for filename in glob.glob("collect_cat_box_Paper/collect_cat_SVbas_146Gd_0.0d0_h
             continue  # Skip files without Cut25 or Cut100
 
         # Extract box size from filename
-        match = re.search(r"_(\d+)\.dat", filename)
+        match = re.search(r"_(\d+)[^/]*\.dat$", filename)
+        print(match)
         if match:
             box_size = int(match.group(1)) * 0.3  # Convert to actual box size
         else:
@@ -47,8 +48,9 @@ for filename in glob.glob("collect_cat_box_Paper/collect_cat_SVbas_146Gd_0.0d0_h
         
         r_C = float(data[3])   # r_C
         E = float(data[4])     # E
-        epair = float(data[6]) # epair
-        gap = float(data[8])   # gap
+        epair = float(data[5]) # epair
+        gap = float(data[7])   # gap
+        print(r_C, E, epair, gap)
         
         # Store values based on cut type
         if cut_type == "cut25":

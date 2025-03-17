@@ -14,7 +14,7 @@ edf="SVbas"
 #pairStrengthsHFB=("430" "430" "430" "430" "430" "430" "430")  
 
 # Test box size, width = 0.0 for pairgap = 1.61 at cutoff = 100 MeV
-pairStrengthsHFB=("303" "303" "303" "303" "303" "303" "303")  
+pairStrengthsHFB=("385.3")  
 
 # Test box size, width = 2.0 for pairgap = 1.61 at cutoff = 100 MeV
 #pairStrengthsHFB=("13020")  
@@ -26,7 +26,7 @@ pairStrengthsHFB=("303" "303" "303" "303" "303" "303" "303")
 ipair=(8)    # for HFB
 
 # Set hfbwidth
-hfbwidth="2.0d0"
+hfbwidth="0.0d0"
 
 # Set grid size
 ngrid="71"
@@ -37,9 +37,9 @@ if [ $j -eq 7 ]; then
 #    pairStrength="7622"
 else
     cond="hfb"
-    pairStrength="13020"
+    pairStrength="539"
 fi
-i=100
+i=25
 #while IFS=, read -r ngrid pairStrength; do
 echo "cond = ${cond}, hfbwidth=${hfbwidth}, pairStrength = ${pairStrength}" 
 for ngrid in $(seq 51 2 129); do
