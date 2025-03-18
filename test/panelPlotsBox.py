@@ -27,7 +27,7 @@ fontDictTitle = {"family": "helvetica", "fontsize": 18, "fontweight": "bold"}
 
 
 # Read multiple files
-file_list = glob.glob("collect_cat_box_Paper/collect_cat_SVbas_146Gd_2.0d0_hfb_*.dat")  # Adjust path to your data files
+file_list = glob.glob("collect_cat_box_Paper/collect_cat_SVbas_146Gd_0.0d0_hfb_*.dat")  # Adjust path to your data files
 
 print(file_list)
 
@@ -92,7 +92,7 @@ cut100_color = "red"
 
 # Define label padding
 labelpadding = [None, None, None, None]
-ylabelList = ["Proton rms radius [fm]", "Total energy [MeV]", "Pairing energy [MeV]", "Neutron gap [MeV]"]
+ylabelList = ["Proton rms radius [fm]", "Total energy [MeV]", "Pairing energy [MeV]", "Proton gap [MeV]"]
 xvals = [box_sizes_25, box_sizes_100]
 yvals_25 = [r_C_25 - r_C_25[-1], E_25-E_25[-1], epair_25-epair_25[-1], gap_25 - gap_25[-1]]
 yvals_100 = [r_C_100 - r_C_100[-1], E_100-E_100[-1], epair_100-epair_100[-1], gap_100 - gap_100[-1]]
@@ -143,7 +143,7 @@ for i in range(4):
 for ax in axs[1:]:
     ax.yaxis.set_major_formatter(ticker.FormatStrFormatter('%.2f'))
 
-axs[0].set_title(r"$^{120}$Sn, SV-bas, spherical 1D, vary box size, width=2.0 fm", fontdict= fontDict)
+axs[0].set_title(r"$^{120}$Sn, SV-bas, spherical 1D, vary box size, width=0.0 fm", fontdict= fontDict)
 axs[3].set_xlabel("Box size [fm]", labelpad = labelpadding[3], fontdict=fontDictTitle)
 
 # # Add legend only in the bottom panel
@@ -154,6 +154,6 @@ axs[3].legend()
 plt.tight_layout()
 
 # Save the plot
-plt.savefig("SVbas_146Gd_hfb_props_cut25_100_w20.pdf")
+plt.savefig("SVbas_146Gd_hfb_props_cut25_100_w00.pdf")
 
 # plt.show()
