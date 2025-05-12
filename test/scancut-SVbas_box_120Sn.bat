@@ -11,6 +11,9 @@ nucleus="120Sn"
 edf="SVbas"
 
 # Test box size, width = 0.0 for pairgap = 1.61 at cutoff = 25 MeV
+#pairStrengthsBCS=("537 ")  
+
+# Test box size, width = 0.0 for pairgap = 1.61 at cutoff = 25 MeV
 #pairStrengthsHFB=("456.9")  
 
 # Test box size, width = 1.0 for pairgap = 1.61 at cutoff = 25 MeV
@@ -40,11 +43,11 @@ edf="SVbas"
 # Test box size, width = 3.0 for pairgap = 1.61 at cutoff = 100 MeV
 #pairStrengthsHFB=("30300")  
 
-#ipair=(7)    # for BCS
-ipair=(8)    # for HFB
+ipair=(7)    # for BCS
+#ipair=(8)    # for HFB
 
 # Set hfbwidth
-hfbwidth="1.0d0"
+hfbwidth="0.0d0"
 
 # Set grid size
 ngrid="71"
@@ -52,7 +55,7 @@ ngrid="71"
 for j in "${ipair[@]}"; do
 if [ $j -eq 7 ]; then
     cond="bcs"
-#    pairStrength="7622"
+    pairStrength="537"
 else
     cond="hfb"
     pairStrength="1530"

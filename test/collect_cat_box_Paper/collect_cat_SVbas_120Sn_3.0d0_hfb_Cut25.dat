@@ -22,14 +22,6 @@ ngrid=71,hfbwidth=3.0d0,pair.strength=30710
  Z,N,r_C,E,epair,gap,sumuv=  50  70  4.636501  -1016.56      -0.000 -20.771   0.000   1.699   0.000  12.228
 ngrid=73,hfbwidth=3.0d0,pair.strength=30710
  Z,N,r_C,E,epair,gap,sumuv=  50  70  4.634671  -1016.77      -0.000 -23.520   0.000   1.768   0.000  13.304
-ngrid=75,hfbwidth=3.0d0,pair.strength=30710
- Z,N,r_C,E,epair,gap,sumuv=  50  70  4.585109  -999.393      -0.000 -40.872   0.000   1.929   0.000  21.192
-ngrid=77,hfbwidth=3.0d0,pair.strength=30710
- Z,N,r_C,E,epair,gap,sumuv=  50  70  4.578514  -999.852      -0.000 -45.466   0.000   2.063   0.000  22.034
-ngrid=79,hfbwidth=3.0d0,pair.strength=30710
- Z,N,r_C,E,epair,gap,sumuv=  50  70  4.583941  -995.880      -0.000 -40.935   0.000   1.801   0.000  22.729
-ngrid=81,hfbwidth=3.0d0,pair.strength=30710
- Z,N,r_C,E,epair,gap,sumuv=  50  70  4.582992  -1003.16      -0.000 -40.577   0.000   1.772   0.000  22.905
 ngrid=83,hfbwidth=3.0d0,pair.strength=30710
  Z,N,r_C,E,epair,gap,sumuv=  50  70  4.629236  -1016.43      -0.000 -32.282   0.000   1.796   0.000  17.979
 ngrid=85,hfbwidth=3.0d0,pair.strength=30710
@@ -42,10 +34,6 @@ ngrid=91,hfbwidth=3.0d0,pair.strength=30710
  Z,N,r_C,E,epair,gap,sumuv=  50  70  4.621805  -1018.62      -0.000 -42.838   0.000   1.905   0.000  22.487
 ngrid=93,hfbwidth=3.0d0,pair.strength=30710
  Z,N,r_C,E,epair,gap,sumuv=  50  70  4.621412  -1018.95      -0.000 -43.542   0.000   1.877   0.000  23.199
-ngrid=95,hfbwidth=3.0d0,pair.strength=30710
- Z,N,r_C,E,epair,gap,sumuv=  50  70  4.563211  -1001.89      -0.000 -94.011   0.000   2.609   0.000  36.033
-ngrid=97,hfbwidth=3.0d0,pair.strength=30710
- Z,N,r_C,E,epair,gap,sumuv=  50  70  4.562112  -1004.68      -0.000 -101.999   0.000   2.599   0.000  39.245
 ngrid=99,hfbwidth=3.0d0,pair.strength=30710
  Z,N,r_C,E,epair,gap,sumuv=  50  70  4.620537  -1018.68      -0.000 -43.759   0.000   1.703   0.000  25.691
 ngrid=101,hfbwidth=3.0d0,pair.strength=30710
@@ -74,7 +62,5 @@ ngrid=123,hfbwidth=3.0d0,pair.strength=30710
  Z,N,r_C,E,epair,gap,sumuv=  50  70  4.598367  -1018.41      -0.000 -60.209   0.000   1.548   0.000  38.889
 ngrid=125,hfbwidth=3.0d0,pair.strength=30710
  Z,N,r_C,E,epair,gap,sumuv=  50  70  4.601627  -1018.83      -0.000 -59.019   0.000   1.475   0.000  40.012
-ngrid=127,hfbwidth=3.0d0,pair.strength=30710
- Z,N,r_C,E,epair,gap,sumuv=  50  70  4.548488  -1012.80      -0.000 -100.214   0.000   1.832   0.000  54.701
 ngrid=129,hfbwidth=3.0d0,pair.strength=30710
  Z,N,r_C,E,epair,gap,sumuv=  50  70  4.602384  -1019.71      -0.000 -60.821   0.000   1.471   0.000  41.351
