@@ -95,6 +95,7 @@ ax.tick_params(
 ax.set_title("Cutoff = 25 MeV", fontdict=fontDictTitle)
 ax.text(0.05, 0.75, "(a)", transform=ax.transAxes, fontsize=16)
 ax.set_xlim(14, 40)
+ax.set_ylim(-1022,-1018.5)
 ax.set_ylabel("Energy [MeV]", fontdict=fontDict)
 # ax.legend(prop={'size': 12})
 
@@ -109,6 +110,7 @@ for i, width in enumerate(widths):
 ax.set_xlabel("Box Size [fm]", fontdict=fontDict)
 ax.set_ylabel("Charge Radius [fm]", fontdict=fontDict, labelpad=10)
 ax.set_xlim(14, 40)
+ax.set_ylim(4.640, 4.644)
 ax.tick_params(
     axis="both",
     which="major",
