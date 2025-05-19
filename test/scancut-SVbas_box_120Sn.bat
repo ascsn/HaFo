@@ -43,11 +43,11 @@ edf="SVbas"
 # Test box size, width = 3.0 for pairgap = 1.61 at cutoff = 100 MeV
 #pairStrengthsHFB=("30300")  
 
-ipair=(7)    # for BCS
-#ipair=(8)    # for HFB
+#ipair=(7)    # for BCS
+ipair=(8)    # for HFB
 
 # Set hfbwidth
-hfbwidth="0.0d0"
+hfbwidth="3.0d0"
 
 # Set grid size
 ngrid="71"
@@ -58,7 +58,7 @@ if [ $j -eq 7 ]; then
     pairStrength="537"
 else
     cond="hfb"
-    pairStrength="1530"
+    pairStrength="30710"
 fi
 i=25
 #while IFS=, read -r ngrid pairStrength; do
@@ -79,7 +79,7 @@ echo "0.25854594    ,-.38168900    ,-2.8236379    ,0.12322898    ,   34.11167,  
 echo "   0.00000   0.20113   0.00000,,,      riftm,rho0pr,powerp" >> for005
 echo "     0.000,  0.000000,  0.000000,           tyuk,xyuk,ayuk" >> for005
 echo "  0.300000,1.0,${j},10,${pairStrength},0,0.0,-${i},${hfbwidth},,,   POWER,ACOUL,IPAIR,PAIRFP/N,ILNRESP,..." >> for005
-echo "50,70,,,17,,,,,,  nprot,nneut,nmaxp,nmaxn,iparsh" >> for005
+echo "50,70,,,7,,,,,,  nprot,nneut,nmaxp,nmaxn,iparsh" >> for005
 echo " 0         IFGSC" >> for005
 echo "-1,,    IWUNIT" >> for005
 
@@ -94,6 +94,6 @@ grep Z,N for011 >> ${fileName}
 done
 echo "${fileName} Done!"
 echo "${cond} Done!"
-mv ${fileName} collect_cat_box_Paper/
+mv ${fileName} collect_cat_box_Paper_shells/
 #done <<< "${combined}"
 done

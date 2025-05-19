@@ -1,0 +1,80 @@
+ngrid=51,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.650381  -1015.66      -0.000  -0.000   0.000   0.000   0.000   0.000
+ngrid=53,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.650379  -1015.66      -0.000  -0.000   0.000   0.000   0.000   0.000
+ngrid=55,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.650378  -1015.67      -0.000  -0.000   0.000   0.000   0.000   0.000
+ngrid=57,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.650378  -1015.67      -0.000  -0.000   0.000   0.000   0.000   0.000
+ngrid=59,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.650378  -1015.68      -0.000  -0.000   0.000   0.000   0.000   0.000
+ngrid=61,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.646263  -1015.80      -0.000  -4.952   0.000   0.790   0.000   6.269
+ngrid=63,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.644583  -1015.88      -0.000  -7.709   0.000   1.020   0.000   7.555
+ngrid=65,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.644471  -1015.91      -0.000  -8.856   0.000   1.208   0.000   7.330
+ngrid=67,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.641509  -1015.87      -0.000 -12.946   0.000   1.341   0.000   9.654
+ngrid=69,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.639296  -1015.96      -0.000 -16.352   0.000   1.520   0.000  10.760
+ngrid=71,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.636512  -1016.56      -0.000 -20.753   0.000   1.702   0.000  12.192
+ngrid=73,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.635900  -1016.57      -0.000 -21.599   0.000   1.692   0.000  12.767
+ngrid=75,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.575939  -998.119      -0.000 -44.103   0.000   2.107   0.000  20.929
+ngrid=77,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.579502  -1001.77      -0.000 -46.042   0.000   2.014   0.000  22.861
+ngrid=79,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.583345  -1003.22      -0.000 -41.998   0.000   1.832   0.000  22.930
+ngrid=81,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.594406  -1005.62      -0.000 -42.794   0.000   1.993   0.000  21.469
+ngrid=83,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.629191  -1016.58      -0.000 -32.087   0.000   1.822   0.000  17.608
+ngrid=85,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.627868  -1017.32      -0.000 -33.611   0.000   1.822   0.000  18.444
+ngrid=87,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.625385  -1017.82      -0.000 -37.490   0.000   1.915   0.000  19.578
+ngrid=89,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.623745  -1018.27      -0.000 -39.711   0.000   1.927   0.000  20.602
+ngrid=91,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.622318  -1018.48      -0.000 -41.876   0.000   1.959   0.000  21.377
+ngrid=93,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.622811  -1018.72      -0.000 -41.121   0.000   1.915   0.000  21.470
+ngrid=95,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.621840  -1018.28      -0.000 -42.694   0.000   1.919   0.000  22.246
+ngrid=97,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.620119  -1018.86      -0.000 -45.101   0.000   1.949   0.000  23.138
+ngrid=99,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.563223  -997.681      -0.000 -91.790   0.000   2.616   0.000  35.094
+ngrid=101,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.620785  -1018.62      -0.000 -44.778   0.000   1.858   0.000  24.099
+ngrid=103,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.619860  -1018.86      -0.000 -45.116   0.000   1.857   0.000  24.295
+ngrid=105,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.619462  -1019.29      -0.000 -45.530   0.000   1.863   0.000  24.438
+ngrid=107,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.619008  -1019.36      -0.000 -46.204   0.000   1.867   0.000  24.753
+ngrid=109,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.619138  -1018.85      -0.000 -46.198   0.000   1.821   0.000  25.375
+ngrid=111,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.594087  -1010.91      -0.000 -55.713   0.000   1.983   0.000  28.089
+ngrid=113,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.595272  -1011.49      -0.000 -56.074   0.000   1.981   0.000  28.309
+ngrid=115,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.595225  -1010.60      -0.000 -58.151   0.000   2.011   0.000  28.917
+ngrid=117,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.595165  -1010.70      -0.000 -58.077   0.000   2.013   0.000  28.849
+ngrid=119,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.595137  -1011.42      -0.000 -58.215   0.000   2.015   0.000  28.889
+ngrid=121,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.571809  -1008.07      -0.000 -82.620   0.000   2.358   0.000  35.036
+ngrid=123,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.571697  -1012.46      -0.000 -72.696   0.000   2.154   0.000  33.744
+ngrid=125,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.595124  -1011.38      -0.000 -58.548   0.000   2.022   0.000  28.957
+ngrid=127,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.595122  -1011.26      -0.000 -58.518   0.000   2.019   0.000  28.982
+ngrid=129,hfbwidth=3.0d0,pair.strength=30710
+ Z,N,r_C,E,epair,gap,sumuv=  50  70  4.595130  -1011.22      -0.000 -58.960   0.000   2.030   0.000  29.050
