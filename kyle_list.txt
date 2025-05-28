@@ -1,0 +1,11 @@
+1) Check tfoldens (what it is, why it is)
+2) add on your densities of interest to the subroutine plot()
+2a) that includes taun, taup, jsp, jsn, etc
+
+1]
+
+tfoldens is a switch that appears to perform some calculations to unfold the 
+c.m. corrections. When true, the unfolding is calculated but is storred in
+another file ( fort.20 ) which is not the same recorded values in for011. This
+was confirmed in the hafo_plotter script where I plotted the difference in the
+two for011 outputs and one of the for011 outputs vs fort.20.

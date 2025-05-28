@@ -345,8 +345,8 @@ c      bmass  = inverse effective mass
 c      pot    = potential
 c      potls  = spin-orbit potential
 c      rho    = density
-c               (all densities and potentials are stored in a linear
-c                array. protons occupy the first interval [1..'ngrid']
+c               (all densities and potentials are stored in a linear CHEESE
+c                array. protons occupy the first interval [1..'ngrid'] 
 c                and neutrons the second interval ['ngrid'+1...2*'ngrid']).
 c
 c     dimensions of bookkeeping fields (e.g. 'jsp') are
@@ -3416,7 +3416,7 @@ c
 c
 c     * * * * * * * * *      densities and currents      * * * * * * * * * *
 c
-c     accumulates the density 'rho',
+c     accumulates the density 'rho', CHEESE
 c                 the kinetic density 'tau' and
 c                 the spin-orbit density 'sj'
 c     from the radial single particle wave functions given on 'wf'
@@ -3709,7 +3709,7 @@ c
       data iflinw/1/
       data itste/0/
       data ttest/.false./
-      data testen/.false./
+      data testen/.true./
 
       logical TPAIRON
       parameter (TPAIRON=.true.)
@@ -3738,11 +3738,14 @@ c     folding the densities with yukawa of length ayuk using the
 c     inversion 'invert'.
 c
 c                                            save charge density before folding
-c      if(ifdfms.ne.1 .and. ifdfms.ne.3) then
+c      if(ifdfms.ne.1 .and. ifdfms.ne.3) then CHEESE
       if(ifrhoc.eq.0) then
+        open(unit=422,file='j3_rc.txt', status='unknown')
         do ir=1,ngrid
           rhochr(ir) = rho(ir)
+          write(422,*) rhochr(ir)
         enddo
+        close(422)
       else
        call gaufol(rho,rhochr,one*0.8)
       endif
@@ -4194,7 +4197,10 @@ c
         sumt1 = 0.0
         sumls = 0.0
         sumkin = 0.0
-        do i=2,ngrid
+        open(unit=421,file='j3_quants.txt', status='unknown') !cheese brie
+        write(421,*) 'r rp rn tp tn ssp ssn sp sn '
+        ! i=2,ngrid originally, j3
+        do i=1,ngrid
           j      = i+ngrid
           r      = (i-1)*rstep
           vol    = r*r
@@ -4222,7 +4228,9 @@ c
      &            + sumt1
           sumls  = vol*( -b4*sss*rs- b4p*(ssp*rp+ssm*rm)) + sumls
           sumkin = vol*(amfc(1)*tp+amfc(2)*tm)    + sumkin
+          write(421,*) r,rp,rm,tp,tm,ssp,ssm,sp,sm
         enddo
+        close(421)
         sumt0  = frpirs*sumt0*0.5
         sumt1  = frpirs*sumt1*0.5
         sumls  = frpirs*sumls
@@ -6382,14 +6390,18 @@ c      data one/1.0/
       data ifexpr/0/              ! switch for computing and printing exch.
 c
       LOGICAL,PARAMETER :: TSCANPH=.FALSE.
-      LOGICAL,PARAMETER :: TFOLDENS=.FALSE.
+      LOGICAL,PARAMETER :: TFOLDENS=.TRUE.
 !      CHARACTER(7),PARAMETER :: gform='1pg13.5',gform6='1pg14.6'
       CHARACTER(8),PARAMETER :: gform='1pg20.12',gform6='1pg20.12'
+      character(len=100) :: fmt ! cheese
+      real(8) :: rho_sum ! cheese
+      real(8) :: j3_r,j3_rhog , j3_taug ! cheese brie
+
 c
 c------------------------------------------------------------------------------
 c
 c
-c     optional c.m. unfolding
+c     optional c.m. unfolding CHEESE
 c
       IF(tfoldens) THEN
         CALL fourb(fop,aux1,delq,rstep,ngrid,iqmax)
@@ -6404,7 +6416,7 @@ c
      &     '    rho-neut       rho-mass'
         DO i=1,ngrid
           r=(i-1)*rstep
-          WRITE(20,'(i5,f7.3,2x,6('//gform//'))')  i,r,rhochr(i),
+          WRITE(20,'(i5,f7.3,2x,4('//gform//'))')  i,r,rhochr(i),
      &             aux1(i),aux2(i),aux3(i)
         END DO
         WRITE(20,'(1x)')
@@ -6539,12 +6551,17 @@ c
      &   'densities all with c.m. correction'
        write(ifile,'(a/2a)')  ' plot the densities:',
      &     '  i      r          rho-coul        rho-prot   ',
-     &     '      rho-neut       rho-mass'
+     &     '      rho-neut       rho-mass       tau-prot',
+     &     '      tau-neut       sjs-prot       sjs-neut'
        if(ipair.lt.5) then
          do i=1,ngrid
            r=(i-1)*rstep
-           write(ifile,'(i5,f7.3,2x,4('//gform//'))')  i,r,rhochr(i),
-     &             rho(i),rho(i+ngrid),(rho(i)+rho(i+ngrid))
+             fmt = '(i5,f7.3,2x,8(' // trim(gform) // '))'
+             rho_sum = rho(i)+rho(i+ngrid)
+             write(ifile, fmt) i, r, rhochr(i), rho(i), rho(i+ngrid), rho_sum, tau(i), tau(i+ngrid),sjs(i), sjs(i+ngrid)
+! cheese
+c            write(ifile,'(i5,f7.3,2x,6('//gform//'))')  i,r,rhochr(i),
+c      &             rho(i),rho(i+ngrid),(rho(i)+rho(i+ngrid)),tau(i),tau(i+ngrid)
          enddo
        else
          acc=0D0
