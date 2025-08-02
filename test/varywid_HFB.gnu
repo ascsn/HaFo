@@ -15,6 +15,7 @@ set style line 5 lt 1 lc rgb "#009977" lw 2 pt 7 ps 0.8
 set style line 6 lt 1 lc rgb "#000000" lw 2
 set style line 7 lt 0 lc rgb "#FF0000" lw 3
 set style line 8 lt 0 lc rgb "#000000" lw 3
+set palette defined (0 "black", 0.2 "blue", 0.4 "green", 0.8 "orange", 1.0 "red")
 set multiplot
 #
 set size 0.8,0.6
@@ -24,9 +25,11 @@ set yrange [0:4.45]
 set ylabel "pairing gap {/Symbol= D}  [MeV]" offset 0
 set xlabel "s.p. energy  [MeV]" offset 0
 set key top right box
+set cbrange [0:9]
+unset colorbox
 set arrow from 0,graph 0 to 0,graph 1 nohead lt 0 lw 1
 #set label "^{120}Sn, SV-bas, HFB" at graph 0.03,0.09
-p  "varywid_HFB.gnu" i 0 u 3:8 t "width=0.0" w p ls 1
+p  "varywid_HFB.gnu" i 0 u 3:8:2 t "width=0.0" w p ls 1 palette
 #
 set size 0.8,0.6
 set origin 1.2,0.2
@@ -35,7 +38,8 @@ set yrange [0:19.9]
 set ylabel "s.p. radius [fm]" offset 1
 set xlabel "s.p. energy  [MeV]" offset 0
 #set label "^{120}Sn, SV-bas, HFB" at graph 0.03,0.09
-p  "varywid_HFB.gnu" i 0 u 3:6 t "width=0.0" w p ls 1
+set colorbox
+p  "varywid_HFB.gnu" i 0 u 3:6:2 t "width=0.0" w p ls 1 palette
 #
 set size 0.8,0.6
 set origin 0.2,0.8
@@ -44,8 +48,9 @@ set xrange [-47:190]
 set yrange [0:4.45]
 set ylabel "pairing gap {/Symbol= D}  [MeV]" offset 0
 set xlabel "" offset 0
+unset colorbox
 #set label "^{120}Sn, SV-bas, HFB" at graph 0.03,0.09
-p  "varywid_HFB.gnu" i 1 u 3:8 t "width=1.0" w p ls 2
+p  "varywid_HFB.gnu" i 1 u 3:8:2 t "width=1.0" w p ls 2 palette
 #
 set size 0.8,0.6
 set origin 1.2,0.8
@@ -55,7 +60,8 @@ set ylabel "s.p. radius [fm]" offset 1
 set xlabel "" offset 0
 set key bottom right
 #set label "^{120}Sn, SV-bas, HFB" at graph 0.03,0.09
-p  "varywid_HFB.gnu" i 1 u 3:6 t "width=1.0" w p ls 2
+set colorbox
+p  "varywid_HFB.gnu" i 1 u 3:6:2 t "width=1.0" w p ls 2 palette
 #
 set size 0.8,0.6
 set origin 0.2,1.4
@@ -65,8 +71,9 @@ set yrange [0:4.45]
 set ylabel "pairing gap {/Symbol= D}  [MeV]" offset 0
 set xlabel "" offset 0
 set key bottom right
+unset colorbox
 #set label "^{120}Sn, SV-bas, HFB" at graph 0.03,0.09
-p  "varywid_HFB.gnu" i 2 u 3:8 t "width=1.5" w p ls 3
+p  "varywid_HFB.gnu" i 2 u 3:8:2 t "width=1.5" w p ls 3 palette
 #
 set size 0.8,0.6
 set origin 1.2,1.4
@@ -75,7 +82,8 @@ set yrange [0:19.9]
 set ylabel "s.p. radius [fm]" offset 1
 set xlabel "" offset 0
 #set label "^{120}Sn, SV-bas, HFB" at graph 0.03,0.09
-p  "varywid_HFB.gnu" i 2  u 3:6 t "width=1.5" w p ls 3
+set colorbox
+p  "varywid_HFB.gnu" i 2  u 3:6:2 t "width=1.5" w p ls 3 palette
 #
 set size 0.8,0.6
 set origin 0.2,2.0
@@ -85,8 +93,9 @@ set yrange [0:4.45]
 set ylabel "pairing gap {/Symbol= D}  [MeV]" offset 0
 set xlabel "" offset 0
 set key bottom right
+unset colorbox
 #set label "^{120}Sn, SV-bas, HFB" at graph 0.03,0.09
-p  "varywid_HFB.gnu" i 3 u 3:8 t "width=2.0" w p ls 4
+p  "varywid_HFB.gnu" i 3 u 3:8:2 t "width=2.0" w p ls 4 palette
 #
 set size 0.8,0.6
 set origin 1.2,2.0
@@ -95,7 +104,8 @@ set yrange [0:19.9]
 set ylabel "s.p. radius [fm]" offset 1
 set xlabel "" offset 0
 #set label "^{120}Sn, SV-bas, HFB" at graph 0.03,0.09
-p  "varywid_HFB.gnu" i 3 u 3:6 t "width=2.0" w p ls 4
+set colorbox
+p  "varywid_HFB.gnu" i 3 u 3:6:2 t "width=2.0" w p ls 4 palette
 #
 set size 0.8,0.6
 set origin 0.2,2.6
@@ -105,8 +115,9 @@ set yrange [0:4.45]
 set ylabel "pairing gap {/Symbol= D}  [MeV]" offset 0
 set xlabel "" offset 0
 set key bottom right
+unset colorbox
 #set label "^{120}Sn, SV-bas, HFB" at graph 0.03,0.09
-p  "varywid_HFB.gnu" i 4 u 3:8 t "width=3.0" w p ls 5
+p  "varywid_HFB.gnu" i 4 u 3:8:2 t "width=3.0" w p ls 5 palette
 #
 set size 0.8,0.6
 set origin 1.2,2.6
@@ -115,7 +126,8 @@ set yrange [0:19.9]
 set ylabel "s.p. radius [fm]" offset 1
 set xlabel "" offset 0
 set title "{/=40 ^{120}Sn, SV-bas, HFB}" offset -22
-p  "varywid_HFB.gnu" i 4 u 3:6 t "width=3.0" w p ls 5
+set colorbox
+p  "varywid_HFB.gnu" i 4 u 3:6:2 t "width=3.0" w p ls 5 palette
 #
 !eps2pdf -f varywid_HFB.eps
 !rm -f varywid_HFB.eps

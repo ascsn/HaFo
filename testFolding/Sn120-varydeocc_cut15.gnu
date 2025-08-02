@@ -18,10 +18,10 @@ set xrange [1.5:10.5]
 #set yrange [-0.07:0.005]
 set yrange [-1:19.9]
 #set ytics 1
-p "collect_cat/collect_cat_FyDr_120Sn_cut15_wid0_0.0d0_hfb.dat"  i 0  u 2:($8+26.830) t "width=0, HFB" w lp pt 7,\
- "collect_cat/collect_cat_FyDr_120Sn_cut15_wid0_0.0d0_bcs.dat"  i 0  u 2:($8+19.219) t "width=0, BCS" w lp pt 7,\
- "collect_cat/collect_cat_FyDr_120Sn_cut15_wid1_1.0d0_hfb.dat"  i 0  u 2:($8+19.973) t "width=1, HFB" w lp pt 7,\
- "collect_cat/collect_cat_FyDr_120Sn_cut15_wid1_1.0d0_bcs.dat"  i 0  u 2:($8+18.124) t "width=1, BCS" w lp pt 7
+p "collect_cat/collect_cat_FyDr_120Sn_cut15_wid0_0.0d0_hfb.dat"  i 0  u 2:($8+26.830) t "width=0, HFB" w lp lw 4 pt 7,\
+ "collect_cat/collect_cat_FyDr_120Sn_cut15_wid0_0.0d0_bcs.dat"  i 0  u 2:($8+19.219) t "width=0, BCS" w lp lw 4 lc rgb '#00aa00' pt 7,\
+ "collect_cat/collect_cat_FyDr_120Sn_cut15_wid1_1.0d0_hfb.dat"  i 0  u 2:($8+19.973) t "width=1, HFB" w lp lw 4 pt 7,\
+ "collect_cat/collect_cat_FyDr_120Sn_cut15_wid1_1.0d0_bcs.dat"  i 0  u 2:($8+18.124) t "width=1, BCS" w lp lw 4 pt 7
 #
 set origin 0.2,1.0
 set size 0.6,0.8
@@ -35,10 +35,10 @@ set yrange [-22:2]
 #set ytics 1
 set key bottom right
 set title "Fy({/Symbol= D}r), ^{120}Sn, cutoff 15 MeV"
-p "collect_cat/collect_cat_FyDr_120Sn_cut15_wid0_0.0d0_hfb.dat"  i 0  u 2:(($5-4.668917)*1e3) t "width=0, HFB" w lp pt 7,\
- "collect_cat/collect_cat_FyDr_120Sn_cut15_wid0_0.0d0_bcs.dat"  i 0  u 2:(($5-4.659498)*1e3) t "width=0, BCS" w lp pt 7,\
- "collect_cat/collect_cat_FyDr_120Sn_cut15_wid1_1.0d0_hfb.dat"  i 0  u 2:(($5-4.661443)*1e3) t "width=1, HFB" w lp pt 7,\
- "collect_cat/collect_cat_FyDr_120Sn_cut15_wid1_1.0d0_bcs.dat"  i 0  u 2:(($5-4.652495)*1e3) t "width=1, BCS" w lp pt 7
+p "collect_cat/collect_cat_FyDr_120Sn_cut15_wid0_0.0d0_hfb.dat"  i 0  u 2:(($5-4.668917)*1e3) t "width=0, HFB" w lp lw 4 pt 7,\
+ "collect_cat/collect_cat_FyDr_120Sn_cut15_wid0_0.0d0_bcs.dat"  i 0  u 2:(($5-4.659498)*1e3) t "width=0, BCS" w lp lw 4 lc rgb '#00aa00' pt 7,\
+ "collect_cat/collect_cat_FyDr_120Sn_cut15_wid1_1.0d0_hfb.dat"  i 0  u 2:(($5-4.661443)*1e3) t "width=1, HFB" w lp lw 4 pt 7,\
+ "collect_cat/collect_cat_FyDr_120Sn_cut15_wid1_1.0d0_bcs.dat"  i 0  u 2:(($5-4.652495)*1e3) t "width=1, BCS" w lp lw 4 pt 7
 #
 unset title
 set origin 0.8,0.2
@@ -51,10 +51,10 @@ set key top right
 set xrange [1.5:10.5]
 set yrange [-1:19.9]
 #set ytics 1
-p "collect_cat/collect_cat_FyDr_120Sn_cut45_wid0_0.0d0_hfb.dat"  i 0  u 2:($8+27.097) t "width=0, HFB" w lp pt 7,\
- "collect_cat/collect_cat_FyDr_120Sn_cut45_wid0_0.0d0_bcs.dat"  i 0  u 2:($8+38.004) t "width=0, BCS" w lp pt 7,\
- "collect_cat/collect_cat_FyDr_120Sn_cut45_wid1_1.0d0_hfb.dat"  i 0  u 2:($8+24.922) t "width=1, HFB" w lp pt 7,\
- "collect_cat/collect_cat_FyDr_120Sn_cut45_wid1_1.0d0_bcs.dat"  i 0  u 2:($8+24.157) t "width=1, BCS" w lp pt 7
+p "collect_cat/collect_cat_FyDr_120Sn_cut45_wid0_0.0d0_hfb.dat"  i 0  u 2:($8+27.097) t "width=0, HFB" w lp lw 4 pt 7,\
+ "collect_cat/collect_cat_FyDr_120Sn_cut45_wid0_0.0d0_bcs.dat"  i 0  u 2:($8+38.004) t "width=0, BCS" w lp lc rgb '#00aa00' lw 4 pt 7,\
+ "collect_cat/collect_cat_FyDr_120Sn_cut45_wid1_1.0d0_hfb.dat"  i 0  u 2:($8+24.922) t "width=1, HFB" w lp lw 4 pt 7,\
+ "collect_cat/collect_cat_FyDr_120Sn_cut45_wid1_1.0d0_bcs.dat"  i 0  u 2:($8+24.157) t "width=1, BCS" w lp lw 4 pt 7
 #
 set origin 0.8,1.0
 set size 0.6,0.8
@@ -67,10 +67,10 @@ set xrange [1.5:10.5]
 set yrange [-22:2]
 #set ytics 1
 set title "Fy({/Symbol= D}r), ^{120}Sn, cutoff 45 MeV"
-p "collect_cat/collect_cat_FyDr_120Sn_cut45_wid0_0.0d0_hfb.dat"  i 0  u 2:(($5-4.669307)*1e3) t "width=0, HFB" w lp pt 7,\
- "collect_cat/collect_cat_FyDr_120Sn_cut45_wid0_0.0d0_bcs.dat"  i 0  u 2:(($5-4.675436)*1e3) t "width=0, BCS" w lp pt 7,\
- "collect_cat/collect_cat_FyDr_120Sn_cut45_wid1_1.0d0_hfb.dat"  i 0  u 2:(($5-4.662187)*1e3) t "width=1, HFB" w lp pt 7,\
- "collect_cat/collect_cat_FyDr_120Sn_cut45_wid1_1.0d0_bcs.dat"  i 0  u 2:(($5-4.661550)*1e3) t "width=1, BCS" w lp pt 7
+p "collect_cat/collect_cat_FyDr_120Sn_cut45_wid0_0.0d0_hfb.dat"  i 0  u 2:(($5-4.669307)*1e3) t "width=0, HFB" w lp lw 4 pt 7,\
+ "collect_cat/collect_cat_FyDr_120Sn_cut45_wid0_0.0d0_bcs.dat"  i 0  u 2:(($5-4.675436)*1e3) t "width=0, BCS" w lp lc rgb '#00aa00' lw 4 pt 7,\
+ "collect_cat/collect_cat_FyDr_120Sn_cut45_wid1_1.0d0_hfb.dat"  i 0  u 2:(($5-4.662187)*1e3) t "width=1, HFB" w lp lw 4 pt 7,\
+ "collect_cat/collect_cat_FyDr_120Sn_cut45_wid1_1.0d0_bcs.dat"  i 0  u 2:(($5-4.661550)*1e3) t "width=1, BCS" w lp lw 4 pt 7
 #
 !eps2pdf -f  Sn120-varydeocc_cut15.eps
 !rm -f  Sn120-varydeocc_cut15.eps
