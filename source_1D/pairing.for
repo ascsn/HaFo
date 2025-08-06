@@ -1718,7 +1718,7 @@ c      data ifedir/3/           ! switches sort of energy in cutoff
       data ifedir/0/           ! switches sort of energy in cutoff
 !      data ifkincut/1/        ! switches to kinetic-energy cutoff
       data addpgw/1D0/        ! mixing of pairing weights
-      data addmix/1D0/        ! mixing of occupation numbers
+      data addmix/0.2D0/        ! mixing of occupation numbers
 c
       logical,parameter ::  TPOLD=.FALSE.
       logical,parameter ::  tstcut=.TRUE.
@@ -2318,7 +2318,7 @@ c
 !       v2 = weight(nplshl)
        accel  = v2**(-atajima)
        v2a    = v2*accel
-       uva    = uv*accel
+       uva    = uv*accel  * hfbfacact  ! attenuation by vatioable HFBFACACT
        IF(thfbfold) THEN
          IF(ifkincut==1) STOP "kinetic cutoff incompatible with folding"
 !         CALL gapoperator(wffold(nplm+1:nplm+ngrid),aux2(1:ngrid),

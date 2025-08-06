@@ -136,6 +136,7 @@ C
      &                 rhoscp,rhoscn,                  ! semiclassical level dens.
      &                 rhosnm,              ! density symm.nucl.matter
      &                 str_squark,          ! strength s-quark --> weak charge
+     &                 hfbfacact,           ! factor on HFB contribution to mean field
      &                 numstp,numstn,
      &                 IPAIR,IFPAIR(2),ISKY,ilnrsp,IMFOLD,iparsh,iparac,
      &                 ioptsk,ipairsav,iteration_number,

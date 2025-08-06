@@ -359,8 +359,9 @@ c     character*1 tdum
       LOGICAL, PARAMETER :: tcentrdep=.FALSE.
       LOGICAL, PARAMETER :: thfbnatprint=.TRUE.,thfbnatural=.TRUE.
       LOGICAL :: tprint96
+      LOGICAL :: thfbfac=.FALSE.
       REAL(8) :: pairaddfacp=0D0,pairaddfacn=0D0
-      REAL(8) :: pairenhance=2D0
+      REAL(8) :: pairenhance=2D0,hfbfacact=1D0
       INTEGER :: iterhfb=400,iternat=0,modnat=1
       INTEGER :: iterbcs=200
       REAL(8) :: symcondsav(2)
@@ -436,11 +437,11 @@ c
 !        IF(thfbfold.AND.iternat>0) 
 !     &      STOP 'folding and HFB subiterations yet incompatible'
         OPEN(111,file='hfbparams')
-        READ(111,*) iterhfb,iternat,modnat,pairenhance,iterbcs
+        READ(111,*) iterhfb,iternat,modnat,pairenhance,iterbcs,thfbfac
         WRITE(96,'(1x/1x)')
-        WRITE(96,'(a,3i5,f7.2,i5)')
+        WRITE(96,'(a,3i5,f7.2,i5,l3)')
      &    '# iterhfb,iternat,modnat,pairenhance,iterbcs=',
-     &    iterhfb,iternat,modnat,pairenhance,iterbcs
+     &    iterhfb,iternat,modnat,pairenhance,iterbcs,thfbfac
         CLOSE(111)
       END IF 
 !      idisc=-1
@@ -782,9 +783,9 @@ c      write(12,'(a)') '  iter  energy       ewid       detot'
      &   ' proton pairing constraint:',pairaddfacp
        IF(pairaddfacn.NE.0D0) WRITE(11,'(a,1pg13.5)')
      &   ' neutron pairing constraint:',pairaddfacn
-       IF(ipair==6 .OR. ipair==8) write(11,'(a,3i5,f8.2)')
-     &   ' HFB:      iterhfb,iternat,modnat,pairenhance=',
-     &   iterhfb,iternat,modnat,pairenhance
+       IF(ipair==6 .OR. ipair==8) write(11,'(a,3i5,f8.2,l3)')
+     &   ' HFB: iterhfb,iternat,modnat,pairenhance,thfbfac=',
+     &   iterhfb,iternat,modnat,pairenhance,thfbfac
        if(ifform.lt.0)
      &  write(11,'(a,i3,a,2(/5x,5(a,f10.6)))')
      &   '    ifform=',ifform,
@@ -886,12 +887,14 @@ c
           pairfn=pairfnsav*pairfacact
           gpp = gppsav*pairfacact
           gpn = gpnsav*pairfacact
+          IF(thfbfac) hfbfacact=1D0-MAX(0,iterhfb-iter)/iterhfb
         ELSE
           fxi = fxisav
           pairfp=pairfpsav
           pairfn=pairfnsav
           gpp = gppsav
           gpn = gpnsav
+          hfbfacact=1D0
         END IF
       END IF
 !      WRITE(6,'(a,i5,3(1pg13.5))') ' iparac,fxi...=',

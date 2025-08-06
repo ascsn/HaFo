@@ -37,27 +37,29 @@ ipair=(8)    # for HFB
 
 # Set hfbwidth
 #hfbwidth="1.5d0"
-hfbwidth="2.0d0"
+hfbwidth="1.0d0"
 
 for j in "${ipair[@]}"; do
 if [ $j -eq 7 ]; then
     cond="bcs"
-    pairStrength="5984"
+    pairStrength="323.1"
     #combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsBCS[@]}"))
 else
     cond="hfb"
-    pairStrength="10815.0"
+    pairStrength="1420"
 #    combined=$(paste -d "," <(printf "%s\n" "${hfbwidths[@]}") <(printf "%s\n" "${pairStrengthsHFB[@]}"))
 fi
 #while IFS=, read -r hfbwidth pairStrength; do
 echo "cond = ${cond}, hfbwidth=${hfbwidth}, pairStrength = ${pairStrength}" 
 for i in $(seq 15 1 100); do
+#for i in $(seq 23 1 25); do
 echo "1,,    IWUNIT" > for005
 echo "'SV-bas HFB'" >> for005
 #echo "71,0.3,              NGRID,RSTEP" >> for005
-echo "51,0.3,              NGRID,RSTEP" >> for005
+echo "61,0.3,              NGRID,RSTEP" >> for005
 echo "-1,1E-8,1E-9,100,20000,3,-1, IWR,DABR/E,ITPR/MAX,IFPL" >> for005
-echo "0.3,100.,0.2,-1,,,,,               X0DAMP,E0DAMP,ADDNEW,WALL" >> for005
+#echo "0.3,100.,0.2,-1,,,,,               X0DAMP,E0DAMP,ADDNEW,WALL" >> for005
+echo "0.05,100.,0.1,-1,,,,,               X0DAMP,E0DAMP,ADDNEW,WALL" >> for005
 echo "1,0,0,-1,1,3,0,0,0,10,,, if:ex,tm,enrg,rso,zpe,dfms,rhoc,enav,mfold,optsk" >> for005
 echo "1,,,                       ifform" >> for005
 echo "0.64,0,0,0,0,   apro0,apro11,apro12,bpro11,bpro12" >> for005
@@ -74,8 +76,9 @@ echo "-1,,    IWUNIT" >> for005
 
 
 ../hafom_huge.exe < for005 > /dev/null
+#../hafom_huge.new < for005 > /dev/null
 
-fileName="collect_cat_${edf}_${nucleus}_${hfbwidth}_${cond}_Cut100.dat"
+fileName="collect.anneal" #"collect_cat_${edf}_${nucleus}_${hfbwidth}_${cond}_Cut100.dat"
 echo "cutoff=-${i},hfbwidth=${hfbwidth},pair.strength=${pairStrength}" >> ${fileName}
 grep Z,N for011 >> ${fileName}
 

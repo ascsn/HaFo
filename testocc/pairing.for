@@ -1721,8 +1721,9 @@ c-------------------------------------------------------------------------------
 c
       tswitchexplicit = nexplicit>0 .AND. ABS(partnm-aneutnum)<1D-6
       IF(tswitchexplicit) nexplicit=nexplicit-isosh+1
-!      WRITE(6,'(a,i2,2(1pg13.5),L2)') 
-!     &    'EXPLICIT:',nexplicit,partnm,aneutnum,tswitchexplicit
+      WRITE(6,'(a,i2,4(1pg13.5),L2)') 
+     &    'EXPLICIT:',nexplicit,partnm,aneutnum,ph(nexpicit),
+     &     e(nexplicit),tswitchexplicit
       IF(nblck>0 .AND. nexplicit>0) 
      &   STOP "NBLCK and NEXPLICIT incompatible"
       ifkincut=0      ! switches to kinetic-energy cutoff if 1
