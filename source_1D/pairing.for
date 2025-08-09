@@ -1526,7 +1526,7 @@ c
           pptmax(iso) = pptacc            
         END IF
 !        deltaf(istate) = (1D0-addnew)*deltaf(istate)-addnew*rstep*acc
-        deltaf(istate) = MAX(-rstep*acc,1D-6)
+        deltaf(istate) = MAX(-rstep*acc,1D-10)  !1D-6)
       enddo
 c
       if(iwr.ge.-1 .or. ecstab.NE.0D0) then

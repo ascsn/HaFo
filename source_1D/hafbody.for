@@ -44,8 +44,8 @@ c
       data   c1,c1p, c4,c4p,tte,tto
      &     /0D0,0D0,0D0,0D0,0D0,0D0/
       data cutfac,atajima,ecstab,alpinv,betinv,alpin2,betin2,riftm1
-     &    / 1.65 ,    0.0,   0D0, 0.0D0, 0.0D0, 0.0D0, 0.0D0,   0D0/
-!     &    / 1.65 ,    0.5,   0D0, 0.0D0, 0.0D0, 0.0D0, 0.0D0,   0D0/
+     &    / 1.65 ,    0.5,   0D0, 0.0D0, 0.0D0, 0.0D0, 0.0D0,   0D0/
+!     &    / 1.65 ,    0.0,   0D0, 0.0D0, 0.0D0, 0.0D0, 0.0D0,   0D0/
       data b3tilde,b12,b12p,b7,b7p,pow7
      &    /    0D0,0D0,0D0,0D0,0D0, 0D0/
       data rho0pr,pairgm,rhoswm,exmass,powerp,hfbwidth

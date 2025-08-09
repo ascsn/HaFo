@@ -64,7 +64,8 @@ cold      PARAMETER (KG1=89,KNMX=11,KJMX=47,KMAXN=277,KMAXP=277,              !
      *            KRESWF=1,
      *            KTIMWF=KX11,TMONOPC=.false.,TADSIC=.false.,
      &            TLSYMM=.true.,TFORMW=.false.,TEPAIR=.FALSE.,
-     &            TPHPAIR=.TRUE.,TLOWERCUT=.FALSE.)
+     &            TPHPAIR=.TRUE.,TLOWERCUT=.FALSE.)             ! uv cutoff
+!     &            TPHPAIR=.FALSE.,TLOWERCUT=.FALSE.)            ! v**2 cutoff
 c
 c      parameters for switches in the RPA part
 c
