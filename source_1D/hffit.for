@@ -706,6 +706,11 @@ cold      if(ipair.eq.2) iparol = 0
      +5x,'cutfac= ',f7.2, ' (cutoff factor in pairing)'/
      +5x,'hfbwidth= ',f6.2, ' (folding width in pairing)'/
      +5x,'isovectormodel= ',i2/)
+!      IF(tphpair) THEN
+!        WRITE(2,'(5x,a)') 'u*v cutoff'
+!      ELSE
+!        WRITE(2,'(5x,a)') 'v**2 cutoff'
+!      END IF
       write(2,'(a,3(a,g12.3))') '     convergence parameters:',
      &          ' addnew=',addnew,' dabe=',dabe,' dabr=',dabr
 c
@@ -2273,6 +2278,7 @@ c
      &   ' iteration nr.',itera,' , chi**2=',chia
 !        iflast=0
 !        IF(itera==nwdr) iflast=1
+        ifalt2 = 0
         call xd1(a,sigmaa,sigma0,numax,nwdr,iwarn,0,
      &           ifcurv,zuord)
 c
@@ -2448,8 +2454,8 @@ c
       data parsav/kparsv*0D0/,chisav/3*0D0/,itera/0/
       data ifdrc/0/                         ! switch to direct 2. derivative
       LOGICAL, PARAMETER :: tonestep=.TRUE.  ! evaluation of chi**2 landscape
-      LOGICAL, PARAMETER :: tpreigen=.TRUE.  ! print details eigenvetors
-      LOGICAL, PARAMETER :: tsensitivity=.TRUE.
+      LOGICAL, PARAMETER :: tpreigen=.FALSE.  ! print detailed eigenvetors
+      LOGICAL, PARAMETER :: tsensitivity=.FALSE.
 c
 c--------------------------------------------------------------------
 c

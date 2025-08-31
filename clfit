@@ -1,5 +1,5 @@
 #!/bin/bash
-FC=ifx
+FC=ifort
 OPTION1="-w -O3 -xsse4.2 -ip -finline-functions -funroll-loops -static -autodouble"
 #OPTION1="-w -g -CB -traceback -autodouble"
 # OPTION1="-w -O3 -xsse4.2 -ip -finline-functions -funroll-loops -autodouble"
@@ -14,7 +14,8 @@ $FC $OPTION1 -c hafbody.for
 $FC $OPTION1 -c sumdum.for
 $FC $OPTION1 -c fbtrans.f
 #ifort -cpp $OPTION1 -o ../hffit.exe hffit.for  weak-charge.o NMP-entry.o hfb-matrix.o hafbody.o sumdum.o fbtrans.o
-$FC -fpp  $OPTION1 -o ../hffit.exe hffit.for  weak-charge.o NMP-entry.o hfb-matrix.o hafbody.o sumdum.o fbtrans.o regpair.o Gauss_folding.o
+#$FC -fpp  $OPTION1 -o ../hffit.exe hffit.for  weak-charge.o NMP-entry.o hfb-matrix.o hafbody.o sumdum.o fbtrans.o regpair.o Gauss_folding.o
+$FC -fpp  $OPTION1 -o ../hffit.new hffit.for  weak-charge.o NMP-entry.o hfb-matrix.o hafbody.o sumdum.o fbtrans.o regpair.o Gauss_folding.o
 cd ..
 
 # -axsse4.2 -msse4.2 -O3
