@@ -1406,7 +1406,7 @@ c     &                0,0,0,0,0,0,0)
           CALL  extobsiso(par,yfit,numax*min(nwdr,1),82,120,82,126)
           CALL  extobsiso(par,yfit,numax*min(nwdr,1),82,132,82,126)
           CALL flush(2)
-          IF(1==1) THEN 
+          IF(1==2) THEN 
           CALL  extobs3gap(par,numax*min(nwdr,1),20,24,20,24,2)
           CALL  extobs3gap(par,numax*min(nwdr,1),50,68,50,72,2)
 !          CALL  extobs3gap(par,numax*min(nwdr,1),14,16,18,16,2)
@@ -1498,13 +1498,13 @@ c     &                0,0,0,0,0,0,0)
 !          STOP '3gap done'
 !          WRITE(2,*) ' Isotopic shifts finished. Start 3gap:'
 !
-          CALL  extobs5gap(par,numax*min(nwdr,1),20,24,20,24,0)
-          CALL  extobs5gap(par,numax*min(nwdr,1),50,72,50,72,0)
-          CALL  extobs5gap(par,numax*min(nwdr,1),82,122,82,122,0)
-!          CALL  extobs5gap(par,numax*min(nwdr,1),92,132,92,132,0)
-          CALL  extobs5gap(par,numax*min(nwdr,1),34,50,34,50,0)
-          CALL  extobs5gap(par,numax*min(nwdr,1),56,82,56,82,0)
-          CALL  extobs5gap(par,numax*min(nwdr,1),88,126,88,126,0)
+!          CALL  extobs5gap(par,numax*min(nwdr,1),20,24,20,24,0)
+!          CALL  extobs5gap(par,numax*min(nwdr,1),50,72,50,72,0)
+!          CALL  extobs5gap(par,numax*min(nwdr,1),82,122,82,122,0)
+!!          CALL  extobs5gap(par,numax*min(nwdr,1),92,132,92,132,0)
+!          CALL  extobs5gap(par,numax*min(nwdr,1),34,50,34,50,0)
+!          CALL  extobs5gap(par,numax*min(nwdr,1),56,82,56,82,0)
+!          CALL  extobs5gap(par,numax*min(nwdr,1),88,126,88,126,0)
 !
           CALL  extobssgap(par,numax*min(nwdr,1),20,24,20,24)
           CALL  extobssgap(par,numax*min(nwdr,1),50,72,50,72)
@@ -2454,7 +2454,7 @@ c
       data parsav/kparsv*0D0/,chisav/3*0D0/,itera/0/
       data ifdrc/0/                         ! switch to direct 2. derivative
       LOGICAL, PARAMETER :: tonestep=.TRUE.  ! evaluation of chi**2 landscape
-      LOGICAL, PARAMETER :: tpreigen=.FALSE.  ! print detailed eigenvetors
+      LOGICAL, PARAMETER :: tpreigen=.TRUE.  ! print detailed eigenvetors
       LOGICAL, PARAMETER :: tsensitivity=.FALSE.
 c
 c--------------------------------------------------------------------
