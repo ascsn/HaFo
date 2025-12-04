@@ -1882,7 +1882,8 @@ c
           WRITE(iu,'(5(1pg18.10))') asm,hsm,hgradm 
           WRITE(iu,'(5(1pg18.10))') hcoul,sigmacoul
           WRITE(iu,'(5(1pg18.10))') fxi,h1xi,hgradxi,gammaxi,rho0xi
-          WRITE(iu,'(2(1pg18.10),i2)') delfxi,ecstab,isovectormodel
+          WRITE(iu,'(4(1pg18.10),i2)') delfxi,ecstab,delh1xi,delhgradxi,
+     &            isovectormodel
           WRITE(iu,'(5(1pg18.10))') c0tau,c1tau 
           WRITE(iu,'(5(1pg18.10))') c0nabj,c1nabj,c0tens,c1tens
       ELSE

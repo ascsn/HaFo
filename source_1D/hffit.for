@@ -1313,7 +1313,7 @@ c     &                0,0,0,0,0,0,0)
 !        IF(numax>1) THEN
         CALL flush(2)
         IF(numax>0) THEN
-        DO ifac=1,4,3  !4,1,-3 !1,4
+        DO ifac=4,1,-3 !1,4,3  !4,1,-3 !1,4
           parmnatfac = parmfseries(ifac)
           WRITE(2,'(/a,f7.3)') ' parameter variation now:',
      &      parmnatfac
