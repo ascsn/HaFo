@@ -33,7 +33,7 @@ def split_line(line):
 # Load data
 for width in widths:
     for cutoff in cutoffs:
-        filename = f"collect_cat_box_Paper/collect_cat_SVbas_120Sn_{width}_hfb_{cutoff}.dat"
+        filename = f"collect_cat_box_paper_new/collect_cat_SVbas_unknown_{width}_hfb_{cutoff}.dat"
         try:
             with open(filename, 'r') as f:
                 lines = f.readlines()

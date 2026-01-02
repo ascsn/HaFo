@@ -1,5 +1,11 @@
-OPTIONS= -O3 -msse4.2 -mtune=native -mavx -mfpmath=sse -ffast-math -finline-functions -fno-align-commons -fdefault-real-8 -fdefault-double-8 
-#OPTIONS= -g -fbacktrace -fbounds-check
+#!/bin/bash
+
+# No space after the equals sign, and use quotes to treat all options as a single string.
+OPTIONS="-O3 -msse4.2 -mtune=native -mavx -mfpmath=sse -ffast-math -finline-functions -fno-align-commons -fdefault-real-8 -fdefault-double-8"
+
+# Optional: You can uncomment this line to use a different set of options
+# OPTIONS="-g -fbacktrace -fbounds-check"
+
 cd testocc
 gfortran $OPTIONS -c weak-charge.f90
 gfortran $OPTIONS -c xx.f90

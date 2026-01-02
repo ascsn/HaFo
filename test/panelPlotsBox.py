@@ -22,12 +22,12 @@ mpl.rcParams["axes.formatter.useoffset"] = False
 box_sizes_25, r_C_25, E_25, epair_25, gap_25 = [], [], [], [], []
 box_sizes_100, r_C_100, E_100, epair_100, gap_100 = [], [], [], [], []
 
-fontDict = {"family": "helvetica", "fontsize": 18, "fontweight": "bold"}
-fontDictTitle = {"family": "helvetica", "fontsize": 18, "fontweight": "bold"}
+fontDict = {"family": "helvetica", "fontsize": 22, "fontweight": "bold"}
+fontDictTitle = {"family": "helvetica", "fontsize": 22, "fontweight": "bold"}
 
 
 # Read multiple files
-file_list = glob.glob("collect_cat_box_Paper/collect_cat_SVbas_146Gd_0.0d0_hfb_*.dat")  # Adjust path to your data files
+file_list = glob.glob("collect_cat_box_Paper/collect_cat_SVbas_120Sn_0.0d0_hfb_*.dat")  # Adjust path to your data files
 
 print(file_list)
 

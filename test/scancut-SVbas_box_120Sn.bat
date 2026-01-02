@@ -11,7 +11,7 @@ nucleus="120Sn"
 edf="SVbas"
 
 # Test box size, width = 0.0 for pairgap = 1.61 at cutoff = 25 MeV
-#pairStrengthsBCS=("537 ")  
+#pairStrengthsBCS=("537")  
 
 # Test box size, width = 0.0 for pairgap = 1.61 at cutoff = 25 MeV
 #pairStrengthsHFB=("456.9")  
@@ -58,7 +58,7 @@ if [ $j -eq 7 ]; then
     pairStrength="537"
 else
     cond="hfb"
-    pairStrength="30710"
+    pairStrength="30235.012020"
 fi
 i=25
 #while IFS=, read -r ngrid pairStrength; do
@@ -87,13 +87,13 @@ echo "-1,,    IWUNIT" >> for005
 ../hafom_huge.exe < for005 > /dev/null
 
 #fileName="collect_cat_${edf}_${nucleus}_${hfbwidth}_${cond}_Cut${i}_${ngrid}.dat"
-fileName="collect_cat_${edf}_${nucleus}_${hfbwidth}_${cond}_Cut${i}.dat"
+fileName="collect_cat_${edf}_${nucleus}_${hfbwidth}_${cond}_Cut${i}_sh.dat"
 echo "ngrid=${ngrid},hfbwidth=${hfbwidth},pair.strength=${pairStrength}" >> ${fileName}
 grep Z,N for011 >> ${fileName}
 
 done
 echo "${fileName} Done!"
 echo "${cond} Done!"
-mv ${fileName} collect_cat_box_Paper_shells/
+mv ${fileName} collect_cat_box_paper_new/
 #done <<< "${combined}"
 done
