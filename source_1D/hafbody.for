@@ -887,7 +887,7 @@ c
           pairfn=pairfnsav*pairfacact
           gpp = gppsav*pairfacact
           gpn = gpnsav*pairfacact
-          IF(thfbfac) hfbfacact=1D0-MAX(0,iterhfb-iter)/iterhfb
+          IF(thfbfac) hfbfacact=  MIN((1D0*iter)/iterhfb,1D0) ! 1D0-MAX(0,iterhfb-iter)/iterhfb
         ELSE
           fxi = fxisav
           pairfp=pairfpsav

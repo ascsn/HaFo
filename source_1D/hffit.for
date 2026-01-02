@@ -706,6 +706,11 @@ cold      if(ipair.eq.2) iparol = 0
      +5x,'cutfac= ',f7.2, ' (cutoff factor in pairing)'/
      +5x,'hfbwidth= ',f6.2, ' (folding width in pairing)'/
      +5x,'isovectormodel= ',i2/)
+!      IF(tphpair) THEN
+!        WRITE(2,'(5x,a)') 'u*v cutoff'
+!      ELSE
+!        WRITE(2,'(5x,a)') 'v**2 cutoff'
+!      END IF
       write(2,'(a,3(a,g12.3))') '     convergence parameters:',
      &          ' addnew=',addnew,' dabe=',dabe,' dabr=',dabr
 c
@@ -1308,7 +1313,7 @@ c     &                0,0,0,0,0,0,0)
 !        IF(numax>1) THEN
         CALL flush(2)
         IF(numax>0) THEN
-        DO ifac=1,4,3  !4,1,-3 !1,4
+        DO ifac=4,1,-3 !1,4,3  !4,1,-3 !1,4
           parmnatfac = parmfseries(ifac)
           WRITE(2,'(/a,f7.3)') ' parameter variation now:',
      &      parmnatfac
@@ -1401,7 +1406,7 @@ c     &                0,0,0,0,0,0,0)
           CALL  extobsiso(par,yfit,numax*min(nwdr,1),82,120,82,126)
           CALL  extobsiso(par,yfit,numax*min(nwdr,1),82,132,82,126)
           CALL flush(2)
-          IF(1==1) THEN 
+          IF(1==2) THEN 
           CALL  extobs3gap(par,numax*min(nwdr,1),20,24,20,24,2)
           CALL  extobs3gap(par,numax*min(nwdr,1),50,68,50,72,2)
 !          CALL  extobs3gap(par,numax*min(nwdr,1),14,16,18,16,2)
@@ -1493,13 +1498,13 @@ c     &                0,0,0,0,0,0,0)
 !          STOP '3gap done'
 !          WRITE(2,*) ' Isotopic shifts finished. Start 3gap:'
 !
-          CALL  extobs5gap(par,numax*min(nwdr,1),20,24,20,24,0)
-          CALL  extobs5gap(par,numax*min(nwdr,1),50,72,50,72,0)
-          CALL  extobs5gap(par,numax*min(nwdr,1),82,122,82,122,0)
-!          CALL  extobs5gap(par,numax*min(nwdr,1),92,132,92,132,0)
-          CALL  extobs5gap(par,numax*min(nwdr,1),34,50,34,50,0)
-          CALL  extobs5gap(par,numax*min(nwdr,1),56,82,56,82,0)
-          CALL  extobs5gap(par,numax*min(nwdr,1),88,126,88,126,0)
+!          CALL  extobs5gap(par,numax*min(nwdr,1),20,24,20,24,0)
+!          CALL  extobs5gap(par,numax*min(nwdr,1),50,72,50,72,0)
+!          CALL  extobs5gap(par,numax*min(nwdr,1),82,122,82,122,0)
+!!          CALL  extobs5gap(par,numax*min(nwdr,1),92,132,92,132,0)
+!          CALL  extobs5gap(par,numax*min(nwdr,1),34,50,34,50,0)
+!          CALL  extobs5gap(par,numax*min(nwdr,1),56,82,56,82,0)
+!          CALL  extobs5gap(par,numax*min(nwdr,1),88,126,88,126,0)
 !
           CALL  extobssgap(par,numax*min(nwdr,1),20,24,20,24)
           CALL  extobssgap(par,numax*min(nwdr,1),50,72,50,72)
@@ -2273,6 +2278,7 @@ c
      &   ' iteration nr.',itera,' , chi**2=',chia
 !        iflast=0
 !        IF(itera==nwdr) iflast=1
+        ifalt2 = 0
         call xd1(a,sigmaa,sigma0,numax,nwdr,iwarn,0,
      &           ifcurv,zuord)
 c
@@ -2448,8 +2454,8 @@ c
       data parsav/kparsv*0D0/,chisav/3*0D0/,itera/0/
       data ifdrc/0/                         ! switch to direct 2. derivative
       LOGICAL, PARAMETER :: tonestep=.TRUE.  ! evaluation of chi**2 landscape
-      LOGICAL, PARAMETER :: tpreigen=.TRUE.  ! print details eigenvetors
-      LOGICAL, PARAMETER :: tsensitivity=.TRUE.
+      LOGICAL, PARAMETER :: tpreigen=.TRUE.  ! print detailed eigenvetors
+      LOGICAL, PARAMETER :: tsensitivity=.FALSE.
 c
 c--------------------------------------------------------------------
 c
