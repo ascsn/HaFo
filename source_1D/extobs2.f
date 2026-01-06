@@ -1863,7 +1863,7 @@ c
      &   '1,,    IWUNIT',
      &   "' resonances ion 208 Pb'",
      &   '0,0.3,              NGRID,RSTEP',
-     &   '-1,1E-8,1E-9,278,5780,3,-1, IWR,DABR/E,ITPR/MAX,IFPL',
+     &   '-1,1E-10,1E-10,300,15000,3,-1, IWR,DABR/E,ITPR/MAX,IFPL',
      &   '0.2,90.,0.2,-1,,               X0DAMP,E0DAMP,ADDNEW,WALL'
         write(31,'(9(i2,a),i2,a,5x,a)') 
      &    ifex,',',iftm,',',ifenrg,',',ifrso,',',ifzpe,',',
@@ -1875,17 +1875,17 @@ c
      &   '0.64,0,0,0,0,   aneu0,aneu11,aneu12,bneu11,bneu12'
       IF(ioptsk==13) THEN            ! Fayans functional
           iu=31
-          WRITE(iu,'(3(1pg18.10),a)') avp,h1vp,h2vp,' avp,h1vp,h2vp'
-          WRITE(iu,'(5(1pg18.10))') avm,h1vm,h2vm
-          WRITE(iu,'(5(1pg18.10))') sigmavol,rho0fy
-          WRITE(iu,'(5(1pg18.10))') asp,hsp,hgradp 
-          WRITE(iu,'(5(1pg18.10))') asm,hsm,hgradm 
-          WRITE(iu,'(5(1pg18.10))') hcoul,sigmacoul
-          WRITE(iu,'(5(1pg18.10))') fxi,h1xi,hgradxi,gammaxi,rho0xi
-          WRITE(iu,'(4(1pg18.10),i2)') delfxi,ecstab,delh1xi,delhgradxi,
+          WRITE(iu,'(3(1pg20.12),a)') avp,h1vp,h2vp,' avp,h1vp,h2vp'
+          WRITE(iu,'(5(1pg20.12))') avm,h1vm,h2vm
+          WRITE(iu,'(5(1pg20.12))') sigmavol,rho0fy
+          WRITE(iu,'(5(1pg20.12))') asp,hsp,hgradp 
+          WRITE(iu,'(5(1pg20.12))') asm,hsm,hgradm 
+          WRITE(iu,'(5(1pg20.12))') hcoul,sigmacoul
+          WRITE(iu,'(5(1pg20.12))') fxi,h1xi,hgradxi,gammaxi,rho0xi
+          WRITE(iu,'(4(1pg20.12),i2)') delfxi,ecstab,delh1xi,delhgradxi,
      &            isovectormodel
-          WRITE(iu,'(5(1pg18.10))') c0tau,c1tau 
-          WRITE(iu,'(5(1pg18.10))') c0nabj,c1nabj,c0tens,c1tens
+          WRITE(iu,'(5(1pg20.12))') c0tau,c1tau 
+          WRITE(iu,'(5(1pg20.12))') c0nabj,c1nabj,c0tens,c1tens
       ELSE
         write(31,'(5(1pg19.11,a)/5(g19.11,a))')
      &  t0,',',t1,',',t2,',',t3,',',t4,',      t0,t1,t2,t3,t4',
@@ -1919,8 +1919,8 @@ c
         write(31,'((f10.3,a),2(f10.6,a))')
      &    tyuk,',',xyuk,',',ayuk,',           tyuk,xyuk,ayuk'
       END IF
-        write(31,'(f15.11,a,2(1pg19.11),a,2(1pg19.11),a)')
-     &     power,',1.0,7,',pairfp,pairfn,
+        write(31,'(f15.11,a,i2,2(1pg20.12),a,2(1pg19.11),a)')
+     &     power,',1.0,',ipair,pairfp,pairfn,
      &  ',0,,',cutfac,hfbwidth,',, POWER,ACOUL,IPAIR,PAIRFP/N,ILNRESP,'
 c        write(31,'(f15.11,a,a)')
 c     &     power,',0.0,0,0.2,0.2',

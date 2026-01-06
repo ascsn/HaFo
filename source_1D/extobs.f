@@ -1500,16 +1500,18 @@ c
      &   '0.64,0,0,0,0,   apro0,apro11,apro12,bpro11,bpro12',
      &   '0.64,0,0,0,0,   aneu0,aneu11,aneu12,bneu11,bneu12'
         IF(ioptsk==13) THEN            ! Fayans functional
-          WRITE(31,'(3(1pg18.10),a)') avp,h1vp,h2vp,' avp,h1vp,h2vp'
-          WRITE(31,'(5(1pg18.10))') avm,h1vm,h2vm
-          WRITE(31,'(5(1pg18.10))') sigmavol,rho0fy
-          WRITE(31,'(5(1pg18.10))') asp,hsp,hgradp 
-          WRITE(31,'(5(1pg18.10))') asm,hsm,hgradm 
-          WRITE(31,'(5(1pg18.10))') hcoul,sigmacoul
-          WRITE(31,'(5(1pg18.10))') fxi,h1xi,hgradxi,gammaxi,rho0xi
-          WRITE(31,'(2(1pg18.10),i2)') delfxi,ecstab,isovectormodel
-          WRITE(31,'(5(1pg18.10))') c0tau,c1tau 
-          WRITE(31,'(5(1pg18.10))') c0nabj,c1nabj,c0tens,c1tens
+          WRITE(31,'(3(1pg20.12),a)') avp,h1vp,h2vp,' avp,h1vp,h2vp'
+          WRITE(31,'(5(1pg20.12))') avm,h1vm,h2vm
+          WRITE(31,'(5(1pg20.12))') sigmavol,rho0fy
+          WRITE(31,'(5(1pg20.12))') asp,hsp,hgradp 
+          WRITE(31,'(5(1pg20.12))') asm,hsm,hgradm 
+          WRITE(31,'(5(1pg20.12))') hcoul,sigmacoul
+          WRITE(31,'(5(1pg20.12))') fxi,h1xi,hgradxi,gammaxi,rho0xi
+          WRITE(31,'(4(1pg20.12),i2)') delfxi,ecstab,delh1xi,delhgradxi,
+     &            isovectormodel
+!          WRITE(31,'(2(1pg20.12),i2)') delfxi,ecstab,isovectormodel
+          WRITE(31,'(5(1pg20.12))') c0tau,c1tau 
+          WRITE(31,'(5(1pg20.12))') c0nabj,c1nabj,c0tens,c1tens
         ELSE 
           write(31,'(5(1pg20.12,a)/5(g20.12,a))')
      &    t0,',',t1,',',t2,',',t3,',',t4,',      t0,t1,t2,t3,t4',
@@ -1544,9 +1546,9 @@ c
         IF(ioptsk.NE.13) 
      &     write(31,'((f10.3,a),2(f10.6,a))')
      &      tyuk,',',xyuk,',',ayuk,',           tyuk,xyuk,ayuk'
-        write(31,'(f15.11,a,i2,a,f9.3,a,f9.3,a,f9.3,a)')
-     &     power,',1.0,',ipair,',',pairfp,',',pairfn,
-     &  ',0,,',cutfac,',,   POWER,ACOUL,IPAIR,PAIRFP/N,ILNRESP,...'
+        write(31,'(f15.11,a,i2,a,f9.3,a,f9.3,a,2f9.3,a)')
+     &     power,',1.0,',ipair,',',pairfp,',',pairfn,',0,,',
+     &  cutfac,hfbwidth,',,   POWER,ACOUL,IPAIR,PAIRFP/N,ILNRESP,...'
         if(i.gt.0) par(i) = par(i) - dparmo(i)
         close(31)
       enddo
@@ -1708,15 +1710,15 @@ c                                         for the ground state
      &       " b4,b4p,alpha,amfc",
      & ifex,riftm,ifzpe,acoul,ioptsk," if:ex,ls,cm,CHG,ioptsk"
       if(ioptsk.eq.11) then                            !new
-        write(31,'(3(1pg18.10))')  alpinv,betinv,riftm1
+        write(31,'(3(1pg20.12))')  alpinv,betinv,riftm1
         if(abs(b7p)+abs(b7)>0D0 .AND. b7 == 0D0) then
           b7print = 1D-7
         else
           b7print = b7
         endif
-        write(31,'(3(1pg18.10))')  b7print,b7p,pow7
+        write(31,'(3(1pg20.12))')  b7print,b7p,pow7
       endif 
-       write(31,'(i4,4(1pg17.9),a)')
+       write(31,'(i4,4(1pg20.12),a)')
      & ipair,pairfp,pairfn,0,rho0pr,"  ipair,pairfp,pairfn"
       write(31,'(a)')
      & "    1 0 0  1.0  1.0    0    0    0    "//
