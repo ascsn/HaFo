@@ -1,6 +1,7 @@
 import os
 import subprocess
 import shutil
+from pathlib import Path
 
 # Define nuclei with their properties
 nuclei = {
@@ -11,11 +12,11 @@ nuclei = {
 }
 
 # Paths
-base_dir = '/home/sudhanvalalit/Documents/Research/Witek/codes/HaFo'
-exe_path = os.path.join(base_dir, 'haforpa.new')
-input_dir = os.path.join(base_dir, 'test', 'testFayans')
-output_base_dir = os.path.join(base_dir, 'test', 'testFayans', 'testNuclei')
-
+current_dir = Path(__file__).resolve().parent
+base_dir = current_dir.parent.parent
+exe_path = base_dir / 'haforpa.new'
+input_dir = base_dir / 'test' / 'testFayans'
+output_base_dir = base_dir / 'test' / 'testFayans' / 'testNuclei'
 # Input files with their corresponding folder names
 input_configs = {
     'for005.fyivpFR': 'FR',  # Finite Range
@@ -63,11 +64,11 @@ for nucleus, properties in nuclei.items():
             # Update Z,N values for this nucleus
             update_input_file(dst, Z, N)
         
-            print(f"  Processing {folder_type} ({input_file})...")
+            print(f"Processing {folder_type} ({input_file})...")
             try:
                 # Check if executable exists
                 if not os.path.exists(exe_path):
-                    print(f"  ✗ Executable not found: {exe_path}")
+                    print(f"Executable not found: {exe_path}")
                     continue
                 
                 # List files before execution
@@ -91,26 +92,26 @@ for nucleus, properties in nuclei.items():
                 files_after = set(os.listdir(calc_dir))
                 new_files = files_after - files_before
                 
-                print(f"    Return code: {result.returncode}")
+                print(f"Return code: {result.returncode}")
                 if new_files:
-                    print(f"    New files created: {', '.join(sorted(new_files))}")
+                    print(f"New files created: {', '.join(sorted(new_files))}")
                 else:
-                    print(f"    No new files created")
+                    print(f"No new files created")
                     # Let's also check if there are any files in the directory
-                    print(f"    Current files in directory: {', '.join(sorted(os.listdir(calc_dir)))}")
+                    print(f"Current files in directory: {', '.join(sorted(os.listdir(calc_dir)))}")
                 
                 if result.returncode == 0:
-                    print(f"  ✓ {nucleus} {folder_type} ({input_file}) completed successfully")
+                    print(f"{nucleus} {folder_type} ({input_file}) completed successfully")
                 else:
-                    print(f"  ✗ {nucleus} {folder_type} ({input_file}) failed with return code {result.returncode}")
+                    print(f"{nucleus} {folder_type} ({input_file}) failed with return code {result.returncode}")
                     if result.stderr:
-                        print(f"    Error output: {result.stderr}")
+                        print(f"Error output: {result.stderr}")
                     if result.stdout:
-                        print(f"    Standard output: {result.stdout}")
+                        print(f"Standard output: {result.stdout}")
                         
             except Exception as e:
-                print(f"  ✗ Error running {nucleus} {folder_type} ({input_file}): {e}")
+                print(f"Error running {nucleus} {folder_type} ({input_file}): {e}")
         else:
-            print(f"  ✗ Input file not found: {src}")
+            print(f"Input file not found: {src}")
 
 print("All nuclei processed.")
