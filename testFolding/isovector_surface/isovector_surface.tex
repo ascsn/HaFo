@@ -1,0 +1,178 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+
+\textwidth 15.2cm
+\textheight 23.5cm
+\topmargin  -1.5cm
+\oddsidemargin 0.5cm
+\evensidemargin 0.5cm
+\pagestyle{empty}
+
+%\partopsep -33pt
+%\parsep 0pt
+%\topskip -33pt
+\parskip 0pt
+\parindent 0pt
+\setlength{\topsep}{0pt}
+\setlength{\partopsep}{0pt}
+\setlength{\itemsep}{-30pt}
+\setlength{\parsep}{-30pt}
+
+\makeatletter
+   \def\@listi{\itemsep0pt\parsep0pt}
+\makeatother
+
+
+
+
+%\renewcommand{\baselinestretch}{0.9}
+\renewcommand{\topfraction}{0.8}
+\renewcommand{\textfraction}{0.2}
+\renewcommand{\floatpagefraction}{0.8}
+
+%\settowidth{\leftmargin}{CC}
+%\addtolength{\leftmargin}{-30pt}
+%\setlength{\leftmargin}{5pt}
+
+\begin{document}
+
+\section*{The isovector surface term in the Fayans functional}
+
+\vspace*{-0.3em}
+
+\subsection*{Discussion file MSU--FAU, January 8. 2026}
+
+\bigskip
+
+This discussion file investigates the impact of the isovector surface
+term, $\propto a_-^{(s)}(\nabla\rho_-)^2$, in the Fayans
+functional. To that end, we performed fits with free variation of
+$a_-^{(s)}\equiv$\texttt{asm} starting from the Fy(IVP3) functional
+with finite pairing width 0.9 fm.  All results shown in the following
+were produced for that newly fitted parametrization.
+
+
+
+\begin{figure}[bth]
+\centerline{\includegraphics[width=\linewidth]{test_isovector_surface.pdf}}
+\caption{Quality measure $chi^2$ as function of the isovector-surface
+parameter \texttt{asm}$\equiv a_-^{(s)}$.}
+\label{fig:test_isovector_surface}
+\end{figure}
+The straightforward fit delivered
+$a_-^{(s)}=0.005\pm 0.016$ well compatible with zero. To make sure
+that we are not fooled by a rough $\chi^2$ landscape, we
+counter-checked by a series of fits with fixed and systematically
+varied \texttt{asm}.
+%
+Figure \ref{fig:test_isovector_surface} shows the resulting.  it
+confirms perfectly the findings from the fit with free
+$\texttt{asm}$. The isovector surface term does not improve much with
+respect to the fit data. The same was found earlier in fit of Skyrme
+forces where the isovector surface parameter is in most cases
+compatible with zero within the $2\sigma$ band of variation. In case
+of the Fayans Fy(IVP3) functional it is even less surprising. The
+three isovector pairing parameters of Fy(IVP3) have already explored a
+great deal of isovector freedom which, together with the finite-range
+pairing, has delivered a huge gain in $\chi^2$.
+
+\clearpage
+
+\begin{figure}
+\centerline{\includegraphics[width=\linewidth]{alignmatrix-fit_asm.pdf}}
+\caption{Matrix of CoD between model parameters and energies of
+  $^{236}$U, namely ground state energy $E$, fission isomer energy
+  $E^*$, and the isomer energy difference $\Delta E\equiv$DE for the
+  fit of Fy(IVP3) including free isovector surface parameter
+  \texttt{asm}$\equiv a_-^{(s)}$. The model parameters are denoted as
+  they are named in the code.}
+\label{fig:alignmatrix-fit_asm}
+\end{figure}
+Earlier papers argued that the isovector-surface term has a large
+impact on the energy of the fission isomer in heavy elements. The new fit
+opens the chance to investigate that in terms of correlation analysis
+what we will do now. This gives us at the same time insight into the
+correlations of the new parameter 'asm' with the other model
+parameters. As a first overview, all correlations are shown in figure 
+\ref{fig:alignmatrix-fit_asm} as matrix of coefficients of
+determination (CoD). The CoD of the isomer energy 'DE(236U)' are
+widely distributed over the model parameters without showing any clear
+preference. This was already found in previous studies and the
+introduction of the isovector-surface term does not change that. It is
+rather the isovector-gradient term in the Fayans pairing which has a
+surprisingly prevalence over the other parameters. The new parameter
+'asm' correlates best with the isoscalar surface parameters.
+
+\clearpage
+
+\begin{figure}
+\centerline{\includegraphics[width=0.7\linewidth]{CoD_isovector_surface.pdf}}
+\caption{Lower panel: The CoD between the isovector surface parameter
+  \texttt{asm}$\equiv a_-^{(s)}$ and model parameters as well as
+  properties $^{236}$U.  Upper panel: The Cod between the isomer
+  energy in $^{236}$U and model parameters as well as properties
+  $^{236}$U.}
+\label{fig:CoD_isovector_surface}
+\end{figure}
+Figure \ref{fig:CoD_isovector_surface} shows a cut along the CoD for
+'asm' (lower panel) and the isomer energy in $^{236}$U (upper panel).
+This allows to read off the correlations more quantitatively. It is
+interesting to note that 'asm' has very little relation to pairing
+properties. Quite different, the isomer energy is substantially
+influenced by pairing, again a feature known from previous
+studies. There is, indeed, some correlation with 'asm'. The question
+is to what extend this is significant as 'asm' may be strongly
+determined by the other model parameters. To see that more clearly
+these inter-relation of model parameters, we will look also at the
+multiple correlation coefficients (MCC).
+
+\clearpage
+
+\begin{figure}
+\centerline{\includegraphics[width=0.8\linewidth]{MCC_isovector_surface.pdf}}
+\caption{Left panel: The MCC between the isovector surface parameter
+  \texttt{asm}$\equiv a_-^{(s)}$ and groups of model parameters as
+  indicated.  Right panel: The same for the MCC with the isomer energy
+  in $^{236}$U.}
+\label{fig:MCC_isovector_surface}
+\end{figure}
+Figure \ref{fig:MCC_isovector_surface} shows the MCC of groups of
+model parameters with the isovector-surface parameter 'asm' (left
+panel) and the isomer energy in $^{236}$U (right panel). This shows
+that 'asm' is already determined to 70\% by the isoscalar surface
+term. Together with the spin-orbit term, we come already to 83\%.  The
+isovector-surface term has very little freedom in the given Fayans
+functional. The MCC with the isomer energy confirm that pairing as a
+whole is the strongest influencer. Thus one should play with the
+pairing parameters first if one aims to fine-tune the isomer.
+The impact of the surface term is not negligible either. Here we ought
+to mention that we have checked the MCC two ways, first, only with the
+isoscalar-surface parameter, and second, by also including 'asm'. The
+difference is a step 0.385 to 0.390 for the MCC, i.e. negligible.
+
+\medskip
+
+The question remains, how the new parametrizations Fy(IVP3) perform
+with respect to heavy elements. The table below shows it:
+
+\begin{center}
+\begin{tabular}{l|lll}
+\hline
+method      & $E(^{236}\mathrm{U})$& $E^*(^{236}\mathrm{U})$&$\Delta E(^{236}\mathrm{U})$\\
+\hline
+exp.        &  -1790.411 &           &   2.81\\
+mean-field  &  -1785.719 & -1783.067 &   2.652\\
++rot.corr.  &  -1787.510 & -1786.878 &   0.632\\
+\hline
+\end{tabular}
+\end{center}
+
+The pure mean field results produce a deceivingly nice isomer energy,
+but a too weak binding. For consistency, we must include the
+rotational correction. This helps significantly for the binding
+energy, but produces a too small isomer energy.  The under-binding of
+heavy nuclei is a known disease of non-relativistic Skyrme mean-field
+models and the Fayans functionals share this insufficiency. 
+Here is still work ahead.
+
+\end{document}

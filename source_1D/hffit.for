@@ -325,9 +325,8 @@ c
       character*6 dummy
       character*27 heatyp(12),headact,headact2
       logical*4  top11
-      logical tasym,trpaobs
-      parameter (tasym=.false.)
-      parameter (trpaobs=.true.)
+      LOGICAL, PARAMETER :: tasym=.FALSE.
+      LOGICAL, PARAMETER :: trpaobs=.FALSE.
       REAL(8) :: datapointnumber(12)      ! counter for effective nrr. of data points
 c
       include 'wavfun.inc'
@@ -1255,6 +1254,7 @@ c     &                0,0,0,0,0,0,0)
        END DO
       ELSE
       if(iextan.eq.2) then
+        ipair=ipairsav
 !        IF(iextan<0) then
         call extbarr(par,numax*min(nwdr,1))
         CALL attach(par,jp)
@@ -1313,7 +1313,7 @@ c     &                0,0,0,0,0,0,0)
 !        IF(numax>1) THEN
         CALL flush(2)
         IF(numax>0) THEN
-        DO ifac=4,1,-3 !1,4,3  !4,1,-3 !1,4
+        DO ifac=1,4,3 !1,4,3  !4,1,-3 !1,4
           parmnatfac = parmfseries(ifac)
           WRITE(2,'(/a,f7.3)') ' parameter variation now:',
      &      parmnatfac
@@ -1326,6 +1326,7 @@ c     &                0,0,0,0,0,0,0)
 !          CALL  extobs3gap(par,numax*min(nwdr,1),50,82,50,82,3)
 !          CALL  extobs3gap(par,numax*min(nwdr,1),82,126,82,126,3)
           call nucvarnat(par,numax)
+          ipair=ipairsav
           call extbarr2(par,numax*min(nwdr,1))
           call extobs2_all(par,yfit,numax*min(nwdr,1),41)
           call extobs2_all(par,yfit,numax*min(nwdr,1),42)

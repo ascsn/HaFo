@@ -33,7 +33,8 @@ c
       logical tsecord,tstsecord
       parameter (tsecord=.false.,tstsecord=.false.)
       character*1 asec
-      real*8  work2(kparmx,kparmx,22),work2dum(kparmx,kparmx) 
+      REAL(8) ::  work2(kparmx,kparmx,22),work2dum(kparmx,kparmx) 
+      REAL(8) ::  work0(22),dwork(kparmx,22)       !  workspace for variation
       REAL(8), ALLOCATABLE :: eneutsav(:),deneutsav(:,:)
       REAL(8), ALLOCATABLE :: esymsav(:),desymsav(:,:)
 c
@@ -139,6 +140,12 @@ C
           CALL collectw(i,j,hgradp,b2p0,db2p,work2(:,:,17),tsymderiv)
           CALL collectw(i,j,hsp,hsp0,dhsp,work2(:,:,18),tsymderiv)
           CALL collectw(i,j,delfxi,gammx0,dgammx,work2(:,:,19),
+     &                  tsymderiv)
+          CALL collectw(i,j,delh1xi,work0(20),dwork(:,20),work2(:,:,20),
+     &                  tsymderiv)
+          CALL collectw(i,j,delhgradxi,work0(21),dwork(:,21),
+     &                  work2(:,:,21),tsymderiv)
+          CALL collectw(i,j,asm,work0(22),dwork(:,22),work2(:,:,22),
      &                  tsymderiv)
         END IF
 c
@@ -292,11 +299,6 @@ c
         WRITE(82,'(1pg24.16)') vpp0
         WRITE(82,'(100(1pg24.16))') dvpp(1:nparmx)
         IF(tsecord) 
-     &     write(82,'(1000(1pg24.16))') work2(1:nparmx,1:nparmx,19)
-        WRITE(82,'(a)') asec//'delfxi'
-        WRITE(82,'(1pg24.16)') gammx0
-        WRITE(82,'(100(1pg24.16))') dgammx(1:nparmx)
-        IF(tsecord) 
      &     write(82,'(1000(1pg24.16))') work2(1:nparmx,1:nparmx,13)
         WRITE(82,'(a)') asec//'h1xi'
         WRITE(82,'(1pg24.16)') vpn0
@@ -308,6 +310,26 @@ c
         WRITE(82,'(100(1pg24.16))') drho0pr(1:nparmx)
         IF(tsecord) 
      &   write(82,'(1000(1pg24.16))') work2(1:nparmx,1:nparmx,15)
+        WRITE(82,'(a)') asec//'delfxi'
+        WRITE(82,'(1pg24.16)') gammx0
+        WRITE(82,'(100(1pg24.16))') dgammx(1:nparmx)
+        IF(tsecord) 
+     &     write(82,'(1000(1pg24.16))') work2(1:nparmx,1:nparmx,19)
+        WRITE(82,'(a)') asec//'delh1xi'
+        WRITE(82,'(1pg24.16)') work0(20)
+        WRITE(82,'(100(1pg24.16))') dwork(1:nparmx,20)
+        IF(tsecord) 
+     &     write(82,'(1000(1pg24.16))') work2(1:nparmx,1:nparmx,20)
+        WRITE(82,'(a)') asec//'delhgradxi'
+        WRITE(82,'(1pg24.16)') work0(21)
+        WRITE(82,'(100(1pg24.16))') dwork(1:nparmx,21)
+        IF(tsecord) 
+     &     write(82,'(1000(1pg24.16))') work2(1:nparmx,1:nparmx,21)
+        WRITE(82,'(a)') asec//'asm'
+        WRITE(82,'(1pg24.16)') work0(22)
+        WRITE(82,'(100(1pg24.16))') dwork(1:nparmx,22)
+        IF(tsecord) 
+     &     write(82,'(1000(1pg24.16))') work2(1:nparmx,1:nparmx,22)
       ELSE
 !        WRITE(82,'(a)') asec//'b4'
         WRITE(82,'(a)') asec//'B4_0'
@@ -1653,6 +1675,76 @@ c
         close(31)
         ident(1:1) = 's' 
 c
+c       prepare input for NAMELIST 'force' in 'SkyAx'
+c
+        open(31,file='force2D.'//id2//'.'//ident)
+        WRITE(31,'(a)') "&force name='none,'"
+        WRITE(31,'(a,f5.2,3(a,i3)/3(a,L1),3(a,f6.2)/a,2(1pg18.10))')
+     &   'chg=',acoul,
+     &   ',ex=',ifex,
+     &   ',zpe=',ifzpe,
+     &   ',ipair=',ipair,
+     &   ',tcoulfold=',ifrhoc, 
+     &   ',tcutoff_uvspace=',tphpair,
+     &   ',tregpair=',tregpair,
+     &   ',pairstab=',-ecstab,
+     &   ',pair_cutoff=',cutfac,
+     &   ',hfbwidth=',hfbwidth,
+     &   ',h2m=',amfc0
+        IF(ioptsk==13) THEN
+          WRITE(31,'(a,L1/6(a,1pg20.12)/6(a,1pg20.12)/
+     &              6(a,1pg20.12)/5(a,1pg20.12)/a,i2)')
+     &   ',tFayans=',.TRUE.,
+     &   ',avp=',avp,
+     &   ',h1vp=',h1vp,
+     &   ',h2vp=',h2vp,
+     &   ',avm=',avm,
+     &   ',h1vm=',h1vm,
+     &   ',h2vm=',h2vm,
+     &   ',asp=',asp,
+     &   ',hsp=',hsp,
+     &   ',hgradp=',hgradp,
+     &   ',asm=',asm,
+     &   ',hsm=',hsm,
+     &   ',hgradm=',hgradm, 
+     &   ',fxi=',fxi,
+     &   ',h1xi=',h1xi,
+     &   ',hgradxi=',hgradxi,
+     &   ',delfxi=',delfxi,
+     &   ',delh1xi=',delh1xi,
+     &   ',delhgradxi=',delhgradxi,
+     &   ',c0tau=',c0tau,
+     &   ',c1tau=',c1tau,
+     &   ',c0nabj=',c0nabj,
+     &   ',c1nabj=',c1nabj,
+     &   ',hcoul=',hcoul, 
+     &   ',isovectormodel=',isovectormodel
+       ELSE
+         WRITE(31,'(5(a,1pg20.12)/5(a,1pg20.12)/
+     &              5(a,1pg20.12))')
+     &   't0=',t0,
+     &   ',t1=',t1,
+     &   ',t2=',t2,
+     &   ',t3=',t3,
+     &   ',t4=',t4,
+     &   ',x0=',x0,
+     &   ',x1=',x1,
+     &   ',x2=',x2,
+     &   ',x3=',x3,
+     &   ',b4p=',b4p,
+     &   ',power=',power,
+     &   ',riftm=',riftm, 
+     &   ',v0prot=',v0prot,
+     &   ',v0neut=',v0neut,
+     &   ',rho0pr=',rho0pr
+      END IF
+      WRITE(31,'(a)') '&end'
+      CLOSE(31)
+!         isTsym                                         !NEW ODD                                                                         
+
+
+
+c
 c       write for005.*
 c
         nprot = 120
@@ -1863,7 +1955,7 @@ c
      &   '1,,    IWUNIT',
      &   "' resonances ion 208 Pb'",
      &   '0,0.3,              NGRID,RSTEP',
-     &   '-1,1E-8,1E-9,278,5780,3,-1, IWR,DABR/E,ITPR/MAX,IFPL',
+     &   '-1,1E-10,1E-10,300,15000,3,-1, IWR,DABR/E,ITPR/MAX,IFPL',
      &   '0.2,90.,0.2,-1,,               X0DAMP,E0DAMP,ADDNEW,WALL'
         write(31,'(9(i2,a),i2,a,5x,a)') 
      &    ifex,',',iftm,',',ifenrg,',',ifrso,',',ifzpe,',',
@@ -1875,17 +1967,17 @@ c
      &   '0.64,0,0,0,0,   aneu0,aneu11,aneu12,bneu11,bneu12'
       IF(ioptsk==13) THEN            ! Fayans functional
           iu=31
-          WRITE(iu,'(3(1pg18.10),a)') avp,h1vp,h2vp,' avp,h1vp,h2vp'
-          WRITE(iu,'(5(1pg18.10))') avm,h1vm,h2vm
-          WRITE(iu,'(5(1pg18.10))') sigmavol,rho0fy
-          WRITE(iu,'(5(1pg18.10))') asp,hsp,hgradp 
-          WRITE(iu,'(5(1pg18.10))') asm,hsm,hgradm 
-          WRITE(iu,'(5(1pg18.10))') hcoul,sigmacoul
-          WRITE(iu,'(5(1pg18.10))') fxi,h1xi,hgradxi,gammaxi,rho0xi
-          WRITE(iu,'(4(1pg18.10),i2)') delfxi,ecstab,delh1xi,delhgradxi,
+          WRITE(iu,'(3(1pg20.12),a)') avp,h1vp,h2vp,' avp,h1vp,h2vp'
+          WRITE(iu,'(5(1pg20.12))') avm,h1vm,h2vm
+          WRITE(iu,'(5(1pg20.12))') sigmavol,rho0fy
+          WRITE(iu,'(5(1pg20.12))') asp,hsp,hgradp 
+          WRITE(iu,'(5(1pg20.12))') asm,hsm,hgradm 
+          WRITE(iu,'(5(1pg20.12))') hcoul,sigmacoul
+          WRITE(iu,'(5(1pg20.12))') fxi,h1xi,hgradxi,gammaxi,rho0xi
+          WRITE(iu,'(4(1pg20.12),i2)') delfxi,ecstab,delh1xi,delhgradxi,
      &            isovectormodel
-          WRITE(iu,'(5(1pg18.10))') c0tau,c1tau 
-          WRITE(iu,'(5(1pg18.10))') c0nabj,c1nabj,c0tens,c1tens
+          WRITE(iu,'(5(1pg20.12))') c0tau,c1tau 
+          WRITE(iu,'(5(1pg20.12))') c0nabj,c1nabj,c0tens,c1tens
       ELSE
         write(31,'(5(1pg19.11,a)/5(g19.11,a))')
      &  t0,',',t1,',',t2,',',t3,',',t4,',      t0,t1,t2,t3,t4',
@@ -1919,8 +2011,8 @@ c
         write(31,'((f10.3,a),2(f10.6,a))')
      &    tyuk,',',xyuk,',',ayuk,',           tyuk,xyuk,ayuk'
       END IF
-        write(31,'(f15.11,a,2(1pg19.11),a,2(1pg19.11),a)')
-     &     power,',1.0,7,',pairfp,pairfn,
+        write(31,'(f15.11,a,i2,2(1pg20.12),a,2(1pg19.11),a)')
+     &     power,',1.0,',ipair,pairfp,pairfn,
      &  ',0,,',cutfac,hfbwidth,',, POWER,ACOUL,IPAIR,PAIRFP/N,ILNRESP,'
 c        write(31,'(f15.11,a,a)')
 c     &     power,',0.0,0,0.2,0.2',
