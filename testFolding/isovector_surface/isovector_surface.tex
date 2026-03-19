@@ -40,7 +40,8 @@
 
 \vspace*{-0.3em}
 
-\subsection*{Discussion file MSU--FAU, January 8. 2026}
+\subsection*{Discussion file MSU--FAU, status January
+22. 2026}
 
 \bigskip
 
@@ -103,10 +104,10 @@ rather the isovector-gradient term in the Fayans pairing which has a
 surprisingly prevalence over the other parameters. The new parameter
 'asm' correlates best with the isoscalar surface parameters.
 
-\clearpage
+%\clearpage
 
 \begin{figure}
-\centerline{\includegraphics[width=0.7\linewidth]{CoD_isovector_surface.pdf}}
+\centerline{\includegraphics[width=0.8\linewidth]{CoD_isovector_surface.pdf}}
 \caption{Lower panel: The CoD between the isovector surface parameter
   \texttt{asm}$\equiv a_-^{(s)}$ and model parameters as well as
   properties $^{236}$U.  Upper panel: The Cod between the isomer
@@ -114,7 +115,8 @@ surprisingly prevalence over the other parameters. The new parameter
   $^{236}$U.}
 \label{fig:CoD_isovector_surface}
 \end{figure}
-Figure \ref{fig:CoD_isovector_surface} shows a cut along the CoD for
+Figure \ref{fig:CoD_isovector_surface} shows a cut of the CoD
+ with
 'asm' (lower panel) and the isomer energy in $^{236}$U (upper panel).
 This allows to read off the correlations more quantitatively. It is
 interesting to note that 'asm' has very little relation to pairing
@@ -126,29 +128,30 @@ determined by the other model parameters. To see that more clearly
 these inter-relation of model parameters, we will look also at the
 multiple correlation coefficients (MCC).
 
-\clearpage
+%\clearpage
 
 \begin{figure}
-\centerline{\includegraphics[width=0.8\linewidth]{MCC_isovector_surface.pdf}}
+\centerline{\includegraphics[width=1\linewidth]{MCC_isovector_surface.pdf}}
 \caption{Left panel: The MCC between the isovector surface parameter
   \texttt{asm}$\equiv a_-^{(s)}$ and groups of model parameters as
   indicated.  Right panel: The same for the MCC with the isomer energy
-  in $^{236}$U.}
+  in $^{236}$U, $^{238}$U, $^{240}$Pt, and $^{242}$Cm.}
 \label{fig:MCC_isovector_surface}
 \end{figure}
 Figure \ref{fig:MCC_isovector_surface} shows the MCC of groups of
 model parameters with the isovector-surface parameter 'asm' (left
-panel) and the isomer energy in $^{236}$U (right panel). This shows
-that 'asm' is already determined to 70\% by the isoscalar surface
+panel) and the fission isomer energies in four actinides as indicated
+(right panel). The MCC are very similar four all four actinides. They
+show that 'asm' is already determined to 70\% by the isoscalar surface
 term. Together with the spin-orbit term, we come already to 83\%.  The
 isovector-surface term has very little freedom in the given Fayans
 functional. The MCC with the isomer energy confirm that pairing as a
 whole is the strongest influencer. Thus one should play with the
-pairing parameters first if one aims to fine-tune the isomer.
-The impact of the surface term is not negligible either. Here we ought
-to mention that we have checked the MCC two ways, first, only with the
+pairing parameters first if one aims to fine-tune the isomer.  The
+impact of the surface term is not negligible either. Here we ought to
+mention that we have checked the MCC two ways, first, only with the
 isoscalar-surface parameter, and second, by also including 'asm'. The
-difference is a step 0.385 to 0.390 for the MCC, i.e. negligible.
+difference is is about 0.01 in all four cases, i.e. negligible.
 
 \medskip
 
@@ -158,14 +161,37 @@ with respect to heavy elements. The table below shows it:
 \begin{center}
 \begin{tabular}{l|lll}
 \hline
-method      & $E(^{236}\mathrm{U})$& $E^*(^{236}\mathrm{U})$&$\Delta E(^{236}\mathrm{U})$\\
+      & $E(^{236}\mathrm{U})$& $E^*(^{236}\mathrm{U})$&$\Delta E(^{236}\mathrm{U})$\\
 \hline
-exp.        &  -1790.411 &           &   2.81\\
+exp.        &  -1790.411 &           &   2.750\\
 mean-field  &  -1785.719 & -1783.067 &   2.652\\
 +rot.corr.  &  -1787.510 & -1786.878 &   0.632\\
 \hline
+\hline
+      & $E(^{238}\mathrm{U})$& $E^*(^{238}\mathrm{U})$&$\Delta E(^{238}\mathrm{U})$\\
+\hline
+exp.        &  -1801.695 &           &   2.557\\
+mean-field  &  -1797.870 & -1795.212 &   2.658\\
++rot.corr.  &  -1799.649 & -1798.292 &   1.357\\
+\hline
+\hline
+      & $E(^{240}\mathrm{Pt})$& $E^*(^{240}\mathrm{Pt})$&$\Delta E(^{240}\mathrm{Pt})$\\
+\hline
+exp.        &  -1813.455 &           &   2.800\\
+mean-field  &  -1809.080 & -1806.622 &   2.458\\
++rot.corr.  &  -1810.873 & -1809.821 &   1.052\\
+\hline
+\hline
+      & $E(^{242}\mathrm{Cm})$& $E^*(^{242}\mathrm{Cm})$&$\Delta E(^{242}\mathrm{Cm})$\\
+\hline
+exp.        &  -1823.355 &           &   1.900\\
+mean-field  &  -1818.492 & -1816.506 &   1.982\\
++rot.corr.  &  -1820.288 & -1819.660 &   0.628\\
+\hline
 \end{tabular}
 \end{center}
+
+\bigskip
 
 The pure mean field results produce a deceivingly nice isomer energy,
 but a too weak binding. For consistency, we must include the
@@ -173,6 +199,119 @@ rotational correction. This helps significantly for the binding
 energy, but produces a too small isomer energy.  The under-binding of
 heavy nuclei is a known disease of non-relativistic Skyrme mean-field
 models and the Fayans functionals share this insufficiency. 
-Here is still work ahead.
+The energy of the fission isomer is particularly touchy. The
+measurement yields the difference between ground state and isomer. But
+both are heavily impacted by collective correlations (rotation and
+vibration). The raw mean-field result is merely the difference of
+minima. The rotational correction gives the energy difference between
+angular momentum projected minima. The correlated energy is obtained
+from subtracting the vibrational zero-point energy and adding the
+collective energy of the ground state in the corresponding minimum. 
+This can change the result by about 1 MeV. The actual number requires
+a detailed calculation. Thus there  is still work ahead, at the
+side of DFT functionals and at the side of collective calculations.
+
+
+\clearpage
+
+\subsection*{Surface parameter and surface energy}
+
+One has to distinguish the surface parameter of a model and the
+surface energy. The surface parameter is the model parameter in front
+of the gradient term $\propto(\nabla\rho_{0/1})^2$. The surface energy
+is a model property of semi-infinite matter which depends on several
+terms of the model, not only the gradient term. To explore the impact
+of both these features, we show below the matrix of CoD between model
+parameters and a couple of observables for SV-min. The surface
+parameters of the model are 'b2' (isoscalar) and 'b2p'
+(isovector). The surface energies are 'asurf' (isoscalar) and
+'asurf-symm' (isovector). They are computed for semi-infinite matter
+in semi-classical approximation (extended Thomas-Fermi) for which a
+code for Skyrme functionals is readily available.
+
+\bigskip
+
+
+\centerline{\includegraphics[width=\linewidth]{alignmatrix-SVmin-surface}}
+
+\bigskip
+
+The surprise is that the surface parameters have little correlation
+with the surface energies. They also have different CoD to the other
+entries. The surface model parameters, b2 nd b2p, are strongly tied to
+each other and, accordingly, they show the same weak correlations to
+slope of symmetry energy $J$, isovector effective mass $\kappa$, and
+isovector spin orbit b4p. There is also a faint correlation with the
+fission isomer energy DE(236U). 
+The surface energies 'asurf' and 'asurf-symm' are more independent form
+each other and shows different CoD. is strongly correlated with bulk
+binding and shows a couple of weaker correlations to other model parameters.
+'asurf' is strongly correlated to bulk binding and isovector response
+($J,L$). 'asurf symm' is almost exclusively determined by the
+isoscalar effective mass and it shows a weak correlation with the
+binding energy of $^{236}$U.
+
+Note that the fission isomer energy DE(236U) has a large CoD with
+isovector response ($J,L$). There was some correlation also for
+the Fayans model, but not that large. 
+
+Now we have looked at a standard Skyrme functional SV-min and
+an advanced Fayans functional. The latter was fitted to a larger set
+of fit data. For completion we also shows for a Fayans functional
+fitted to standard data only and with the isovector surface parameter
+'asm' included. The fit yields, again, a small value of 'asm', well
+compatible with zero within its uncertainty range. However, the
+uncertainty of 'asm' becomes much larger than for the fit to full
+Fy(IVP3) data which indicates that the extra radius information
+in Fy(IVP3) is strongly limiting 'asm'. 
+
+\bigskip
+
+
+\centerline{\includegraphics[width=\linewidth]{alignmatrix-Fystd-asm}}
+
+\bigskip
+
+The above figure shows the resulting matrix of CoD, now also with
+the bulk properties of the super-exotic nucleus $^{266}$Pb.
+The 'asm' is strongly correlated to the two isoscalar surface
+parameters 'asp' and 'hgradp'. In fact, as in the Skyrme model,
+'asm' is fully determined by the other model parameters. The energies
+of $^{236}$U and $^{266}$Pb shows some correlation to surface energies,
+but to all of them. The radius and the surface thickness of $^{266}$Pb
+show correlation with the isoscalar surface parameters. This is kind
+of a surprise as one would have expected a larger CoD with the
+isosalar surface parameter.
+
+After all, the search for 'asm'-selective, or 'b2p'-selective,
+observables was not yet successful. My be we have it already in the
+form a multitude of observables, particularly in the Fy(IVP3) fit, and
+these prefer this parameter being zero.
+
+
+\clearpage
+
+I quick side-issue:
+There was the argument that UNEDF1 gives a better extrapolation to
+superheavy elements by virtue of fitting to deformed nuclei. This gain
+has a price. To illustrate that, the figure below repeats figure 7
+from the UNEDF1 paper.
+
+\bigskip
+
+\centerline{\includegraphics[]{UNEDF1-Fig7.jpg}}
+
+\bigskip
+
+The deformed nuclei fit well, indeed. But all near spherical nuclei
+are grossly overbound. The fit has simply shifted the problem from
+the deformed nuclei to the spherical ones. The basic problem remains:
+The functionals in its present from cannot cover simultaneously
+the binding energy of super-heavy deformed nuclei and of near spherical
+nuclei. Rotational projection helps toward reducing the problem, but
+not yet enough for super-heavy elements. 
+
+
+
 
 \end{document}
