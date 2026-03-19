@@ -11,6 +11,7 @@ ifort -mcmodel=medium -msse4.2 -mfpmath=sse -no-prec-div -ip -finline-functions 
 ifort -mcmodel=medium -msse4.2 -mfpmath=sse -no-prec-div -ip -finline-functions -funroll-loops -c hfb-matrix.f
 ifort -mcmodel=medium -msse4.2 -mfpmath=sse -no-prec-div -ip -finline-functions -funroll-loops -c NMP-entry.f90
 ifort -mcmodel=medium -msse4.2 -mfpmath=sse -no-prec-div -ip -finline-functions -funroll-loops -autodouble  -o ../hafom_huge.exe hafom.f givens.o weak-charge.o NMP-entry.o hfb-matrix.o regpair.o Gauss_folding.o
+#ifort -mcmodel=medium -g -traceback -autodouble  -o ../hafom_huge.exe hafom.f givens.o weak-charge.o NMP-entry.o hfb-matrix.o regpair.o Gauss_folding.o
 #ifort -mcmodel=medium -msse4.2 -mfpmath=sse -no-prec-div -ip -finline-functions -funroll-loops -autodouble  -o ../hafom_huge.new hafom.f givens.o weak-charge.o NMP-entry.o hfb-matrix.o regpair.o Gauss_folding.o
 #ifc -O3 -o ../levden_sm.exe levden_sm.f
 cp params.sav params.inc
