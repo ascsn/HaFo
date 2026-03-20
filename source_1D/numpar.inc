@@ -70,13 +70,24 @@ C
 C     PARAMETER FOR THE FITTING PART:
 C      IERROR = RETURNS AN ERROR FLAG IN CASE OF INCOMPLETE CONVERGENCE
 C               IN THE HARTREE-FOCK ITERATION
+!     Parameter for the HFB step:
+!      thfbfac = switch to step-wise introduction of HFB step
+!      iterhfb = number of steps for reducing initially enhanced strength
+!      iterbcs = number of initial BCD steps
+!      iternat = number of HFB steps in configuration space
+!      modnat  = modulus for running interlaced stepin config. space
+!      pairenhance = factor for inigtially enhanced pairing strength
+!      
 C
        CHARACTER*50 TITLE
+       LOGICAL :: thfbfac
        COMMON /NUMPAR/ DABR,DABE,ADDNEW,EPSPR,X0DAMP,E0DAMP,WALL,
      &                 EPSRPA,RPAMIX,DABRPA,
+     &                 v2limh,delmix,pairenhance,
      &                 IFEX,IFTM,ITMAX,ITPR,IWR,IFDFMS,
      &                 IFENRG,IFRSO,IFGSC,IFZPE,IFRHOC,IDISC,IFREAD,
      &                 IFPLOT,IFENAV,IFSAVE,
      &                 IFIRPA,IFGRHO,IFANLR,ITRPA,
-     &                 IERROR,    TITLE
+     &                 iterhfb,iternat,modnat,iterbcs,
+     &                 IERROR,thfbfac,    TITLE
 C END INCLUDE BLOCK

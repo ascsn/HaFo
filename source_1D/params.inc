@@ -46,8 +46,9 @@ c       TPHPAIR = switch to old handling of pairing space (weight only on
 c                   Delta, not on v**2)
 c       TLOWERCUT = activates also pairing cutoff below Fermi surface
 C
-      logical TMONOPC,TADSIC,TLSYMM,TFORMW,TEPAIR,TPHPAIR,TLOWERCUT
-      LOGICAL, PARAMETER :: tregpair=.FALSE.  ! .TRUE. for regularized pairing
+      logical TMONOPC,TADSIC,TLSYMM,TFORMW,TEPAIR,TLOWERCUT
+      LOGICAL :: tregpair
+      LOGICAL :: tphpair 
 csmall       PARAMETER (KG1=61,KNMX=7,KJMX=27,KMAXN=56,KMAXP=46,                 !
 cmed       PARAMETER (KG1=199,KNMX=11,KJMX=47,KMAXN=56,KMAXP=56,                 !
       PARAMETER (KG1=301,KNMX=11,KJMX=47,KMAXN=277,KMAXP=277,              !
@@ -68,12 +69,14 @@ chuge       PARAMETER (KG1=230,KNMX=30,KJMX=140,KMAXN=3000,KMAXP=3000,          
      *            KRESWF=1,
      *            KTIMWF=KX11,TMONOPC=.false.,TADSIC=.false.,
      &            TLSYMM=.true.,TFORMW=.FALSE.,TEPAIR=.TRUE.,
-     &            TPHPAIR=.TRUE.,TLOWERCUT=.FALSE.)
+     &            TLOWERCUT=.FALSE.)
 c
 c      parameters for switches in the RPA part
 c
       logical oddoff,evenoff
       parameter (oddoff=.false.,evenoff=.false.)
+!
+      COMMON /switches/tregpair,tphpair
 C END INCLUDE BLOCK
 
 

@@ -13,6 +13,12 @@ c
       include 'rmsnuc.inc'
       include 'constn.inc'
 c      include 'linres.inc'
+      REAL(8) :: pairenhance=2D0,v2limh=1D-6,delmix=0.8D0
+      INTEGER :: iterhfb=400,iternat=0,modnat=1
+      INTEGER :: iterbcs=200
+!      LOGICAL :: tregpair=.FALSE.  ! .TRUE. for regularized pairing
+!      LOGICAL :: tphpair = .TRUE.  ! .TRUE. for uv-cutoff
+!      LOGICAL :: thfbfac=.FALSE.
 c
 c-------------------------------------------------------------------------------
 c
@@ -35,8 +41,8 @@ c
 c
 c     data in common /skypar/
 c
-      data  t5, t6, t7, t8, t9, x5, x6, x7, x8, b4p
-     &    /0D0,0D0,0D0,0D0,0D0,0D0,0D0,0D0,0D0, 0D0/
+      data  t5, t6, t7, t8, t9, x5, x6, x7, x8, b4p,amfc0
+     &    /0D0,0D0,0D0,0D0,0D0,0D0,0D0,0D0,0D0, 0D0,0D0,0D0/
       data b5p, b6,b6p, b7,b7p
      &    /0D0,0D0,0D0,0D0,0D0/
       data  ipair,ilnrsp,iparsh,pairfp, pairfn,acoul,beta20,temprt
@@ -128,6 +134,9 @@ c
       DATA c0tau,c1tau/0D0,0D0/
       DATA c0nabj,c1nabj,c0tens,c1tens/0D0,0D0,0D0,00D0/
 !      DATA tpairFy/.true./
+      DATA tregpair/.FALSE./
+      DATA tphpair/.TRUE./
+      DATA isovectormodel/3/
 c
 c     data for common /linres/
 c
@@ -359,11 +368,9 @@ c     character*1 tdum
       LOGICAL, PARAMETER :: tcentrdep=.FALSE.
       LOGICAL, PARAMETER :: thfbnatprint=.TRUE.,thfbnatural=.TRUE.
       LOGICAL :: tprint96
-      LOGICAL :: thfbfac=.FALSE.
+!      LOGICAL :: thfbfac=.FALSE.
       REAL(8) :: pairaddfacp=0D0,pairaddfacn=0D0
-      REAL(8) :: pairenhance=2D0,hfbfacact=1D0
-      INTEGER :: iterhfb=400,iternat=0,modnat=1
-      INTEGER :: iterbcs=200
+      REAL(8) :: hfbfacact=1D0
       REAL(8) :: symcondsav(2)
 cold      dimension ph(277)
 c
@@ -1645,8 +1652,8 @@ c
        amfc0(2) =  20.7219  
 c       amfc0(1) = 20.73621
 c       amfc0(2) = 20.73621
-      else
-       stop ' IFDFMS must be out of [0..3]'
+      elseif(SUM(amfc0)==0D0) then
+        stop ' IFDFMS must be out of [0..3]'
       endif
       if(ifzpe.lt.1 .and. ifzpe.gt.-2) then
         if(ifdfms.ge.3) then
@@ -4592,9 +4599,9 @@ c
       include 'constn.inc'
       common /ctest/edirec(ksl2),efkincut,ifkincut   ! to communicate 'spkin'
 c
-      data v2lim/1.0E-6/                 ! lower limit in HFB step
-ctest      data v2lim/1.0/                 ! lower limit in HFB step
-      data delmix/0.8/                   ! factor on gap potential in damping
+!      data v2limh/1.0E-6/                 ! lower limit in HFB step
+ctest      data v2limh/1.0/                 ! lower limit in HFB step
+!      data delmix/0.8/                   ! factor on gap potential in damping
 ctest      data delmix/0.5/                   ! factor on gap potential in damping
 c      data v2damp/0.0/
 c
@@ -4748,8 +4755,8 @@ c
          enddo
          x0act  = x0damp
        else
-!         v2act  = max(v2occ(nplshl),v2lim)
-         v2act  = max(weight(nplshl),v2lim)
+!         v2act  = max(v2occ(nplshl),v2limh)
+         v2act  = max(weight(nplshl),v2limh)
          e0act  = e0damp+sqrt((one-v2act)/v2act)*pptmax(iso)*delmix
 cold         x0act  = x0damp/(v2act)**(0.5-v2damp)
          x0act = x0damp/v2act**(1.0-ATAJIMA)

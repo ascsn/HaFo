@@ -111,6 +111,8 @@ c
       include 'numpar.inc'
       include 'rmsnuc.inc'
       include 'constn.inc'
+!
+      CHARACTER(20) :: ain
 c
 c------------------------------------------------------------------------------
 c
@@ -120,18 +122,6 @@ c     read switch 'iwunit' and open output unit accordingly
 c
        iwuold=-1
        do 1000 irep=1,999
-       read(05,*,err=1001,end=1001)   iwunit
-       if(iwunit.lt.0) stop ! " terminate at users request"
-       if(iwunit.ne.iwuold) then
-        if(iwuold.ne.-1) close(unit=06)
-        if(iwunit.eq.0) then
-         open(unit=06,file='for006',status='unknown')
-c       else
-c         open(unit=06,file='con')
-        endif
-       endif
-       iwuold=iwunit
-!       WRITE(6,'(a)') 'HAFOM:  next nucleus'
 c
 c      initialize values
 c
@@ -145,6 +135,34 @@ c
        t8 = zero
        t9 = zero
        ioptsk = 0
+!
+!      starts reading sequence
+!
+       read(05,'(a)',err=1001,end=1001)   ain
+       WRITE(6,*) ain
+!       rewind(05)
+       BACKSPACE(05)
+!       STOP
+       IF(INDEX(ain,'&MAIN')>0 .OR. INDEX(ain,'&main')>0) THEN
+         CALL nameinp()
+       ELSE
+
+       WRITE(6,*) 'in old branch'
+       read(05,'(a)',err=1001,end=1001)   ain
+       WRITE(6,*) ain
+       read(ain,*,end=1001)   iwunit
+       WRITE(6,*) iwunit
+       if(iwunit.lt.0) stop ! " terminate at users request"
+       if(iwunit.ne.iwuold) then
+        if(iwuold.ne.-1) close(unit=06)
+        if(iwunit.eq.0) then
+         open(unit=06,file='for006',status='unknown')
+c       else
+c         open(unit=06,file='con')
+        endif
+       endif
+       iwuold=iwunit
+!       WRITE(6,'(a)') 'HAFOM:  next nucleus'
 c
 c      read all data
 c
@@ -292,6 +310,8 @@ c        write(6,*)     x5,x6,x7,x8
 !       WRITE(6,'(a,4i4,1pg13.5)')'HAFOM:',nprot,nneut,nmaxp,nmaxn,xparsh
        read(05,*)     ifgsc
        iparsh = NINT(xparsh)
+
+       END IF
 c
 c      run the hartree-fock package
 c
@@ -310,3 +330,4 @@ c
        end
 c      include 'hafbody.for'
 c      include 'sumdum.for'
+      include 'nameinp.f'

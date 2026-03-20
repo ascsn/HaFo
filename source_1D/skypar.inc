@@ -171,9 +171,9 @@ c
      &          c0tau,c1tau,c0nabj,c1nabj,c0tens,c1tens,
      &          r0fy,r0fy2,rho0inv,efermfy,efacfy,ufacfy,pfacfy,
      &          clsp,clsm,ctensp,ctensm,ufacfypr,pgradfac
-!      INTEGER,PARAMETER :: isovectormodel=1
-!      INTEGER,PARAMETER :: isovectormodel=2
-      INTEGER,PARAMETER :: isovectormodel=3
+!      INTEGER :: isovectormodel=1
+!      INTEGER :: isovectormodel=2
+!      INTEGER :: isovectormodel=3
       common /faypar/avp,h1vp,h2vp,avm,h1vm,h2vm,sigmavol,rho0fy,
      &               asp,hsp,hgradp,asm,hsm,hgradm,hcoul,sigmacoul,
      &               fxi,h1xi,hgradxi,gammaxi,rho0xi,
@@ -182,7 +182,7 @@ c
      &               c0tau,c1tau,c0nabj,c1nabj,c0tens,c1tens,
      &               r0fy,r0fy2,rho0inv,efermfy,efacfy,ufacfy,pfacfy,
      &               clsp,clsm,ctensp,ctensm,ufacfypr,pgradfac,
-     &               tpairFy
+     &               isovectormodel,tpairFy
 c
 C END INCLUDE BLOCK
 

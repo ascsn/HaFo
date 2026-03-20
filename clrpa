@@ -1,5 +1,5 @@
 cd source_1D
-ifort -c -w -O0 givens.f
+ifort -c -w -O0  givens.f
 #ifort -w -O3 -tpp7 -save -ipo -xW -o ../haforpa.exe haforpa.f givens.o
 #ifort -w -g -save  -o ../haforpa.exe haforpa.f givens.o
 #ifort -w -save  -O3 -xW -o ../haforpa.exe haforpa.f givens.o

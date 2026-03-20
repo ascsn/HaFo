@@ -1,6 +1,6 @@
 c-----hfb_eqs---------------------------------------------------------
 c
-      subroutine hfb_natural(iso,efermiso,partnum,iternat)
+      subroutine hfb_natural(iso,efermiso,partnum,iternata)
 c
       include 'params.inc'
 c
@@ -18,7 +18,7 @@ c
 c
       REAL(8), INTENT(IN OUT) :: efermiso
       REAL(8), INTENT(IN OUT) :: partnum
-      INTEGER, INTENT(IN) :: iso,iternat
+      INTEGER, INTENT(IN) :: iso,iternata
 c
 !      REAL(8) :: efermhfb(2)
       REAL(8), ALLOCATABLE :: cm(:,:),cmnew(:,:),symcond(:,:)
@@ -31,12 +31,12 @@ c
       LOGICAL,PARAMETER :: tprint1=.FALSE.
       LOGICAL,PARAMETER :: toffdiag=.TRUE.,tnewv2=.FALSE.
       INTEGER,PARAMETER :: ifcut=1
-!      INTEGER,PARAMETER :: iternat=0!100
+!      INTEGER,PARAMETER :: iternata=0!100
       REAL(8),PARAMETER :: delstepbas=3.0D0,e0bas=10D0
 c
 c--------------------------------------------------------------------
 c
-      IF(iternat<0) RETURN
+      IF(iternata<0) RETURN
 c
       isoadd = (iso-1)*ngrid
       isnpad = (iso-1)*kjmx
@@ -227,13 +227,13 @@ c
           END IF
         END IF
 
-      IF(iternat.LE.0) RETURN
+      IF(iternata.LE.0) RETURN
 c
 c     iterate
 c
       iab=-2
       IF(tprint1) iab=-1
-      DO iter=1,iternat
+      DO iter=1,iternata
 
 c     h->psi in configuration space
         DO na=1,nmaxa 
