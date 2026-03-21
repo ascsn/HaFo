@@ -1,0 +1,39 @@
+&main title='test 120Sn',itmax=6000,iwr=-1,ifplot=4,iwunit=1
+/
+&grids ngrid=0,rstep=0.3D0
+/
+&static nprot=50,nneut=70,e0inv=110D0,x0inv=0.3D0,addrho=0.15D0,
+deocc(1)=6D0,deocc(2)=6D0,errenr=1D-10,errrad=1D-9,
+/
+&force
+ name='none',pairstab=-0D0,
+ t0=-1879.640018,t1=313.7493427,t2=112.6762700,t3=12527.38921,
+ x0=0.2585452462,x1=-0.3816889952,x2=-2.823640993,x3=0.1232283530,
+ t4=124.633,b4p=34.1116989,power=0.3,
+ h2m=20.749811,20.721249,
+ chg=1D0,ex=1,riftm=0D0,zpe=1,
+ ipair=7,v0prot=674.618,v0neut=606.902,rho0pr=0.2011591,
+ pair_cutoff=-5D0,HFBwidth=0.0D0,tregpair=F,tcutoff_uvspace=.T.,
+ tFayans=.FALSE.
+/
+&thermal /
+&main title='test 120Sn',itmax=6000,iwr=-1,ifplot=4,iwunit=1
+/
+&grids ngrid=0,rstep=0.3D0
+/
+&static nprot=50,nneut=72,e0inv=110D0,x0inv=0.3D0,addrho=0.15D0,
+deocc(1)=6D0,deocc(2)=6D0,errenr=1D-10,errrad=1D-9,
+/
+&force
+ name='none',pairstab=-0D0,
+ t0=-1879.640018,t1=313.7493427,t2=112.6762700,t3=12527.38921,
+ x0=0.2585452462,x1=-0.3816889952,x2=-2.823640993,x3=0.1232283530,
+ t4=124.633,b4p=34.1116989,power=0.3,
+ h2m=20.749811,20.721249,
+ chg=1D0,ex=1,riftm=0D0,zpe=1,
+ ipair=7,v0prot=674.618,v0neut=450,rho0pr=0.2011591,
+ pair_cutoff=-15D0,HFBwidth=0.0D0,tregpair=F,tcutoff_uvspace=.T.,
+ tFayans=.FALSE.
+/
+&thermal /
+

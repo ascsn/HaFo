@@ -14,11 +14,11 @@ c
       include 'constn.inc'
 c      include 'linres.inc'
       REAL(8) :: pairenhance=2D0,v2limh=1D-6,delmix=0.8D0
-      INTEGER :: iterhfb=400,iternat=0,modnat=1
+      INTEGER :: iterhfb=400,iternat=0,modnat=999999
       INTEGER :: iterbcs=200
 !      LOGICAL :: tregpair=.FALSE.  ! .TRUE. for regularized pairing
 !      LOGICAL :: tphpair = .TRUE.  ! .TRUE. for uv-cutoff
-!      LOGICAL :: thfbfac=.FALSE.
+!      LOGICAL :: tnamelist=.FALSE.
 c
 c-------------------------------------------------------------------------------
 c
@@ -130,13 +130,14 @@ c
       DATA sigmavol,rho0fy/0.3333333333D0,0.08D0/
       DATA hsp,hgradp,asm,hsm,hgradm/0D0,0D0,0D0,0D0,0D0/
       DATA hcoul,sigmacoul/0D0,0.33333333333D0/
-      DATA h1xi,hgradxi,gammaxi,rho0xi/0D0,0D0,1D0,0.16D0/
+      DATA h1xi,hgradxi,gammaxi,rho0xi/0D0,0D0,0.66666666667D0,0.16D0/
       DATA c0tau,c1tau/0D0,0D0/
       DATA c0nabj,c1nabj,c0tens,c1tens/0D0,0D0,0D0,00D0/
 !      DATA tpairFy/.true./
       DATA tregpair/.FALSE./
       DATA tphpair/.TRUE./
       DATA isovectormodel/3/
+      DATA tnamelist/.FALSE./
 c
 c     data for common /linres/
 c
@@ -427,6 +428,7 @@ c     given 'nprot' and 'nneut' from disk.
 c
 !      ecstab=0.001
 !     set auxiliary field to default (=inactive)
+!      WRITE(6,*) 'iternat=',iternat
       regpairadd=1D0
 !     optionally read parameters for pairing-energy constraint
 !     --> attention: not finally tested for Fayans pairing
@@ -439,7 +441,7 @@ c
 ! optionally read parameters for HFB iteration
       INQUIRE(FILE='hfbparams',EXIST=tprint96)
       tprint96=thfbnatprint .AND. thfbnatural .AND. tprint96
-      IF(tprint96) THEN
+      IF(tprint96 .AND. .NOT.tnamelist) THEN
         !  preliminary test switch, implement folding in HFB sub.
 !        IF(thfbfold.AND.iternat>0) 
 !     &      STOP 'folding and HFB subiterations yet incompatible'
@@ -508,6 +510,7 @@ c     & stop ' "KMAXP" to large for provided multiplicities "PH"'
 !      IF(ioptsk.EQ.13 .AND. ipair.NE.7)
 !      IF(ioptsk.EQ.13 .AND. ipair.LT.7)
 !     &  stop ' IOPTSK=13 requires IPAIR=7'
+!      WRITE(6,*) 'iternat=',iternat
       IF(iternat.NE.0 .AND. (ipair.eq.8 .or. ipair.eq.6) .AND.
      &   ecstab<0D0)  STOP 'HFB sub-iterations require ECSTAB=0.0'
 !     &   ecstab.NE.0D0)  STOP 'HFB sub-iterations require ECSTAB=0.0'

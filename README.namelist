@@ -1,0 +1,84 @@
+Using NAMELIST input for the 1D Hartree-Fock code:
+--------------------------------------------------
+
+Code Update 21. March 2026
+
+
+The input data for the 1D code can now be given as
+a Fortran namelist. The structure is the same as
+for the 2D SkyAx code. But several input parameters
+differ for technoical reasons. Here a brief summary
+of input parameters:
+
+Namelist &MAIN:
+
+ title       = character array with title of the run
+ iwunit      = output switch 
+                0: to file 'for006', 1: to std output, -1: terminate
+ itmax       = number of static iterations
+ iwr         = print level to std output (from -2 to +1)
+ ifplot      = level of compressed output on 'for011' 
+               the larger the more, recommended value ifplot=3
+ iterbcs     = nr. of initial BCS iterations in HFB run
+ iterhfb     = nr. of steps with enhanced pairing strength in HFB run
+ pairenhance = initial enhancement factor on pairing strength, the factor 
+               is reduced linearly until step nr. 'iterhfb' is reached
+ modnat      = modulus of calling 'hfb_natural' which is the routine
+               for the HFB step in configuration space
+ iternat     = number of sub-iterations in  'hfb_natural'
+ v2limh      = lower limit of occupation 'v**2' in HFB Hamiltonian
+ delmix      = mixing factor of old and new occupations in HFB
+ tnobcs      = inactive in 1D
+
+
+Namelist &GRIDS:
+
+ ngrid       = number of radial grid points
+ rstep       = grid spacing
+
+
+Namelist &STATIC:
+
+ nprot       = nr. of protons
+ nneut       = nr. of neutrons
+ nmaxp       = nr. of proton j-shells 
+ nmaxn       = nr. of neutron j-shells 
+ deocc       = two entries as nr. of proton and neutron extra shells,
+               value will be converted to nearest integer,
+               must not exceed 6
+ e0inv       = damping energy in damped gradient step
+ x0inv       = dimensionless step size in damped gradient step
+ addrho      = admixture of new density, density is composed as 
+                'addrho'*rho_new+(1.'addrho')*rh_old
+ addpot      = obsolete in 1D code
+ addocc      = obsolete in 1D code
+ errenr      = termination criterion for energy convergence
+ errrad      = termination criterion for radius convergence
+ npiter      = nr. of pairing iterations
+ trestart    = solutions will recycled if .TRUE. (not so useful
+               in single runs)
+
+
+Namelist &FORCE:
+
+ This provides the force parameters and options. It is the same 
+ as in the 2D code SkyAx.
+ Note that only the option 'istsym=0' is implemented ('istsym'
+ choses the level of treatment of spin terms). In the 1D code
+ it means that the full time-odd terms are active for odd nuclei,
+ but that Cramer's degeneracy is maintained. 
+
+
+Namelist &THERMAL:
+
+ temprt      = posibly finite temperature
+
+
+
+Sample input is provided in
+  test/for005.SVbas.nameinp for the Skymre foirce SV-bas  and
+  test/for005.FyIVP.namelinp for the Fayans model Fy(IVP).
+The files
+  test/for005.SVbas and
+  test/for005.FyIVP
+are input in old standard form for the same cases.

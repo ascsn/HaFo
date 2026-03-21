@@ -212,39 +212,6 @@ c       write(6,*)  aneu0,aneu11,aneu12,bneu11,bneu12
          READ(5,*) delfxi,ecstab,delh1xi,delhgradxi !,isovectormodel
          WRITE(6,*) delfxi,ecstab,delh1xi,delhgradxi,isovectormodel
 !         delfxi=0D0
-         IF(isovectormodel==0) THEN
-           fxip=fxi
-           h1xip=h1xi
-           hgradxip=hgradxi
-           fxin=fxi
-           h1xin=h1xi
-           hgradxin=hgradxi
-         ELSE IF(isovectormodel==2) THEN
-           fxip=fxi+delfxi
-           h1xip=h1xi
-           hgradxip=hgradxi
-           fxin=fxi-delfxi
-           h1xin=h1xi
-           hgradxin=hgradxi
-         ELSE IF(isovectormodel==1) THEN
-           xipfac=(fxi+delfxi)/fxi
-           fxip=fxi*xipfac
-           h1xip=h1xi*xipfac
-           hgradxip=hgradxi*xipfac
-           delh1xi = h1xip-h1xi
-           delhgradxi = hgradxip-hgradxi
-           xinfac=(fxi-delfxi)/fxi
-           fxin=fxi*xinfac
-           h1xin=h1xi*xinfac
-           hgradxin=hgradxi*xinfac
-         ELSE IF(isovectormodel==3) THEN
-           fxip=fxi+delfxi
-           h1xip=h1xi+delh1xi
-           hgradxip=hgradxi+delhgradxi
-           fxin=fxi-delfxi
-           h1xin=h1xi-delh1xi
-           hgradxin=hgradxi-delhgradxi
-         END IF
 !
          READ(5,*) c0tau,c1tau 
          WRITE(6,*) c0tau,c1tau 
@@ -312,6 +279,42 @@ c        write(6,*)     x5,x6,x7,x8
        iparsh = NINT(xparsh)
 
        END IF
+
+!      prepare a couple of internal Fayans parameters
+         IF(isovectormodel==0) THEN
+           fxip=fxi
+           h1xip=h1xi
+           hgradxip=hgradxi
+           fxin=fxi
+           h1xin=h1xi
+           hgradxin=hgradxi
+         ELSE IF(isovectormodel==2) THEN
+           fxip=fxi+delfxi
+           h1xip=h1xi
+           hgradxip=hgradxi
+           fxin=fxi-delfxi
+           h1xin=h1xi
+           hgradxin=hgradxi
+         ELSE IF(isovectormodel==1) THEN
+           xipfac=(fxi+delfxi)/fxi
+           fxip=fxi*xipfac
+           h1xip=h1xi*xipfac
+           hgradxip=hgradxi*xipfac
+           delh1xi = h1xip-h1xi
+           delhgradxi = hgradxip-hgradxi
+           xinfac=(fxi-delfxi)/fxi
+           fxin=fxi*xinfac
+           h1xin=h1xi*xinfac
+           hgradxin=hgradxi*xinfac
+         ELSE IF(isovectormodel==3) THEN
+           fxip=fxi+delfxi
+           h1xip=h1xi+delh1xi
+           hgradxip=hgradxi+delhgradxi
+           fxin=fxi-delfxi
+           h1xin=h1xi-delh1xi
+           hgradxin=hgradxi-delhgradxi
+         END IF
+
 c
 c      run the hartree-fock package
 c

@@ -80,7 +80,7 @@ C               IN THE HARTREE-FOCK ITERATION
 !      
 C
        CHARACTER*50 TITLE
-       LOGICAL :: thfbfac
+       LOGICAL :: thfbfac,tnamelist
        COMMON /NUMPAR/ DABR,DABE,ADDNEW,EPSPR,X0DAMP,E0DAMP,WALL,
      &                 EPSRPA,RPAMIX,DABRPA,
      &                 v2limh,delmix,pairenhance,
@@ -89,5 +89,5 @@ C
      &                 IFPLOT,IFENAV,IFSAVE,
      &                 IFIRPA,IFGRHO,IFANLR,ITRPA,
      &                 iterhfb,iternat,modnat,iterbcs,
-     &                 IERROR,thfbfac,    TITLE
+     &                 IERROR,thfbfac,tnamelist,    TITLE
 C END INCLUDE BLOCK
