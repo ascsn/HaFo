@@ -62,9 +62,7 @@ Namelist &STATIC:
 Namelist &FORCE:
 
  This provides the force parameters and options. It is the same 
- as in the 2D code SkyAx. But the input of a parametrization by
- name is not yet implemented. The model parameters must be given
- explictily.
+ as in the 2D code SkyAx.
  Note that only the option 'istsym=0' is implemented ('istsym'
  choses the level of treatment of spin terms). In the 1D code
  it means that the full time-odd terms are active for odd nuclei,
