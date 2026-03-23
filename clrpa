@@ -5,10 +5,11 @@ ifort -c -w -O0  givens.f
 #ifort -w -save  -O3 -xW -o ../haforpa.exe haforpa.f givens.o
 ifort -msse4.2 -mfpmath=sse -ipo -finline-functions -funroll-loops -c Gauss_folding.f90
 ifort -msse4.2 -mfpmath=sse -ipo -finline-functions -funroll-loops -c regpair.f90
+ifort -msse4.2 -mfpmath=sse -ipo -finline-functions -funroll-loops -c m_dynpar.f90
 ifort -msse4.2 -mfpmath=sse -ipo -finline-functions -funroll-loops -c weak-charge.f90
 ifort -msse4.2 -mfpmath=sse -ipo -finline-functions -funroll-loops -c hfb-matrix.f
 ifort -msse4.2 -mfpmath=sse -ipo -finline-functions -funroll-loops -c NMP-entry.f90
 #ifort -msse4.2 -mfpmath=sse -static -ipo -finline-functions -funroll-loops -autodouble -o ../haforpa.exe haforpa.f givens.o weak-charge.o NMP-entry.o hfb-matrix.o regpair.o Gauss_folding.o
-ifort -msse4.2 -mfpmath=sse -static -ipo -finline-functions -funroll-loops -autodouble -o ../haforpa.new haforpa.f givens.o weak-charge.o NMP-entry.o hfb-matrix.o regpair.o Gauss_folding.o
+ifort -msse4.2 -mfpmath=sse -static -ipo -finline-functions -funroll-loops -autodouble -o ../haforpa.new haforpa.f givens.o weak-charge.o NMP-entry.o hfb-matrix.o regpair.o Gauss_folding.o m_dynpar.o
 #ifc -O3 -o ../levden_sm.exe levden_sm.f
 cd ..

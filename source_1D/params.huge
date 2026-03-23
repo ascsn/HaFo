@@ -42,8 +42,8 @@ C       TMONOPC = switch to monopole constraint (using 'wall' variable)
 c       TLSYMM  = re-scale slope of asymmetry energy --> 3*rho*dasymm
 C
       logical TMONOPC,TADSIC,TLSYMM,TFORMW,TEPAIR,TLOWERCUT
-      LOGICAL :: tregpair=.FALSE.  
-      LOGICAL :: tphpair = .TRUE.  
+      LOGICAL :: tregpair
+      LOGICAL :: tphpair
 C
 csmall       PARAMETER (KG1=61,KNMX=7,KJMX=27,KMAXN=56,KMAXP=46,                 !
 cmed       PARAMETER (KG1=199,KNMX=11,KJMX=47,KMAXN=56,KMAXP=56,                 !

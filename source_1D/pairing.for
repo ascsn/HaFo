@@ -1434,6 +1434,8 @@ c      write(*,*) 'proton paircr:',(paircr(ir),ir=1,ngrid)
 c
 c     now multiply with strength to obtain local pair-potential
 c
+!      WRITE(6,'(a,3(1pg13.5),l2)')'HFBpot=',v0prot,v0neut,rho0pr,tpairFy
+
       IF(tpairFy) THEN
         CALL fy_hfbpot()
         eppfy = epp

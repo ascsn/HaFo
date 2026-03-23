@@ -1776,7 +1776,7 @@ c        endif
         endif
         tya    = tyuk*(1.0+0.5*xyuk)
         tyb    = tyuk*(0.5+xyuk)
-        IF(hgradxi.NE.0D0) CALL  ini_fyfunc()
+        IF(hgradxi.NE.0D0 .AND. hgradxi<HUGE(1D0)) CALL  ini_fyfunc()
       END IF                            ! end override
 c
 c     setting pairing parameters:
@@ -1943,8 +1943,8 @@ c
       tyukaw= (isky.eq.9)
       texten= (isky.gt.9)
       tssmas= (t9.ne.zero)
-      tpair = (iparac.ge.7 .OR. ioptsk==13)
-      tpairFy = ioptsk==13 .or. hgradxi.NE.0D0
+      tpair = (iparac.ge.7 .OR. ioptsk==13) 
+      tpairFy = ioptsk==13 .or. (hgradxi.NE.0D0.AND.hgradxi<HUGE(1D0))
       IF(.NOT.tpairFy .AND. ioptsk==13) THEN
         pairfp = -fxi*pfacfy   
         pairfn = -fxi*pfacfy

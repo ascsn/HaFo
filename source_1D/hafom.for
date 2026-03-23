@@ -145,6 +145,7 @@ c
 !       STOP
        IF(INDEX(ain,'&MAIN')>0 .OR. INDEX(ain,'&main')>0) THEN
          CALL nameinp()
+!         WRITE(11,*) 'CUTFAC=',cutfac
        ELSE
 
        WRITE(6,*) 'in old branch'

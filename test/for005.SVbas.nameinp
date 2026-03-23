@@ -1,9 +1,9 @@
-&main title='test 120Sn',itmax=6000,iwr=-1,ifplot=4,iwunit=1
+&main title='test 120Sn',itmax=6000,iwr=0,ifplot=3,iwunit=1
 /
 &grids ngrid=0,rstep=0.3D0
 /
-&static nprot=50,nneut=70,e0inv=110D0,x0inv=0.3D0,addrho=0.15D0,
-deocc(1)=6D0,deocc(2)=6D0,errenr=1D-10,errrad=1D-9,
+&static nprot=50,nneut=70,e0inv=100D0,x0inv=0.2D0,addrho=0.15D0,
+deocc(1)=2D0,deocc(2)=2D0,errenr=1D-9,errrad=1D-8,npiter=100,
 /
 &force
  name='none',pairstab=-0D0,
@@ -17,7 +17,7 @@ deocc(1)=6D0,deocc(2)=6D0,errenr=1D-10,errrad=1D-9,
  tFayans=.FALSE.
 /
 &thermal /
-&main title='test 120Sn',itmax=6000,iwr=-1,ifplot=4,iwunit=1
+&main title='test 120Sn',itmax=6000,iwr=-1,ifplot=4,iwunit=-1
 /
 &grids ngrid=0,rstep=0.3D0
 /
