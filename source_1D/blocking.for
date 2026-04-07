@@ -62,6 +62,9 @@ c
 !        OPEN(unit=962,file='result.000',form='formatted')
         WRITE(962) nprot,nneut,nmaxp,nmaxn,etotal,rdmsc,surfc,
      &              rmsc,rmsn,deltp,deltn,rhochr,spenrg
+        WRITE(11,'(a,2i4,f10.3,3(f7.4))')
+     &      'final even even: ',
+     &       nprot,nneut,etotal,rmsc,deltp,deltn
         WRITE(12,'(a,2i4,4(1pg13.5))') 'summary even-even:',
      &    nprot,nneut,etotal,rmsc,epp,enn
         WRITE(6,'(a,200(1pg13.5))') 'spenrg:',spenrg(1:nmaxto)
