@@ -1306,6 +1306,8 @@ c
      &          'test2 pair:',epair,epp2+epn2,epp2,epn2
         WRITE(6,'(a,40(/5(1pg13.5)))')'add potential FY:',ppadd(1:ngrid)
         WRITE(6,'(5(1pg13.5))') ppadd(ngrid+1:2*ngrid)
+        epn=epn2
+        epp=epp2
         tpairFy=.FALSE.
         call skypot(0)
       endif

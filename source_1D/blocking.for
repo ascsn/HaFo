@@ -62,11 +62,11 @@ c
 !        OPEN(unit=962,file='result.000',form='formatted')
         WRITE(962) nprot,nneut,nmaxp,nmaxn,etotal,rdmsc,surfc,
      &              rmsc,rmsn,deltp,deltn,rhochr,spenrg
-        WRITE(11,'(a,2i4,f10.3,3(f7.4))')
+        WRITE(11,'(a,2i4,f10.3,f7.4,2(f7.3))')
      &      'final even even: ',
-     &       nprot,nneut,etotal,rmsc,deltp,deltn
+     &       nprot,nneut,etotal,rmsc,epp,epn !deltp,deltn
         WRITE(12,'(a,2i4,4(1pg13.5))') 'summary even-even:',
-     &    nprot,nneut,etotal,rmsc,epp,enn
+     &    nprot,nneut,etotal,rmsc,epp,epn
         WRITE(6,'(a,200(1pg13.5))') 'spenrg:',spenrg(1:nmaxto)
         CLOSE(962)
         RETURN
@@ -89,7 +89,8 @@ c
             eblock(nblockp) = etotal
             rbl2(nblockp,1) = rmsc
 !            gapbl2(:,nblockp,1) = (/deltp,deltn/)       
-            gapbl2(:,nblockp,1) = (/-epp/deltp,-epn/deltn/)            
+!            gapbl2(:,nblockp,1) = (/-epp/deltp,-epn/deltn/)            
+            gapbl2(:,nblockp,1) = (/epp,epn/)            
             occsav(nblockp) = v2occ(nblockp)
             gwsav(nblockp) = weight(nblockp)
             WRITE(6,'(a,2i3,a,4(1pg13.5))') 'proton BLOCKING: ',nblockp,
@@ -108,11 +109,11 @@ c
         nblockmin = 0
         DO nblockp=1,nmaxp
           IF(eblock(nblockp).NE.0D0) THEN
-            WRITE(6,'(2i4,4(1pg13.5))') nblockp,jsp(nblockp),
+            WRITE(6,'(2i4,4(1pg13.4))') nblockp,jsp(nblockp),
      &      spsav(nblockp),occsav(nblockp),eblock(nblockp),efact
             WRITE(11,'(2i4,a,4(1pg14.6))') nblockp,jsp(nblockp),'/2',
      &     eblock(nblockp),rbl2(nblockp,1),v2occ(nblockp),gwsav(nblockp)
-            WRITE(12,'(2i4,a,4(1pg14.6))') nblockp,jsp(nblockp),'/2',
+            WRITE(12,'(2i4,a,4(1pg14.5))') nblockp,jsp(nblockp),'/2',
      &      eblock(nblockp),rbl2(nblockp,1),gapbl2(:,nblockp,1)
 !     &     eblock(nblockp),rbl2(nblockp,1),v2occ(nblockp),gwsav(nblockp)
             IF(eblock(nblockp)<eblockmin) THEN
@@ -123,10 +124,14 @@ c
         END DO
         nblockp = nblockmin
         CALL hafosu
-        WRITE(11,'(a,2i4,2i3,a,f9.3,3(f7.4))')
+        WRITE(11,'(a,2i4,2i3,a,f9.3,f7.4,2(f7.3))')
      &      'final proton BLOCKING: ',
      &       nprot,nneut,nblockp,jsp(nblockp),'/2   .    . ',etotal,rmsc
-     &       ,deltp,deltn
+     &       ,epp,epn  !deltp,deltn
+        WRITE(12,'(a,2i4,2i3,a,f9.3,f7.4,2(f7.3))')
+     &      'final proton BLOCKING: ',
+     &       nprot,nneut,nblockp,jsp(nblockp),'/2   .    . ',etotal,rmsc
+     &       ,epp,epn  !deltp,deltn
       ELSE IF(isoodd==2) THEN
         efact =efensav
         DO nblock=1,nmaxn
@@ -141,8 +146,8 @@ c
             CALL hafosu
             eblock(nblockn) = etotal            
             rbl2(nblockn,1) = rmsc
-            gapbl2(:,nblockn,1) = 2D0*(/sumuvp,sumuvn/)            
-!            gapbl2(:,nblockn,1) = (/epp,epn/)            
+!            gapbl2(:,nblockn,1) = 2D0*(/sumuvp,sumuvn/)            
+            gapbl2(:,nblockn,1) = (/epp,epn/)            
             occsav(nblockn) = v2occ(nblockn)
             gwsav(nblockn) = weight(nblockn)
             IF(testprintb) 
@@ -167,7 +172,7 @@ c
             WRITE(11,'(2i4,a,6(1pg14.6))') nblockn,jsp(nblock),'/2',
      &      spsav(nblockn),occsav(nblockn),eblock(nblockn),
      &      rbl2(nblockn,1),v2occ(nblockn),gwsav(nblockn)
-            WRITE(12,'(2i4,a,6(1pg14.6))') nblockn,jsp(nblock),'/2',
+            WRITE(12,'(2i4,a,6(1pg14.5))') nblockn,jsp(nblock),'/2',
      &      spsav(nblockn),occsav(nblockn),eblock(nblockn),
      &      rbl2(nblockn,1),gapbl2(:,nblockn,1)
 !     &      rbl2(nblockn,1),v2occ(nblockn),gwsav(nblockn)
@@ -181,10 +186,14 @@ c
 !        WRITE(20,'(a)') 'final neutron BLOCKING: '
         CALL hafosu
 !        WRITE(11,'(a,4i3,a,4(1pg13.5))')
-        WRITE(11,'(a,2i4,2i3,a,f9.3,3(f7.4))')
+        WRITE(11,'(a,2i4,2i3,a,f9.3,f8.4,2(f7.3))')
      &      'final neutron BLOCKING: ',
      &       nprot,nneut,nblockn,jsp(nblockn-nmaxp),'/2 . . ',etotal,
-     &       rmsc,deltp,deltn
+     &       rmsc,epp,epn !,deltp,deltn
+        WRITE(12,'(a,2i4,2i3,a,f9.3,f8.4,2(f7.3))')
+     &      'final neutron BLOCKING: ',
+     &       nprot,nneut,nblockn,jsp(nblockn-nmaxp),'/2 . . ',etotal,
+     &       rmsc,gapbl2(:,nblockn,1) !,deltp,deltn
       ELSE IF(isoodd==3) THEN
 !        efact =efepsav
         DO nblockp=1,nmaxp
@@ -235,6 +244,11 @@ c
         nblockn=nblnmin
         WRITE(11,'(2i4,a,2i3,a,f9.3,3f7.4)')
         WRITE(11,'(/1x/a/1x/a,2i4,2(2i3,a),f9.3,3f7.4)')
+     &     '******************', 'final double BLOCKING: ',
+     &    nprot,nneut,nblockp,jsp(nblockp),'/2 ',nblockn-nmaxp,
+     &           jsp(nblockn-nmaxp),'/2 ',emin,rbl2(nblockp,nblockn),
+     &           gapbl2(:,nblockp,nblockn)
+        WRITE(12,'(/1x/a/1x/a,2i4,2(2i3,a),f9.3,f7.4,2(f7.3))')
      &     '******************', 'final double BLOCKING: ',
      &    nprot,nneut,nblockp,jsp(nblockp),'/2 ',nblockn-nmaxp,
      &           jsp(nblockn-nmaxp),'/2 ',emin,rbl2(nblockp,nblockn),
