@@ -35,7 +35,7 @@ c
       data iwr,ifplot,ifrhoc,ifanlr,ifgrho
      &    / -1,     0,     0,     0,     0/
       data ifex,iftm,ifenrg,ifrso,ifgsc,ifzpe,ifdfms,ifenav,ifsave
-     &    /   1,   1,     1,    1,    0,    0,     0,     0,     1/
+     &    /   1,   0,     1,    1,    0,    0,     0,     0,     1/
       data itrpa,epsrpa
      &    /    0,   0.5/
 c
@@ -135,7 +135,7 @@ c
       DATA c0nabj,c1nabj,c0tens,c1tens/0D0,0D0,0D0,00D0/
 !      DATA tpairFy/.true./
       DATA tregpair/.FALSE./
-      DATA tphpair/.TRUE./
+      DATA tphpair/.FALSE./
       DATA isovectormodel/3/
       DATA tnamelist/.FALSE./
 c
@@ -1306,6 +1306,8 @@ c
      &          'test2 pair:',epair,epp2+epn2,epp2,epn2
         WRITE(6,'(a,40(/5(1pg13.5)))')'add potential FY:',ppadd(1:ngrid)
         WRITE(6,'(5(1pg13.5))') ppadd(ngrid+1:2*ngrid)
+        epn=epn2
+        epp=epp2
         tpairFy=.FALSE.
         call skypot(0)
       endif
