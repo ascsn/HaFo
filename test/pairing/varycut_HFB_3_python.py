@@ -460,10 +460,10 @@ fig, (ax2, ax1) = plt.subplots(
 ax1.set_xlim(14, 101)
 ax1.set_ylim(0.0, 3.3)
 ax1.set_xlabel(r"$\varepsilon_{cut}$ (MeV)", fontdict=fontDict)
-ax1.set_ylabel(r"total energy (MeV)", fontdict=fontDict)
+ax1.set_ylabel(r"$\Delta E $ (MeV)", fontdict=fontDict)
 # ax1.tick_params(axis='both', which='major', labelsize=12)
-ax1.text(0.85, 1.9, r"$^{120}$Sn", fontsize=40, ha='center', va='bottom', transform=ax1.transAxes)
-ax1.text(0.85, 1.8, r"SV-bas", fontsize=40, ha='center', va='bottom', transform=ax1.transAxes)
+ax1.text(0.85, 1.8, r"$^{120}$Sn", fontsize=72, ha='center', va='bottom', transform=ax1.transAxes)
+ax1.text(0.85, 1.7, r"SV-bas", fontsize=54, ha='center', va='bottom', transform=ax1.transAxes)
 ax1.text(0.1, 1.9, r"(a)", fontsize=40, ha='center', va='bottom', transform=ax1.transAxes)
 
 # Constants for y-offset (col 2 + constant)
@@ -497,7 +497,7 @@ ax2.tick_params(axis='x', labelbottom=False)
 # ax1.text(0.1, 1.9, r"(a)", fontsize=40, ha='center', va='bottom', transform=ax1.transAxes)
 ax1.text(0.1, -0.3, r"(b)", fontsize=40, ha='center', va='bottom', transform=ax2.transAxes)
 
-ax2.set_ylabel(r"charge radius ($10^{-3}$ fm)", fontdict=fontDict)
+ax2.set_ylabel(r"$\Delta R_{\rm{ch}}$ ($10^{-3}$ fm)", fontdict=fontDict)
 # ax2.set_title(r"$^{120}$Sn, SV-bas", fontsize=16)
 # ax2.tick_params(axis='both', which='major', labelsize=12)
 

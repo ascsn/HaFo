@@ -61,7 +61,7 @@ gs = gridspec.GridSpec(2, 1, height_ratios=[1, 1], figure=fig, hspace=0)
 # --- 4. Bottom Subplot (Total Energy) ---
 ax_bottom = fig.add_subplot(gs[1, 0])
 ax_bottom.set_xlabel(r"$N_{\text{st}}^{1/3}$", fontdict=fontDict, labelpad=0)
-ax_bottom.set_ylabel("total energy (MeV)", fontdict=fontDict, labelpad=10)
+ax_bottom.set_ylabel(r"$\Delta E$ (MeV)", fontdict=fontDict, labelpad=10)
 ax_bottom.set_xlim(7, 19)
 ax_bottom.set_ylim(-0.1, 0.37)
 
@@ -80,7 +80,7 @@ for cut_val, s_data in series_data_bottom.items():
 
     ax_bottom.plot(
         x_raw, y_raw,
-        label=f"$\\epsilon_{{\\text{{cut}}}}$ = {cut_val} MeV",
+        label=f"{cut_val} MeV",
         color=colors[s_data['color_key']], linestyle='-', linewidth=4
     )
     # ax_bottom.plot(
@@ -89,7 +89,17 @@ for cut_val, s_data in series_data_bottom.items():
     #     color=colors[s_data['color_key']]
     # )
 
-ax_bottom.legend(loc='upper right', prop={'size': 24})
+leg = ax_bottom.legend(
+    title=r"$\varepsilon_{\rm cut}$",
+    title_fontsize=52,
+    loc='upper right',
+    prop={'size': 24},
+    bbox_to_anchor=(0.8, 1.0),  
+    # frameon=True,
+    # edgecolor='black',
+)
+leg.get_title().set_fontweight('bold')
+ax_bottom.text(0.88, 0.1, r'(b)', transform=ax_bottom.transAxes, fontsize=36, verticalalignment='top')
 ax_bottom.tick_params(
     axis="both",
     which="major",
@@ -112,12 +122,13 @@ ax_bottom.tick_params(
 # --- 5. Top Subplot (Charge Radius) ---
 ax_top = fig.add_subplot(gs[0, 0], sharex=ax_bottom)
 ax_top.set_xlabel("", fontdict=fontDict, labelpad=0) # X-label removed for top plot due to sharex
-ax_top.set_ylabel(r"charge radius ($10^{-3}$ fm)", fontdict=fontDict, labelpad=10)
+ax_top.set_ylabel(r"$\Delta R_{\rm{ch}}$ ($10^{-3}$ fm)", fontdict=fontDict, labelpad=10)
 ax_top.set_xlim(7, 19)
 ax_top.set_ylim(-2.95, 0.5)
 # ax_top.set_title(r"$^{170}$Yb, SV-bas, HFB", fontdict=fontDictTitle, pad=10)
-ax_top.text(0.8, 0.7, r'$^{170}$Yb', transform=ax_top.transAxes, fontsize=35, verticalalignment='top')
-ax_top.text(0.65, 0.6, r'SV-bas, HFB', transform=ax_top.transAxes, fontsize=35, verticalalignment='top')
+ax_top.text(0.25, 0.35, r'$^{170}$Yb', transform=ax_top.transAxes, fontsize=72, verticalalignment='top', fontweight='bold')
+ax_top.text(0.2, 0.2, r'SV-bas, HFB', transform=ax_top.transAxes, fontsize=54, verticalalignment='top', fontweight='bold')
+ax_top.text(0.88, 0.1, r'(a)', transform=ax_top.transAxes, fontsize=36, verticalalignment='top', fontweight='bold')
 # Make x-axis tick labels invisible for the top plot
 plt.setp(ax_top.get_xticklabels(), visible=False)
 

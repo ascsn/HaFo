@@ -1,4 +1,4 @@
-# HFBlocalization_interpolated.py
+    # HFBlocalization_interpolated.py
 # Interpolated map version of your original plotting script.
 # Uses matplotlib.tri.LinearTriInterpolator to upsample onto a fine grid.
 #
@@ -642,7 +642,8 @@ ax1 = fig.add_axes(ax1_pos)
 ax2 = fig.add_axes(ax2_pos)
 cax = fig.add_axes(cbar_pos)
 
-AXIS_LABEL_SIZE = 32
+AXIS_LABEL_SIZE = 36
+TICK_LABEL_SIZE = 32
 X_TICK_LOCATIONS = np.linspace(-5, 5, 5)
 
 # --- 4) Plot BCS (left) using interpolated field ---
@@ -666,12 +667,13 @@ ax2.set_xticks(X_TICK_LOCATIONS)
 cbar_ticks = np.arange(0.06, 0.076 + 0.001, 0.005)
 cbar = fig.colorbar(m1, cax=cax, format=r"%.3f", ticks=cbar_ticks)
 cbar.set_label(r"density ($\mathrm{fm}^{-3}$)", fontsize=AXIS_LABEL_SIZE)
+cbar.ax.tick_params(labelsize=TICK_LABEL_SIZE)
 
 for ax in [ax1, ax2]:
     ax.tick_params(
         axis="both",
         which="major",
-        labelsize=28,
+        labelsize=TICK_LABEL_SIZE,
         labelright=False,
         direction="in",
         right=True,
@@ -681,7 +683,7 @@ for ax in [ax1, ax2]:
     ax.tick_params(
         axis="both",
         which="minor",
-        labelsize=28,
+        labelsize=TICK_LABEL_SIZE,
         labelright=False,
         direction="in",
         right=True,
