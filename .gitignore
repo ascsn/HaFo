@@ -3,3 +3,6 @@
 *.out
 101Sn/*
 *.exe
+*.new
+source_1D/*.mod
+Applications/*

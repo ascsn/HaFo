@@ -62,10 +62,10 @@ c
 !        OPEN(unit=962,file='result.000',form='formatted')
         WRITE(962) nprot,nneut,nmaxp,nmaxn,etotal,rdmsc,surfc,
      &              rmsc,rmsn,deltp,deltn,rhochr,spenrg
-        WRITE(11,'(a,2i4,f10.3,f7.4,2(f7.3))')
+        WRITE(11,'(a,2i8,f10.3,f7.4,2(f7.3))')
      &      'final even even: ',
      &       nprot,nneut,etotal,rmsc,epp,epn !deltp,deltn
-        WRITE(12,'(a,2i4,4(1pg13.5))') 'summary even-even:',
+        WRITE(12,'(a,2i8,4(1pg13.5))') 'summary even-even:',
      &    nprot,nneut,etotal,rmsc,epp,epn
         WRITE(6,'(a,200(1pg13.5))') 'spenrg:',spenrg(1:nmaxto)
         CLOSE(962)
@@ -99,10 +99,10 @@ c
      &        jsp(nblockp),'/2',etotal,rmsc,deltap,deltan
           END IF
         END DO
-        WRITE(11,'(a,2i4,1pg13.5)') 
+        WRITE(11,'(a,2i8,1pg13.5)')
      &    'Summary of blocking calculations: nprot,nneut,E_unblock=',
      &       nprot,nneut,eblock(0)
-        WRITE(12,'(a,2i4,1pg13.5)') 
+        WRITE(12,'(a,2i8,1pg13.5)')
      &    'Summary of blocking calculations: nprot,nneut,E_unblock=',
      &       nprot,nneut,eblock(0)
         eblockmin = +1D4
@@ -124,11 +124,11 @@ c
         END DO
         nblockp = nblockmin
         CALL hafosu
-        WRITE(11,'(a,2i4,2i3,a,f9.3,f7.4,2(f7.3))')
+        WRITE(11,'(a,2i8,2i3,a,f9.3,f7.4,2(f7.3))')
      &      'final proton BLOCKING: ',
      &       nprot,nneut,nblockp,jsp(nblockp),'/2   .    . ',etotal,rmsc
      &       ,epp,epn  !deltp,deltn
-        WRITE(12,'(a,2i4,2i3,a,f9.3,f7.4,2(f7.3))')
+        WRITE(12,'(a,2i8,2i3,a,f9.3,f7.4,2(f7.3))')
      &      'final proton BLOCKING: ',
      &       nprot,nneut,nblockp,jsp(nblockp),'/2   .    . ',etotal,rmsc
      &       ,epp,epn  !deltp,deltn
@@ -158,10 +158,10 @@ c
      &         nblockn,etotal,v2occ(nblockn),gwsav(nblockn)
           END IF
         END DO
-        WRITE(11,'(a,2i4,1pg13.5)') 
+        WRITE(11,'(a,2i8,1pg13.5)')
      &    'Summary of blocking calculations: nprot,nneut,E_unblock=',
      &       nprot,nneut,eblock(0)
-        WRITE(12,'(a,2i4,1pg13.5)') 
+        WRITE(12,'(a,2i8,1pg13.5)')
      &    'Summary of blocking calculations: nprot,nneut,E_unblock=',
      &       nprot,nneut,eblock(0)
         eblockmin = +1D4
@@ -186,11 +186,11 @@ c
 !        WRITE(20,'(a)') 'final neutron BLOCKING: '
         CALL hafosu
 !        WRITE(11,'(a,4i3,a,4(1pg13.5))')
-        WRITE(11,'(a,2i4,2i3,a,f9.3,f8.4,2(f7.3))')
+        WRITE(11,'(a,2i8,2i3,a,f9.3,f8.4,2(f7.3))')
      &      'final neutron BLOCKING: ',
      &       nprot,nneut,nblockn,jsp(nblockn-nmaxp),'/2 . . ',etotal,
      &       rmsc,epp,epn !,deltp,deltn
-        WRITE(12,'(a,2i4,2i3,a,f9.3,f8.4,2(f7.3))')
+        WRITE(12,'(a,2i8,2i3,a,f9.3,f8.4,2(f7.3))')
      &      'final neutron BLOCKING: ',
      &       nprot,nneut,nblockn,jsp(nblockn-nmaxp),'/2 . . ',etotal,
      &       rmsc,gapbl2(:,nblockn,1) !,deltp,deltn
@@ -242,13 +242,13 @@ c
         END DO; END DO        
         nblockp=nblpmin
         nblockn=nblnmin
-        WRITE(11,'(2i4,a,2i3,a,f9.3,3f7.4)')
-        WRITE(11,'(/1x/a/1x/a,2i4,2(2i3,a),f9.3,3f7.4)')
+        WRITE(11,'(2i8,a,2i3,a,f9.3,3f7.4)')
+        WRITE(11,'(/1x/a/1x/a,2i8,2(2i3,a),f9.3,3f7.4)')
      &     '******************', 'final double BLOCKING: ',
      &    nprot,nneut,nblockp,jsp(nblockp),'/2 ',nblockn-nmaxp,
      &           jsp(nblockn-nmaxp),'/2 ',emin,rbl2(nblockp,nblockn),
      &           gapbl2(:,nblockp,nblockn)
-        WRITE(12,'(/1x/a/1x/a,2i4,2(2i3,a),f9.3,f7.4,2(f7.3))')
+        WRITE(12,'(/1x/a/1x/a,2i8,2(2i3,a),f9.3,f7.4,2(f7.3))')
      &     '******************', 'final double BLOCKING: ',
      &    nprot,nneut,nblockp,jsp(nblockp),'/2 ',nblockn-nmaxp,
      &           jsp(nblockn-nmaxp),'/2 ',emin,rbl2(nblockp,nblockn),
@@ -256,10 +256,10 @@ c
         CALL hafosu
       END IF
       IF(tprispe) THEN
-        WRITE(13,'(2i4,87(1pg11.3))')
+        WRITE(13,'(2i8,87(1pg11.3))')
      &   nprot,nneut,epp,(spenrg(i),i=1,nmaxp)
         CALL flush(13)
-        WRITE(14,'(2i4,86(1pg11.3))')
+        WRITE(14,'(2i8,86(1pg11.3))')
      &   nprot,nneut,epn,(spenrg(i),i=nmaxp+1,nmaxto)
         CALL flush(14)
       END IF
