@@ -1,18 +1,21 @@
 cd source_1D
 cp params.inc params.sav
 cp params.huge params.inc
-ifx -c -mcmodel=medium -w -O0 givens.f
-#ifort -w -O3 -tpp7 -save -ipo -xW -o ../haforpa.exe haforpa.f givens.o
-#ifort -w -g -save  -o ../haforpa.exe haforpa.f givens.o
-#ifort -w -save  -O3 -xW -o ../haforpa.exe haforpa.f givens.o
-ifx -mcmodel=medium -msse4.2 -mfpmath=sse -ipo -finline-functions -funroll-loops -autodouble  -c Gauss_folding.f90
-ifx -mcmodel=medium -msse4.2 -mfpmath=sse -ipo -finline-functions -funroll-loops -autodouble  -c regpair.f90
-ifx -mcmodel=medium -msse4.2 -mfpmath=sse -ipo -finline-functions -funroll-loops -autodouble  -c m_dynpar.f90
-ifx -mcmodel=medium -msse4.2 -mfpmath=sse -ipo -finline-functions -funroll-loops -autodouble  -c weak-charge.f90
-ifx -mcmodel=medium -msse4.2 -mfpmath=sse -ipo -finline-functions -funroll-loops -autodouble  -c hfb-matrix.f
-ifx -mcmodel=medium -msse4.2 -mfpmath=sse -ipo -finline-functions -funroll-loops -autodouble  -c NMP-entry.f90
-ifx -mcmodel=medium -msse4.2 -mfpmath=sse -ipo -finline-functions -funroll-loops -autodouble  -o ../hafom_huge.exe hafom.f givens.o weak-charge.o NMP-entry.o hfb-matrix.o regpair.o Gauss_folding.o m_dynpar.o
+OPTION1=" -mcmodel=medium -msse4.2 -mfpmath=sse -ipo -finline-functions -funroll-loops -shared-intel"
+OPTION2=" -mcmodel=medium -msse4.2 -mfpmath=sse -static-intel -ipo -finline-functions -funroll-loops -autodouble -shared-intel"
+#ifx -c -mcmodel=medium -w -O0 givens.f
+ifx -c $OPTION1 givens.f
+ifx $OPTION1 -c Gauss_folding.f90
+ifx $OPTION1 -c regpair.f90
+ifx $OPTION1 -c m_dynpar.f90
+ifx $OPTION1 -c weak-charge.f90
+ifx $OPTION1 -c hfb-matrix.f
+ifx $OPTION1 -c NMP-entry.f90
+ifx $OPTION2 -o ../hafom_huge.exe hafom.f givens.o weak-charge.o NMP-entry.o hfb-matrix.o regpair.o Gauss_folding.o m_dynpar.o
+
+
 #ifort -mcmodel=medium -msse4.2 -mfpmath=sse -no-prec-div -ipo -finline-functions -funroll-loops -autodouble  -o ../hafom_huge.new hafom.f givens.o weak-charge.o NMP-entry.o hfb-matrix.o regpair.o Gauss_folding.o
 #ifc -O3 -o ../levden_sm.exe levden_sm.f
+
 cp params.sav params.inc
 cd ..

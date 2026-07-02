@@ -2366,7 +2366,8 @@ c          ENDIF
             ll = js/2
             do n=1,knmx+1
               energy = hbom*( (2*(n-1)+ll) - xkap0*wls(js)
-     &                       - xkm*(ll+ll*ll)                )
+     &                       - xkm*(ll+ll*ll)/(1D0+xkm*ll)    )
+!     &                       - xkm*(ll+ll*ll)                )
                 write(6,'(a,3i5,1pg13.5)')
      &           ' iso,js,n,energy=',iso,js,n,energy
               IF(energy.LE.eocc) THEN
