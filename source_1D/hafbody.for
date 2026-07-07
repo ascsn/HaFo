@@ -61,6 +61,7 @@ c     &    /  0.16,0.1666,   0.0,   0.0/
      &    /  -0.24/
       data imfold,ioptsk
      &    /     0,     0/
+      data hfbfacact/1D0/
 c
 c     data in common /wavfun/
 c
@@ -371,7 +372,11 @@ c     character*1 tdum
       LOGICAL :: tprint96
 !      LOGICAL :: thfbfac=.FALSE.
       REAL(8) :: pairaddfacp=0D0,pairaddfacn=0D0
-      REAL(8) :: hfbfacact=1D0
+!     'hfbfacact' is set in BLOCK DATA. An initializer here would be a
+!     second initialization of common /SKYPAR/ outside BLOCK DATA, which
+!     makes gfortran silently drop all BLOCK DATA values of /SKYPAR/
+!     (e.g. 'cutfac','pairgm','acoul').
+      REAL(8) :: hfbfacact
       REAL(8) :: symcondsav(2)
 cold      dimension ph(277)
 c
